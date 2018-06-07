@@ -1,3 +1,5 @@
+
+
 body {
 	background: #333;
     font-family: 'Roboto', sans-serif;
@@ -32,7 +34,8 @@ h3 {
     line-height: 26px;
 }
 
-img { max-width: 100%; }
+img { max-width: 100%; opacity: .8;}
+img:hover {opacity: 1;}
 
 ::-moz-selection { background: #42c5ea; color: #fff; text-shadow: none; }
 ::selection { background: #42c5ea; color: #fff; text-shadow: none; }
@@ -59,9 +62,9 @@ img { max-width: 100%; }
 
 /***** Top content *****/
 
-.top-content { padding: 20px 0 80px 0; background-color: #fff; }
+.top-content { padding: 20px 0 20px 0; background-color: #fff; }
 .top-content .text { color: #333; }
-.top-content .text h1 { color: #333; font-size: 50px;}
+.top-content .text h1 { color: #333; font-size: 30px;}/*font size của tiêu đề login | register*/
 .top-content .description { margin: 20px 0 10px 0; }
 .top-content .description a { color: #e65540; border-bottom: 1px dotted #333; }
 .top-content .description a:hover, 
@@ -95,7 +98,8 @@ img { max-width: 100%; }
 .l-form .input-error { border-color: #e65540; }
 
 .forms-right-icons .row { padding-bottom: 15px; }
-.forms-right-icons { padding-top: 40px; color: #333; text-align: left; }
+/*khoảng cách của right form*/
+.forms-right-icons { padding-top: 40px; color: #333; text-align: left; padding-left: 60px; }
 .forms-right-icons h3 { margin-top: 0; color: #333; }
 .forms-right-icons .icon { text-align: right; font-size: 30px; line-height: 34px; }
 

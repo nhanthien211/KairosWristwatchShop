@@ -11,7 +11,7 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/css/form-elements.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 
@@ -131,6 +131,7 @@
 
 			<!-- đăng nhập ======================================== -->
 			<div class="row login-form ">
+				<!-- right -->
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="row l-form">
 						<h3>Welcome back!</h3>
@@ -138,29 +139,27 @@
 					</div>
 
 					<form role="form " action=" " method="post " class="l-form ">
-						<div class="form-group ">
-							<label class="sr-only " for="l-form-username ">Username</label>
-							<input type="text " name="l-form-username " placeholder="Username... " class="l-form-username
-							 form-control " id="l-form-username ">
+						<div class="form-group " style="text-align: left">
+							<label class="simpleLabel">Username</label>
+							<input type="text " name="l-form-username " placeholder="Username... " class="l-form-username 
+											form-control " id="l-form-username ">
+
 						</div>
-						<div class="form-group ">
+						<div class="form-group " style="text-align: left">
 							<label class="sr-only " for="l-form-password ">Password</label>
+							<label class="simpleLabel">Password</label>
 							<input type="password " name="l-form-password " placeholder="Password... " class="l-form-password
 							 form-control " id="l-form-password ">
 						</div>
+
+
 						<button type="submit " class="btn ">Sign in!</button>
 					</form>
 
 				</div>
-				<div class="col-sm-6 forms-right-icons ">
+				<!-- left -->
+				<div class="col-sm-6 forms-right-icons">
 					<img src="images/login-banner-2.jpg" alt="">
-
-
-					<!-- <div class="col-sm-10 ">
-									
-								
-							</div> -->
-
 				</div>
 
 			</div>
