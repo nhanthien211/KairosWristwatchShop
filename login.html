@@ -8,23 +8,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login | Register</title>
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="assets/css/form-elements.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-
-
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+	<!-- CSS chung -->
+	<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+	<link href="Content/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="fonts/font-awesome/css/fontawesome-all.min.css">
+	<!-- CSS for this page only -->
+	<link rel="stylesheet" href="Content/css/login-form-elements.css">
+	<link rel="stylesheet" href="Content/css/login-style.css">
 
 	<!-- Favicon and touch icons -->
-	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<link rel="icon" type="image/png" href="Content/img/icons/favicon.png" />
 
 </head>
 
@@ -36,8 +29,8 @@
 
 			<!-- intro info -->
 			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2 text">
-					<img src="images/icons/logo1.png" alt="">
+				<div class="col-sm-12 text">
+					<img src="Content/img/icons/logo1.png" alt="">
 					<div class="description">
 						<p>
 							Join us now; or
@@ -53,178 +46,224 @@
 				</div>
 			</div>
 
-			<!-- <div class="row">
-				<div class="col-sm-10 col-sm-offset-1 show-forms">
-					<span class="show-login-form active">Login</span>
-					<span class="show-forms-divider">|</span>
-					<span class="show-register-form">Register</span>
-				</div>
-			</div> -->
-
 			<!-- Form đăng ký ===================================== -->
 			<div class="row register-form">
-				<!-- right -->
-				<div class="col-sm-4 col-sm-offset-1">
-					<div class="textAboveLogin">
-						<h3>New to our site?</h3>
-						<p>Join our community to gain access to check out your shopping cart, comment and enjoy free shipping coupon!</p>
-					</div>
+				<!-- right FORM REGISTER -->
+				<div class="col-sm-6" style="display: inline-block; background-color: ghostwhite; padding: 20px 20px 20px 20px;">
+					<h3>New to our site?</h3>
+					<p>Join our community to gain access to check out your shopping cart, comment and enjoy free shipping coupon!</p>
 
-					<form role="form" action="" method="post" class="r-form">
-						<div class="form-group ">
-							<i class="fa fa-user"></i>
-							<input type="text " name="username" placeholder="Username... " class="form-control">
+					<!-- TEST FORM VALIDATE -->
+					<form action="#" class="to-validate" novalidate>
+						<div class="form-group">
+							<input type="text" name="username" placeholder="(*) Username . . . " class="form-control" id="validationCustom01" required>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Username is required!!!
+							</div>
+							<i class="fa fa-user form-group-icon"></i>
 						</div>
-						<div class="form-group ">
-							<i class="fa fa-unlock-alt"></i>
-							<input type="password " name="password" placeholder="Password... " class="form-control ">
+						<div class="form-group">
+							<input type="password" name="password" placeholder="(*) Password . . . " class="form-control" id="validationCustom02" required>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Password is required!!!
+							</div>
+							<i class="fa fa-unlock-alt form-group-icon"></i>
 						</div>
-						<div class="form-group ">
-							<i class="fa fa-unlock-alt"></i>
-							<input type="password " name="rePassword" placeholder="Re-password... " class="form-control ">
+						<div class="form-group">
+							<input type="password" name="rePassword" placeholder="(*) Confirm Password . . . " class="form-control" id="validationCustom03"
+							    required>
+							<i class="fa fa-unlock-alt form-group-icon"></i>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Confirm Password is required!!!
+							</div>
 						</div>
-						<div class="form-group ">
-							<i class="fa fa-envelope"></i>
-							<input type="email" name="r-form-email " placeholder="Email... " class="r-form-email form-control
-							 " id="r-form-email " required="required">
+						<div class="form-group">
+							<input type="email" name="email" placeholder="(*) Email . . . " class="form-control" id="validationCustom04" required>
+							<i class="fa fa-envelope form-group-icon"></i>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Email is required!!!
+							</div>
 						</div>
-						<div class="form-group ">
-							<i class="fa fa-quote-left"></i>
-							<input type="text " name="r-form-first-name " placeholder="First name... " class="r-form-first-name
-								 form-control " id="r-form-first-name ">
+						<div class="form-group">
+							<input type="text" name="firstName" placeholder="(*) First Name . . . " class="form-control" id="validationCustom05" required>
+							<i class="fa fa-quote-left form-group-icon"></i>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								First Name is required!!!
+							</div>
 						</div>
-						<div class="form-group ">
-							<i class="fa fa-quote-right"></i>
-							<input type="text " name="r-form-last-name " placeholder="Last name... " class="r-form-last-name
-								 form-control " id="r-form-last-name ">
+						<div class="form-group">
+							<input type="text" name="lastName" placeholder="(*) Last Name . . . " class="form-control" id="validationCustom06" required>
+							<i class="fa fa-quote-right form-group-icon"></i>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Last Name is required!!!
+							</div>
 						</div>
-						<div class="form-group ">
-							<i class="fa fa-phone"></i>
-							<input type="text " name="r-form-last-name " placeholder="Phone... " class="form-control ">
+						<div class="form-group">
+							<input type="text" name="phone" placeholder="(*) Phone . . . " class="form-control" id="validationCustom07" required>
+							<i class="fa fa-phone form-group-icon"></i>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Phone is required!!!
+							</div>
 						</div>
-						<div class="form-group ">
-							<i class="fa fa-calendar"></i>
-							<input type="date" name="r-form-last-name " class="form-control ">
+						<div class="form-group">
+							<input type="date" name="dob" class="form-control" id="validationCustom08">
+							<i class="fa fa-calendar form-group-icon"></i>
 						</div>
-
-						<button type="submit " class="btn ">Sign me up!</button>
+						<div class="form-group" style="text-align: left">
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-secondary active">
+									<input type="radio" name="GenderMale" id="male" autocomplete="off" checked> Male
+								</label>
+								<label class="btn btn-secondary">
+									<input type="radio" name="GenderFemale" id="female" autocomplete="off"> Female
+								</label>
+							</div>
+						</div>
+						<button class="btn btn-primary" type="submit">Sign Up</button>
 					</form>
-				</div>
-
-				<!-- left -->
-				<div class="col-sm-6 forms-right-icons">
-					<img src="images/reg-banner-1.jpg" alt="">
-					<img src="images/reg-banner-2.jpg" alt="">
-				</div>
 
 
-				<!-- <div class="col-sm-4 col-sm-offset-1">
-					<form role="form" action="" method="post" class="r-form">
-						<div class="form-group " style="text-align: left">
-							<label class="simpleLabel">Username</label>
-							<input type="text" name="username" placeholder="Username... " class="form-control ">
+					<!-- <form role="form" action="#" method="post" class="r-form">
+						<div class="form-group">
+							<i class="fa fa-user"></i>
+							<input type="text" name="username" placeholder="Username... " class="form-control">
 						</div>
-						<div class="form-group ">
-							<label class="sr-only ">Password</label>
+						<div class="form-group">
+							<i class="fa fa-unlock-alt"></i>
 							<input type="password" name="password" placeholder="Password... " class="form-control ">
 						</div>
-						<div class="form-group ">
-							<label class="sr-only ">Re-password</label>
+						<div class="form-group">
+							<i class="fa fa-unlock-alt"></i>
 							<input type="password" name="rePassword" placeholder="Re-password... " class="form-control ">
 						</div>
-						<div class="form-group ">
-							<label class="sr-only " for="r-form-first-name ">First name</label>
-							<input type="text " name="r-form-first-name " placeholder="First name... " class="r-form-first-name
-							 form-control " id="r-form-first-name ">
+						<div class="form-group">
+							<i class="fa fa-envelope"></i>
+							<input type="email" name="r-form-email" placeholder="Email... " class="r-form-email form-control
+							 " id="r-form-email" required="required">
 						</div>
-						<div class="form-group ">
-							<label class="sr-only " for="r-form-last-name ">Last name</label>
-							<input type="text " name="r-form-last-name " placeholder="Last name... " class="r-form-last-name
-							 form-control " id="r-form-last-name ">
+						<div class="form-group">
+							<i class="fa fa-quote-left"></i>
+							<input type="text" name="r-form-first-name" placeholder="First name... " class="r-form-first-name
+								 form-control" id="r-form-first-name ">
 						</div>
-						<div class="form-group ">
-							<label class="sr-only " for="r-form-email ">Email</label>
-							<input type="text " name="r-form-email " placeholder="Email... " class="r-form-email form-control
-							 " id="r-form-email ">
+						<div class="form-group">
+							<i class="fa fa-quote-right"></i>
+							<input type="text" name="r-form-last-name" placeholder="Last name... " class="r-form-last-name
+								 form-control " id="r-form-last-name ">
 						</div>
-						<div class="form-group ">
-							<label class="sr-only " for="r-form-about-yourself ">About yourself</label>
-							<textarea name="r-form-about-yourself " placeholder="About yourself... " class="r-form-about-yourself form-control " id="r-form-about-yourself "></textarea>
+						<div class="form-group">
+							<i class="fa fa-phone"></i>
+							<input type="text" name="r-form-last-name" placeholder="Phone... " class="form-control ">
 						</div>
+						<div class="form-group">
+							<i class="fa fa-calendar"></i>
+							<input type="date" name="r-form-last-name" class="form-control ">
+						</div>
+						<div class="form-group">
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-secondary">
+									<input type="radio" name="GenderMale" id="male" autocomplete="off" checked> Male
+								</label>
+								<label class="btn btn-secondary active">
+									<input type="radio" name="GenderFemale" id="female" autocomplete="off"> Female
+								</label>
+							</div>
+						</div>
+
 						<button type="submit " class="btn ">Sign me up!</button>
-					</form>
+					</form> -->
 				</div>
-				<div class="col-sm-6 forms-right-icons ">
-					<div class="row ">
-						<div class="col-sm-2 icon ">
-							<i class=""></i>
-						</div>
-						<div class="col-sm-10 ">
-							<h3>Register</h3>
-							<p>Join our community to gain access to check out your shopping cart, comment and enjoy free shipping coupon!</p>
-						</div>
-					</div>
-					<div class="row ">
-						<div class="col-sm-2 icon ">
-							<i class="fa fa-commenting "></i>
-						</div>
-						<div class="col-sm-10 ">
-							<h3>Awesome Login</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
-						</div>
-					</div>
-					<div class="row ">
-						<div class="col-sm-2 icon ">
-							<i class="fa fa-magic "></i>
-						</div>
-						<div class="col-sm-10 ">
-							<h3>Great Registration</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
-						</div>
-					</div>
-				</div> -->
+
+				<!-- left one-->
+				<!-- <div class="col-sm-7 forms-right-icons"">
+					<img src="Content/img/mainIMG/reg-banner-1.jpg" alt="">
+				</div>  -->
 			</div>
+			<!-- Form đăng ký ===================================== -->
+
+
 
 			<!-- Form đăng nhập ======================================== -->
-			<div class="row login-form ">
-				<!-- right -->
+			<div class="row login-form">
+				<div class="col-sm-2"></div>
+				<!-- right FORM LOGIN -->
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="textAboveLogin">
 						<h3>Welcome back!</h3>
 						<p>It's very nice to see you again! Let's sign in and continue your experience now!</p>
 					</div>
 
-					<form role="form" action="" method="post " class="l-form ">
-						<div class="form-group ">
+					<!-- form login -->
+					<!-- <form role="form" action="#" method="post" class="l-form ">
+						<div class="form-group">
 							<i class="fa fa-user"></i>
-							<input type="text " name="l-form-username " placeholder="Enter your Username or Email... " class="l-form-username 
-											form-control " id="l-form-username ">
+							<input class="form-control form-control-sm" type="text" name="Username" placeholder="Enter your Username... ">
 						</div>
-						<div class="form-group ">
+						<div class="form-group">
 							<i class="fa fa-unlock-alt"></i>
-							<input type="password " name="l-form-password " placeholder="Enter your Password... " class="l-form-password
-							 form-control " id="l-form-password ">
+							<input class="form-control form-control-sm" type="password" name="Password" placeholder="Enter your Password... ">
 						</div>
-						<button type="submit " class="btn ">Sign in!</button>
+						<button type="submit" class="btn">Sign in!</button>
+					</form> -->
+
+					<form action="#" class="to-validate" novalidate>
+						<div class="form-group">
+							<input type="text" name="username" placeholder="Username . . . " class="form-control" id="validationCustom01" required>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Username is required!!!
+							</div>
+							<i class="fa fa-user form-group-icon"></i>
+						</div>
+						<div class="form-group">
+							<input type="password" name="password" placeholder="Password . . . " class="form-control" id="validationCustom02" required>
+							<div class="invalid-feedback" style="font-size: 15px;">
+								Password is required!!!
+							</div>
+							<i class="fa fa-unlock-alt form-group-icon"></i>
+						</div>
+						<button class="btn btn-primary" type="submit">Login</button>
 					</form>
 				</div>
+
 				<!-- left -->
-				<div class="col-sm-6 forms-right-icons">
-					<img src="images/login-banner-2.jpg" alt="">
+				<div class="col-sm-4 forms-right-icons">
+					<img src="Content/img/mainIMG/login-banner-2.jpg" alt="">
 				</div>
 
+				<div class="col-sm-2"></div>
 			</div>
 		</div>
 
+		<!-- Bootstrap core JavaScript-->
+		<script src="Scripts/jquery/jquery.min.js"></script>
+		<script src="Content/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<!-- Core plugin JavaScript-->
+		<script src="Scripts/jquery-easing/jquery.easing.min.js"></script>
 		<!-- Javascript -->
-		<script src="assets/js/jquery-1.11.1.min.js "></script>
-		<script src="assets/bootstrap/js/bootstrap.min.js "></script>
-		<script src="assets/js/jquery.backstretch.min.js "></script>
-		<script src="assets/js/scripts.js "></script>
+		<script src="Content/bootstrap/js/bootstrap.min.js "></script>
+		<script src="Scripts/js/jquery.backstretch.min.js"></script>
+		<script src="Scripts/js/scripts-login-register.js"></script>
 
-		<!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js "></script>
-        <![endif]-->
+		<script>
+			// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+				'use strict';
+				window.addEventListener('load', function () {
+					// Fetch all the forms we want to apply custom Bootstrap validation styles to
+					var forms = document.getElementsByClassName('to-validate');
+					// Loop over them and prevent submission
+					var validation = Array.prototype.filter.call(forms, function (form) {
+						form.addEventListener('submit', function (event) {
+							if (form.checkValidity() === false) {
+								event.preventDefault();
+								event.stopPropagation();
+							}
+							form.classList.add('was-validated');
+						}, false);
+					});
+				}, false);
+			})();
+		</script>
 
 </body>
 

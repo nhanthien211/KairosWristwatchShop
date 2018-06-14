@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Account Info</title>
+    <!-- Bootstrap core CSS-->
+    <link href="Content/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="fonts/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="Content/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="Content/css/main-admin-page.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-light" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+
+        <a class="navbar-brand" href="index.html">
+            <img src="Content/img/icons/logo1.png" alt="">
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="background-color: #e65540; color: white">
+                        <span class="nav-link-text">Welcome, Administrator =]]</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="admin-info.html">
+                        <i class="fa fa-fw fa-user"></i>
+                        <span class="nav-link-text">Account Info</span>
+                    </a>
+                </li>
+                <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Manage Users">
+                    <a class="nav-link" href="admin-manage-user.html">
+                        <i class="fa fa-fw fa-users "></i>
+                        <span class="nav-link-text">Manage Users</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Orders">
+                    <a class="nav-link" href="admin-manage-order.html">
+                        <i class="fa fa-fw fa-copy"></i>
+                        <span class="nav-link-text">Manage Orders</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Watches">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-fw fa-cubes"></i>
+                        <span class="nav-link-text">Manage Watchs</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fa fa-fw fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Admin Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="admin-manage-user.html">Users Management</a>
+                </li>
+                <li class="breadcrumb-item active">User Details</li>
+            </ol>
+
+            <!-- DataTables Card-->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-fw fa-sliders-h "></i> View User Details</div>
+                <div class="card-body">
+                    <form action="#" method="get">
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">UsserID</div>
+                            <div class="col-sm-8 col-lg-8">
+                                <input class="form-control form-control-sm" readonly type="text" name="UserID" value="đây là userID">
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">Name</div>
+                            <div class="col-sm-8 col-lg-8">
+                                <input class="form-control form-control-sm" readonly type="text" name="tName" value="firstname + lastname">
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">Email</div>
+                            <div class="col-sm-8 col-lg-8">
+                                <input class="form-control form-control-sm" readonly type="email" name="Email" value="Đây là email= .-.">
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">Phone</div>
+                            <div class="col-sm-8 col-lg-8">
+                                <input class="form-control form-control-sm" readonly type="text" name="Phone" value="0123 123 123">
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">Day of Birth</div>
+                            <div class="col-sm-8 col-lg-8">
+                                <!-- set "date" value with format yyyy-MM-dd -->
+                                <input class="form-control form-control-sm" readonly type="date" name="DOB" value="1998-09-17">
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">Gender</div>
+                            <div class="col-sm-8 col-lg-8">
+                                Male or Female???
+                            </div>
+                        </div>
+                        <!-- =============================================== -->
+                        <hr>
+                        <!-- =============================================== -->
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">Active</div>
+                            <div class="col-sm-8 col-lg-8">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" name="isActive" id="Active" autocomplete="off" checked> Active
+                                    </label>
+                                    <label class="btn btn-secondary active">
+                                        <input type="radio" name="isActive" id="NotActive" autocomplete="off"> Disable
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-4 col-lg-4 for-info-name">Role</div>
+                            <div class="col-sm-8 col-lg-8">
+                                <select name="selectRole" id="">
+                                    <option value="Admin">Administrator</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-12 col-lg-12 for-info-name">
+                                <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                            </div>
+                        </div>
+                        <div class="row for-input-row">
+                            <div class="col-sm-12 col-lg-12 for-info-name">                                
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Kairos 2018</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="Scripts/jquery/jquery.min.js"></script>
+        <script src="Content/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="Scripts/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="Content/datatables/jquery.dataTables.js"></script>
+        <script src="Content/datatables/dataTables.bootstrap4.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="Scripts/js/sb-admin.js"></script>
+        <!-- Custom scripts for this page-->
+        <script src="Scripts/js/sb-admin-datatables.min.js"></script>
+    </div>
+</body>
+
+</html>
