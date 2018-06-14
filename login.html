@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="assets/css/form-elements.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -62,7 +63,62 @@
 
 			<!-- Form đăng ký ===================================== -->
 			<div class="row register-form">
+				<!-- right -->
 				<div class="col-sm-4 col-sm-offset-1">
+					<div class="textAboveLogin">
+						<h3>New to our site?</h3>
+						<p>Join our community to gain access to check out your shopping cart, comment and enjoy free shipping coupon!</p>
+					</div>
+
+					<form role="form" action="" method="post" class="r-form">
+						<div class="form-group ">
+							<i class="fa fa-user"></i>
+							<input type="text " name="username" placeholder="Username... " class="form-control">
+						</div>
+						<div class="form-group ">
+							<i class="fa fa-unlock-alt"></i>
+							<input type="password " name="password" placeholder="Password... " class="form-control ">
+						</div>
+						<div class="form-group ">
+							<i class="fa fa-unlock-alt"></i>
+							<input type="password " name="rePassword" placeholder="Re-password... " class="form-control ">
+						</div>
+						<div class="form-group ">
+							<i class="fa fa-envelope"></i>
+							<input type="email" name="r-form-email " placeholder="Email... " class="r-form-email form-control
+							 " id="r-form-email " required="required">
+						</div>
+						<div class="form-group ">
+							<i class="fa fa-quote-left"></i>
+							<input type="text " name="r-form-first-name " placeholder="First name... " class="r-form-first-name
+								 form-control " id="r-form-first-name ">
+						</div>
+						<div class="form-group ">
+							<i class="fa fa-quote-right"></i>
+							<input type="text " name="r-form-last-name " placeholder="Last name... " class="r-form-last-name
+								 form-control " id="r-form-last-name ">
+						</div>
+						<div class="form-group ">
+							<i class="fa fa-phone"></i>
+							<input type="text " name="r-form-last-name " placeholder="Phone... " class="form-control ">
+						</div>
+						<div class="form-group ">
+							<i class="fa fa-calendar"></i>
+							<input type="date" name="r-form-last-name " class="form-control ">
+						</div>
+
+						<button type="submit " class="btn ">Sign me up!</button>
+					</form>
+				</div>
+
+				<!-- left -->
+				<div class="col-sm-6 forms-right-icons">
+					<img src="images/reg-banner-1.jpg" alt="">
+					<img src="images/reg-banner-2.jpg" alt="">
+				</div>
+
+
+				<!-- <div class="col-sm-4 col-sm-offset-1">
 					<form role="form" action="" method="post" class="r-form">
 						<div class="form-group " style="text-align: left">
 							<label class="simpleLabel">Username</label>
@@ -126,36 +182,31 @@
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
-			<!-- đăng nhập ======================================== -->
+			<!-- Form đăng nhập ======================================== -->
 			<div class="row login-form ">
 				<!-- right -->
 				<div class="col-sm-4 col-sm-offset-1">
-					<div class="row l-form">
+					<div class="textAboveLogin">
 						<h3>Welcome back!</h3>
 						<p>It's very nice to see you again! Let's sign in and continue your experience now!</p>
 					</div>
 
-					<form role="form " action=" " method="post " class="l-form ">
-						<div class="form-group " style="text-align: left">
-							<label class="simpleLabel">Username</label>
-							<input type="text " name="l-form-username " placeholder="Username... " class="l-form-username 
+					<form role="form" action="" method="post " class="l-form ">
+						<div class="form-group ">
+							<i class="fa fa-user"></i>
+							<input type="text " name="l-form-username " placeholder="Enter your Username or Email... " class="l-form-username 
 											form-control " id="l-form-username ">
-
 						</div>
-						<div class="form-group " style="text-align: left">
-							<label class="sr-only " for="l-form-password ">Password</label>
-							<label class="simpleLabel">Password</label>
-							<input type="password " name="l-form-password " placeholder="Password... " class="l-form-password
+						<div class="form-group ">
+							<i class="fa fa-unlock-alt"></i>
+							<input type="password " name="l-form-password " placeholder="Enter your Password... " class="l-form-password
 							 form-control " id="l-form-password ">
 						</div>
-
-
 						<button type="submit " class="btn ">Sign in!</button>
 					</form>
-
 				</div>
 				<!-- left -->
 				<div class="col-sm-6 forms-right-icons">
@@ -164,20 +215,6 @@
 
 			</div>
 		</div>
-
-		<!-- Footer -->
-		<!-- <footer>
-        	<div class="container ">
-        		<div class="row ">
-        			
-        			<div class="col-sm-8 col-sm-offset-2 ">
-        				<div class="footer-border "></div>
-        				<p>Made by <a href="http://azmind.com " target="_blank ">AZMIND</a>.</p>
-        			</div>
-        			
-        		</div>
-        	</div>
-        </footer> -->
 
 		<!-- Javascript -->
 		<script src="assets/js/jquery-1.11.1.min.js "></script>
