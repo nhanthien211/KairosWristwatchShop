@@ -55,7 +55,7 @@
 					<!-- TEST FORM VALIDATE -->
 					<form action="#" class="to-validate" novalidate>
 						<div class="form-group">
-							<input type="text" name="username" placeholder="(*) Username . . . " class="form-control" id="validationCustom01" required>
+							<input type="text" name="username" placeholder="(*) Username . . . " class="form-control" id="validationCustom01" pattern=".{6,}[A-Za-z0-9]" required>
 							<div class="invalid-feedback" style="font-size: 15px;">
 								Username is required!!!
 							</div>
@@ -98,10 +98,10 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="text" name="phone" placeholder="(*) Phone . . . " class="form-control" id="validationCustom07" required>
+							<input type="text" name="phone" placeholder="Phone . . . " class="form-control" id="validationCustom07" pattern=".{7,9}[0-9]">
 							<i class="fa fa-phone form-group-icon"></i>
 							<div class="invalid-feedback" style="font-size: 15px;">
-								Phone is required!!!
+								Only 8-10 numbers!
 							</div>
 						</div>
 						<div class="form-group">
@@ -174,27 +174,6 @@
 		<script src="Content/bootstrap/js/bootstrap.min.js "></script>
 		<script src="Scripts/js/jquery.backstretch.min.js"></script>
 		<script src="Scripts/js/scripts-login-register.js"></script>
-
-		<script>
-			// Example starter JavaScript for disabling form submissions if there are invalid fields
-			(function () {
-				'use strict';
-				window.addEventListener('load', function () {
-					// Fetch all the forms we want to apply custom Bootstrap validation styles to
-					var forms = document.getElementsByClassName('to-validate');
-					// Loop over them and prevent submission
-					var validation = Array.prototype.filter.call(forms, function (form) {
-						form.addEventListener('submit', function (event) {
-							if (form.checkValidity() === false) {
-								event.preventDefault();
-								event.stopPropagation();
-							}
-							form.classList.add('was-validated');
-						}, false);
-					});
-				}, false);
-			})();
-		</script>
 
 </body>
 
