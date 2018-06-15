@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Manage Watch</title>
+    <!-- Bootstrap core CSS-->
+    <link href="../Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="../Content/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="../Content/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="../Content/main-admin-page.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-light" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+
+        <a class="navbar-brand" href="index.html">
+            <img src="../Content/img/icons/logo1.png" alt="">
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="background-color: #e65540; color: white">
+                        <span class="nav-link-text">Welcome, Administrator =]]</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="admin-info.html">
+                        <i class="fa fa-fw fa-user"></i>
+                        <span class="nav-link-text">Account Info</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Users">
+                    <a class="nav-link" href="admin-manage-user.html">
+                        <i class="fa fa-fw fa-users "></i>
+                        <span class="nav-link-text">Manage Users</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Orders">
+                    <a class="nav-link" href="admin-manage-order.html">
+                        <i class="fa fa-fw fa-copy"></i>
+                        <span class="nav-link-text">Manage Orders</span>
+                    </a>
+                </li>
+                <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Manage Watches">
+                    <a class="nav-link" href="admin-manage-watch.html">
+                        <i class="fa fa-fw fa-cubes"></i>
+                        <span class="nav-link-text">Manage Watchs</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fa fa-fw fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="admin-info.html">Admin Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Manage Watch</li>
+            </ol>
+
+            <!-- DataTables Card-->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-fw fa-cubes" style="display: inline;"></i> Watch List
+                    <form action="#" class="form-inline" style="display: inline;">
+                        <button class="btn btn-danger" type="submit" style="float: right;">Add New Watch</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>WatchID</th>
+                                    <th>Quantity</th>
+                                    <th>Price ($)</th>
+                                    <th>Status</th>
+                                    <th>Published Date</th>
+                                    <th>Published By</th>
+                                    <th>More details</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>WatchID</th>
+                                    <th>Quantity</th>
+                                    <th>Price ($)</th>
+                                    <th>Status</th>
+                                    <th>Published Date</th>
+                                    <th>Published By</th>
+                                    <th>More details</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <!-- Vòng for cho list data -->
+                                <tr>
+                                    <td>WTH00001</td>
+                                    <td>100</td>
+                                    <td>200.5</td>
+                                    <td>True</td>
+                                    <td>Some date....</td>
+                                    <td>By someone ...</td>
+                                    <td>
+                                        <a href="#">
+                                            <i class="fa fa-edit"></i>
+                                            View Details & Edit</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <i class="fa fa-trash-alt"></i>
+                                            Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Kairos 2018</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="../Scripts/jquery.min.js"></script>
+        <script src="../Scripts/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../Scripts/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="../Scripts/jquery.dataTables.js"></script>
+        <script src="../Scripts/dataTables.bootstrap4.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../Scripts/sb-admin.js"></script>
+        <!-- Custom scripts for this page-->
+        <script src="../Scripts/sb-admin-datatables.min.js"></script>
+    </div>
+</body>
+
+</html>
