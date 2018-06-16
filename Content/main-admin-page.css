@@ -1,8 +1,9 @@
+
+/*for config color of radio button*/
 .radio-config {
     background-color: #dee2e6;
     color: #000;
 }
-
 .radio-config:hover, .radio-config:focus {
     background-color: silver;
 }

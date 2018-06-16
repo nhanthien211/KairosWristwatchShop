@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>User Detail Info</title>
-    <!-- Bootstrap core CSS-->
-    <link href="Content/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <!-- Custom fonts for this template-->
-    <link href="fonts/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
-    <!-- Page level plugin CSS-->
-    <link href="Content/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="Content/css/main-admin-page.css" rel="stylesheet">
+    <title>Watch Detail</title>
+  <!-- Bootstrap core CSS-->
+  <link href="../Content/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="../Content/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="../Content/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="../Content/main-admin-page.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
@@ -41,7 +41,7 @@
                         <span class="nav-link-text">Account Info</span>
                     </a>
                 </li>
-                <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Manage Users">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Users">
                     <a class="nav-link" href="admin-manage-user.html">
                         <i class="fa fa-fw fa-users "></i>
                         <span class="nav-link-text">Manage Users</span>
@@ -53,8 +53,8 @@
                         <span class="nav-link-text">Manage Orders</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Watches">
-                    <a class="nav-link" href="#">
+                <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Manage Watches">
+                    <a class="nav-link" href="admin-manage-watch.html">
                         <i class="fa fa-fw fa-cubes"></i>
                         <span class="nav-link-text">Manage Watchs</span>
                     </a>
@@ -75,22 +75,28 @@
                     <a href="#">Admin Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="admin-manage-user.html">Users Management</a>
+                    <a href="admin-manage-user.html">Watch Management</a>
                 </li>
-                <li class="breadcrumb-item active">User Details</li>
+                <li class="breadcrumb-item active">Watch Details</li>
             </ol>
 
             <!-- DataTables Card-->
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-fw fa-sliders-h "></i> View User Details</div>
+                    <i class="fa fa-fw fa-sliders-h "></i> View Watch Details</div>
                 <div class="card-body">
+                    <!-- Form for update watch -->
                     <form action="#" method="get">
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">UsserID</div>
-                            <div class="col-sm-8 col-lg-8">
-                                <input class="form-control form-control-sm" readonly type="text" name="UserID" value="đây là userID">
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-6">
+                                <label for="NameID">WatchID</label>
+                                <input class="form-control form-control-sm" type="text" id="NameID" name="UserID" value="đây là userID">
                             </div>
+                            <div class="col-sm-6">
+                                    <label for="NameID">WatchID</label>
+                                    <input class="form-control form-control-sm" type="text" id="NameID" name="UserID" value="đây là userID">
+                                </div>
+                            
                         </div>
                         <div class="row for-input-row">
                             <div class="col-sm-4 col-lg-4 for-info-name">Name</div>
