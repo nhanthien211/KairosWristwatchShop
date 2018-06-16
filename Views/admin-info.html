@@ -31,7 +31,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item">
-          <a class="nav-link" href="#" style="background-color: #e65540; color: white">
+          <a class="nav-link nav-welcome" href="#">
             <span class="nav-link-text">Welcome, Administrator =]]</span>
           </a>
         </li>
@@ -84,69 +84,71 @@
         <div class="card-body">
           <!-- FORM CHỈNH SỬA ======================================================= -->
           <form action="#" method="get" class="to-validate" novalidate>
-            <div class="row for-input-row">
-              <div class="col-sm-4 col-lg-4 for-info-name">First Name</div>
-              <div class="col-sm-8 col-lg-8">
-                <input class="form-control form-control-sm" type="text" name="FirstName" value="" required maxlength="30" minlength="2">
+
+            <!-- ROW FIRST - LAST NAME -->
+            <div class="row for-input-row" style="font-weight: bold">
+              <div class="col-sm-6">
+                <label for="FName">First Name</label>
+                <input class="form-control form-control-sm" type="text" name="FName" value="" required maxlength="30" minlength="2">
                 <div class="invalid-feedback" style="font-size: 15px;">
-                    Invalid Firstname (2 - 30 characters)
-                  </div>
+                  Invalid Firstname (2 - 30 characters)
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label for="LName">Last Name</label>
+                <input class="form-control form-control-sm" type="text" name="LName" value="" required maxlength="30" minlength="2">
+                <div class="invalid-feedback" style="font-size: 15px;">
+                  Invalid LastName (2 - 30 characters)
+                </div>
               </div>
             </div>
-            <div class="row for-input-row">
-              <div class="col-sm-4 col-lg-4 for-info-name">Last Name</div>
-              <div class="col-sm-8 col-lg-8">
-                <input class="form-control form-control-sm" type="text" name="LastName" value="" required maxlength="30" minlength="2">
-                <div class="invalid-feedback" style="font-size: 15px;">
-                    Invalid Firstname (2 - 30 characters)
-                  </div>
-              </div>
-            </div>
-            <div class="row for-input-row">
-              <div class="col-sm-4 col-lg-4 for-info-name">Email</div>
-              <div class="col-sm-8 col-lg-8">
+
+            <!-- ROW EMAIL - PHONE -->
+            <div class="row for-input-row" style="font-weight: bold">
+              <div class="col-sm-6">
+                <label for="Email">Email</label>
                 <input class="form-control form-control-sm" type="text" name="Email" value="" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$">
                 <div class="invalid-feedback" style="font-size: 15px;">
-                    Invalid Email (email@address.domain)
-                  </div>
+                  Invalid Email (email@address.domain)
+                </div>
               </div>
-              
-            </div>
-            <div class="row for-input-row">
-              <div class="col-sm-4 col-lg-4 for-info-name">Phone</div>
-              <div class="col-sm-8 col-lg-8">
-                <input class="form-control form-control-sm" type="text" name="Phone" value="0123 123 123" pattern=".{7,9}[0-9]">
+              <div class="col-sm-6">
+                <label for="Phone">Phone</label>
+                <input class="form-control form-control-sm" type="text" name="Phone" value="" pattern=".{7,9}[0-9]">
                 <div class="invalid-feedback" style="font-size: 15px;">
-                    Only 8-10 numbers!
-                  </div>
+                  Only 8-10 numbers!
+                </div>
               </div>
             </div>
-            <div class="row for-input-row">
-              <div class="col-sm-4 col-lg-4 for-info-name">Day of Birth</div>
-              <div class="col-sm-8 col-lg-8">
+
+            <!-- ROW DOB - STARTED DATE -->
+            <div class="row for-input-row" style="font-weight: bold">
+              <div class="col-sm-6">
+                <label for="DOB">DOB</label>
                 <!-- set "date" value with format yyyy-MM-dd -->
                 <input class="form-control form-control-sm" type="date" name="DOB" value="" id="validationCustom08">
               </div>
+              <div class="col-sm-6">
+                <label for="StartedDate">Started Date</label>
+                <!-- set "date" value with format yyyy-MM-dd -->
+                <input class="form-control form-control-sm" type="date" name="StartedDate" value="2018-01-01" readonly>
+              </div>
             </div>
-            <div class="row for-input-row">
-                <div class="col-sm-4 col-lg-4 for-info-name">Started Date</div>
-                <div class="col-sm-8 col-lg-8">
-                  <!-- set "date" value with format yyyy-MM-dd -->
-                  <input class="form-control form-control-sm" type="date" name="StartedDate" value="2018-01-01" readonly>
-                </div>
-              </div>
-            <div class="row for-input-row">
-              <div class="col-sm-4 col-lg-4 for-info-name">Gender</div>
-              <div class="col-sm-8 col-lg-8">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary radio-config">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Male
-                  </label>
-                  <label class="btn btn-secondary active radio-config">
-                    <input type="radio" name="options" id="option2" autocomplete="off"> Female
-                  </label>
-                </div>
-              </div>
+
+            <!-- GENDER -->
+            <div class="row for-input-row"  style="font-weight: bold">
+                <div class="col-sm-6">
+                    <label for="Gender">Gender</label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary radio-config">
+                          <input type="radio" name="Gender" id="option1" autocomplete="off" checked> Male
+                        </label>
+                        <label class="btn btn-secondary active radio-config">
+                          <input type="radio" name="Gender" id="option2" autocomplete="off"> Female
+                        </label>
+                      </div>
+                  </div>
+              
             </div>
             <div class="row for-input-row">
               <div class="col-sm-12 col-lg-12" style="text-align: right;">

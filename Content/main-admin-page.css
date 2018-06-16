@@ -1,4 +1,8 @@
-
+.nav-welcome {
+    background-color: #e65540; 
+    color: white !important;
+    text-align: center;
+}
 /*for config color of radio button*/
 .radio-config {
     background-color: #dee2e6;
@@ -10,8 +14,9 @@
 
 .for-input-row{
     margin-bottom: 15px;
-    padding-right: 20%;
-    margin-left: 10%;
+    padding-right: 10%;
+    padding-left: 10%;
+    /* margin-left: 10%; */
 }
 .for-info-name{
     text-align: right;
@@ -327,7 +332,7 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 }
 
 body.sidenav-toggled .navbar-sidenav {
-    width: 55px
+    width: 55px;
 }
 
 body.sidenav-toggled .navbar-sidenav .nav-link-text {

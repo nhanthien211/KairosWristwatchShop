@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Watch Detail</title>
-  <!-- Bootstrap core CSS-->
-  <link href="../Content/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="../Content/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="../Content/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="../Content/main-admin-page.css" rel="stylesheet">
+    <!-- Bootstrap core CSS-->
+    <link href="../Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="../Content/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="../Content/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="../Content/main-admin-page.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="background-color: #e65540; color: white">
+                    <a class="nav-link nav-welcome" href="#">
                         <span class="nav-link-text">Welcome, Administrator =]]</span>
                     </a>
                 </li>
@@ -88,15 +88,27 @@
                     <!-- Form for update watch -->
                     <form action="#" method="get">
                         <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-12">
+                                <label for="WatchName">Watch Name</label>
+                                <input class="form-control form-control-sm" type="text" name="WatchName" value="đây là name">
+                            </div>
+                        </div>
+                        <div class="row for-input-row" style="font-weight: bold">
+                                <div class="col-sm-12">
+                                    <label for="WatchDescription">Watch Description</label><br>
+                                    <textarea name="WatchDescription" class="form-control" id="" rows="3"></textarea>
+                                </div>
+                            </div>
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-6">
+                                <label for="NameID">Watch Name</label>
+                                <input class="form-control form-control-sm" type="text" id="NameID" name="UserID" value="đây là userID">
+                            </div>
                             <div class="col-sm-6">
                                 <label for="NameID">WatchID</label>
                                 <input class="form-control form-control-sm" type="text" id="NameID" name="UserID" value="đây là userID">
                             </div>
-                            <div class="col-sm-6">
-                                    <label for="NameID">WatchID</label>
-                                    <input class="form-control form-control-sm" type="text" id="NameID" name="UserID" value="đây là userID">
-                                </div>
-                            
+
                         </div>
                         <div class="row for-input-row">
                             <div class="col-sm-4 col-lg-4 for-info-name">Name</div>
@@ -160,7 +172,7 @@
                             </div>
                         </div>
                         <div class="row for-input-row">
-                            <div class="col-sm-12 col-lg-12 for-info-name">                                
+                            <div class="col-sm-12 col-lg-12 for-info-name">
 
                             </div>
                         </div>
