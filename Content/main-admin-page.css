@@ -7,13 +7,14 @@
 .radio-config {
     background-color: #dee2e6;
     color: #000;
+    border: none;
 }
 .radio-config:hover, .radio-config:focus {
     background-color: silver;
 }
 
 .for-input-row{
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     padding-right: 10%;
     padding-left: 10%;
     /* margin-left: 10%; */

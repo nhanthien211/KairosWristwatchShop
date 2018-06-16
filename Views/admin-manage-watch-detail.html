@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
 
         <a class="navbar-brand" href="index.html">
-            <img src="Content/img/icons/logo1.png" alt="">
+            <img src="../Content/img/icons/logo1.png" alt="">
         </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,78 +94,151 @@
                             </div>
                         </div>
                         <div class="row for-input-row" style="font-weight: bold">
-                                <div class="col-sm-12">
-                                    <label for="WatchDescription">Watch Description</label><br>
-                                    <textarea name="WatchDescription" class="form-control" id="" rows="3"></textarea>
-                                </div>
+                            <div class="col-sm-12">
+                                <label for="WatchDescription">Watch Description</label>
+                                <br>
+                                <textarea name="WatchDescription" class="form-control" id="" rows="3"></textarea>
                             </div>
+                        </div>
                         <div class="row for-input-row" style="font-weight: bold">
                             <div class="col-sm-6">
-                                <label for="NameID">Watch Name</label>
-                                <input class="form-control form-control-sm" type="text" id="NameID" name="UserID" value="đây là userID">
+                                <label for="Quantity">Quantity</label>
+                                <input class="form-control form-control-sm" type="text" name="Quantity" value="">
                             </div>
                             <div class="col-sm-6">
-                                <label for="NameID">WatchID</label>
-                                <input class="form-control form-control-sm" type="text" id="NameID" name="UserID" value="đây là userID">
+                                <label for="NameID">Price</label>
+                                <input class="form-control form-control-sm" type="text" name="Price" value="">
                             </div>
+                        </div>
 
-                        </div>
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">Name</div>
-                            <div class="col-sm-8 col-lg-8">
-                                <input class="form-control form-control-sm" readonly type="text" name="tName" value="firstname + lastname">
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-6">
+                                <label for="Movement">Movement</label>
+                                <select name="Movement" class="custom-select">
+                                    <!-- type of movement -->
+                                    <option value="1">aaaa</option>
+                                    <option value="1" selected>bbbb</option>
+                                    <option value="1">cccc</option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">Email</div>
-                            <div class="col-sm-8 col-lg-8">
-                                <input class="form-control form-control-sm" readonly type="email" name="Email" value="Đây là email= .-.">
-                            </div>
-                        </div>
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">Phone</div>
-                            <div class="col-sm-8 col-lg-8">
-                                <input class="form-control form-control-sm" readonly type="text" name="Phone" value="0123 123 123">
-                            </div>
-                        </div>
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">Day of Birth</div>
-                            <div class="col-sm-8 col-lg-8">
-                                <!-- set "date" value with format yyyy-MM-dd -->
-                                <input class="form-control form-control-sm" readonly type="date" name="DOB" value="1998-09-17">
-                            </div>
-                        </div>
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">Gender</div>
-                            <div class="col-sm-8 col-lg-8">
-                                Male or Female???
-                            </div>
-                        </div>
-                        <!-- =============================================== -->
-                        <hr>
-                        <!-- =============================================== -->
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">Active</div>
-                            <div class="col-sm-8 col-lg-8">
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary">
-                                        <input type="radio" name="isActive" id="Active" autocomplete="off" checked> Active
-                                    </label>
-                                    <label class="btn btn-secondary active">
-                                        <input type="radio" name="isActive" id="NotActive" autocomplete="off"> Disable
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row for-input-row">
-                            <div class="col-sm-4 col-lg-4 for-info-name">Role</div>
-                            <div class="col-sm-8 col-lg-8">
-                                <select name="selectRole" id="">
-                                    <option value="Admin">Administrator</option>
-                                    <option value="User">User</option>
+                            <div class="col-sm-6">
+                                <label for="Model">Model</label>
+                                <select name="Model" class="custom-select">
+                                    <!-- type of movement -->
+                                    <option value="1">aaaa</option>
+                                    <option value="1">bbbb</option>
+                                    <option value="1">cccc</option>
                                 </select>
                             </div>
                         </div>
+
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-3">
+                                <label for="Movement">Water Resistant</label>
+                                <br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary radio-config active">
+                                        <input type="radio" name="Water" autocomplete="off" checked> Yes
+                                    </label>
+                                    <label class="btn btn-secondary radio-config">
+                                        <input type="radio" name="Water" autocomplete="off"> No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="LED">LED Light</label>
+                                <br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary radio-config active">
+                                        <input type="radio" name="LED" autocomplete="off" checked> Yes
+                                    </label>
+                                    <label class="btn btn-secondary radio-config">
+                                        <input type="radio" name="LED" autocomplete="off"> No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Alarm">Alarm</label>
+                                <br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary radio-config active">
+                                        <input type="radio" name="Alarm" autocomplete="off" checked> Yes
+                                    </label>
+                                    <label class="btn btn-secondary radio-config">
+                                        <input type="radio" name="Alarm" autocomplete="off"> No
+                                    </label>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-12">
+                                <label for="BandMaterial">Band Material</label>
+                                <input class="form-control form-control-sm" type="text" name="BandMaterial" value="">
+                            </div>
+                        </div>
+
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-6">
+                                <label for="CaseMaterial">Case Material</label>
+                                <input class="form-control form-control-sm" type="text" name="CaseMaterial" value="">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="CaseRadius">Case Radius</label>
+                                <input class="form-control form-control-sm" type="number" name="CaseRadius" value="" min="0.1" step="0.1">
+                            </div>
+                        </div>
+
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-6">
+                                <label for="Discount">Discount (%)</label>
+                                <input class="form-control form-control-sm" type="number" name="Discount" value="" min="0" step="1">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="Gurantee">Gurantee (Months)</label>
+                                <input class="form-control form-control-sm" type="number" name="Gurantee" value="" min="0" step="1">
+                            </div>
+                        </div>
+
+                        <div class="row for-input-row" style="font-weight: bold; margin-bottom: 50px;">
+                            <div class="col-sm-12 custom-file">
+                                <label for="Thumbnail">Thumbnail</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row for-input-row" style="font-weight: bold">
+                            <div class="col-sm-6">
+                                <label for="PublishedDate">Published Date</label>
+                                <input class="form-control form-control-sm" type="date" name="PublishedDate" value="" readonly>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="PublishedDate">Published By</label>
+                                <input class="form-control form-control-sm" type="text" name="PublishedDate" value="" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row for-input-row"  style="font-weight: bold">
+                            <div class="col-sm-6">
+                                    <label for="Status">Status</label>
+                                    <br>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary radio-config active">
+                                            <input type="radio" name="Status" autocomplete="off" checked> Continue
+                                        </label>
+                                        <label class="btn btn-secondary radio-config">
+                                            <input type="radio" name="Status" autocomplete="off"> Discontinue
+                                        </label>
+                                    </div>
+                            </div>
+                                
+                        </div>
+
                         <div class="row for-input-row">
                             <div class="col-sm-12 col-lg-12 for-info-name">
                                 <button type="submit" class="btn btn-outline-success">Save Changes</button>
@@ -212,17 +285,17 @@
             </div>
         </div>
         <!-- Bootstrap core JavaScript-->
-        <script src="Scripts/jquery/jquery.min.js"></script>
-        <script src="Content/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../Scripts/jquery.min.js"></script>
+        <script src="../Scripts/bootstrap.bundle.min.js"></script>
         <!-- Core plugin JavaScript-->
-        <script src="Scripts/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../Scripts/jquery.easing.min.js"></script>
         <!-- Page level plugin JavaScript-->
-        <script src="Content/datatables/jquery.dataTables.js"></script>
-        <script src="Content/datatables/dataTables.bootstrap4.js"></script>
+        <script src="../Scripts/jquery.dataTables.js"></script>
+        <script src="../Scripts/dataTables.bootstrap4.js"></script>
         <!-- Custom scripts for all pages-->
-        <script src="Scripts/js/sb-admin.js"></script>
+        <script src="../Scripts/sb-admin.js"></script>
         <!-- Custom scripts for this page-->
-        <script src="Scripts/js/sb-admin-datatables.min.js"></script>
+        <script src="../Scripts/sb-admin-datatables.min.js"></script>
     </div>
 </body>
 
