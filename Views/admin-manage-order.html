@@ -7,21 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Manage Orders</title>
     <!-- Bootstrap core CSS-->
-    <link href="Content/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../Content/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
-    <link href="fonts/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+    <link href="../Content/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
     <!-- Page level plugin CSS-->
-    <link href="Content/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="../Content/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="Content/css/main-admin-page.css" rel="stylesheet">
+    <link href="../Content/main-admin-page.css" rel="stylesheet">
+    <!-- Favicon and touch icons -->
+    <link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
 
-        <a class="navbar-brand" href="index.html">
-            <img src="Content/img/icons/logo1.png" alt="">
+        <a class="navbar-brand" href="#">
+            <img src="../Content/img/icons/logo1.png" alt="">
         </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +40,7 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                     <a class="nav-link" href="admin-info.html">
                         <i class="fa fa-fw fa-user"></i>
-                        <span class="nav-link-text">Account Info</span>
+                        <span class="nav-link-text">Account Information</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Users">
@@ -54,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Watches">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="admin-manage-watch.html">
                         <i class="fa fa-fw fa-cubes"></i>
                         <span class="nav-link-text">Manage Watchs</span>
                     </a>
@@ -71,9 +73,6 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="admin-info.html">Admin Dashboard</a>
-                </li>
                 <li class="breadcrumb-item active">Orders Management</li>
             </ol>
 
@@ -89,8 +88,9 @@
                                     <th>OrderID</th>
                                     <th>CustomerID</th>
                                     <th>Order Date</th>
+                                    <th>Total ($)</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>More Details</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -98,8 +98,9 @@
                                     <th>OrderID</th>
                                     <th>CustomerID</th>
                                     <th>Order Date</th>
+                                    <th>Total ($)</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>More Details</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -108,14 +109,12 @@
                                     <td>O1</td>
                                     <td>cus1</td>
                                     <td>2017-12-31</td>
+                                    <td>123.0</td>
                                     <td>Complete</td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#editModal">
                                             <i class="fa fa-edit"></i>
-                                            View Details & Edit</a>   |  
-                                        <a href="#">
-                                            <i class="fa fa-trash-alt"></i>
-                                            Delete</a>
+                                            View Details & Edit</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -150,67 +149,23 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Edit Modal-->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Order's Details</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <table>
-                            <tr>
-                                <th style="padding: 20px">Active</th>
-                                <td>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-secondary active">
-                                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                            <input type="radio" name="options" id="option2" autocomplete="off"> Disable
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th style="padding: 20px">Role</th>
-                                <td>
-                                    <select name="selectRole" id="">
-                                        <option value="Admin">Administrator</option>
-                                        <option value="User">User</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="admin-manage-user.html">Confirm</a>
+                        <a class="btn btn-primary" href="index.html">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Bootstrap core JavaScript-->
-        <script src="Scripts/jquery/jquery.min.js"></script>
-        <script src="Content/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../Scripts/jquery.min.js"></script>
+        <script src="../Scripts/bootstrap.bundle.min.js"></script>
         <!-- Core plugin JavaScript-->
-        <script src="Scripts/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../Scripts/jquery.easing.min.js"></script>
         <!-- Page level plugin JavaScript-->
-        <script src="Content/datatables/jquery.dataTables.js"></script>
-        <script src="Content/datatables/dataTables.bootstrap4.js"></script>
+        <script src="../Scripts/jquery.dataTables.js"></script>
+        <script src="../Scripts/dataTables.bootstrap4.js"></script>
         <!-- Custom scripts for all pages-->
-        <script src="Scripts/js/sb-admin.js"></script>
+        <script src="../Scripts/sb-admin.js"></script>
         <!-- Custom scripts for this page-->
-        <script src="Scripts/js/sb-admin-datatables.min.js"></script>
+        <script src="../Scripts/sb-admin-datatables.min.js"></script>
     </div>
 </body>
 
