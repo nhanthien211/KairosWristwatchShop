@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Watch Detail</title>
+    <title>Add New</title>
     <!-- Bootstrap core CSS-->
     <link href="../Content/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -15,14 +15,7 @@
     <!-- Custom styles for this template-->
     <link href="../Content/main-admin-page.css" rel="stylesheet">
     <!-- Favicon and touch icons -->
-    <link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
-    <!-- Summer Note Editor -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+	<link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
@@ -83,13 +76,13 @@
                 <li class="breadcrumb-item">
                     <a href="admin-manage-user.html">Watch Management</a>
                 </li>
-                <li class="breadcrumb-item active">Watch Details</li>
+                <li class="breadcrumb-item active">Add New Watch</li>
             </ol>
 
             <!-- DataTables Card-->
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-fw fa-sliders-h "></i> View Watch Details</div>
+                    <i class="fa fa-fw fa-cubes"></i> Add New Watch</div>
                 <div class="card-body">
                     <!-- Form for update watch -->
                     <form action="#" method="get" class="to-validate" novalidate>
@@ -99,35 +92,14 @@
                                 <input class="form-control form-control-sm" type="text" name="WatchName" value="" required>
                                 <div class="invalid-feedback" style="font-size: 15px;">
                                     Name required!
-                                </div>
+                                  </div>
                             </div>
                         </div>
-
-                        <div class="row for-input-row">
+                        <div class="row for-input-row" style="font-weight: bold">
                             <div class="col-sm-12">
-                                <label for="WatchDescription" style="font-weight: bold">Watch Description</label>
+                                <label for="WatchDescription">Watch Description</label>
                                 <br>
-                                <textarea name="WatchDescription" class="form-control" id="summernote">
-                                    s<span style="background-color: rgb(255, 255, 0);">umm</span>er<b> note</b> hihi
-                                </textarea>
-                                <script>
-                                    $('#summernote').summernote({                   
-                                        height: 200,
-                                        toolbar: [
-                                            ['style', ['style']],
-                                            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-                                            ['fontname', ['fontname']],
-                                            ['color', ['color']],
-                                            ['para', ['ul', 'ol', 'paragraph']],
-                                            ['height', ['height']],
-                                            ['table', ['table']],
-                                            ['insert', ['link', 'hr', 'undo', 'redo']],
-                                            ['help', ['help']]
-                                        ]
-                                    });
-                                    $("#content").summernote()
-                                    $('.dropdown-toggle').dropdown()
-                                </script>
+                                <textarea name="WatchDescription" class="form-control" id="" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="row for-input-row" style="font-weight: bold">
@@ -136,14 +108,14 @@
                                 <input class="form-control form-control-sm" type="number" name="Quantity" value="" min="0" step="1" required>
                                 <div class="invalid-feedback" style="font-size: 15px;">
                                     Quantity required!
-                                </div>
+                                  </div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="NameID">Price (*)</label>
                                 <input class="form-control form-control-sm" type="number" name="Price" value="" min="0" step="0.1" required>
                                 <div class="invalid-feedback" style="font-size: 15px;">
                                     Price required!
-                                </div>
+                                  </div>
                             </div>
                         </div>
 
@@ -205,7 +177,7 @@
                                     </label>
                                 </div>
                             </div>
-
+                            
                         </div>
 
                         <div class="row for-input-row" style="font-weight: bold">
@@ -259,20 +231,20 @@
                             </div>
                         </div>
 
-                        <div class="row for-input-row" style="font-weight: bold">
+                        <div class="row for-input-row"  style="font-weight: bold">
                             <div class="col-sm-6">
-                                <label for="Status">Status</label>
-                                <br>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary radio-config active">
-                                        <input type="radio" name="Status" autocomplete="off" checked> Continue
-                                    </label>
-                                    <label class="btn btn-secondary radio-config">
-                                        <input type="radio" name="Status" autocomplete="off"> Discontinue
-                                    </label>
-                                </div>
+                                    <label for="Status">Status</label>
+                                    <br>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary radio-config active">
+                                            <input type="radio" name="Status" autocomplete="off" checked> Continue
+                                        </label>
+                                        <label class="btn btn-secondary radio-config">
+                                            <input type="radio" name="Status" autocomplete="off"> Discontinue
+                                        </label>
+                                    </div>
                             </div>
-
+                                
                         </div>
 
                         <div class="row for-input-row">
@@ -323,7 +295,6 @@
         <!-- Bootstrap core JavaScript-->
         <script src="../Scripts/jquery.min.js"></script>
         <script src="../Scripts/bootstrap.bundle.min.js"></script>
-
         <!-- Core plugin JavaScript-->
         <script src="../Scripts/jquery.easing.min.js"></script>
         <!-- Page level plugin JavaScript-->

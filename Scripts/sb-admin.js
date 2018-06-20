@@ -76,3 +76,4 @@ if (mm < 10) {
 }
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("validationCustom08").setAttribute("max", today);
+
