@@ -15,7 +15,7 @@
   <!-- Custom styles for this template-->
   <link href="../Content/main-admin-page.css" rel="stylesheet">
   <!-- Favicon and touch icons -->
-	<link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
+  <link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
@@ -79,7 +79,12 @@
       <!-- Content-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-fw fa-user "></i> Manage Account Info</div>
+          <i class="fa fa-fw fa-user" style="display: inline;"></i> Manage Account Info
+          <form action="#" class="form-inline" style="display: inline;" data-toggle="modal" data-target="#passwordModal">
+            <button class="btn btn-danger" type="submit" style="float: right;">Change Password</button>
+          </form>
+        </div>
+
         <div class="card-body">
           <!-- FORM CHỈNH SỬA: ======================================================= -->
           <form action="#" method="get" class="to-validate" novalidate>
@@ -135,19 +140,19 @@
             </div>
 
             <!-- GENDER -->
-            <div class="row for-input-row"  style="font-weight: bold">
-                <div class="col-sm-6">
-                    <label for="Gender">Gender</label>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary radio-config">
-                          <input type="radio" name="Gender" id="option1" autocomplete="off" checked> Male
-                        </label>
-                        <label class="btn btn-secondary active radio-config">
-                          <input type="radio" name="Gender" id="option2" autocomplete="off"> Female
-                        </label>
-                      </div>
-                  </div>
-              
+            <div class="row for-input-row" style="font-weight: bold">
+              <div class="col-sm-6">
+                <label for="Gender">Gender</label>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary radio-config">
+                    <input type="radio" name="Gender" id="option1" autocomplete="off" checked> Male
+                  </label>
+                  <label class="btn btn-secondary active radio-config">
+                    <input type="radio" name="Gender" id="option2" autocomplete="off"> Female
+                  </label>
+                </div>
+              </div>
+
             </div>
             <div class="row for-input-row">
               <div class="col-sm-12 col-lg-12" style="text-align: right;">
@@ -172,6 +177,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -190,6 +196,37 @@
         </div>
       </div>
     </div>
+
+    <!-- Change password Modal-->
+    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- change password form ========================================================== -->
+            <form action="#" method="post">
+              <label for="password">New Password</label>
+              <input class="form-control form-control-sm" type="password" name="password" id="password" value="" required onkeyup='check();'>
+              <label for="password">Confirm Password</label>
+              <input class="form-control form-control-sm" type="password" name="password" id="re-password" value="" required onkeyup='check();'>
+              <br>
+              <span id='message'></span>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-outline-success">Confirm</button>
+          </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="../Scripts/jquery.min.js"></script>
     <script src="../Scripts/bootstrap.bundle.min.js"></script>

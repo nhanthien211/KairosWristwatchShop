@@ -77,3 +77,14 @@ if (mm < 10) {
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("validationCustom08").setAttribute("max", today);
 
+//Check pasword + re-pasword
+var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('re-password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'Matched!';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Password and Re-password not matching!';
+  }
+}
