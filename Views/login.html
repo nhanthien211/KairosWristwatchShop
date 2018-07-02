@@ -55,14 +55,16 @@
 					<!-- TEST FORM VALIDATE -->
 					<form action="#" class="to-validate" novalidate>
 						<div class="form-group">
-							<input type="text" name="username" placeholder="(*) Username . . . " class="form-control" id="validationCustom01" pattern=".{6,}[A-Za-z0-9]" required>
+							<input type="text" name="username" placeholder="(*) Username . . . " class="form-control" id="validationCustom01" pattern=".{6,}[A-Za-z0-9]"
+							    required>
 							<div class="invalid-feedback" style="font-size: 15px;">
-								Username is required!!!
+								Username is required!
 							</div>
 							<i class="fa fa-user form-group-icon"></i>
 						</div>
 						<div class="form-group">
-							<input type="password" name="password" placeholder="(*) Password . . . " class="form-control" id="validationCustom02" required>
+							<input type="password" name="password" placeholder="(*) Password . . . " class="form-control" id="validationCustom02" required
+							    onkeyup='check();'>
 							<div class="invalid-feedback" style="font-size: 15px;">
 								Password is required!!!
 							</div>
@@ -70,11 +72,12 @@
 						</div>
 						<div class="form-group">
 							<input type="password" name="rePassword" placeholder="(*) Confirm Password . . . " class="form-control" id="validationCustom03"
-							    required>
+							    required onkeyup='check();'>
 							<i class="fa fa-unlock-alt form-group-icon"></i>
 							<div class="invalid-feedback" style="font-size: 15px;">
 								Confirm Password is required!!!
 							</div>
+							<span id='message'></span>
 						</div>
 						<div class="form-group">
 							<input type="email" name="email" placeholder="(*) Email . . . " class="form-control" id="validationCustom04" required>

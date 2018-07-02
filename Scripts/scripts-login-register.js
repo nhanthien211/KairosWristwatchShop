@@ -1,4 +1,3 @@
-
 // Show/hide tab of form -------------------------------------------------------------
 jQuery(document).ready(function () {
     $('.show-register-form').on('click', function () {
@@ -35,6 +34,12 @@ jQuery(document).ready(function () {
                 if (form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
+                } else if (document.getElementById('validationCustom02').value !=
+                    document.getElementById('validationCustom03').value) {
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = 'Password and Re-password not matching!';
+                    event.preventDefault();
+                    event.stopPropagation();
                 }
                 form.classList.add('was-validated');
             }, false);
@@ -55,3 +60,15 @@ if (mm < 10) {
 }
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("validationCustom08").setAttribute("max", today);
+
+//check password and re-pasword -----------------------------------------------------
+var check = function () {
+    if (document.getElementById('validationCustom02').value ==
+        document.getElementById('validationCustom03').value) {
+        document.getElementById('message').style.color = 'green';
+        document.getElementById('message').innerHTML = 'Matched!';
+    } else {
+        document.getElementById('message').style.color = 'red';
+        document.getElementById('message').innerHTML = 'Password and Re-password not matching!';
+    }
+}
