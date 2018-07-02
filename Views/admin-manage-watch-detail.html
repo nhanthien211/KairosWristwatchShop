@@ -17,12 +17,15 @@
     <!-- Favicon and touch icons -->
     <link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
     <!-- Summer Note Editor -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
+    <!-- <script src="../Scripts/index-jquery-3.2.1.slim.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script> -->
+    <!-- <script src="../Scripts/index-popper.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script> -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet"> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script> -->
+    <script src="../Scripts/ckeditor/ckeditor.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
@@ -107,27 +110,14 @@
                             <div class="col-sm-12">
                                 <label for="WatchDescription" style="font-weight: bold">Watch Description</label>
                                 <br>
-                                <textarea name="WatchDescription" class="form-control" id="summernote">
-                                    s<span style="background-color: rgb(255, 255, 0);">umm</span>er<b> note</b> hihi
+                                <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                    Watch Description here...
                                 </textarea>
                                 <script>
-                                    $('#summernote').summernote({                   
-                                        height: 200,
-                                        toolbar: [
-                                            ['style', ['style']],
-                                            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-                                            ['fontname', ['fontname']],
-                                            ['color', ['color']],
-                                            ['para', ['ul', 'ol', 'paragraph']],
-                                            ['height', ['height']],
-                                            ['table', ['table']],
-                                            ['insert', ['link', 'hr', 'undo', 'redo']],
-                                            ['help', ['help']]
-                                        ]
-                                    });
-                                    $("#content").summernote()
-                                    $('.dropdown-toggle').dropdown()
-                                </script>
+                                    // Replace the <textarea id="editor1"> with a CKEditor
+                                    // instance, using default configuration.
+                                    CKEDITOR.replace('editor1');
+                                </script>                                
                             </div>
                         </div>
                         <div class="row for-input-row" style="font-weight: bold">
