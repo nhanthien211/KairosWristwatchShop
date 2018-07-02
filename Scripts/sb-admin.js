@@ -1,30 +1,30 @@
-(function($) {
+(function ($) {
   "use strict"; // Start of use strict
   // Configure tooltips for collapsed side navigation
   $('.navbar-sidenav [data-toggle="tooltip"]').tooltip({
     template: '<div class="tooltip navbar-sidenav-tooltip" role="tooltip" style="pointer-events: none;"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
   })
   // Toggle the side navigation
-  $("#sidenavToggler").click(function(e) {
+  $("#sidenavToggler").click(function (e) {
     e.preventDefault();
     $("body").toggleClass("sidenav-toggled");
     $(".navbar-sidenav .nav-link-collapse").addClass("collapsed");
     $(".navbar-sidenav .sidenav-second-level, .navbar-sidenav .sidenav-third-level").removeClass("show");
   });
   // Force the toggled class to be removed when a collapsible nav link is clicked
-  $(".navbar-sidenav .nav-link-collapse").click(function(e) {
+  $(".navbar-sidenav .nav-link-collapse").click(function (e) {
     e.preventDefault();
     $("body").removeClass("sidenav-toggled");
   });
   // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
-  $('body.fixed-nav .navbar-sidenav, body.fixed-nav .sidenav-toggler, body.fixed-nav .navbar-collapse').on('mousewheel DOMMouseScroll', function(e) {
+  $('body.fixed-nav .navbar-sidenav, body.fixed-nav .sidenav-toggler, body.fixed-nav .navbar-collapse').on('mousewheel DOMMouseScroll', function (e) {
     var e0 = e.originalEvent,
       delta = e0.wheelDelta || -e0.detail;
     this.scrollTop += (delta < 0 ? 1 : -1) * 30;
     e.preventDefault();
   });
   // Scroll to top button appear
-  $(document).scroll(function() {
+  $(document).scroll(function () {
     var scrollDistance = $(this).scrollTop();
     if (scrollDistance > 100) {
       $('.scroll-to-top').fadeIn();
@@ -35,7 +35,7 @@
   // Configure tooltips globally
   $('[data-toggle="tooltip"]').tooltip()
   // Smooth scrolling using jQuery easing
-  $(document).on('click', 'a.scroll-to-top', function(event) {
+  $(document).on('click', 'a.scroll-to-top', function (event) {
     var $anchor = $(this);
     $('html, body').stop().animate({
       scrollTop: ($($anchor.attr('href')).offset().top)
@@ -48,18 +48,18 @@
 (function () {
   'use strict';
   window.addEventListener('load', function () {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('to-validate');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function (form) {
-          form.addEventListener('submit', function (event) {
-              if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-          }, false);
-      });
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('to-validate');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
   }, false);
 })();
 
@@ -78,7 +78,7 @@ today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("validationCustom08").setAttribute("max", today);
 
 //Check pasword + re-pasword
-var check = function() {
+var check = function () {
   if (document.getElementById('password').value ==
     document.getElementById('re-password').value) {
     document.getElementById('message').style.color = 'green';
@@ -86,5 +86,18 @@ var check = function() {
   } else {
     document.getElementById('message').style.color = 'red';
     document.getElementById('message').innerHTML = 'Password and Re-password not matching!';
+  }
+}
+
+function passOnSubbmit() {
+  if (document.getElementById('password').value ==
+    document.getElementById('re-password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'Matched!';
+    return true;
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Password and Re-password not matching!';
+    return false;
   }
 }

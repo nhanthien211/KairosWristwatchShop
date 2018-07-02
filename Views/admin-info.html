@@ -209,11 +209,11 @@
           </div>
           <div class="modal-body">
             <!-- change password form ========================================================== -->
-            <form action="#" method="post">
+            <form action="#" method="post" onsubmit="return passOnSubbmit()">
               <label for="password">New Password</label>
-              <input class="form-control form-control-sm" type="password" name="password" id="password" value="" required onkeyup='check();'>
+              <input class="form-control form-control-sm" type="password" name="password" id="password" value="" required onkeyup='check();' minlength="8">
               <label for="password">Confirm Password</label>
-              <input class="form-control form-control-sm" type="password" name="password" id="re-password" value="" required onkeyup='check();'>
+              <input class="form-control form-control-sm" type="password" name="password" id="re-password" value="" required onkeyup='check();' minlength="8">
               <br>
               <span id='message'></span>
           </div>
