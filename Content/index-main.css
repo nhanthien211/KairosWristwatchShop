@@ -2056,10 +2056,14 @@ li.sale-noti > a {
   padding-right: 30px;
 }
 .table-shopping-cart .column-4 {
-  width: 355px;
+  width: 200px;
   padding-right: 30px;
 }
 .table-shopping-cart .column-5 {
+  width: 155px;
+  padding-right: 30px;
+}
+.table-shopping-cart .column-6 {
   padding-right: 30px;
 }
 

@@ -15,7 +15,8 @@
     <!-- Custom styles for this template-->
     <link href="../Content/main-admin-page.css" rel="stylesheet">
     <!-- Favicon and touch icons -->
-	<link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
+    <link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
+    <script src="../Scripts/ckeditor/ckeditor.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
@@ -74,7 +75,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="admin-manage-user.html">Watch Management</a>
+                    <a href="admin-manage-watch.html">Watch Management</a>
                 </li>
                 <li class="breadcrumb-item active">Add New Watch</li>
             </ol>
@@ -99,7 +100,12 @@
                             <div class="col-sm-12">
                                 <label for="WatchDescription">Watch Description</label>
                                 <br>
-                                <textarea name="WatchDescription" class="form-control" id="" rows="3"></textarea>
+                                <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                        Watch Description here...
+                                    </textarea>
+                                    <script>
+                                        CKEDITOR.replace('editor1');
+                                    </script>                                
                             </div>
                         </div>
                         <div class="row for-input-row" style="font-weight: bold">
