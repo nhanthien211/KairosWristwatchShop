@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Orders</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Icon for page==================================================================================-->
+    <link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
+    <!--Bootstrap min==================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/bootstrap.min.css">
+    <!--font awsome====================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/font-awesome/css/fontawesome-all.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-animate.css">
+    <!--animation for arrow============================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-slick.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-util.min.css">
+    <link rel="stylesheet" type="text/css" href="../Content/index-main.css">
+    <!--===============================================================================================-->
+    <style>
+        .cart-img-product-config {
+            width: 90px;
+            position: relative
+        }
+
+        .cart-img-product-config img {
+            width: 100%
+        }
+    </style>
+</head>
+
+<body class="animsition">
+
+    <!-- Header -->
+    <header class="header1">
+        <!-- Header desktop -->
+        <div class="container-menu-header">
+
+            <div class="wrap_header">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <img src="../Content/img/icons/logo1.png" alt="IMG-LOGO">
+                </a>
+
+                <!-- Menu -->
+                <div class="wrap_menu">
+                    <nav class="menu">
+                        <ul class="main_menu">
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="product.html">Shop</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Account Icon -->
+                <div class="header-icons">
+                    <ul class="main_menu">
+                        <li>
+                            <a href="cart.html" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-02.png" class="header-icon1" alt="ICON">
+                            </a>
+                        </li>
+                        <span class="linedivide1"></span>
+                        <li>
+                            <a href="#" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            </a>
+                            <ul class="sub_menu">
+                                <li>
+                                    <a href="login.html">Sign in | Sign up</a>
+                                </li>
+                                <li>
+                                    <a href="user-account.html">My Account</a>
+                                </li>
+                                <li class="sale-noti">
+                                    <a href="user-order.html">My Orders</a>
+                                </li>
+                                <li>
+                                    <a href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Mobile ========================================================== -->
+        <div class="wrap_header_mobile">
+            <!-- Logo moblie -->
+            <a href="index.html" class="logo-mobile">
+                <img src="../Content/img/icons/logo1.png" alt="IMG-LOGO">
+            </a>
+
+            <!-- Button show menu -->
+            <div class="btn-show-menu">
+                <!-- Header Icon mobile -->
+                <div class="header-icons-mobile">
+                    <ul class="main_menu">
+                        <li>
+                            <a href="cart.html" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-02.png" class="header-icon1" alt="ICON">
+                            </a>
+                        </li>
+                        <span class="linedivide1"></span>
+                        <li>
+                            <a href="#" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            </a>
+                            <ul class="sub_menu">
+                                <li>
+                                    <a href="login.html">Sign in | Sign up</a>
+                                </li>
+                                <li>
+                                    <a href="user-account.html">My Account</a>
+                                </li>
+                                <li class="sale-noti">
+                                    <a href="user-order.html">My Orders</a>
+                                </li>
+                                <li>
+                                    <a href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="wrap-side-menu">
+            <nav class="side-menu">
+                <ul class="main-menu">
+                    <li class="item-menu-mobile">
+                        <a href="index.html">Home</a>
+
+                    </li>
+                    <li class="item-menu-mobile">
+                        <a href="product.html">Shop</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Title Page -->
+    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../Content/img/mainIMG/shop-banner.jpg);">
+        <h2 class="l-text2 t-center">
+            My Orders
+        </h2>
+    </section>
+
+    <!-- Cart -->
+    <section class="cart bgwhite p-t-20 p-b-100">
+        <div class="container">
+
+            <div class="flex-w flex-sb">
+                <!-- left column============================ -->
+                <div class="w-size15 p-b-50 respon5">
+                    <div class="leftbar p-r-20 p-r-0-sm">
+                        <!-- categories =================================== -->
+                        <h4 class="m-text14 p-b-7">
+                            Hello
+                        </h4>
+
+                        <ul>
+                            <li class="p-t-4">
+                                <a href="user-account.html" class="s-text13">
+                                    My Acount
+                                </a>
+                            </li>
+
+                            <li class="p-t-4">
+                                <a href="user-order.html" class="s-text13 active1">
+                                    My Orders
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- right column========================= -->
+                <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-r-0 m-l-auto p-lr-15-sm w-size16 respon5" style="background-color: #eeeeee59">
+                    <!-- Empty order list -->
+                    <div class="p-b-30">
+                        <h5 class="m-text20 p-b-24">
+                            You haven't placed any order yet!
+                        </h5>
+                        <a href="index.html" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 size13">Continue shopping...</a>
+                    </div>
+
+                    <!-- have order -->
+                    <h5 class="m-text20 p-b-24">
+                        My Orders (total: xxx)
+                    </h5>
+
+                    <div class="wrap-table-shopping-cart bgwhite">
+                        <table class="table table-bordered bgwhite">
+                            <thead>
+                                <tr>
+                                    <th>OrderID</th>
+                                    <th>Bought Date</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color: tomato; text-decoration: underline">
+                                        <a href="user-order-detail.html">ID123</a>
+                                    </td>
+                                    <td>20-12-2018</td>
+                                    <td>$36.00</td>
+                                    <td>
+                                        Complete
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg6 p-t-20 p-b-20 p-l-45 p-r-45">
+        <div class="flex-w">
+            <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+                <h4 class="s-text12 p-b-30">
+                    GET IN TOUCH
+                </h4>
+
+                <div>
+                    <p class="s-text7 w-size27">
+                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                <h4 class="s-text12 p-b-30">
+                    Links
+                </h4>
+
+                <ul>
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            Back To Top
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                <h4 class="s-text12 p-b-30">
+                    Help
+                </h4>
+
+                <ul>
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            FAQs
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top bg0-hov" id="myBtn">
+        <span class="symbol-btn-back-to-top">
+            <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+        </span>
+    </div>
+
+    <!-- Container Selection -->
+    <div id="dropDownSelect1"></div>
+    <div id="dropDownSelect2"></div>
+
+
+
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/index-popper.min.js"></script>
+    <script type="text/javascript" src="../Scripts/bootstrap.bundle.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/index-select2.min.js"></script>
+    <script type="text/javascript">
+        $(".selection-1").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect2')
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="../Scripts/index-main.js"></script>
+
+</body>
+
+</html>

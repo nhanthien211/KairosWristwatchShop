@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Checkout</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Icon for page==================================================================================-->
+    <link rel="icon" type="image/png" href="../Content/img/icons/favicon.png" />
+    <!--Bootstrap min==================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/bootstrap.min.css">
+    <!--font awsome====================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/font-awesome/css/fontawesome-all.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-animate.css">
+    <!--animation for arrow============================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-slick.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/index-util.min.css">
+    <link rel="stylesheet" type="text/css" href="../Content/index-main.css">
+    <!--===============================================================================================-->
+    <style>
+        .cart-img-product-config {
+            width: 90px;
+            position: relative
+        }
+
+        .cart-img-product-config img {
+            width: 100%
+        }
+    </style>
+</head>
+
+<body class="animsition">
+
+    <!-- Header -->
+    <header class="header1">
+        <!-- Header desktop -->
+        <div class="container-menu-header">
+
+            <div class="wrap_header">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <img src="../Content/img/icons/logo1.png" alt="IMG-LOGO">
+                </a>
+
+                <!-- Menu -->
+                <div class="wrap_menu">
+                    <nav class="menu">
+                        <ul class="main_menu">
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="product.html">Shop</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Account Icon -->
+                <div class="header-icons">
+                    <ul class="main_menu">
+                        <li>
+                            <a href="cart.html" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-02.png" class="header-icon1" alt="ICON">
+                            </a>
+                        </li>
+                        <span class="linedivide1"></span>
+                        <li>
+                            <a href="#" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            </a>
+                            <ul class="sub_menu">
+                                <li>
+                                    <a href="login.html">Sign in | Sign up</a>
+                                </li>
+                                <li>
+                                    <a href="user-account.html">My Account</a>
+                                </li>
+                                <li>
+                                    <a href="user-order.html">My Orders</a>
+                                </li>
+                                <li>
+                                    <a href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Mobile ========================================================== -->
+        <div class="wrap_header_mobile">
+            <!-- Logo moblie -->
+            <a href="index.html" class="logo-mobile">
+                <img src="../Content/img/icons/logo1.png" alt="IMG-LOGO">
+            </a>
+
+            <!-- Button show menu -->
+            <div class="btn-show-menu">
+                <!-- Header Icon mobile -->
+                <div class="header-icons-mobile">
+                    <ul class="main_menu">
+                        <li>
+                            <a href="cart.html" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-02.png" class="header-icon1" alt="ICON">
+                            </a>
+                        </li>
+                        <span class="linedivide1"></span>
+                        <li>
+                            <a href="#" class="header-wrapicon1 dis-block">
+                                <img src="../Content/img/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            </a>
+                            <ul class="sub_menu">
+                                <li>
+                                    <a href="login.html">Sign in | Sign up</a>
+                                </li>
+                                <li>
+                                    <a href="user-account.html">My Account</a>
+                                </li>
+                                <li>
+                                    <a href="user-order.html">My Orders</a>
+                                </li>
+                                <li>
+                                    <a href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="wrap-side-menu">
+            <nav class="side-menu">
+                <ul class="main-menu">
+                    <li class="item-menu-mobile">
+                        <a href="index.html">Home</a>
+
+                    </li>
+                    <li class="item-menu-mobile">
+                        <a href="product.html">Shop</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Title Page -->
+    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../Content/img/mainIMG/shop-banner.jpg);">
+        <h2 class="l-text2 t-center">
+            CHECK OUT
+        </h2>
+    </section>
+
+    <!-- Cart -->
+    <section class="cart bgwhite p-t-20 p-b-100">
+        <div class="container" style="text-align: center">
+            <!-- Total -->
+            <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm w-size16" style=" display: inline-block; text-align: left">
+                <h5 class="m-text20 p-b-24">
+                    Shipping Information
+                </h5>
+                <!-- FORM SHIP INFO ================================= -->
+                <form action="#" method="get" id="shipInfo" class="to-validate" novalidate onsubmit="return checkAddress()">
+                    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+                        <!-- Row shipName -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Receiver name *
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipName" placeholder="* Enter receiver name" id="validationCustom01"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Receiver name is required!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row shipPhone -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Phone *
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipPhone" placeholder="* Enter phone number (8 - 11 numbers)"
+                                    id="validationCustom02" required pattern=".{7,10}[0-9]">
+                                <div class="invalid-feedback">
+                                    Invalid phone number! (8-11 numbers)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row shipCity -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-10">
+                            City *
+                        </span>
+                        <div class="rs2-select2 rs3-select2 rs4-select2 of-hidden w-size16 m-t-8 m-b-12">
+                            <select class="selection-2 s-text8" name="shipCity" id="shipCity" onchange="checkAddress()">
+                                <option value="">Select a city</option>
+                                <option value="a">a</option>
+                            </select>
+                            <span id='messageForCity' class="s-text8"></span>
+                        </div>
+
+                        <!-- Row shipDistrict -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-10">
+                            District *
+                        </span>
+                        <div class="rs2-select2 rs3-select2 rs4-select2 of-hidden w-size16 m-t-8 m-b-12">
+                            <select class="selection-2 s-text8" name="shipDistrict" id="shipDistrict" onchange="checkAddress()">
+                                <option value="">Select a district...</option>
+                                <option value="a">a</option>
+                            </select>
+                            <span id='messageForDis' class="s-text8"></span>
+                        </div>
+
+                        <!-- Row shipWard -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-10">
+                            Ward *
+                        </span>
+                        <div class="rs2-select2 rs3-select2 rs4-select2 of-hidden w-size16 m-t-8 m-b-12">
+                            <select class="selection-2 s-text8" name="shipWard" id="shipWard" onchange="checkAddress()">
+                                <option value="">Select a ward...</option>
+                                <option value="a">a</option>
+                            </select>
+                            <span id='messageForWard' class="s-text8"></span>
+                        </div>
+
+                        <!-- Row shipStreet -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Street
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipStreet" placeholder="Enter street name">
+                            </div>
+                        </div>
+
+                        <!-- Row shipAddressNumber -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Address number
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipAddressNumber" placeholder="Enter address number">
+                            </div>
+                        </div>
+
+                        <!-- Row shipNote -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Delivery Note
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <textarea name="shipNote" class="form-control s-text8 p-l-15 p-r-15" placeholder="For delivery note . . ." rows="5"></textarea>
+                            </div>
+                        </div>
+
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                        </span>
+                        <div class="trans-0-4 m-b-10">
+                            <!-- Button -->
+                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-10 p-b-10 p-r-20 p-l-20" type="submit">
+                                Update Totals
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM============================ -->
+
+                <!--  -->
+                <div id="checkoutTotal">
+                    <div class="flex-w flex-sb-m p-t-26 p-b-30">
+                        <div class="flex-w flex-m w-full-sm">
+                            <span class="m-text21 w-size19 w-full-sm">
+                                Subtotal:
+                            </span>
+                        </div>
+                        <div class="flex-w flex-m w-full-sm">
+                            <span class="m-text21 w-size20 w-full-sm">
+                                $36.00
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex-w flex-sb-m p-t-26 p-b-30">
+                        <div class="flex-w flex-m w-full-sm">
+                            <span class="m-text21 w-size19 w-full-sm">
+                                Shipping Fee:
+                            </span>
+                        </div>
+                        <div class="flex-w flex-m w-full-sm">
+                            <span class="m-text21 w-size20 w-full-sm">
+                                $10.00
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex-w flex-sb-m p-t-26 p-b-30">
+                        <div class="flex-w flex-m w-full-sm">
+                            <span class="m-text20 w-size19 w-full-sm">
+                                Total:
+                            </span>
+                        </div>
+                        <div class="flex-w flex-m w-full-sm">
+                            <span class="m-text20 w-size20 w-full-sm">
+                                $46.00
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex-w flex-sb-m p-t-26 p-b-30">
+                        <div class="flex-w flex-m w-full-sm">
+                            <span class="m-text21 w-size19 w-full-sm">
+
+                            </span>
+                        </div>
+                        <div class="flex-w flex-m w-full-sm">
+                            <div class="trans-0-4 m-b-10">
+                                <!-- Button -->
+                                <a href="orders.html" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-10 p-b-10 p-r-20 p-l-20">
+                                    confrim order
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg6 p-t-20 p-b-20 p-l-45 p-r-45">
+        <div class="flex-w">
+            <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+                <h4 class="s-text12 p-b-30">
+                    GET IN TOUCH
+                </h4>
+
+                <div>
+                    <p class="s-text7 w-size27">
+                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                <h4 class="s-text12 p-b-30">
+                    Links
+                </h4>
+
+                <ul>
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            Back To Top
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                <h4 class="s-text12 p-b-30">
+                    Help
+                </h4>
+
+                <ul>
+                    <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                            FAQs
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top bg0-hov" id="myBtn">
+        <span class="symbol-btn-back-to-top">
+            <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+        </span>
+    </div>
+
+    <!-- Container Selection -->
+    <div id="dropDownSelect1"></div>
+    <div id="dropDownSelect2"></div>
+
+
+
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/index-popper.min.js"></script>
+    <script type="text/javascript" src="../Scripts/bootstrap.bundle.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/index-select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/index-slick.min.js"></script>
+    <script type="text/javascript" src="../Scripts/index-slick-custom.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../Scripts/index-sweetalert.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Scripts/index-main.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript">
+        $('.block2-btn-addcart').each(function () {
+            var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+            $(this).on('click', function () {
+                swal(nameProduct, "is added to cart !", "success");
+            });
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script type="text/javascript">
+        $(".selection-1").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect2')
+        });
+    </script>
+
+    <!-- <script type="text/javascript">
+        $(document).ready(function () {
+            $("#checkoutTotal").hide();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#shipInfo').on('submit', function () {
+            $("#checkoutTotal").show();
+        });
+    </script> -->
+
+
+</body>
+
+</html>

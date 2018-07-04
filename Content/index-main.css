@@ -101,8 +101,8 @@ ul, li {
 
 /* ------------------------------------ */
 input {
-	outline: none;
-	border: none !important;
+	/* outline: none;
+	border: none !important; */
 }
 
 textarea {
@@ -307,7 +307,7 @@ iframe {
   display: flex;
   align-items: center;
   background-color: transparent;
-  border: none;
+  /* border: none; */
   height: 20px;
   outline: none;
   position: relative;
