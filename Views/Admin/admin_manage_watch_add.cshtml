@@ -1,0 +1,208 @@
+﻿@{
+    ViewBag.Title = "Add Watch";
+
+    ViewBag.Info = "";
+    ViewBag.Account = "";
+    ViewBag.Order = "";
+    ViewBag.Watch = "active";
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="admin-manage-watch.html">Watch Management</a>
+        </li>
+        <li class="breadcrumb-item active">Add New Watch</li>
+    </ol>
+
+    <!-- DataTables Card-->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-fw fa-cubes"></i> Add New Watch
+        </div>
+        <div class="card-body">
+            <!-- Form for update watch -->
+            <form action="#" method="get" class="to-validate" novalidate>
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-12">
+                        <label for="WatchName">Watch Name (*)</label>
+                        <input class="form-control form-control-sm" type="text" name="WatchName" value="" required>
+                        <div class="invalid-feedback" style="font-size: 15px;">
+                            Name required!
+                        </div>
+                    </div>
+                </div>
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-12">
+                        <label for="WatchDescription">Watch Description</label>
+                        <br>
+                        <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                        Watch Description here...
+                                    </textarea>
+                        <script>
+                                        CKEDITOR.replace('editor1');
+                        </script>
+                    </div>
+                </div>
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-6">
+                        <label for="Quantity">Quantity (*)</label>
+                        <input class="form-control form-control-sm" type="number" name="Quantity" value="" min="0" step="1" required>
+                        <div class="invalid-feedback" style="font-size: 15px;">
+                            Quantity required!
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="NameID">Price (*)</label>
+                        <input class="form-control form-control-sm" type="number" name="Price" value="" min="0" step="0.1" required>
+                        <div class="invalid-feedback" style="font-size: 15px;">
+                            Price required!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-6">
+                        <label for="Movement">Movement</label>
+                        <select name="Movement" class="custom-select">
+                            <!-- type of movement -->
+                            <option value="1">aaaa</option>
+                            <option value="1" selected>bbbb</option>
+                            <option value="1">cccc</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Model">Model</label>
+                        <select name="Model" class="custom-select">
+                            <!-- type of movement -->
+                            <option value="1">aaaa</option>
+                            <option value="1">bbbb</option>
+                            <option value="1">cccc</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-3">
+                        <label for="Movement">Water Resistant</label>
+                        <br>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary radio-config active">
+                                <input type="radio" name="Water" autocomplete="off" checked> Yes
+                            </label>
+                            <label class="btn btn-secondary radio-config">
+                                <input type="radio" name="Water" autocomplete="off"> No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="LED">LED Light</label>
+                        <br>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary radio-config active">
+                                <input type="radio" name="LED" autocomplete="off" checked> Yes
+                            </label>
+                            <label class="btn btn-secondary radio-config">
+                                <input type="radio" name="LED" autocomplete="off"> No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Alarm">Alarm</label>
+                        <br>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary radio-config active">
+                                <input type="radio" name="Alarm" autocomplete="off" checked> Yes
+                            </label>
+                            <label class="btn btn-secondary radio-config">
+                                <input type="radio" name="Alarm" autocomplete="off"> No
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-12">
+                        <label for="BandMaterial">Band Material</label>
+                        <input class="form-control form-control-sm" type="text" name="BandMaterial" value="">
+                    </div>
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-6">
+                        <label for="CaseMaterial">Case Material</label>
+                        <input class="form-control form-control-sm" type="text" name="CaseMaterial" value="">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="CaseRadius">Case Radius</label>
+                        <input class="form-control form-control-sm" type="number" name="CaseRadius" value="" min="0.1" step="0.1">
+                    </div>
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-6">
+                        <label for="Discount">Discount (%)</label>
+                        <input class="form-control form-control-sm" type="number" name="Discount" value="" min="0" step="1">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Gurantee">Gurantee (Months)</label>
+                        <input class="form-control form-control-sm" type="number" name="Gurantee" value="" min="0" step="1">
+                    </div>
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold; margin-bottom: 50px;">
+                    <div class="col-sm-12 custom-file">
+                        <label for="Thumbnail">Thumbnail</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-6">
+                        <label for="PublishedDate">Published Date</label>
+                        <input class="form-control form-control-sm" type="date" name="PublishedDate" value="" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="PublishedDate">Published By</label>
+                        <input class="form-control form-control-sm" type="text" name="PublishedDate" value="" readonly>
+                    </div>
+                </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-6">
+                        <label for="Status">Status</label>
+                        <br>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary radio-config active">
+                                <input type="radio" name="Status" autocomplete="off" checked> Continue
+                            </label>
+                            <label class="btn btn-secondary radio-config">
+                                <input type="radio" name="Status" autocomplete="off"> Discontinue
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row for-input-row">
+                    <div class="col-sm-12 col-lg-12 for-info-name">
+                        <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                    </div>
+                </div>
+                <div class="row for-input-row">
+                    <div class="col-sm-12 col-lg-12 for-info-name">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

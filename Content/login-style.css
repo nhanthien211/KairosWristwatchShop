@@ -1,0 +1,167 @@
+/* .to-validate .form-group > input{
+	position: relative;
+} */
+html{
+	font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+
+.form-group-icon {
+	position: absolute;
+	top: -3px;
+	left: 0px;
+}
+
+.form-group {
+	position: relative;
+}
+/*padding cho text nằm giữa dọc, login form*/
+.textAboveLogin {
+	padding-top: 50px; 
+}
+
+body {
+	background: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #888;
+    line-height: 28px;
+    text-align: center;
+}
+
+strong { font-weight: 500; }
+
+a, a:hover, a:focus {
+	text-decoration: none;
+	color: #e65540;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+h1, h2 {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 34px;
+    font-weight: 100;
+    color: #555;
+    line-height: 48px;
+}
+
+h3 {
+	font-size: 20px;
+    font-weight: 300;
+    color: #555;
+    line-height: 26px;
+}
+
+img { max-width: 100%; opacity: .8; 
+	-o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;}
+img:hover {opacity: 1;}
+
+::-moz-selection { background: #42c5ea; color: #fff; text-shadow: none; }
+::selection { background: #42c5ea; color: #fff; text-shadow: none; }
+
+
+.btn-link-1 {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 5px;
+	padding: 0;
+	background: #555;
+	background: rgba(0, 0, 0, 0.3);
+	font-size: 20px;
+    line-height: 40px;
+    color: #fff;
+    -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
+}
+.btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active {
+	outline: 0; opacity: 0.6; 
+	background: #555; background: rgba(0, 0, 0, 0.3); color: #fff;
+}
+
+
+/***** Top content *****/
+
+.top-content { 
+	padding: 20px 0 20px 0; 
+	background-color: #fff; 	
+}
+.top-content .text { color: #333; }
+.top-content .text h1 { color: #333; font-size: 30px;}/*font size của tiêu đề login | register*/
+.top-content .description { margin: 20px 0 10px 0; }
+.top-content .description a { color: #e65540; border-bottom: 1px dotted #333; }
+.top-content .description a:hover, 
+.top-content .description a:focus { border: 0; }
+
+.show-forms { padding-top: 40px; font-size: 25px; color: #333; line-height: 26px; text-align: left; }
+.show-register-form, .show-forms-divider, .show-login-form { opacity: 0.3;}
+.show-register-form, .show-login-form {
+	cursor: pointer;
+	-o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+/*hiệu ứng khi hover ngang qua các tab lựa chọn*/
+.show-register-form.active, .show-login-form.active,
+.show-register-form:hover, .show-login-form:hover { 
+	opacity: 1;  
+	border-bottom: 2px  solid #e65540;
+}
+
+/*SHOW LOGIN FORM TRƯỚC => REGISTER FORM DISPLAY NONE =================================*/
+.register-form {display: none;}
+/* .login-form { display: none; } */
+
+.r-form { padding-top: 10px; }
+.r-form .form-group { margin-bottom: 25px; text-align: left; position: relative;} /*position cho icon i ở regis form*/
+.form-group > i {/*khoảng cách của icon*/
+	padding-top: 14px;
+	padding-left: 14px;
+	position: absolute;
+}
+.form-group > input {
+	padding-left: 40px;/*padding của khung input khỏi icon*/
+}
+.r-form textarea { height: 100px; }
+.r-form .input-error { border-color: #e65540; }
+
+.l-form { padding-top: 20px; }
+.l-form .form-group { 
+	margin-bottom: 25px; 
+	text-align: left; 
+	position: relative;
+	/* border: 0.5px #888 solid; */
+} /*position cho icon i ở login form*/
+.l-form .input-error { border-color: #e65540; }
+
+.forms-right-icons .row { padding-bottom: 15px; }
+/*khoảng cách của right form*/
+.forms-right-icons { padding-top: 40px; color: #333; text-align: left; padding-left: 0px;}
+/* .forms-right-icons h3 { margin-top: 0; color: #333; }
+.forms-right-icons .icon { text-align: right; font-size: 30px; line-height: 34px; } */
+
+
+/***** Media queries *****/
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	
+	.forms-right-icons .icon { font-size: 22px; }
+	
+}
+
+@media (max-width: 767px) {
+	
+	.show-forms, .forms-right-icons, .forms-right-icons .icon { text-align: center;}
+	.forms-right-icons .icon { padding-top: 10px; }
+	.forms-right-icons h3 { margin-top: 15px; }
+	
+}
+
+@media (max-width: 415px) {
+	
+	h1, h2 { font-size: 28px; }
+
+}
+

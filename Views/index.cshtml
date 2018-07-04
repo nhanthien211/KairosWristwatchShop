@@ -1,0 +1,23 @@
+﻿@using ProjectKairos.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>index</title>
+</head>
+<body>
+    
+    @if (Session["CURRENT_USER"] != null)
+    {
+        var user = (Account) Session["CURRENT_USER"];
+        <p> Welcome, @user.LastName @user.FirstName</p>
+        @Html.ActionLink("Logout", "Logout", "Account")
+
+    }
+    else
+    {
+        <h1>Hello, guest. @Html.ActionLink("Login now", "Login", "Account")</h1>
+    }
+</body>
+</html>
