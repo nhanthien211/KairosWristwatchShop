@@ -25,27 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="../Content/index-util.min.css">
 	<link rel="stylesheet" type="text/css" href="../Content/index-main.css">
 	<!--===============================================================================================-->
-	<style>
-		.for-img {
-			width: 75% !important;
-			display: inline-block !important;
-		}
-
-		.for-img-contain {
-			text-align: center !important;
-		}
-
-		.table-config th {
-			font-weight: bold !important;
-			border: none;
-			width: 35%;
-		}
-
-		.table-config tr,
-		.table-config td {
-			border: none;
-		}
-	</style>
+	<link rel="stylesheet" href="../Content/magic-check.min.css">
 </head>
 
 <body class="animsition">
@@ -205,10 +185,10 @@
 			</div>
 			<!-- product title -->
 			<div class="w-size14 p-t-30 respon5">
-				<h4 class="product-detail-name m-text16">
+				<h4 class="m-text16">
 					G-SHOCK Collection
 				</h4>
-				<h3 class="m-text5 t-left p-b-13">
+				<h3 class="product-detail-name m-text5 t-left p-b-13">
 					GBA800-7A
 				</h3>
 				<span class="m-text17 p-b-13">
@@ -379,10 +359,10 @@
 				<!-- Write REVIEW -->
 				<div class="dropdown-content dis-none p-t-15 p-b-23">
 					<form action="#" method="get">
-							<textarea name="review" class="form-control" rows="5" placeholder="Your review here . . . " required></textarea>
-							<br>
-							<button type="submit" class="btn btn-success">Send</button>
-					</form>			
+						<textarea name="review" class="form-control" rows="5" placeholder="Your review here . . . " required></textarea>
+						<br>
+						<button type="submit" class="btn btn-success">Send</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -498,6 +478,15 @@
 		$(".selection-2").select2({
 			minimumResultsForSearch: 20,
 			dropdownParent: $('#dropDownSelect2')
+		});
+	</script>
+	<!--===============================================================================================-->
+	<script type="text/javascript">
+		$('.btn-addcart-product-detail').each(function () {
+			var nameProduct = $('.product-detail-name').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to cart !", "success");
+			});
 		});
 	</script>
 

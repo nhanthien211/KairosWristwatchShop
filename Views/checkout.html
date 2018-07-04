@@ -25,16 +25,6 @@
     <link rel="stylesheet" type="text/css" href="../Content/index-util.min.css">
     <link rel="stylesheet" type="text/css" href="../Content/index-main.css">
     <!--===============================================================================================-->
-    <style>
-        .cart-img-product-config {
-            width: 90px;
-            position: relative
-        }
-
-        .cart-img-product-config img {
-            width: 100%
-        }
-    </style>
 </head>
 
 <body class="animsition">
@@ -411,13 +401,9 @@
             <i class="fa fa-angle-double-up" aria-hidden="true"></i>
         </span>
     </div>
-
     <!-- Container Selection -->
     <div id="dropDownSelect1"></div>
     <div id="dropDownSelect2"></div>
-
-
-
     <!--===============================================================================================-->
     <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
     <!--===============================================================================================-->
@@ -455,20 +441,15 @@
             dropdownParent: $('#dropDownSelect2')
         });
     </script>
-
-    <!-- <script type="text/javascript">
-        $(document).ready(function () {
-            $("#checkoutTotal").hide();
-        });
-    </script>
-
-    <script type="text/javascript">
-        $('#shipInfo').on('submit', function () {
-            $("#checkoutTotal").show();
-        });
-    </script> -->
-
-
+    <!--===============================================================================================-->
+	<script type="text/javascript">
+		$('.btn-addcart-product-detail').each(function () {
+			var nameProduct = $('.product-detail-name').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+	</script>
 </body>
 
 </html>

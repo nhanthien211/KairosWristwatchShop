@@ -533,8 +533,6 @@
 	<div id="dropDownSelect1"></div>
 	<div id="dropDownSelect2"></div>
 
-
-
 	<!--===============================================================================================-->
 	<script type="text/javascript" src="../Scripts/jquery.min.js"></script>
 	<!--===============================================================================================-->
@@ -570,6 +568,15 @@
 		$(".selection-2").select2({
 			minimumResultsForSearch: 20,
 			dropdownParent: $('#dropDownSelect2')
+		});
+	</script>
+	<!--===============================================================================================-->
+	<script type="text/javascript">
+		$('.btn-addcart-product-detail').each(function () {
+			var nameProduct = $('.product-detail-name').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to cart !", "success");
+			});
 		});
 	</script>
 </body>

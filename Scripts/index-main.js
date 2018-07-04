@@ -268,13 +268,3 @@ function checkAddress() {
 
     return flag;
 }
-
-// $('#shipCity').change(function(){
-//     alert('asq');
-//     if ($("#shipCity")[0].selectedIndex <= 0) {
-//         document.getElementById('message').style.color = '#dc3545';
-//         document.getElementById('message').innerHTML = 'Please select City!';
-//     } else {
-//         document.getElementById('message').innerHTML = 'aaa!';
-//     }
-// });
