@@ -43,6 +43,23 @@ namespace ProjectKairos.Controllers
             return View("~/Views/Admin/admin_manage_user.cshtml");
         }
 
+        [HttpGet]
+        [Route("Manage/Order")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult ManageOrder()
+        {
+            return View("~/Views/Admin/admin_manage_order.cshtml");
+        }
+
+        [HttpGet]
+        [Route("Manage/Watch")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult ManageWatch()
+        {
+            return View("~/Views/Admin/admin_manage_watch.cshtml");
+        }
+
+        #region view and edit account
         [HttpPost]
         [AuthorizeUser(Role = "Administrator")]
         [Route("LoadAccount")]
@@ -93,22 +110,6 @@ namespace ProjectKairos.Controllers
             var data = account.Skip(skip).Take(pageSize).ToList();
 
             return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
-        }
-
-        [HttpGet]
-        [Route("Manage/Order")]
-        [AuthorizeUser(Role = "Administrator")]
-        public ActionResult ManageOrder()
-        {
-            return View("~/Views/Admin/admin_manage_order.cshtml");
-        }
-
-        [HttpGet]
-        [Route("Manage/Watch")]
-        [AuthorizeUser(Role = "Administrator")]
-        public ActionResult ManageWatch()
-        {
-            return View("~/Views/Admin/admin_manage_watch.cshtml");
         }
 
         [HttpGet]
@@ -167,5 +168,19 @@ namespace ProjectKairos.Controllers
 
             return RedirectToAction("ViewAccount", "Admin");
         }
+        #endregion
+
+        #region add new watch
+        [HttpGet]
+        [Route("Manage/Watch/Add")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult AddWatch()
+        {
+            return View("~/Views/Admin/admin_manage_watch_add.cshtml");
+        }
+
+
+        #endregion
+
     }
 }

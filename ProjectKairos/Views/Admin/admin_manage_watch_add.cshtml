@@ -9,11 +9,53 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+@section ckeditor
+{
+    <!--Chèn script để load ck editor-->
+    @Scripts.Render("~/bundles/ckeditor")        
+}
+
+@section scripts
+{
+    <script>
+        var file = document.getElementById('inputGroupFile01');
+        file.value = '';
+        file.onchange = function (e) {
+            $('#fileUploadResult').className = '';
+            var fileExtension = this.value.match(/\.([^\.]+)$/)[1];
+            fileExtension = fileExtension.toLowerCase();
+            if (fileExtension === 'png' || fileExtension === 'jpg' || fileExtension === 'jpeg') {
+                var size = file.files[0].size;
+                if (size > 512000) {
+                    //bigger than 500kb, too much for a thumbnail
+                    $('#fileUploadResult').addClass('text-danger');
+                    $('#fileUploadResult').html('Uploaded file must be under 500KB');
+                    this.value = '';
+                    return;
+                }
+               
+                $(this).next().after().text($(this).val().split('\\').slice(-1)[0]);
+                $('#fileUploadResult').addClass('text-success');
+                $('#fileUploadResult').html('Success');
+            } else {
+                $(this).next().after().text('Choose File');
+                $('#fileUploadResult').addClass('text-danger');
+                $('#fileUploadResult').html('Only .jpg .jpeg and .png is supported');
+                this.value = '';
+            }           
+        };
+
+        function clearFileError() {
+            $('#fileUploadResult').html('');
+        }
+    </script>
+}
+
 <div class="container-fluid">
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="admin-manage-watch.html">Watch Management</a>
+            <a href="@Url.Action("ManageWatch", "Admin")">Watch Management</a>            
         </li>
         <li class="breadcrumb-item active">Add New Watch</li>
     </ol>
@@ -33,20 +75,25 @@
                         <div class="invalid-feedback" style="font-size: 15px;">
                             Name required!
                         </div>
+                        
                     </div>
                 </div>
-                <div class="row for-input-row" style="font-weight: bold">
-                    <div class="col-sm-12">
-                        <label for="WatchDescription">Watch Description</label>
-                        <br>
-                        <textarea name="editor1" id="editor1" rows="10" cols="80">
-                                        Watch Description here...
-                                    </textarea>
-                        <script>
-                                        CKEDITOR.replace('editor1');
-                        </script>
+
+                <div class="row for-input-row" style="font-weight: bold; margin-bottom: 50px;">
+                    <div class="col-sm-12 custom-file">
+                        <label for="Thumbnail">Thumbnail (*)</label>
+                        <div class="custom-file" lang="es">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" required accept="image/*" value="">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            <div class="invalid-feedback" style="font-size: 15px;">
+                                A Thumbnail for product is required!
+                            </div>
+                            <div id="fileUploadResult"></div>
+                        </div>
                     </div>
                 </div>
+                <br/>
+
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
                         <label for="Quantity">Quantity (*)</label>
@@ -63,6 +110,20 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-12">
+                        <label for="WatchDescription">Watch Description</label>
+                        <br>
+                        <textarea name="editor1" id="editor1" rows="10" cols="80">
+                        <h1>Watch Description here...</h1>
+                                    </textarea>
+                        <script>
+                            CKEDITOR.replace('editor1');
+                        </script>
+                    </div>
+                </div>
+
 
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
@@ -146,55 +207,18 @@
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
                         <label for="Discount">Discount (%)</label>
-                        <input class="form-control form-control-sm" type="number" name="Discount" value="" min="0" step="1">
+                        <input class="form-control form-control-sm" type="number" name="Discount" value="0" min="0" step="1">
                     </div>
                     <div class="col-sm-6">
                         <label for="Gurantee">Gurantee (Months)</label>
-                        <input class="form-control form-control-sm" type="number" name="Gurantee" value="" min="0" step="1">
+                        <input class="form-control form-control-sm" type="number" name="Gurantee" value="12" min="0" step="1">
                     </div>
                 </div>
 
-                <div class="row for-input-row" style="font-weight: bold; margin-bottom: 50px;">
-                    <div class="col-sm-12 custom-file">
-                        <label for="Thumbnail">Thumbnail</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01">
-                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row for-input-row" style="font-weight: bold">
-                    <div class="col-sm-6">
-                        <label for="PublishedDate">Published Date</label>
-                        <input class="form-control form-control-sm" type="date" name="PublishedDate" value="" readonly>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="PublishedDate">Published By</label>
-                        <input class="form-control form-control-sm" type="text" name="PublishedDate" value="" readonly>
-                    </div>
-                </div>
-
-                <div class="row for-input-row" style="font-weight: bold">
-                    <div class="col-sm-6">
-                        <label for="Status">Status</label>
-                        <br>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary radio-config active">
-                                <input type="radio" name="Status" autocomplete="off" checked> Continue
-                            </label>
-                            <label class="btn btn-secondary radio-config">
-                                <input type="radio" name="Status" autocomplete="off"> Discontinue
-                            </label>
-                        </div>
-                    </div>
-
-                </div>
 
                 <div class="row for-input-row">
                     <div class="col-sm-12 col-lg-12 for-info-name">
-                        <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                        <button type="submit" class="btn btn-outline-success" id="btn-add-watch" onclick="clearFileError()">Save Changes</button>
                     </div>
                 </div>
                 <div class="row for-input-row">
@@ -206,3 +230,4 @@
         </div>
     </div>
 </div>
+
