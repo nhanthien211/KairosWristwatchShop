@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Manage Watch";
+
+    ViewBag.Info = "";
+    ViewBag.Account = "";
+    ViewBag.Order = "";
+    ViewBag.Watch = "active";
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Manage Watch</li>
+    </ol>
+
+    <!-- DataTables Card-->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-fw fa-cubes" style="display: inline;"></i> Watch List
+            <form action="admin-add-new.html" class="form-inline" style="display: inline;">
+                <button class="btn btn-danger" type="submit" style="float: right;">Add New Watch</button>
+            </form>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>WatchID</th>
+                            <th>Quantity</th>
+                            <th>Price ($)</th>
+                            <th>Status</th>
+                            <th>Published Date</th>
+                            <th>Published By</th>
+                            <th>More Details</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>WatchID</th>
+                            <th>Quantity</th>
+                            <th>Price ($)</th>
+                            <th>Status</th>
+                            <th>Published Date</th>
+                            <th>Published By</th>
+                            <th>More details</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <!-- Vòng for cho list data -->
+                        <tr>
+                            <td>WTH00001</td>
+                            <td>100</td>
+                            <td>200.5</td>
+                            <td>True</td>
+                            <td>Some date....</td>
+                            <td>By someone ...</td>
+                            <td>
+                                <a href="admin-manage-watch-detail.html">
+                                    <i class="fa fa-edit"></i>
+                                    View Details & Edit
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <i class="fa fa-trash-alt"></i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
