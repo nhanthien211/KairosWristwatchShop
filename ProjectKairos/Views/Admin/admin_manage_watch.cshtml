@@ -9,6 +9,11 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+@section scripts
+{
+    <!--BỔ sung script để tạo table watch sau-->
+}
+
 <div class="container-fluid">
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
@@ -19,9 +24,10 @@
     <div class="card mb-3">
         <div class="card-header">
             <i class="fa fa-fw fa-cubes" style="display: inline;"></i> Watch List
-            <form action="admin-add-new.html" class="form-inline" style="display: inline;">
+            @using (@Html.BeginForm("AddWatch", "Admin", FormMethod.Get, new {@class = "form-inline", @style = "display: inline"}))
+            {
                 <button class="btn btn-danger" type="submit" style="float: right;">Add New Watch</button>
-            </form>
+            }         
         </div>
         <div class="card-body">
             <div class="table-responsive">

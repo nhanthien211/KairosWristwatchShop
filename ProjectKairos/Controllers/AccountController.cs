@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web.Mvc;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
-using System.Data.Entity;
 
 namespace ProjectKairos.Controllers
 {
@@ -146,7 +145,6 @@ namespace ProjectKairos.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 string username = (string)Session["CURRENT_USER_ID"];
                 Account currentUser = db.Accounts.Find(username);
 
@@ -172,7 +170,6 @@ namespace ProjectKairos.Controllers
                 {
                     return RedirectToAction("Index", "Admin");
                 }
-
             }
             return Content("Unexpected Error. Please try again");
         }
@@ -217,4 +214,6 @@ namespace ProjectKairos.Controllers
             return Content("TO USER");
         }
     }
+
+
 }

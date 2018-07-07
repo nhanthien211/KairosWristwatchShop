@@ -8,6 +8,12 @@
     ViewBag.Watch = "";
 
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable_account")
 }
 
 <div class="container-fluid">
@@ -38,4 +44,6 @@
         </div>
     </div>
 </div>
+
+
 

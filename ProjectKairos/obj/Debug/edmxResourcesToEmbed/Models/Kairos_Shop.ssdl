@@ -53,7 +53,7 @@
     </Key>
     <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WatchID" Type="int" Nullable="false" />
-    <Property Name="URL" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="URL" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="UploadedTime" Type="datetime" Nullable="false" />
     <Property Name="UploadedBy" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Status" Type="bit" Nullable="false" />
@@ -135,7 +135,7 @@
     </Key>
     <Property Name="WatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WatchCode" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="WatchDescription" Type="varchar(max)" Nullable="false" />
+    <Property Name="WatchDescription" Type="varchar(max)" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="MovementID" Type="int" Nullable="false" />
@@ -148,9 +148,9 @@
     <Property Name="PublishedBy" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Discount" Type="int" Nullable="false" />
     <Property Name="LEDLight" Type="bit" Nullable="false" />
-    <Property Name="Gurantee" Type="int" Nullable="false" />
+    <Property Name="Guarantee" Type="int" Nullable="false" />
     <Property Name="Alarm" Type="bit" Nullable="false" />
-    <Property Name="Thumbnail" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Status" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="WatchModels">

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="42e1785ab9cd4edcbe0ba48641983612" Name="Diagram1">
+      <Diagram DiagramId="42e1785ab9cd4edcbe0ba48641983612" Name="Diagram1" ZoomLevel="34">
         <EntityTypeShape EntityType="KAIROS_SHOPModel.Account" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KAIROS_SHOPModel.City" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="KAIROS_SHOPModel.Comment" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
