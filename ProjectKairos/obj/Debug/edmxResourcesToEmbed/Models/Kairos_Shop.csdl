@@ -69,7 +69,7 @@
     </Key>
     <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="WatchID" Type="Int32" Nullable="false" />
-    <Property Name="URL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UploadedTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UploadedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Status" Type="Boolean" Nullable="false" />
@@ -169,7 +169,7 @@
     </Key>
     <Property Name="WatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="WatchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="WatchDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WatchDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="Price" Type="Double" Nullable="false" />
     <Property Name="MovementID" Type="Int32" Nullable="false" />
@@ -182,9 +182,8 @@
     <Property Name="PublishedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Discount" Type="Int32" Nullable="false" />
     <Property Name="LEDLight" Type="Boolean" Nullable="false" />
-    <Property Name="Gurantee" Type="Int32" Nullable="false" />
     <Property Name="Alarm" Type="Boolean" Nullable="false" />
-    <Property Name="Thumbnail" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Thumbnail" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Account" Relationship="Self.FK_Watches_Accounts" FromRole="Watches" ToRole="Accounts" />
     <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Watches" FromRole="Watches" ToRole="Comments" />
@@ -193,6 +192,7 @@
     <NavigationProperty Name="Movement" Relationship="Self.FK_Watches_Movements" FromRole="Watches" ToRole="Movements" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Watches" FromRole="Watches" ToRole="OrderDetail" />
     <NavigationProperty Name="WatchModel" Relationship="Self.FK_Watches_WatchModels" FromRole="Watches" ToRole="WatchModels" />
+    <Property Name="Guarantee" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="WatchModel">
     <Key>

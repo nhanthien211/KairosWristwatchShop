@@ -1,6 +1,4 @@
-﻿@using ProjectKairos.Utilities
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="~/Content/img/icons/favicon.png">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title</title>    
     @Styles.Render("~/Content/admin_css")
     @RenderSection("ckeditor", required: false)
-    <!--If required set to true, will throw error on any site use this layout but does not 
+    <!--If required set to true, will throw error on any site use this layout but does not
     have section implemented-->
 </head>
 
@@ -96,8 +94,6 @@
                 </div>
             </div>
         </div>
-
-
 
         @Scripts.Render("~/bundles/admin_script")
         @RenderSection("scripts", required: false)

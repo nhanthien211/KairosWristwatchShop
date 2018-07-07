@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
+using ImageProcessor.Imaging;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
@@ -117,7 +121,7 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Administrator")]
         public ActionResult ViewAccount(string username)
         {
-            var role = db.Roles.ToList();
+
             var account = db.Accounts.Where(a => a.Username == username).Select(a => new AccountInfoRoleViewModel
             {
                 Username = a.Username,
@@ -135,7 +139,7 @@ namespace ProjectKairos.Controllers
             {
                 return HttpNotFound();
             }
-
+            var role = db.Roles.ToList();
             account.Role = role;
             return View("~/Views/Admin/admin_manage_user_detail.cshtml", account);
         }
@@ -176,10 +180,100 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Administrator")]
         public ActionResult AddWatch()
         {
-            return View("~/Views/Admin/admin_manage_watch_add.cshtml");
+            //load movement and model to view 
+            var movement = db.Movements.ToList();
+            var watchModel = db.WatchModels.ToList();
+
+            var viewModel = new AddWatchViewModel
+            {
+                Movement = movement,
+                WatchModel = watchModel,
+                Alarm = true,
+                LedLight = true,
+                WaterResistant = true,
+                CaseRadius = 0,
+                Discount = 0,
+                Quantity = 1,
+                Price = 1,
+                Guarantee = 12
+            };
+            return View("~/Views/Admin/admin_manage_watch_add.cshtml", viewModel);
         }
 
+        [HttpPost]
+        [Route("Manage/Watch/Add")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult AddWatch([Bind(Include = "WatchDescription, WatchCode, Quantity, Price, MovementID, ModelId, BandMaterial, CaseRadius, CaseMaterial, Discount, Guarantee")] Watch watch, HttpPostedFileBase thumbnail)
+        {
+            if (ModelState.IsValid)
+            {
+                watch.WaterResistant = true;
+                watch.LEDLight = true;
+                watch.Alarm = true;
+                if (Request["water"] == "no")
+                {
+                    watch.WaterResistant = false;
+                }
+                if (Request["led"] == "no")
+                {
+                    watch.LEDLight = false;
+                }
+                if (Request["alarm"] == "no")
+                {
+                    watch.Alarm = false;
+                }
 
+                //check if watch code is unique
+                var result = db.Watches.Where(w => w.WatchCode == watch.WatchCode)
+                                        .Select(w => w.WatchCode)
+                                        .FirstOrDefault();
+                if (result != null)
+                {
+                    //code đã tồn tại
+                    //thông báo điền lại code 
+                    //prefill các field
+                    var movement = db.Movements.ToList();
+                    var watchModel = db.WatchModels.ToList();
+                    var viewModel = new AddWatchViewModel
+                    {
+                        Movement = movement,
+                        WatchModel = watchModel,
+                        WatchName = watch.WatchCode,
+                        WatchDescription = watch.WatchDescription,
+                        ModelId = watch.ModelID,
+                        MovementId = watch.MovementID,
+                        BandMaterial = watch.BandMaterial,
+                        CaseRadius = watch.CaseRadius.GetValueOrDefault(),
+                        CaseMaterial = watch.CaseMaterial,
+                        Discount = watch.Discount,
+                        Quantity = watch.Quantity,
+                        Price = watch.Price,
+                        Guarantee = watch.Guarantee,
+                        Alarm = watch.Alarm,
+                        LedLight = watch.LEDLight,
+                        WaterResistant = watch.WaterResistant,
+                        DuplicateErrorMessage = "Watch with code '" + watch.WatchCode + "' already existed"
+                    };
+                    return View("~/Views/Admin/admin_manage_watch_add.cshtml", viewModel);
+                }
+                //lưu hình ảnh xuống máy  
+
+                string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watch.WatchCode + DateTime.Now.ToBinary();
+                ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 750, ResizeMode.Max, ref path);
+
+                watch.Thumbnail = path;
+                watch.PublishedTime = DateTime.Now;
+                watch.PublishedBy = (string)Session["CURRENT_USER_ID"];
+                watch.Status = true;
+
+                db.Watches.Add(watch);
+                db.SaveChanges();
+
+                TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
+                return RedirectToAction("AddWatch", "Admin");
+            }
+            return HttpNotFound();
+        }
         #endregion
 
     }

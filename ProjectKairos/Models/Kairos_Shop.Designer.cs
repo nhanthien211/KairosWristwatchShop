@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\ProjectKairos\Models\Kairos_Shop.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\Models\Kairos_Shop.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

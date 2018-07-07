@@ -22,7 +22,12 @@
         {
             phone = Model.Phone;
         }
-        dob = Model.DOB.GetValueOrDefault().ToString("yyyy-MM-dd");
+        if (Model.DOB.HasValue)
+        {
+            dob = Model.DOB.Value.ToString("yyyy-MM-dd");
+        }
+
+        
         if (!Model.Gender)
         {
             male = "";
@@ -63,7 +68,7 @@
                         <p>
                             Join us now; or
                             @Html.ActionLink("back to main page", "Index", "Home")
-                          
+
                         </p>
                     </div>
                     <h1>
@@ -86,12 +91,12 @@
 
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "to-validate", novalidate = "" }))
                     {
-                        
-                        @Html.ValidationMessage("DUPLICATE_USERNAME", new {@class = "text-danger"})
+                        @Html.ValidationMessage("DUPLICATE_USERNAME", new { @class = "text-danger" })
+
                         <div class="form-group">
-                            <input type="text" name="username" value="@username" placeholder="* Username . . . " class="form-control" id="validationCustom01" pattern=".{5,20}[A-Za-z0-9]" required>
+                            <input type="text" name="username" value="@username" placeholder="* Username . . . " class="form-control" id="validationCustom01" pattern="[A-Za-z0-9]{5,20}" required>
                             <div class="invalid-feedback" style="font-size: 15px;">
-                                Invalid Username (5 - 20 characters excluding special characters) 
+                                Invalid Username (5 - 20 characters excluding special characters)
                             </div>
                             <i class="fa fa-user form-group-icon"></i>
                         </div>
@@ -111,6 +116,7 @@
                             </div>
                             <span id='message'></span>
                         </div>
+                        
                         <div class="form-group">
                             <input type="email" name="email" value="@email" placeholder="* Email . . . " class="form-control" id="validationCustom04" required pattern="@emailPattern">
                             <i class="fa fa-envelope form-group-icon"></i>
@@ -164,7 +170,6 @@
 
             </div>
             <!-- Form đăng ký ===================================== -->
-
             <!-- Form đăng nhập ======================================== -->
             <div class="row login-form">
                 <div class="col-sm-2"></div>
@@ -206,8 +211,8 @@
             </div>
         </div>
     </div>
-    
-    @Scripts.Render("~/bundles/loginscript")
+
+    @Scripts.Render("~/bundles/loginscript")  
     @Html.Raw(ViewBag.message)
 </body>
 
