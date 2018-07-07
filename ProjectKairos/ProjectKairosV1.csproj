@@ -160,6 +160,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,6 +237,7 @@
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.svg" />
     <Content Include="Content\font-awesome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\font-montserrat\OFL.txt" />
     <Content Include="Content\img\icons\bg-01.jpg" />
     <Content Include="Content\img\icons\discover.png" />
     <Content Include="Content\img\icons\express.png" />
@@ -248,14 +250,34 @@
     <Content Include="Content\img\icons\paypal.png" />
     <Content Include="Content\img\icons\video-16-9.jpg" />
     <Content Include="Content\img\icons\visa.png" />
+    <Content Include="Content\img\mainIMG\casio-banner-1.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-10.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-2.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-4.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-5.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-7.jpg" />
+    <Content Include="Content\img\mainIMG\casio-long-poster.jpg" />
     <Content Include="Content\img\mainIMG\casio-small-banner-12.jpg" />
+    <Content Include="Content\img\mainIMG\casio-small-banner-6.jpg" />
+    <Content Include="Content\img\mainIMG\casio-small-banner-8.jpg" />
+    <Content Include="Content\img\mainIMG\casio-small-banner-9.jpg" />
     <Content Include="Content\img\mainIMG\login-banner-2.jpg" />
     <Content Include="Content\img\mainIMG\login-banner-4.jpg" />
     <Content Include="Content\img\mainIMG\notfound.jpg" />
+    <Content Include="Content\img\mainIMG\p1.jpg" />
     <Content Include="Content\img\mainIMG\reg-banner-1.jpg" />
     <Content Include="Content\img\mainIMG\reg-banner-2.jpg" />
+    <Content Include="Content\img\mainIMG\shop-banner.jpg" />
+    <Content Include="Content\index-animate.css" />
+    <Content Include="Content\index-animsition.min.css" />
+    <Content Include="Content\index-hamburgers.min.css" />
+    <Content Include="Content\index-main.css" />
+    <Content Include="Content\index-select2.min.css" />
+    <Content Include="Content\index-slick.css" />
+    <Content Include="Content\index-util.min.css" />
     <Content Include="Content\login-form-elements.css" />
     <Content Include="Content\login-style.css" />
+    <Content Include="Content\magic-check.min.css" />
     <Content Include="Content\main-admin-page.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -582,6 +604,42 @@
     <Content Include="Models\Kairos_Shop.edmx.diagram">
       <DependentUpon>Kairos_Shop.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\font-montserrat\Montserrat-Black.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-BlackItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraBold.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Italic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Light.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-LightItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Medium.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-MediumItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Regular.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Thin.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ThinItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Black.ttf" />
+    <Content Include="Content\font-poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Bold.ttf" />
+    <Content Include="Content\font-poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Italic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Light.ttf" />
+    <Content Include="Content\font-poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Medium.ttf" />
+    <Content Include="Content\font-poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Regular.ttf" />
+    <Content Include="Content\font-poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Content\font-poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Thin.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ThinItalic.ttf" />
     <None Include="packages.config" />
     <Content Include="Views\login.cshtml" />
     <Content Include="Views\Admin\admin_info.cshtml" />
@@ -598,6 +656,13 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Views\Shared\_LayouUser.cshtml" />
+    <Content Include="Views\shopping_cart.cshtml" />
+    <Content Include="Views\User\user_checkout.cshtml" />
+    <Content Include="Views\User\user_account.cshtml" />
+    <Content Include="Views\index1.cshtml" />
+    <Content Include="Views\shopping_product.cshtml" />
+    <Content Include="Views\shopping_detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

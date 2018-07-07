@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="Username" />
@@ -518,7 +518,8 @@
             <End Role="Watches" EntitySet="Watches" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KAIROS_SHOPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -704,8 +705,9 @@
           <Property Name="PublishedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Discount" Type="Int32" Nullable="false" />
           <Property Name="LEDLight" Type="Boolean" Nullable="false" />
+          <Property Name="Guarantee" Type="Int32" Nullable="false" />
           <Property Name="Alarm" Type="Boolean" Nullable="false" />
-          <Property Name="Thumbnail" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Watches_Accounts" FromRole="Watches" ToRole="Accounts" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Watches" FromRole="Watches" ToRole="Comments" />
@@ -714,7 +716,6 @@
           <NavigationProperty Name="Movement" Relationship="Self.FK_Watches_Movements" FromRole="Watches" ToRole="Movements" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Watches" FromRole="Watches" ToRole="OrderDetail" />
           <NavigationProperty Name="WatchModel" Relationship="Self.FK_Watches_WatchModels" FromRole="Watches" ToRole="WatchModels" />
-          <Property Name="Guarantee" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="WatchModel">
           <Key>
@@ -1226,7 +1227,6 @@
           <EntitySetMapping Name="Watches">
             <EntityTypeMapping TypeName="KAIROS_SHOPModel.Watch">
               <MappingFragment StoreEntitySet="Watches">
-                <ScalarProperty Name="Guarantee" ColumnName="Guarantee" />
                 <ScalarProperty Name="WatchID" ColumnName="WatchID" />
                 <ScalarProperty Name="WatchCode" ColumnName="WatchCode" />
                 <ScalarProperty Name="WatchDescription" ColumnName="WatchDescription" />
@@ -1242,6 +1242,7 @@
                 <ScalarProperty Name="PublishedBy" ColumnName="PublishedBy" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="LEDLight" ColumnName="LEDLight" />
+                <ScalarProperty Name="Guarantee" ColumnName="Guarantee" />
                 <ScalarProperty Name="Alarm" ColumnName="Alarm" />
                 <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

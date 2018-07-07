@@ -144,7 +144,6 @@
     <EntitySetMapping Name="Watches">
       <EntityTypeMapping TypeName="KAIROS_SHOPModel.Watch">
         <MappingFragment StoreEntitySet="Watches">
-          <ScalarProperty Name="Guarantee" ColumnName="Guarantee" />
           <ScalarProperty Name="WatchID" ColumnName="WatchID" />
           <ScalarProperty Name="WatchCode" ColumnName="WatchCode" />
           <ScalarProperty Name="WatchDescription" ColumnName="WatchDescription" />
@@ -160,6 +159,7 @@
           <ScalarProperty Name="PublishedBy" ColumnName="PublishedBy" />
           <ScalarProperty Name="Discount" ColumnName="Discount" />
           <ScalarProperty Name="LEDLight" ColumnName="LEDLight" />
+          <ScalarProperty Name="Guarantee" ColumnName="Guarantee" />
           <ScalarProperty Name="Alarm" ColumnName="Alarm" />
           <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
           <ScalarProperty Name="Status" ColumnName="Status" />

@@ -58,7 +58,7 @@ namespace ProjectKairos.Controllers
                         return RedirectToAction("Index", "Admin");
                     }
                     //return to home page if user
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "User");
                 }
                 ModelState.AddModelError("INVALID", invalidMessage);
                 return View("~/Views/login.cshtml");

@@ -59,6 +59,33 @@ namespace ProjectKairos
                 "~/Scripts/ckeditor/ckeditor.js"));
 
 
+            //common css for user
+            bundles.Add(new StyleBundle("~/Content/user_css").Include(
+                "~/Content/bootstrap.min.css",
+                "~/Content/index-animate.css",
+                "~/Content/index-hamburgers.min.css",
+                "~/Content/index-animsition.min.css",
+                "~/Content/index-select2.min.css",
+                "~/Content/index-slick.css",
+                "~/Content/index-util.min.css",
+                "~/Content/index-main.css"
+                ).Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
+
+            //css for checkbox in product.html
+            bundles.Add(new StyleBundle("~/Content/product_checkbox_css").Include(
+                "~/Content/magic-check.min.css"));
+
+            //common js for user
+            bundles.Add(new ScriptBundle("~/bundles/user_script").Include(
+                "~/Scripts/jquery.min.js",
+                "~/Scripts/animsition.min.js",
+                "~/Scripts/index-popper.min.js",
+                "~/Scripts/bootstrap.bundle.min.js",
+                "~/Scripts/index-select2.min.js",
+                "~/Scripts/index-slick.min.js",
+                "~/Scripts/index-slick-custom.min.js",
+                "~/Scripts/index-sweetalert.min.js",
+                "~/Scripts/index-main.js"));
 
             //to disable auto ignore .min file while debug = true in web.config
             bundles.IgnoreList.Clear();

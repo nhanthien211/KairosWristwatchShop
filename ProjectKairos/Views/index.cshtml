@@ -13,7 +13,6 @@
         var user = (Account) Session["CURRENT_USER"];
         <p> Welcome, @user.LastName @user.FirstName</p>
         @Html.ActionLink("Logout", "Logout", "Account")
-
     }
     else
     {
