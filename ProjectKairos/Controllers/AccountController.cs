@@ -1,81 +1,62 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
+using ProjectKairos.ViewModel;
 
 namespace ProjectKairos.Controllers
 {
     public class AccountController : Controller
     {
-        private KAIROS_SHOPEntities db = new KAIROS_SHOPEntities();
+        private KAIROS_SHOPEntities db;
+        private AccountService accountService;
 
+        public AccountController()
+        {
+            db = new KAIROS_SHOPEntities();
+            accountService = new AccountService(db);
+        }
 
         [HttpGet]
         public ActionResult Login()
         {
             if (Session["CURRENT_USER_ID"] != null)
             {
+
                 return RedirectToAction("Index", "Home");
             }
-            return View("~/Views/login.cshtml");
+            AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
+            return View("~/Views/login.cshtml", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Login([Bind(Include = "username, password")] Account inputAccount)
+        public ActionResult Login(string username, string password)
         {
-
-            if (ModelState.IsValid)
+            string result = accountService.CheckLogin(username, password);
+            if (result == null)
             {
-
-                var result = db.Accounts
-                    .Where(a => a.Username == inputAccount.Username && a.IsActive == true)
-                    .Select(a => new { a.Username, a.Password, a.PasswordSalt, a.RoleId })
-                    .FirstOrDefault();
-                //using FirstOrDefault to return null value if no instance found
-                //otherwise will return exception sequence does not contain any element
-                String invalidMessage = "Invalid username or password. Please try again:";
-                if (result == null)
+                //login k thành công 
+                var viewModel = new AccountRegisterViewModel
                 {
-                    ModelState.AddModelError("INVALID", invalidMessage);
-                    return View("~/Views/login.cshtml");
-                }
-                //hashing password using key stored in databased
-                String saltKey = result.PasswordSalt;
-                String encryptPassword = EncryptPasswordUtil.EncryptPassword(inputAccount.Password, saltKey);
-
-                //compared with encrypt password stored in database
-                if (encryptPassword == result.Password)
-                {
-                    //password is correct
-                    //Manage session
-                    Session["CURRENT_USER_ID"] = inputAccount.Username;
-                    Session.Timeout = 60; //1 hour
-
-                    //return to admin dashboard if admin
-                    if (result.RoleId == 1)
-                    {
-                        return RedirectToAction("Index", "Admin");
-                    }
-                    //return to home page if user
-                    return RedirectToAction("Index", "Home");
-                }
-                ModelState.AddModelError("INVALID", invalidMessage);
-                return View("~/Views/login.cshtml");
+                    InvalidLogin = "Invalid username or password. Please try again"
+                };
+                return View("~/Views/login.cshtml", viewModel);
             }
-            //return unexpected error please try again 
-            //will have a 404 not found page default for all error
-            return Content("Unexpected error");
+
+            Session["CURRENT_USER_ID"] = result;
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         [HttpGet]
         public ActionResult Register()
         {
-            if (Session["CURRENT_USER"] != null)
+            if (Session["CURRENT_USER_ID"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View("~/Views/login.cshtml");
+            AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
+            return View("~/Views/login.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -83,134 +64,120 @@ namespace ProjectKairos.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Request["gender"] == "male")
-                {
-                    registerAccount.Gender = true;
-                }
-                else
-                {
-                    registerAccount.Gender = false;
-                }
+                registerAccount.Gender = Request["gender"] == "male";
                 //ModelState.IsValid: whether auto binding request
                 //parameter to object account field is correct
 
                 //Step 1 check if username exists ?
-                string result = db.Accounts.Where(a => a.Username == registerAccount.Username).Select(a => a.Username).FirstOrDefault();
-                if (result != null)
+                string duplicateUsername = "";
+                string duplicateEmail = "";
+                bool canAdd = true;
+                if (accountService.IsDuplicatedUsername(registerAccount.Username))
                 {
-                    //send duplicate username error
-
-                    ModelState.AddModelError("DUPLICATE_USERNAME", "Username '" + registerAccount.Username + "' is used");
-                    ViewBag.message = @"<script>
-                                        $('.login-form').css('display', 'none');
-                                        $('.register-form').css('display', 'block');
-                                        $('.show-login-form').removeClass('active');
-                                        $('.show-register-form').addClass('active');
-                                        </script>";
-                    return View("~/Views/login.cshtml", registerAccount);
+                    duplicateUsername = "Username '" + registerAccount.Username + "' is duplicated";
+                    canAdd = false;
                 }
 
+                if (accountService.IsDuplicatedEmail(registerAccount.Email))
+                {
+                    duplicateEmail = "Email '" + registerAccount.Email + "' is duplicated";
+                    canAdd = false;
+                }
+
+                if (!canAdd)
+                {
+                    var viewModel = new AccountRegisterViewModel
+                    {
+                        Username = registerAccount.Username,
+                        Email = registerAccount.Email,
+                        FirstName = registerAccount.FirstName,
+                        LastName = registerAccount.LastName,
+                        Gender = registerAccount.Gender,
+                        Dob = registerAccount.DOB,
+                        Phone = registerAccount.Phone,
+                        DuplicateEmailErrorMessage = duplicateEmail,
+                        DuplicateUsernameErrorMessage = duplicateUsername
+                    };
+                    ViewBag.message = @"<script>$('.login-form').css('display', 'none');$('.register-form').css('display', 'block');$('.show-login-form').removeClass('active');$('.show-register-form').addClass('active');</script>";
+                    return View("~/Views/login.cshtml", viewModel);
+                }
                 //halting password to store in database
                 //NOTE: do not auto binding password at first
                 registerAccount.Password = EncryptPasswordUtil.EncryptPassword(Request["password"], out string key);
                 registerAccount.PasswordSalt = key;
-
                 //set roleID, startDate, isActive
                 registerAccount.StartDate = DateTime.Now;
                 registerAccount.IsActive = true;
                 registerAccount.RoleId = 2; // default is member
 
-                db.Accounts.Add(registerAccount);
-                db.SaveChanges();
-
-                //auto login and redirect based on role
-                return RedirectToAction("Index", "Home");
-
+                if (accountService.AddNewAccount(registerAccount))
+                {
+                    //auto login and redirect based on role
+                    var loginAccount = new
+                    {
+                        Username = registerAccount.Username,
+                        RoleName = accountService.GetRoleName(registerAccount.Username)
+                    };
+                    Session["CURRENT_USER_ID"] = JsonConvert.SerializeObject(loginAccount, Formatting.Indented);
+                    return Redirect(Request.UrlReferrer.ToString());
+                }
+                return HttpNotFound();
             }
             //return unexpected error please try again 
             //will have a 404 not found page default for all error
             return Content("Unexpected error");
         }
 
-
+        [HttpPost]
         public ActionResult Logout()
         {
-            Session.Remove("CURRENT_USER_ID");
+            Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         [AuthorizeUser(Role = "Administrator, Member")]
-        public ActionResult UpdateMyInfo([Bind(Include = "firstName, lastName, email, phone, dob")] Account account)
+        public ActionResult UpdateMyInfo([Bind(Include = "firstName, lastName, phone, dob")] Account account)
         {
             if (ModelState.IsValid)
             {
-                string username = (string)Session["CURRENT_USER_ID"];
-                Account currentUser = db.Accounts.Find(username);
-
-                db.Accounts.Attach(currentUser);
-
-                currentUser.FirstName = account.FirstName;
-                currentUser.LastName = account.LastName;
-                currentUser.Email = account.Email;
-                currentUser.Phone = account.Phone;
-                currentUser.DOB = account.DOB;
-
-                if (Request["gender"] == "male")
+                account.Gender = Request["gender"] == "male";
+                string username = Session.GetCurrentUserInfo("Username");
+                if (accountService.UpdateAccountInfo(account, username))
                 {
-                    currentUser.Gender = true;
-                }
-                else
-                {
-                    currentUser.Gender = false;
+                    TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
+                    if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                 }
 
-                db.SaveChanges();
-                if (currentUser.RoleId == 1)
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
             }
             return Content("Unexpected Error. Please try again");
         }
 
         [HttpPost]
         [AuthorizeUser(Role = "Administrator, Member")]
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string oldPassword, string newPassword)
         {
-            TempData["SHOW_MODAL"] = @"<script>
-                                            $('#passwordModal').modal();
-                                       </script>";
-            string password = Request["oldPassword"];
-            string newPassword = Request["newPassword"];
-            string username = (string)Session["CURRENT_USER_ID"];
+            TempData["SHOW_MODAL"] = @"<script>$('#passwordModal').modal();</script>";
+            string username = Session.GetCurrentUserInfo("Username");
 
-            Account account = db.Accounts.Find(username);
-
-            string encryptedPassword = EncryptPasswordUtil.EncryptPassword(password, account.PasswordSalt);
-            if (encryptedPassword != account.Password)
+            if (accountService.UpdateAccountPassword(username, oldPassword, newPassword))
             {
-                //incorrect password
-                TempData["UPDATE_RESULT"] = "Password is incorrect.";
-                //script to display modal
+                TempData["UPDATE_RESULT"] = "Password is saved successfully.";
             }
             else
             {
-                db.Accounts.Attach(account);
-                account.Password = EncryptPasswordUtil.EncryptPassword(newPassword, out string key);
-                account.PasswordSalt = key;
-                db.SaveChanges();
-
-                TempData["UPDATE_RESULT"] = "Password is saved successfully.";
+                //incorrect password
+                TempData["UPDATE_RESULT"] = "Old Password is incorrect.";
+                //script to display modal
             }
-            //correct password
-
-
-            if (account.RoleId == 1)
+            //correct password1
+            if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
             {
                 return RedirectToAction("Index", "Admin");
             }
-
             return Content("TO USER");
         }
     }

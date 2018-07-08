@@ -11,7 +11,7 @@ namespace ProjectKairos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Watch
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +22,7 @@ namespace ProjectKairos.Models
             this.Modifications = new HashSet<Modification>();
             this.OrderDetails = new HashSet<OrderDetail>();
         }
-    
+
         public int WatchID { get; set; }
         public string WatchCode { get; set; }
         public string WatchDescription { get; set; }
@@ -42,7 +42,7 @@ namespace ProjectKairos.Models
         public string Thumbnail { get; set; }
         public bool Status { get; set; }
         public int Guarantee { get; set; }
-    
+
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
