@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ProjectKairos.Models;
 
 namespace ProjectKairos.ViewModel
 {
-    public class AddWatchViewModel
+    public class WatchDetailViewModel
     {
-
-
-        public string WatchName { get; set; }
+        public int WatchId { get; set; }
+        public string WatchCode { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
         public string WatchDescription { get; set; }
@@ -96,11 +96,11 @@ namespace ProjectKairos.ViewModel
         public string BandMaterial { get; set; }
         public string CaseMaterial { get; set; }
 
-        private double? caseRadius;
-        public double CaseRadius
+        private double caseRadius;
+        public double? CaseRadius
         {
-            get => caseRadius.GetValueOrDefault();
-            set => caseRadius = value;
+            get => caseRadius;
+            set => caseRadius = value.GetValueOrDefault();
 
         }
 
@@ -112,23 +112,40 @@ namespace ProjectKairos.ViewModel
 
         public string DuplicateErrorMessage { get; set; }
 
-        public AddWatchViewModel(List<Movement> movement, List<WatchModel> watchModel)
+        public string PublishedBy { get; set; }
+
+        public DateTime PublishedTime { get; set; }
+
+
+        public string StatusEnableLabel { get; set; }
+        public string StatusDisableLabel { get; set; }
+        public string StatusEnable { get; set; }
+        public string StatusDisable { get; set; }
+
+        private bool status;
+        public bool Status
         {
-            Movement = movement;
-            WatchModel = watchModel;
-            Alarm = true;
-            LedLight = true;
-            WaterResistant = true;
-            CaseRadius = 0;
-            Discount = 0;
-            Quantity = 1;
-            Price = 1;
-            Guarantee = 12;
+            get => status;
+            set
+            {
+                status = value;
+                StatusEnable = "";
+                StatusEnableLabel = "";
+                StatusDisable = "checked";
+                StatusDisableLabel = "active";
+
+                if (status)
+                {
+                    StatusEnable = "checked";
+                    StatusEnableLabel = "active";
+                    StatusDisable = "";
+                    StatusDisableLabel = "";
+                }
+            }
         }
 
-        public AddWatchViewModel()
-        {
+        public string Thumbnail { get; set; }
 
-        }
+
     }
 }
