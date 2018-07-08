@@ -41,9 +41,9 @@ namespace ProjectKairos.Utilities
                 new RouteValueDictionary(
                     new
                     {
-                        //change to 404 or default page
+                        //change to 404
                         controller = "Home",
-                        action = "Index"
+                        action = "NotFound"
                     })
             );
         }

@@ -1,5 +1,6 @@
 ﻿using ProjectKairos.Models;
 using ProjectKairos.Utilities;
+using ProjectKairos.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,19 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Member")]
         public ActionResult ManageAccount()
         {
-            return View("~/Views/User/user_account.cshtml");
+            string username = (string)Session["CURRENT_USER_ID"];
+            var account = db.Accounts.Where(a => a.Username == username)
+                .Select(a => new AccountInfoViewModel
+                {
+                    FirstName = a.FirstName,
+                    LastName = a.LastName,
+                    Email = a.Email,
+                    Phone = a.Phone,
+                    DOB = a.DOB,
+                    StartedDate = a.StartDate,
+                    Gender = a.Gender
+                }).First();
+            return View("~/Views/User/user_account.cshtml", account);
         }
 
         [HttpGet]
@@ -36,6 +49,22 @@ namespace ProjectKairos.Controllers
         public ActionResult CheckOut()
         {
             return View("~/Views/User/user_checkout.cshtml");
+        }
+
+        [HttpGet]
+        [Route("MyOrder")]
+        [AuthorizeUser(Role = "Member")]
+        public ActionResult ManageOrder()
+        {
+            return View("~/Views/User/user_order.cshtml");
+        }
+
+        [HttpGet]
+        [Route("OrderDetail")]
+        [AuthorizeUser(Role = "Member")]
+        public ActionResult ViewOrderDetail()
+        {
+            return View("~/Views/User/user_order_detail.cshtml");
         }
     }
 }

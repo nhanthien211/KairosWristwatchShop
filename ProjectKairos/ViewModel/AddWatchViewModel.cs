@@ -16,12 +16,12 @@ namespace ProjectKairos.ViewModel
         public string WaterDisableLabel { get; set; }
         public string WaterEnable { get; set; }
         public string WaterDisable { get; set; }
+
         private bool waterResistant;
         public bool WaterResistant
         {
-            get => waterResistant;
-            set
-            {
+            get { return waterResistant; }
+            set {
                 waterResistant = value;
                 WaterEnable = "";
                 WaterEnableLabel = "";
@@ -42,10 +42,13 @@ namespace ProjectKairos.ViewModel
         public string AlarmDisableLabel { get; set; }
         public string AlarmEnable { get; set; }
         public string AlarmDisable { get; set; }
+
+
+
         private bool ledLight;
         public bool LedLight
         {
-            get => ledLight;
+            get{ return ledLight; }
             set
             {
                 ledLight = value;
@@ -72,7 +75,7 @@ namespace ProjectKairos.ViewModel
         private bool alarm;
         public bool Alarm
         {
-            get => alarm;
+            get {return alarm; }
             set
             {
                 alarm = value;
@@ -97,8 +100,8 @@ namespace ProjectKairos.ViewModel
         private double? caseRadius;
         public double CaseRadius
         {
-            get => caseRadius.GetValueOrDefault();
-            set => caseRadius = value;
+            get { return caseRadius.GetValueOrDefault(); }
+            set { caseRadius = value; }
 
         }
 

@@ -9,6 +9,12 @@
     Layout = "~/Views/Shared/_LayouUser.cshtml";
 }
 
+@section loadAddress
+{
+    <!--Chèn script để load ck editor-->
+    @Scripts.Render("~/bundles/loadAddress")
+}
+
 <!-- Title Page -->
 <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../../Content/img/mainIMG/shop-banner.jpg);">
     <h2 class="l-text2 t-center">
@@ -60,8 +66,7 @@
                         City *
                     </span>
                     <div class="rs2-select2 rs3-select2 rs4-select2 of-hidden w-size16 m-t-8 m-b-12">
-                        <select class="selection-2 s-text8" name="shipCity" id="shipCity" onchange="checkAddress()">
-                            <option value="">-- Select a city --</option>
+                        <select class="selection-2 s-text8" name="shipCity" id="shipCity" onchange="checkAddress()">                           
                         </select>
                         <span id='messageForCity' class="s-text8"></span>
                     </div>
@@ -72,7 +77,6 @@
                     </span>
                     <div class="rs2-select2 rs3-select2 rs4-select2 of-hidden w-size16 m-t-8 m-b-12">
                         <select class="selection-2 s-text8" name="shipDistrict" id="shipDistrict" onchange="checkAddress()">
-                            <option value="">-- Select a district --</option>
                         </select>
                         <span id='messageForDis' class="s-text8"></span>
                     </div>
@@ -82,8 +86,7 @@
                         Ward *
                     </span>
                     <div class="rs2-select2 rs3-select2 rs4-select2 of-hidden w-size16 m-t-8 m-b-12">
-                        <select class="selection-2 s-text8" name="shipWard" id="shipWard" onchange="checkAddress()">
-                            <option value="">-- Select a ward --</option>
+                        <select class="selection-2 s-text8" name="shipWard" id="shipWard" onchange="checkAddress()">                           
                         </select>
                         <span id='messageForWard' class="s-text8"></span>
                     </div>

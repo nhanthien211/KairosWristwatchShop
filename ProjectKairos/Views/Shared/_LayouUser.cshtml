@@ -55,7 +55,7 @@
                                         <a href="@Url.Action("ManageAccount", "User")">My Account</a>
                                     </li>
                                     <li class="@ViewBag.MyOrder">
-                                        <a href="user-order.html">My Orders</a>
+                                        <a href="@Url.Action("ManageOrder","User")">My Orders</a>
                                     </li>
                                     <li>
                                         @Html.ActionLink("Logout", "Logout", "Account")
@@ -104,7 +104,7 @@
                                         <a href="@Url.Action("ManageAccount", "User")">My Account</a>
                                     </li>
                                     <li class="@ViewBag.MyOrder">
-                                        <a href="user-order.html">My Orders</a>
+                                        <a href="@Url.Action("ManageOrder","User")">My Orders</a>
                                     </li>
                                     <li>
                                         @Html.ActionLink("Logout", "Logout", "Account")
@@ -217,6 +217,7 @@
     <div id="dropDownSelect2"></div>
 
     @Scripts.Render("~/bundles/user_script")
+    @RenderSection("loadAddress", required: false)
     <!--===============================================================================================-->
     <script type="text/javascript">
 		$('.block2-btn-addcart').each(function () {

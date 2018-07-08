@@ -1,4 +1,5 @@
-﻿@using ProjectKairos.Models
+﻿@model ProjectKairos.ViewModel.AccountInfoViewModel
+
 @{
     ViewBag.Title = "Account Information";
 
@@ -11,7 +12,7 @@
 }
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../Content/img/mainIMG/casio-banner-1.jpg);">
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../../Content/img/mainIMG/casio-banner-1.jpg);">
     <h2 class="l-text2 t-center">
         ACCOUNT
     </h2>
@@ -32,13 +33,13 @@
 
                     <ul class="">
                         <li class="p-t-4">
-                            <a href="user-account.html" class="s-text13 active1">
+                            <a href="@Url.Action("ManageAccount","User")" class="s-text13 active1">
                                 My Acount
                             </a>
                         </li>
 
                         <li class="p-t-4">
-                            <a href="user-order.html" class="s-text13">
+                            <a href="@Url.Action("ManageOrder","User")" class="s-text13">
                                 My Orders
                             </a>
                         </li>
@@ -48,29 +49,35 @@
 
             <!-- right column=========================== -->
             <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-r-0 m-l-auto p-lr-15-sm w-size16 respon5" style="background-color: #eeeeee59">
+                @if (TempData["UPDATE_RESULT"] != null)
+                {
+                string result = (string) TempData["UPDATE_RESULT"];
+                string style = "text-success";
+                if (result.Contains("incorrect"))
+                {
+                style = "text-danger";
+                }
+                <div class="@style" style="font-weight: bold">@result</div>
+                <br>
+                }
+
+                
+
                 <h5 class="m-text20 p-b-24">
                     Account Information
                 </h5>
-                <!-- FORM ACCOUNT INFO ================================= -->
-                <form action="#" method="get" class="to-validate" novalidate>
-                    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
-                        <!-- Row username -->
-                        <span class="s-text18 w-size15 w-full-sm p-t-5">
-                            Username
-                        </span>
-                        <div class="w-size16 w-full-sm">
-                            <div class=" m-b-12">
-                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="username" id="validationCustom01" readonly>
-                            </div>
-                        </div>
 
+                <!-- FORM ACCOUNT INFO ================================= -->
+                @using (@Html.BeginForm("UpdateMyInfo", "Account", FormMethod.Post, new { @class = "to-validate", novalidate = "" }))
+                {
+                    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
                         <!-- Row firstname -->
                         <span class="s-text18 w-size15 w-full-sm p-t-5">
                             First Name *
                         </span>
                         <div class="w-size16 w-full-sm">
-                            <div class=" m-b-12">
-                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="firstName" id="validationCustom02" required>
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="firstName" id="validationCustom02" value="@Model.FirstName" required>
                                 <div class="invalid-feedback">
                                     Invalid First Name!
                                 </div>
@@ -82,8 +89,8 @@
                             Last Name *
                         </span>
                         <div class="w-size16 w-full-sm">
-                            <div class=" m-b-12">
-                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="lastName" id="validationCustom03" required>
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="lastName" id="validationCustom03" value="@Model.LastName" required>
                                 <div class="invalid-feedback">
                                     Invalid Last Name!
                                 </div>
@@ -96,7 +103,7 @@
                         </span>
                         <div class="w-size16 w-full-sm">
                             <div class="m-b-12">
-                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="phone" id="validationCustom04" required pattern=".{7,10}[0-9]">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="phone" id="validationCustom04" value="@Model.Phone" required pattern=".{8,11}[0-9]">
                                 <div class="invalid-feedback">
                                     Invalid Phone number (8-11 numbers)!
                                 </div>
@@ -110,17 +117,51 @@
                         </span>
                         <div class="w-size16 w-full-sm">
                             <div class="m-b-12">
-                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="email" readonly>
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="email" value="@Model.Email" readonly>
                             </div>
                         </div>
 
                         <!-- Row DOB: set yyyy-MM-dd -->
                         <span class="s-text18 w-size15 w-full-sm p-t-5">
-                            DOB *
+                            DOB
                         </span>
                         <div class="w-size16 w-full-sm">
                             <div class="m-b-12">
-                                <input class="form-control s-text8 p-l-15 p-r-15" type="date" name="dob" value="1998-09-17" id="validationCustom05" required>
+                                @{
+                                    string dob = "";
+                                    if (Model.DOB.HasValue)
+                                    {
+                                        dob = Model.DOB.Value.ToString("yyyy-MM-dd");
+                                    }
+                                }
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="date" name="dob" value="@dob" id="validationCustom05">
+                            </div>
+                        </div>
+
+                        <!-- Row Gender -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Gender
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary radio-config @Model.maleLabel">
+                                        <input type="radio" name="gender" value="male" id="option1" autocomplete="off" @Model.male> Male
+                                    </label>
+                                    <label class="btn btn-secondary radio-config @Model.femaleLabel">
+                                        <input type="radio" name="gender" value="female" id="option2" autocomplete="off" @Model.female> Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row DOB: set yyyy-MM-dd -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Started Date
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="date" name="staredDate" value="@Model.StartedDate.ToString("yyyy-MM-dd")" readonly>
                             </div>
                         </div>
 
@@ -133,7 +174,7 @@
                             </button>
                         </div>
                     </div>
-                </form>
+                }
                 <!-- END FORM============================ -->
 
                 <div class="respon5">
@@ -146,7 +187,8 @@
 
                         <div class="dropdown-content dis-none p-t-15 p-b-23">
                             <!-- FORM CHANGE PASS ====================================-->
-                            <form action="#" method="post" class="to-validate" novalidate onsubmit="return check()">
+                            @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post, new { onsubmit = "return check()", @class = "to-validate", novalidate = "" }))
+                            {
                                 <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
                                     <!-- Row old pass -->
                                     <span class="s-text18 w-size15 w-full-sm p-t-5">
@@ -167,7 +209,7 @@
                                     </span>
                                     <div class="w-size16 w-full-sm">
                                         <div class="m-b-12">
-                                            <input class="form-control s-text8 p-l-15 p-r-15" type="password" name="newPassword" id="validationCustom07" onkeyup='check();'
+                                            <input class="form-control s-text8 p-l-15 p-r-15" type="password" name="newPassword" id="validationCustom07" minLength="8" onkeyup='check();'
                                                    required minlength="8">
                                             <div class="invalid-feedback">
                                                 Invalid Password (at least 8 characters)
@@ -199,7 +241,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </form>
+                            }
                             <!-- END FORM CHANGE PASS ====================================-->
                         </div>
                     </div>

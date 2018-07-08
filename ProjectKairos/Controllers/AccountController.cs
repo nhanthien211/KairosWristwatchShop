@@ -169,6 +169,9 @@ namespace ProjectKairos.Controllers
                 if (currentUser.RoleId == 1)
                 {
                     return RedirectToAction("Index", "Admin");
+                } else
+                {
+                    return RedirectToAction("ManageAccount", "User");
                 }
             }
             return Content("Unexpected Error. Please try again");
@@ -211,7 +214,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Admin");
             }
 
-            return Content("TO USER");
+            return RedirectToAction("ManageAccount", "User");
         }
     }
 

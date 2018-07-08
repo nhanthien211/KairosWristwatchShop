@@ -409,7 +409,7 @@ iframe {
 
 .select2-container .select2-results__option--highlighted[aria-selected] {
   background-color: #e65540;
-  color: black;
+  color: white;
 }
 
 .select2-results__options {

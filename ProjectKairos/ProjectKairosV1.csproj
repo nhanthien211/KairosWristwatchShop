@@ -160,6 +160,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -296,6 +297,7 @@
     </Content>
     <Content Include="Scripts\animsition.min.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\checkout-load-address.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -583,6 +585,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\ProductThumbnail\" />
+    <Folder Include="Views\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.eot" />
@@ -663,6 +666,9 @@
     <Content Include="Views\index1.cshtml" />
     <Content Include="Views\shopping_product.cshtml" />
     <Content Include="Views\shopping_detail.cshtml" />
+    <Content Include="Views\User\user_order.cshtml" />
+    <Content Include="Views\User\user_order_detail.cshtml" />
+    <Content Include="Views\notfound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

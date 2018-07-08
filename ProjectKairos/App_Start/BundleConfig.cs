@@ -87,6 +87,13 @@ namespace ProjectKairos
                 "~/Scripts/index-sweetalert.min.js",
                 "~/Scripts/index-main.js"));
 
+            //css for 404
+            bundles.Add(new StyleBundle("~/Content/404_css").Include(
+                      "~/Content/bootstrap.min.css").Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new ScriptBundle("~/bundles/loadAddress").Include(
+               "~/Scripts/checkout-load-address.js"));
+
             //to disable auto ignore .min file while debug = true in web.config
             bundles.IgnoreList.Clear();
 

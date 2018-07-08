@@ -30,5 +30,14 @@ namespace ProjectKairos.Controllers
             return View("~/Views/shopping_cart.cshtml");
         }
 
+        [HttpGet]
+        [Route("NotFound")]
+        public ActionResult NotFound()
+        {
+            return View("~/Views/notfound.cshtml");
+        }
+
+        
+
     }
 }
