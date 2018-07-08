@@ -113,6 +113,16 @@ namespace ProjectKairos.Controllers
 
             if (accountService.AdminUpdateAccount(username, isActive, roleId))
             {
+                if (username == Session.GetCurrentUserInfo("Username"))
+                {
+                    if (isActive == false || roleId != Convert.ToInt32(Session.GetCurrentUserInfo("RoleId")))
+                    {
+                        Session.RemoveAll();
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                }
+                TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
                 return RedirectToAction("ViewAccount", "Admin");
             }
 

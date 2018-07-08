@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
@@ -159,7 +160,11 @@ namespace ProjectKairos.Models
             }
 
             int result = db.SaveChanges();
-            return result > 0;
+            if (db.Entry(trackedWatch).State == EntityState.Unchanged || result > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public WatchDetailViewModel PrepopulateEditValue(Watch watch, List<Movement> movement, List<WatchModel> watchModel)

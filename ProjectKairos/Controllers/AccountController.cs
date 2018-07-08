@@ -128,85 +128,56 @@ namespace ProjectKairos.Controllers
             return Content("Unexpected error");
         }
 
-
+        [HttpPost]
         public ActionResult Logout()
         {
-            Session.Remove("CURRENT_USER_ID");
+            Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         [AuthorizeUser(Role = "Administrator, Member")]
-        public ActionResult UpdateMyInfo([Bind(Include = "firstName, lastName, email, phone, dob")] Account account)
+        public ActionResult UpdateMyInfo([Bind(Include = "firstName, lastName, phone, dob")] Account account)
         {
             if (ModelState.IsValid)
             {
+                account.Gender = Request["gender"] == "male";
                 string username = Session.GetCurrentUserInfo("Username");
-                Account currentUser = db.Accounts.Find(username);
-
-                db.Accounts.Attach(currentUser);
-
-                currentUser.FirstName = account.FirstName;
-                currentUser.LastName = account.LastName;
-                currentUser.Email = account.Email;
-                currentUser.Phone = account.Phone;
-                currentUser.DOB = account.DOB;
-
-                if (Request["gender"] == "male")
+                if (accountService.UpdateAccountInfo(account, username))
                 {
-                    currentUser.Gender = true;
-                }
-                else
-                {
-                    currentUser.Gender = false;
+                    TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
+                    if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                 }
 
-                db.SaveChanges();
-                if (currentUser.RoleId == 1)
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
             }
             return Content("Unexpected Error. Please try again");
         }
 
         [HttpPost]
         [AuthorizeUser(Role = "Administrator, Member")]
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string oldPassword, string newPassword)
         {
-            TempData["SHOW_MODAL"] = @"<script>
-                                            $('#passwordModal').modal();
-                                       </script>";
-            string password = Request["oldPassword"];
-            string newPassword = Request["newPassword"];
+            TempData["SHOW_MODAL"] = @"<script>$('#passwordModal').modal();</script>";
             string username = Session.GetCurrentUserInfo("Username");
 
-            Account account = db.Accounts.Find(username);
-
-            string encryptedPassword = EncryptPasswordUtil.EncryptPassword(password, account.PasswordSalt);
-            if (encryptedPassword != account.Password)
+            if (accountService.UpdateAccountPassword(username, oldPassword, newPassword))
             {
-                //incorrect password
-                TempData["UPDATE_RESULT"] = "Password is incorrect.";
-                //script to display modal
+                TempData["UPDATE_RESULT"] = "Password is saved successfully.";
             }
             else
             {
-                db.Accounts.Attach(account);
-                account.Password = EncryptPasswordUtil.EncryptPassword(newPassword, out string key);
-                account.PasswordSalt = key;
-                db.SaveChanges();
-
-                TempData["UPDATE_RESULT"] = "Password is saved successfully.";
+                //incorrect password
+                TempData["UPDATE_RESULT"] = "Old Password is incorrect.";
+                //script to display modal
             }
-            //correct password
-
-
-            if (account.RoleId == 1)
+            //correct password1
+            if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
             {
                 return RedirectToAction("Index", "Admin");
             }
-
             return Content("TO USER");
         }
     }

@@ -26,7 +26,11 @@ namespace ProjectKairos.Models
             account.RoleId = roleId;
 
             int result = db.SaveChanges();
-            return result > 0;
+            if (db.Entry(account).State == EntityState.Unchanged || result > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public AccountInfoRoleViewModel ViewAccountInfo(string username)
@@ -110,7 +114,7 @@ namespace ProjectKairos.Models
             var result = db.Accounts
                 .Include(a => a.Role)
                 .Where(a => a.Username == username && a.IsActive == true)
-                .Select(a => new { a.Username, a.Password, a.PasswordSalt, a.Role.RoleName })
+                .Select(a => new { a.Username, a.Password, a.PasswordSalt, a.Role.RoleName, a.RoleId })
                 .FirstOrDefault();
             if (result == null)
             {
@@ -131,6 +135,7 @@ namespace ProjectKairos.Models
                 var loginInfo = new
                 {
                     Username = username,
+                    RoleId = result.RoleId,
                     RoleName = result.RoleName
                 };
                 return JsonConvert.SerializeObject(loginInfo, Formatting.Indented);
@@ -162,5 +167,47 @@ namespace ProjectKairos.Models
                 }).First();
             return account;
         }
+
+        public bool UpdateAccountInfo(Account account, string username)
+        {
+            Account currentUser = db.Accounts.Find(username);
+
+            db.Accounts.Attach(currentUser);
+
+            currentUser.FirstName = account.FirstName;
+            currentUser.LastName = account.LastName;
+            currentUser.Phone = account.Phone;
+            currentUser.DOB = account.DOB;
+            currentUser.Gender = account.Gender;
+            int result = db.SaveChanges();
+            if (db.Entry(currentUser).State == EntityState.Unchanged || result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateAccountPassword(string username, string password, string newPassword)
+        {
+            Account account = db.Accounts.Find(username);
+
+            string encryptedPassword = EncryptPasswordUtil.EncryptPassword(password, account.PasswordSalt);
+            if (encryptedPassword != account.Password)
+            {
+                //incorrect password
+                return false;
+            }
+
+            db.Accounts.Attach(account);
+            account.Password = EncryptPasswordUtil.EncryptPassword(newPassword, out string key);
+            account.PasswordSalt = key;
+            int result = db.SaveChanges();
+            if (db.Entry(account).State == EntityState.Unchanged || result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

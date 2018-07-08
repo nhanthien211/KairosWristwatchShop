@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="row for-input-row" style="font-weight: bold; margin-bottom: 50px;">
-                    <div class="col-sm-10 custom-file" novalidate>
+                    <div class="col-sm-12 custom-file" novalidate>
                         <label for="Thumbnail">Thumbnail (*)</label>
                         <div class="custom-file" lang="es">
 
@@ -127,13 +127,15 @@
                             <label style="border-color: #ccc !important" class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             <div id="fileUploadResult"></div>
                         </div>
-                    </div>
-                    <div class="col-sm-2 custom-file">
-                        <img alt="" src="@Model.Thumbnail" id="imagePreview" style="width: 100px;height: 100px" />
-                    </div>
+                    </div>                
                 </div>
-                <br />
+                <br/>
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-12">
+                        <img alt="" src="@Model.Thumbnail" id="imagePreview" style="width: 100px;height: auto" />
+                    </div>
 
+                </div>
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
                         <label for="Quantity">Quantity (*)</label>
