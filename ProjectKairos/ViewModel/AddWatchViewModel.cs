@@ -5,6 +5,8 @@ namespace ProjectKairos.ViewModel
 {
     public class AddWatchViewModel
     {
+
+
         public string WatchName { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
@@ -112,5 +114,24 @@ namespace ProjectKairos.ViewModel
         public List<WatchModel> WatchModel { get; set; }
 
         public string DuplicateErrorMessage { get; set; }
+
+        public AddWatchViewModel(List<Movement> movement, List<WatchModel> watchModel)
+        {
+            Movement = movement;
+            WatchModel = watchModel;
+            Alarm = true;
+            LedLight = true;
+            WaterResistant = true;
+            CaseRadius = 0;
+            Discount = 0;
+            Quantity = 1;
+            Price = 1;
+            Guarantee = 12;
+        }
+
+        public AddWatchViewModel()
+        {
+
+        }
     }
 }

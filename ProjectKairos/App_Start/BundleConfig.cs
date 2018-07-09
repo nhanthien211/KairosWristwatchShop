@@ -58,7 +58,6 @@ namespace ProjectKairos
             bundles.Add(new ScriptBundle("~/bundles/ckeditor").Include(
                 "~/Scripts/ckeditor/ckeditor.js"));
 
-
             //common css for user
             bundles.Add(new StyleBundle("~/Content/user_css").Include(
                 "~/Content/bootstrap.min.css",
@@ -69,7 +68,7 @@ namespace ProjectKairos
                 "~/Content/index-slick.css",
                 "~/Content/index-util.min.css",
                 "~/Content/index-main.css"
-                ).Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
+            ).Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
 
             //css for checkbox in product.html
             bundles.Add(new StyleBundle("~/Content/product_checkbox_css").Include(
@@ -89,10 +88,14 @@ namespace ProjectKairos
 
             //css for 404
             bundles.Add(new StyleBundle("~/Content/404_css").Include(
-                      "~/Content/bootstrap.min.css").Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
+                "~/Content/bootstrap.min.css").Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new ScriptBundle("~/bundles/loadAddress").Include(
-               "~/Scripts/checkout-load-address.js"));
+                "~/Scripts/checkout-load-address.js"));
+
+            //to disable auto ignore .min file while debug = true in web.config
+            bundles.IgnoreList.Clear();
+
 
             //to disable auto ignore .min file while debug = true in web.config
             bundles.IgnoreList.Clear();

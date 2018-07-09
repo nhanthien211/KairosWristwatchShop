@@ -1,12 +1,28 @@
 ﻿using System.Web.Mvc;
+using ProjectKairos.Models;
+using ProjectKairos.Utilities;
 
 namespace ProjectKairos.Controllers
 {
     public class HomeController : Controller
     {
+
+
         public ActionResult Index()
         {
+<<<<<<< HEAD
             return View("~/Views/index1.cshtml");
+=======
+            if (Session["CURRENT_USER_ID"] != null)
+            {
+                string roleName = Session.GetCurrentUserInfo("RoleName");
+                if (roleName == "Administrator")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            return View("~/Views/index.cshtml");
+>>>>>>> origin/backend_admin_feature_nhan
         }
 
         [HttpGet]

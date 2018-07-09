@@ -1,48 +1,14 @@
-﻿@model ProjectKairos.Models.Account
+﻿@model ProjectKairos.ViewModel.AccountRegisterViewModel
 
 @{
-    var emailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$";
-    var username = "";
-    var email = "";
-    var firstName = "";
-    var lastName = "";
-    var phone = "";
-    var dob = "";
-    var male = "checked";
-    var maleLabel = "active";
-    var female = "";
-    var femaleLabel = "";
-    if (Model != null)
-    {
-        username = Model.Username;
-        email = Model.Email;
-        firstName = Model.FirstName;
-        lastName = Model.LastName;
-        if (!String.IsNullOrWhiteSpace(Model.Phone))
-        {
-            phone = Model.Phone;
-        }
-        if (Model.DOB.HasValue)
-        {
-            dob = Model.DOB.Value.ToString("yyyy-MM-dd");
-        }
-
-        
-        if (!Model.Gender)
-        {
-            male = "";
-            maleLabel = "";
-            female = "checked";
-            femaleLabel = "active";
-        }
-    }
+    var emailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$";   
 }
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,6 +32,7 @@
                     <img src="../Content/img/icons/logo1.png" alt="">
                     <div class="description">
                         <p>
+                            
                             Join us now; or
                             @Html.ActionLink("back to main page", "Index", "Home")
 
@@ -91,10 +58,9 @@
 
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "to-validate", novalidate = "" }))
                     {
-                        @Html.ValidationMessage("DUPLICATE_USERNAME", new { @class = "text-danger" })
-
+                        <div class="text-danger">@Model.DuplicateUsernameErrorMessage</div>
                         <div class="form-group">
-                            <input type="text" name="username" value="@username" placeholder="* Username . . . " class="form-control" id="validationCustom01" pattern="[A-Za-z0-9]{5,20}" required>
+                            <input type="text" name="username" value="@Model.Username" placeholder="* Username . . . " class="form-control" id="validationCustom01" pattern="[A-Za-z0-9]{5,20}" required>
                             <div class="invalid-feedback" style="font-size: 15px;">
                                 Invalid Username (5 - 20 characters excluding special characters)
                             </div>
@@ -116,36 +82,44 @@
                             </div>
                             <span id='message'></span>
                         </div>
-                        
+
+                        <div class="text-danger">@Model.DuplicateEmailErrorMessage</div>
                         <div class="form-group">
-                            <input type="email" name="email" value="@email" placeholder="* Email . . . " class="form-control" id="validationCustom04" required pattern="@emailPattern">
+                            <input type="email" name="email" value="@Model.Email" placeholder="* Email . . . " class="form-control" id="validationCustom04" required pattern="@emailPattern">
                             <i class="fa fa-envelope form-group-icon"></i>
                             <div class="invalid-feedback" style="font-size: 15px;">
                                 Invalid Email pattern!!!
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="firstName" value="@firstName" placeholder="* First Name . . . " class="form-control" id="validationCustom05" required>
+                            <input type="text" name="firstName" value="@Model.FirstName" placeholder="* First Name . . . " class="form-control" id="validationCustom05" required>
                             <i class="fa fa-quote-left form-group-icon"></i>
                             <div class="invalid-feedback" style="font-size: 15px;">
                                 First Name is required!!!
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="lastName" value="@lastName" placeholder="* Last Name . . . " class="form-control" id="validationCustom06" required>
+                            <input type="text" name="lastName" value="@Model.LastName" placeholder="* Last Name . . . " class="form-control" id="validationCustom06" required>
                             <i class="fa fa-quote-right form-group-icon"></i>
                             <div class="invalid-feedback" style="font-size: 15px;">
                                 Last Name is required!!!
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="phone" value="@phone" placeholder="* Phone . . . " class="form-control" id="validationCustom07" required pattern=".{8,11}[0-9]">
+                            <input type="text" name="phone" value="@Model.Phone" placeholder="* Phone . . . " class="form-control" id="validationCustom07" required pattern=".{8,11}[0-9]">
                             <i class="fa fa-phone form-group-icon"></i>
                             <div class="invalid-feedback" style="font-size: 15px;">
                                 Invalid Phone Number (8 - 11 numbers)
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group">           
+                            @{
+                                string dob = "";
+                                if (Model.Dob.HasValue)
+                                {
+                                    dob = Model.Dob.Value.ToString("yyyy-MM-dd");
+                                }
+                            }
                             <input type="date" name="dob" value="@dob" class="form-control" id="validationCustom08">
                             <i class="fa fa-calendar form-group-icon"></i>
                             <div class="invalid-feedback" style="font-size: 15px;">
@@ -154,18 +128,17 @@
                         </div>
                         <div class="form-group" style="text-align: left">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-secondary @maleLabel">
-                                    <input type="radio" name="gender" value="male" autocomplete="off" @male> Male
+                                <label class="btn btn-secondary @Model.GenderEnableLabel">
+                                    <input type="radio" name="gender" value="male" autocomplete="off" @Model.GenderEnable> Male
                                 </label>
-                                <label class="btn btn-secondary @femaleLabel">
-                                    <input type="radio" name="gender" value="female" autocomplete="off" @female> Female
+                                <label class="btn btn-secondary @Model.GenderDisableLabel">
+                                    <input type="radio" name="gender" value="female" autocomplete="off" @Model.GenderDisable> Female
                                 </label>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Sign Up</button>
                         <button class="btn btn-primary" type="reset">Reset</button>
                     }
-
                 </div>
 
             </div>
@@ -182,7 +155,7 @@
 
                     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                     {
-                        @Html.ValidationMessage("INVALID", new { @class = "text-danger" })
+                        <div class="text-danger">@Model.InvalidLogin</div>
                         <div class="form-group">
                             <input type="text" name="username" placeholder="Username . . . " class="form-control" id="validationCustom01" required>
                             <div class="invalid-feedback" style="font-size: 15px;">

@@ -27,6 +27,7 @@ namespace ProjectKairos.ViewModel
                 male = "checked";
                 maleLabel = "active";
 
+<<<<<<< HEAD
                 if (!Gender)
                 {
                     female = "checked";
@@ -36,5 +37,33 @@ namespace ProjectKairos.ViewModel
                 }
             }
         }
+=======
+        public string MaleLabel { get; set; }
+        public string FemaleLabel { get; set; }
+        public string Male { get; set; }
+        public string Female { get; set; }
+        private bool gender;
+        public bool Gender
+        {
+            get { return gender; }
+            set
+            {
+                gender = value;
+                Female = "";
+                FemaleLabel = "";
+                Male = "checked";
+                MaleLabel = "active";
+
+                if (!Gender)
+                {
+                    Female = "checked";
+                    FemaleLabel = "active";
+                    Male = "";
+                    MaleLabel = "";
+                }
+            }
+        }
+
+>>>>>>> origin/backend_admin_feature_nhan
     }
 }
