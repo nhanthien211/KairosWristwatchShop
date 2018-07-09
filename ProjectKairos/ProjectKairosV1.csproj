@@ -157,10 +157,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-<<<<<<< HEAD
-    <Compile Include="Controllers\ServiceController.cs" />
-=======
->>>>>>> origin/backend_admin_feature_nhan
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -596,7 +592,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\ProductThumbnail\" />
-    <Folder Include="Views\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.eot" />
@@ -671,17 +666,8 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Views\Shared\_LayouUser.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\shopping_cart.cshtml" />
-    <Content Include="Views\User\user_checkout.cshtml" />
-    <Content Include="Views\User\user_account.cshtml" />
-    <Content Include="Views\index1.cshtml" />
-    <Content Include="Views\shopping_product.cshtml" />
-    <Content Include="Views\shopping_detail.cshtml" />
-=======
     <Content Include="Views\User\user_account.cshtml" />
     <Content Include="Views\User\user_checkout.cshtml" />
->>>>>>> origin/backend_admin_feature_nhan
     <Content Include="Views\User\user_order.cshtml" />
     <Content Include="Views\User\user_order_detail.cshtml" />
     <Content Include="Views\notfound.cshtml" />
