@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Order Detail";
+
+    ViewBag.Home = "";
+    ViewBag.Product = "";
+    ViewBag.MyAccount = "";
+    ViewBag.MyOrder = "";
+
+    Layout = "~/Views/Shared/_LayouUser.cshtml";
+}
+
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../../Content/img/mainIMG/shop-banner.jpg);">
+    <h2 class="l-text2 t-center">
+        order detail
+    </h2>
+</section>
+
+<!-- detail -->
+<section class="cart bgwhite p-t-20 p-b-100">
+    <div class="container">
+        <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm" style="background-color: rgba(238, 238, 238, 0.623)">
+            <!-- Back to list order -->
+            <div class="p-b-30">
+                <a href="@Url.Action("ManageOrder","User")" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 size13">back</a>
+            </div>
+            
+            <!-- orderID -->
+            <h5 class="m-text20 p-b-24">
+                Order #ID123
+            </h5>
+
+            <h5 class="m-text19 p-b-10">
+                General Information
+            </h5>
+            <div class="wrap-table-shopping-cart">
+                <table class="table table-bordered bgwhite s-text3">
+                    <tbody>
+                        <tr>
+                            <th style="width: 30%;">Receiver</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Order Date</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Status</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Shipped Date</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Ship Address</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%;">Ship Note</th>
+                            <td></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <h5 class="m-text19 p-b-10">
+                Product
+            </h5>
+            <div class="wrap-table-shopping-cart">
+                <table class="table table-bordered bgwhite">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">Subtotal</th>
+                            <th>123</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Shipping Fee</th>
+                            <th>123</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Total</th>
+                            <th>123</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+

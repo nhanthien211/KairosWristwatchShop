@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "My Orders";
+
+    ViewBag.Home = "";
+    ViewBag.Product = "";
+    ViewBag.MyAccount = "";
+    ViewBag.MyOrder = "sale-noti";
+
+    Layout = "~/Views/Shared/_LayouUser.cshtml";
+}
+
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../../Content/img/mainIMG/shop-banner.jpg);">
+    <h2 class="l-text2 t-center">
+        My Orders
+    </h2>
+</section>
+
+<!-- Order list -->
+<section class="cart bgwhite p-t-20 p-b-100">
+    <div class="container">
+
+        <div class="flex-w flex-sb">
+            <!-- left column============================ -->
+            <div class="w-size15 p-b-50 respon5">
+                <div class="leftbar p-r-20 p-r-0-sm">
+                    <!-- categories =================================== -->
+                    <h4 class="m-text14 p-b-7">
+                        Hello
+                    </h4>
+
+                    <ul>
+                        <li class="p-t-4">
+                            <a href="@Url.Action("ManageAccount","User")" class="s-text13">
+                                My Acount
+                            </a>
+                        </li>
+
+                        <li class="p-t-4">
+                            <a href="@Url.Action("ManageOrder","User")" class="s-text13 active1">
+                                My Orders
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- right column========================= -->
+            <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-r-0 m-l-auto p-lr-15-sm w-size16 respon5" style="background-color: #eeeeee59">
+                <!-- Empty order list -->
+                <div class="p-b-30">
+                    <h5 class="m-text20 p-b-24">
+                        You haven't placed any order yet!
+                    </h5>
+                    <a href="@Url.Action("ViewProduct","Home")" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 size13">Continue shopping...</a>
+                </div>
+
+                <!-- have order -->
+                <h5 class="m-text20 p-b-24">
+                    My Orders (total: xxx)
+                </h5>
+
+                <div class="wrap-table-shopping-cart bgwhite">
+                    <table class="table table-bordered bgwhite">
+                        <thead>
+                            <tr>
+                                <th>OrderID</th>
+                                <th>Bought Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="color: tomato; text-decoration: underline">
+                                    <a href="@Url.Action("ViewOrderDetail","User")">ID123</a>
+                                </td>
+                                <td>20-12-2018</td>
+                                <td>$36.00</td>
+                                <td>
+                                    Complete
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

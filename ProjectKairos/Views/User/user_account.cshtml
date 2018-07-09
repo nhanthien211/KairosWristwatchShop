@@ -1,0 +1,278 @@
+﻿@model ProjectKairos.ViewModel.AccountInfoViewModel
+
+@{
+    ViewBag.Title = "Account Information";
+
+    ViewBag.Home = "";
+    ViewBag.Product = "";
+    ViewBag.MyAccount = "sale-noti";
+    ViewBag.MyOrder = "";
+
+    Layout = "~/Views/Shared/_LayouUser.cshtml";
+}
+
+<!-- Title Page -->
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../../Content/img/mainIMG/casio-banner-1.jpg);">
+    <h2 class="l-text2 t-center">
+        ACCOUNT
+    </h2>
+</section>
+
+
+<!-- Content page -->
+<section class="bgwhite p-t-55 p-b-65">
+<div class="container">
+<div class="flex-w flex-sb">
+<!-- left column============================ -->
+<div class="w-size15 p-b-50 respon5">
+    <div class="leftbar p-r-20 p-r-0-sm">
+        <!-- categories =================================== -->
+        <h4 class="m-text14 p-b-7">
+            Hello
+        </h4>
+
+        <ul class="">
+            <li class="p-t-4">
+                <a href="@Url.Action("ManageAccount","User")" class="s-text13 active1">
+                    My Acount
+                </a>
+            </li>
+
+            <li class="p-t-4">
+                <a href="@Url.Action("ManageOrder","User")" class="s-text13">
+                    My Orders
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- right column=========================== -->
+<div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-r-0 m-l-auto p-lr-15-sm w-size16 respon5" style="background-color: #eeeeee59">
+
+
+                
+
+<h5 class="m-text20 p-b-24">
+    Account Information
+</h5>
+
+<!-- FORM ACCOUNT INFO ================================= -->
+@using (@Html.BeginForm("UpdateMyInfo", "Account", FormMethod.Post, new { @class = "to-validate", novalidate = "" }))
+{
+    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+        <!-- Row firstname -->
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+            First Name *
+        </span>
+        <div class="w-size16 w-full-sm">
+            <div class="m-b-12">
+                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="FirstName" id="validationCustom02" value="@Model.FirstName" required>
+                <div class="invalid-feedback">
+                    Invalid First Name!
+                </div>
+            </div>
+        </div>
+
+        <!-- Row lastname -->
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+            Last Name *
+        </span>
+        <div class="w-size16 w-full-sm">
+            <div class="m-b-12">
+                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="LastName" id="validationCustom03" value="@Model.LastName" required>
+                <div class="invalid-feedback">
+                    Invalid Last Name!
+                </div>
+            </div>
+        </div>
+
+        <!-- Row phone -->
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+            Phone *
+        </span>
+        <div class="w-size16 w-full-sm">
+            <div class="m-b-12">
+                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="Phone" id="validationCustom04" value="@Model.Phone" required pattern=".{8,11}[0-9]">
+                <div class="invalid-feedback">
+                    Invalid Phone number (8-11 numbers)!
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- Row DOB: set yyyy-MM-dd -->
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+            DOB
+        </span>
+        <div class="w-size16 w-full-sm">
+            <div class="m-b-12">
+                @{
+                    string dob = "";
+                    if (Model.DOB.HasValue)
+                    {
+                        dob = Model.DOB.Value.ToString("yyyy-MM-dd");
+                    }
+                }
+                <input class="form-control s-text8 p-l-15 p-r-15" type="date" name="dob" value="@dob" id="validationCustom05">
+            </div>
+        </div>
+
+        <!-- Row Gender -->
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+            Gender
+        </span>
+        <div class="w-size16 w-full-sm">
+            <div class="m-b-12">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary radio-config @Model.MaleLabel">
+                        <input type="radio" name="gender" value="male" id="option1" autocomplete="off" @Model.Male> Male
+                    </label>
+                    <label class="btn btn-secondary radio-config @Model.FemaleLabel">
+                        <input type="radio" name="gender" value="female" id="option2" autocomplete="off" @Model.Female> Female
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row email -->
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+            Email
+        </span>
+        <div class="w-size16 w-full-sm">
+            <div class="m-b-12">
+                <input class="form-control s-text8 p-l-15 p-r-15" type="text" value="@Model.Email" readonly>
+            </div>
+        </div>
+
+        <!-- Row DOB: set yyyy-MM-dd -->
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+            Started Date
+        </span>
+        <div class="w-size16 w-full-sm">
+            <div class="m-b-12">
+                <input class="form-control s-text8 p-l-15 p-r-15" type="date" name="staredDate" value="@Model.StartedDate.ToString("yyyy-MM-dd")" readonly>
+            </div>
+        </div>
+
+        <span class="s-text18 w-size15 w-full-sm p-t-5">
+        </span>
+        <div class="trans-0-4 m-b-10">
+            <!-- Button -->
+            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-10 p-b-10 p-r-20 p-l-20" type="submit">
+                Update Information
+            </button>
+        </div>
+    </div>
+}
+<!-- END FORM============================ -->
+
+    <div class="respon5">
+        @if (TempData["UPDATE_RESULT"] != null)
+        {
+            string result = (string) TempData["UPDATE_RESULT"];
+            string style = "text-success";
+            if (result.Contains("incorrect"))
+            {
+                style = "text-danger";
+            }
+            <div class="@style" style="font-weight: bold">@result</div>
+            <br>
+        }
+        <div class="wrap-dropdown-content p-t-15 p-b-14">
+            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text20 color0-hov trans-0-4">
+                change password
+                <!--<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i> -->
+                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+            </h5>
+
+            <div class="dropdown-content dis-none p-t-15 p-b-23">
+                <!-- FORM CHANGE PASS ====================================-->
+                @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post, new {onsubmit = "return check()", @class = "to-validate", novalidate = ""}))
+                {
+                    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+                        <!-- Row old pass -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Current Password *
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="password" name="oldPassword" id="validationCustom06" required minlength="8">
+                                <div class="invalid-feedback">
+                                    Invalid Password (at least 8 characters)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row new pass -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            New Password *
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="password" name="newPassword" id="validationCustom07" minLength="8" onkeyup='check();'
+                                       required minlength="8">
+                                <div class="invalid-feedback">
+                                    Invalid Password (at least 8 characters)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row confirm pass -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                            Confirm Password *
+                        </span>
+                        <div class="w-size16 w-full-sm">
+                            <div class="m-b-12">
+                                <input class="form-control s-text8 p-l-15 p-r-15" type="password" name="confirmPassword" id="validationCustom08" onkeyup='check();'
+                                       required minlength="8">
+                                <div class="invalid-feedback">
+                                    Invalid Password (at least 8 characters)
+                                </div>
+                                <span id='message' class="s-text8"></span>
+                            </div>
+                        </div>
+
+                        <!-- submit button -->
+                        <span class="s-text18 w-size15 w-full-sm p-t-5">
+                        </span>
+                        <div class="trans-0-4 m-b-10">
+                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-10 p-b-10 p-r-20 p-l-20" type="submit">
+                                Change password
+                            </button>
+                        </div>
+                    </div>
+                }
+                <!-- END FORM CHANGE PASS ====================================-->
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</section>
+
+<div id="successModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h4 class="modal-title">Success!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Account Info Updated Successfully.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

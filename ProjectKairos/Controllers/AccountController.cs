@@ -150,6 +150,10 @@ namespace ProjectKairos.Controllers
                     {
                         return RedirectToAction("Index", "Admin");
                     }
+                    if (Session.GetCurrentUserInfo("RoleName") == "Member")
+                    {
+                        return RedirectToAction("ManageAccount", "User");
+                    }
                 }
 
             }
@@ -177,6 +181,10 @@ namespace ProjectKairos.Controllers
             if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
             {
                 return RedirectToAction("Index", "Admin");
+            }
+            if (Session.GetCurrentUserInfo("RoleName") == "Member")
+            {
+                return RedirectToAction("ManageAccount", "User");
             }
             return Content("TO USER");
         }
