@@ -27,7 +27,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Home");
             }
             AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
-            return View("~/Views/login.cshtml", viewModel);
+            return View("~/Views/Home/login.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -41,7 +41,7 @@ namespace ProjectKairos.Controllers
                 {
                     InvalidLogin = "Invalid username or password. Please try again"
                 };
-                return View("~/Views/login.cshtml", viewModel);
+                return View("~/Views/Home/login.cshtml", viewModel);
             }
 
             Session["CURRENT_USER_ID"] = result;
@@ -56,7 +56,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Home");
             }
             AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
-            return View("~/Views/login.cshtml", viewModel);
+            return View("~/Views/Home/login.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -99,7 +99,7 @@ namespace ProjectKairos.Controllers
                         DuplicateUsernameErrorMessage = duplicateUsername
                     };
                     ViewBag.message = @"<script>$('.login-form').css('display', 'none');$('.register-form').css('display', 'block');$('.show-login-form').removeClass('active');$('.show-register-form').addClass('active');</script>";
-                    return View("~/Views/login.cshtml", viewModel);
+                    return View("~/Views/Home/login.cshtml", viewModel);
                 }
                 //halting password to store in database
                 //NOTE: do not auto binding password at first
@@ -123,7 +123,7 @@ namespace ProjectKairos.Controllers
                 }
                 return HttpNotFound();
             }
-            //return unexpected error please try again 
+            //return unexpected error please try again      
             //will have a 404 not found page default for all error
             return Content("Unexpected error");
         }

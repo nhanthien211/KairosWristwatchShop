@@ -1,7 +1,5 @@
 ﻿using ProjectKairos.Models;
 using ProjectKairos.Utilities;
-using ProjectKairos.ViewModel;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace ProjectKairos.Controllers
@@ -24,7 +22,7 @@ namespace ProjectKairos.Controllers
         [Route]
         public ActionResult Index()
         {
-            return View("~/Views/index.cshtml");
+            return View("~/Views/Home/index.cshtml");
         }
 
         [HttpGet]

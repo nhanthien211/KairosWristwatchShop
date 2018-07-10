@@ -236,6 +236,7 @@
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
+    <Compile Include="ViewModel\WatchInIndexPageModel.cs" />
     <Compile Include="ViewModel\WatchTableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -587,7 +588,7 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\index.cshtml" />
+    <Content Include="Views\Home\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -650,7 +651,7 @@
     <Content Include="Content\font-poppins\Poppins-Thin.ttf" />
     <Content Include="Content\font-poppins\Poppins-ThinItalic.ttf" />
     <None Include="packages.config" />
-    <Content Include="Views\login.cshtml" />
+    <Content Include="Views\Home\login.cshtml" />
     <Content Include="Views\Admin\admin_info.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\admin_manage_user.cshtml" />
@@ -670,7 +671,10 @@
     <Content Include="Views\User\user_checkout.cshtml" />
     <Content Include="Views\User\user_order.cshtml" />
     <Content Include="Views\User\user_order_detail.cshtml" />
-    <Content Include="Views\notfound.cshtml" />
+    <Content Include="Views\Home\404_page.cshtml" />
+    <Content Include="Views\Home\shopping_cart.cshtml" />
+    <Content Include="Views\Home\shopping_detail.cshtml" />
+    <Content Include="Views\Home\shopping_product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -155,7 +155,7 @@ namespace ProjectKairos.Models
                 //đổi ảnh thumbnail
                 //lưu hình ảnh xuống máy  
                 string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watch.WatchCode + DateTime.Now.ToBinary();
-                ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 750, ResizeMode.Max, ref path);
+                ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 500, ResizeMode.Pad, ref path);
                 trackedWatch.Thumbnail = path;
             }
 
@@ -193,7 +193,7 @@ namespace ProjectKairos.Models
                 LedLight = watch.LEDLight,
                 Guarantee = watch.Guarantee,
                 Alarm = watch.Alarm,
-                Thumbnail = MyCustomUtility.RelativeFromAbsolutePath(oldValue.Thumbnail), //load lại thumbnail cũ
+                Thumbnail = oldValue.Thumbnail, //load lại thumbnail cũ
                 Status = watch.Status,
                 DuplicateErrorMessage = "Watch with code '" + watch.WatchCode + "' already existed. Please choose another one"
             };
@@ -205,6 +205,22 @@ namespace ProjectKairos.Models
             db.Watches.Add(watch);
             int result = db.SaveChanges();
             return result > 0;
+        }
+
+
+        public List<WatchInIndexPageModel> LoadWatchListIndex()
+        {
+            var watch = db.Watches.Where(w => w.Quantity > 0 && w.Status == true)
+                .Select(w => new WatchInIndexPageModel
+                {
+                    WatchID = w.WatchID,
+                    WatchCode = w.WatchCode,
+                    Thumbnail = w.Thumbnail,
+                    Price = w.Price * (1 - w.Discount * 0.01)
+                })
+                .OrderByDescending(w => w.WatchID)
+                .Take(8).ToList();
+            return watch;
         }
     }
 }

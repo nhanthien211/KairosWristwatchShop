@@ -183,7 +183,7 @@ namespace ProjectKairos.Controllers
                 }
                 //lưu hình ảnh xuống máy  
                 string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watch.WatchCode + DateTime.Now.ToBinary();
-                ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 750, ResizeMode.Max, ref path);
+                ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 500, ResizeMode.Pad, ref path);
                 watch.Thumbnail = path;
                 watch.PublishedTime = DateTime.Now;
                 watch.PublishedBy = Session.GetCurrentUserInfo("Username");
@@ -231,7 +231,7 @@ namespace ProjectKairos.Controllers
             {
                 id = Convert.ToInt32(watchId);
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 return HttpNotFound();
             }
@@ -243,7 +243,6 @@ namespace ProjectKairos.Controllers
             }
             watchDetail.Movement = movementService.GetMovementList();
             watchDetail.WatchModel = watchModelService.GetModelsList();
-            watchDetail.Thumbnail = MyCustomUtility.RelativeFromAbsolutePath(watchDetail.Thumbnail);
             return View("~/Views/Admin/admin_manage_watch_detail.cshtml", watchDetail);
         }
 
