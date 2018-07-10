@@ -27,7 +27,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Home");
             }
             AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
-            return View("~/Views/login.cshtml", viewModel);
+            return View("~/Views/Home/login.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -39,27 +39,9 @@ namespace ProjectKairos.Controllers
                 //login k thành công 
                 var viewModel = new AccountRegisterViewModel
                 {
-<<<<<<< HEAD
-                    //password is correct
-                    //Manage session
-                    Session["CURRENT_USER_ID"] = inputAccount.Username;
-                    Session.Timeout = 60; //1 hour
-
-                    //return to admin dashboard if admin
-                    if (result.RoleId == 1)
-                    {
-                        return RedirectToAction("Index", "Admin");
-                    }
-                    //return to home page if user
-                    return RedirectToAction("Index", "User");
-                }
-                ModelState.AddModelError("INVALID", invalidMessage);
-                return View("~/Views/login.cshtml");
-=======
                     InvalidLogin = "Invalid username or password. Please try again"
                 };
-                return View("~/Views/login.cshtml", viewModel);
->>>>>>> origin/backend_admin_feature_nhan
+                return View("~/Views/Home/login.cshtml", viewModel);
             }
 
             Session["CURRENT_USER_ID"] = result;
@@ -74,7 +56,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Home");
             }
             AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
-            return View("~/Views/login.cshtml", viewModel);
+            return View("~/Views/Home/login.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -117,7 +99,7 @@ namespace ProjectKairos.Controllers
                         DuplicateUsernameErrorMessage = duplicateUsername
                     };
                     ViewBag.message = @"<script>$('.login-form').css('display', 'none');$('.register-form').css('display', 'block');$('.show-login-form').removeClass('active');$('.show-register-form').addClass('active');</script>";
-                    return View("~/Views/login.cshtml", viewModel);
+                    return View("~/Views/Home/login.cshtml", viewModel);
                 }
                 //halting password to store in database
                 //NOTE: do not auto binding password at first
@@ -174,17 +156,6 @@ namespace ProjectKairos.Controllers
                     }
                 }
 
-<<<<<<< HEAD
-                db.SaveChanges();
-                if (currentUser.RoleId == 1)
-                {
-                    return RedirectToAction("Index", "Admin");
-                } else
-                {
-                    return RedirectToAction("ManageAccount", "User");
-                }
-=======
->>>>>>> origin/backend_admin_feature_nhan
             }
             return Content("Unexpected Error. Please try again");
         }
@@ -206,21 +177,16 @@ namespace ProjectKairos.Controllers
                 TempData["UPDATE_RESULT"] = "Old Password is incorrect.";
                 //script to display modal
             }
-            //correct password1
+            //correct password
             if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
             {
                 return RedirectToAction("Index", "Admin");
             }
-<<<<<<< HEAD
-
-            return RedirectToAction("ManageAccount", "User");
-=======
             if (Session.GetCurrentUserInfo("RoleName") == "Member")
             {
                 return RedirectToAction("ManageAccount", "User");
             }
-            return Content("TO USER");
->>>>>>> origin/backend_admin_feature_nhan
+            return RedirectToAction("Index", "Home");
         }
     }
 

@@ -1,14 +1,7 @@
 ﻿using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
-<<<<<<< HEAD
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-=======
-using System.Linq;
->>>>>>> origin/backend_admin_feature_nhan
 using System.Web.Mvc;
 
 namespace ProjectKairos.Controllers
@@ -16,9 +9,6 @@ namespace ProjectKairos.Controllers
     [RoutePrefix("Member")]
     public class UserController : Controller
     {
-<<<<<<< HEAD
-        private KAIROS_SHOPEntities db = new KAIROS_SHOPEntities();
-=======
         private KAIROS_SHOPEntities db;
         private AccountService accountService;
 
@@ -27,7 +17,6 @@ namespace ProjectKairos.Controllers
             db = new KAIROS_SHOPEntities();
             accountService = new AccountService(db);
         }
->>>>>>> origin/backend_admin_feature_nhan
 
         // GET: User
         [HttpGet]
@@ -35,11 +24,7 @@ namespace ProjectKairos.Controllers
         [Route]
         public ActionResult Index()
         {
-<<<<<<< HEAD
-            return View("~/Views/index1.cshtml");
-=======
-            return View("~/Views/index.cshtml");
->>>>>>> origin/backend_admin_feature_nhan
+            return View("~/Views/Home/index.cshtml");
         }
 
         [HttpGet]
@@ -47,45 +32,31 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Member")]
         public ActionResult ManageAccount()
         {
-<<<<<<< HEAD
-            string username = (string)Session["CURRENT_USER_ID"];
-            var account = db.Accounts.Where(a => a.Username == username)
-                .Select(a => new AccountInfoViewModel
-                {
-                    FirstName = a.FirstName,
-                    LastName = a.LastName,
-                    Email = a.Email,
-                    Phone = a.Phone,
-                    DOB = a.DOB,
-                    StartedDate = a.StartDate,
-                    Gender = a.Gender
-                }).First();
-            return View("~/Views/User/user_account.cshtml", account);
-=======
             string username = Session.GetCurrentUserInfo("Username");
             var viewModel = accountService.ViewMyAccount(username);
             return View("~/Views/User/user_account.cshtml", viewModel);
->>>>>>> origin/backend_admin_feature_nhan
         }
 
         [HttpGet]
         [Route("Checkout")]
-<<<<<<< HEAD
-        [AuthorizeUser(Role = "Member,Administrator")]
-=======
-        [AuthorizeUser(Role = "Member")]
->>>>>>> origin/backend_admin_feature_nhan
         public ActionResult CheckOut()
         {
-            return View("~/Views/User/user_checkout.cshtml");
+            if (Session["CURRENT_USER_ID"] != null)
+            {
+                string roleName = Session.GetCurrentUserInfo("RoleName");
+                if (roleName == "Member")
+                {
+                    return View("~/Views/User/user_checkout.cshtml");
+                } else if (roleName == "Administrator")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
-<<<<<<< HEAD
-        [Route("MyOrder")]
-=======
         [Route("Manage/Order")]
->>>>>>> origin/backend_admin_feature_nhan
         [AuthorizeUser(Role = "Member")]
         public ActionResult ManageOrder()
         {

@@ -18,12 +18,12 @@ namespace ProjectKairos.ViewModel
         public string WaterDisableLabel { get; set; }
         public string WaterEnable { get; set; }
         public string WaterDisable { get; set; }
-
         private bool waterResistant;
         public bool WaterResistant
         {
             get { return waterResistant; }
-            set {
+            set
+            {
                 waterResistant = value;
                 WaterEnable = "";
                 WaterEnableLabel = "";
@@ -44,13 +44,10 @@ namespace ProjectKairos.ViewModel
         public string AlarmDisableLabel { get; set; }
         public string AlarmEnable { get; set; }
         public string AlarmDisable { get; set; }
-
-
-
         private bool ledLight;
         public bool LedLight
         {
-            get{ return ledLight; }
+            get { return ledLight; }
             set
             {
                 ledLight = value;
@@ -77,7 +74,7 @@ namespace ProjectKairos.ViewModel
         private bool alarm;
         public bool Alarm
         {
-            get {return alarm; }
+            get { return alarm; }
             set
             {
                 alarm = value;

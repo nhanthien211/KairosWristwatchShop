@@ -96,10 +96,6 @@ namespace ProjectKairos
             //to disable auto ignore .min file while debug = true in web.config
             bundles.IgnoreList.Clear();
 
-
-            //to disable auto ignore .min file while debug = true in web.config
-            bundles.IgnoreList.Clear();
-
         }
     }
 }

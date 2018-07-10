@@ -6,13 +6,17 @@ namespace ProjectKairos.Controllers
 {
     public class HomeController : Controller
     {
+        private KAIROS_SHOPEntities db;
+        private WatchService watchService;
 
+        public HomeController()
+        {
+            db = new KAIROS_SHOPEntities();
+            watchService = new WatchService(db);
+        }
 
         public ActionResult Index()
         {
-<<<<<<< HEAD
-            return View("~/Views/index1.cshtml");
-=======
             if (Session["CURRENT_USER_ID"] != null)
             {
                 string roleName = Session.GetCurrentUserInfo("RoleName");
@@ -21,39 +25,56 @@ namespace ProjectKairos.Controllers
                     return RedirectToAction("Index", "Admin");
                 }
             }
-            return View("~/Views/index.cshtml");
->>>>>>> origin/backend_admin_feature_nhan
+
+            var listProductModel = watchService.LoadWatchListIndex();
+            ViewBag.listProduct = listProductModel;
+            return View("~/Views/Home/index.cshtml");
         }
 
         [HttpGet]
         [Route("Product")]
         public ActionResult ViewProduct()
         {
-            return View("~/Views/shopping_product.cshtml");
+            if (Session["CURRENT_USER_ID"] != null)
+            {
+                string roleName = Session.GetCurrentUserInfo("RoleName");
+                if (roleName == "Administrator")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            return View("~/Views/Home/shopping_product.cshtml");
         }
 
         [HttpGet]
-        [Route("Detail")]
+        [Route("ProductDetail/{ProductID}")]
         public ActionResult ViewProductDetail()
         {
-            return View("~/Views/shopping_detail.cshtml");
+            if (Session["CURRENT_USER_ID"] != null)
+            {
+                string roleName = Session.GetCurrentUserInfo("RoleName");
+                if (roleName == "Administrator")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            return View("~/Views/Home/shopping_detail.cshtml");
         }
 
         [HttpGet]
         [Route("Cart")]
         public ActionResult ManageCart()
         {
-            return View("~/Views/shopping_cart.cshtml");
+            if (Session["CURRENT_USER_ID"] != null)
+            {
+                string roleName = Session.GetCurrentUserInfo("RoleName");
+                if (roleName == "Administrator")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            return View("~/Views/Home/shopping_cart.cshtml");
         }
-
-        [HttpGet]
-        [Route("NotFound")]
-        public ActionResult NotFound()
-        {
-            return View("~/Views/notfound.cshtml");
-        }
-
-        
 
     }
 }

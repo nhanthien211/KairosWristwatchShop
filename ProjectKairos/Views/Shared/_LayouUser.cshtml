@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-﻿@using ProjectKairos.Models
-<!DOCTYPE html>
-=======
 ﻿<!DOCTYPE html>
->>>>>>> origin/backend_admin_feature_nhan
 <html>
 <head>
     <meta charset="utf-8">
@@ -54,11 +49,7 @@
                             </a>
                             <ul class="sub_menu">
                                 @if (Session["CURRENT_USER_ID"] != null)
-<<<<<<< HEAD
-                                {                            
-=======
                                 {
->>>>>>> origin/backend_admin_feature_nhan
                                     <li class="@ViewBag.MyAccount">
                                         <a href="@Url.Action("ManageAccount", "User")">My Account</a>
                                     </li>
@@ -66,15 +57,11 @@
                                         <a href="@Url.Action("ManageOrder","User")">My Orders</a>
                                     </li>
                                     <li>
-<<<<<<< HEAD
-                                        @Html.ActionLink("Logout", "Logout", "Account")
-=======
                                         @using (@Html.BeginForm("Logout", "Account", FormMethod.Post))
                                         {
                                             <button type="submit" id="logoutButton">Logout</button>
                                         }
                                         
->>>>>>> origin/backend_admin_feature_nhan
                                     </li>
                                 }
                                 else
@@ -150,11 +137,7 @@
         <div class="wrap-side-menu">
             <nav class="side-menu">
                 <ul class="main-menu">
-<<<<<<< HEAD
-                    <li class="item-menu-mobile @ViewBag.Home" >
-=======
                     <li class="item-menu-mobile @ViewBag.Home">
->>>>>>> origin/backend_admin_feature_nhan
                         <a href="@Url.Action("Index", "Home")">Home</a>
 
                     </li>
@@ -240,36 +223,6 @@
     @RenderSection("loadAddress", required: false)
     <!--===============================================================================================-->
     <script type="text/javascript">
-<<<<<<< HEAD
-		$('.block2-btn-addcart').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-    </script>
-    <!--===============================================================================================-->
-    <script type="text/javascript">
-		$(".selection-1").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
-		});
-
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect2')
-		});
-    </script>
-    <!--===============================================================================================-->
-    <script type="text/javascript">
-		$('.btn-addcart-product-detail').each(function () {
-			var nameProduct = $('.product-detail-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-    </script>
-=======
         $('.block2-btn-addcart').each(function () {
             var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
             $(this).on('click', function () {
@@ -302,7 +255,6 @@
 {
     @Html.Raw(TempData["SHOW_MODAL"]);
 }
->>>>>>> origin/backend_admin_feature_nhan
 </body>
 
 </html>

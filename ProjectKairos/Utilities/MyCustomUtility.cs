@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-=======
 ﻿using System.Web;
->>>>>>> origin/backend_admin_feature_nhan
 
 namespace ProjectKairos.Utilities
 {
@@ -23,10 +16,7 @@ namespace ProjectKairos.Utilities
             }
             return "";
         }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> origin/backend_admin_feature_nhan
     }
 }

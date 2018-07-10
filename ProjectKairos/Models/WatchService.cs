@@ -206,5 +206,22 @@ namespace ProjectKairos.Models
             int result = db.SaveChanges();
             return result > 0;
         }
+
+        public List<WatchInIndexPageModel> LoadWatchListIndex()
+        {
+            var watch = db.Watches.Select(w => new WatchInIndexPageModel
+            {
+                WatchID = w.WatchID,
+                WatchCode = w.WatchCode,
+                Thumbnail = w.Thumbnail,
+                Quantity = w.Quantity,
+                Price = w.Price,
+                Status = w.Status
+            })
+            .Where(w => w.Quantity > 0 && w.Status == true)
+            .OrderBy(w => w.WatchID)
+            .Take(8).ToList();            
+            return watch;
+        }
     }
 }

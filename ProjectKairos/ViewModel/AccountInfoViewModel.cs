@@ -11,33 +11,7 @@ namespace ProjectKairos.ViewModel
         public DateTime? DOB { get; set; }
         public DateTime StartedDate { get; set; }
 
-        public string maleLabel { get; set; }
-        public string femaleLabel { get; set; }
-        public string male { get; set; }
-        public string female { get; set; }
-        private bool gender;
-        public bool Gender
-        {
-            get { return gender; }
-            set
-            {
-                gender = value;
-                female = "";
-                femaleLabel = "";
-                male = "checked";
-                maleLabel = "active";
 
-<<<<<<< HEAD
-                if (!Gender)
-                {
-                    female = "checked";
-                    femaleLabel = "active";
-                    male = "";
-                    maleLabel = "";
-                }
-            }
-        }
-=======
         public string MaleLabel { get; set; }
         public string FemaleLabel { get; set; }
         public string Male { get; set; }
@@ -64,6 +38,5 @@ namespace ProjectKairos.ViewModel
             }
         }
 
->>>>>>> origin/backend_admin_feature_nhan
     }
 }
