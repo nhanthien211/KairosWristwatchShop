@@ -22,10 +22,12 @@ namespace ProjectKairos.Utilities
                     ResizeLayer resizeLayer = new ResizeLayer(size, resizeMode);
                     imageFactory.Load(stream)
                         .Resize(resizeLayer)
+                        .BackgroundColor(Color.White)
                         .Format(format)
                         .Save(path);
                 }
             }
+            path = MyCustomUtility.RelativeFromAbsolutePath(path);
         }
     }
 }

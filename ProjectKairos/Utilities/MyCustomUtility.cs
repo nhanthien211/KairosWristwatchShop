@@ -12,7 +12,9 @@ namespace ProjectKairos.Utilities
                 var applicationPath = request.PhysicalApplicationPath;
                 var virtualDir = request.ApplicationPath;
                 virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
-                return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
+                string test = path.Replace(applicationPath, virtualDir);
+                test = test.Replace(@"\", "/");
+                return test;
             }
             return "";
         }

@@ -183,7 +183,7 @@ namespace ProjectKairos.Controllers
                 }
                 //lưu hình ảnh xuống máy  
                 string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watch.WatchCode + DateTime.Now.ToBinary();
-                ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 750, ResizeMode.Max, ref path);
+                ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 500, ResizeMode.Pad, ref path);
                 watch.Thumbnail = path;
                 watch.PublishedTime = DateTime.Now;
                 watch.PublishedBy = Session.GetCurrentUserInfo("Username");

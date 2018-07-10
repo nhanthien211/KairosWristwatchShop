@@ -15,7 +15,7 @@ namespace ProjectKairos.ViewModel
         public string Thumbnail
         {
             get { return thumbnail; }
-            set { thumbnail = MyCustomUtility.RelativeFromAbsolutePath(value); }
+            set { thumbnail = value; }
         }
 
     }
