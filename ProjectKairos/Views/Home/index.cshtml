@@ -11,6 +11,11 @@
     Layout = "~/Views/Shared/_LayouUser.cshtml";
 }
 
+@section addToCart
+{
+    @Scripts.Render("~/bundles/addToCart")
+}
+
 @using ProjectKairos.ViewModel
 @using ProjectKairos.Utilities
 
@@ -207,10 +212,11 @@
 
                                 <div class="block2-overlay trans-0-4">
                                     <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
+                                        <!-- Button -->                                            
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" onclick="addToCartAjax('@w.WatchID', '@w.WatchCode')">
+                                                Add to Cart
+                                            </button>
+                                        
                                     </div>
                                 </div>
                             </div>

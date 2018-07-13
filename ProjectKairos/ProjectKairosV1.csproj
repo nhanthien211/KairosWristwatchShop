@@ -158,6 +158,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -215,6 +216,8 @@
     </Compile>
     <Compile Include="Models\RoleService.cs" />
     <Compile Include="Models\ShoppingCartService.cs" />
+    <Compile Include="Models\ShoppingItem.cs" />
+    <Compile Include="Models\ShoppingProduct.cs" />
     <Compile Include="Models\Ward.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
@@ -238,6 +241,7 @@
     <Compile Include="ViewModel\AccountRegisterViewModel.cs" />
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
     <Compile Include="ViewModel\WatchInIndexPageModel.cs" />
     <Compile Include="ViewModel\WatchTableViewModel.cs" />
@@ -306,6 +310,7 @@
       <DependentUpon>Kairos_Shop.edmx</DependentUpon>
       <LastGenOutput>Kairos_Shop.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\add-to-cart.js" />
     <Content Include="Scripts\animsition.min.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\checkout-load-address.js" />
@@ -597,6 +602,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\ProductThumbnail\" />
     <Folder Include="Views\Service\" />
+    <Folder Include="Views\Shopping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.eot" />

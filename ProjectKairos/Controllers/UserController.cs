@@ -1,6 +1,7 @@
 ﻿using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -11,11 +12,13 @@ namespace ProjectKairos.Controllers
     {
         private KAIROS_SHOPEntities db;
         private AccountService accountService;
+        private ShoppingCartService shoppingService;
 
         public UserController()
         {
             db = new KAIROS_SHOPEntities();
             accountService = new AccountService(db);
+            shoppingService = new ShoppingCartService(db);
         }
 
         // GET: User
@@ -40,7 +43,8 @@ namespace ProjectKairos.Controllers
         [HttpGet]
         [Route("Checkout")]
         public ActionResult CheckOut()
-        {
+        {            
+
             if (Session["CURRENT_USER_ID"] != null)
             {
                 string roleName = Session.GetCurrentUserInfo("RoleName");
@@ -52,7 +56,20 @@ namespace ProjectKairos.Controllers
                     return RedirectToAction("Index", "Admin");
                 }
             }
-            return RedirectToAction("Login", "Account");
+
+            //not login =====================================================
+            //Check if cart existed and not empty
+            List<ShoppingItem> cart = (List<ShoppingItem>)Session["CART"];
+            if (cart != null && cart.Count != 0)
+            {
+                //Validate cart quantity by session
+                Dictionary<int, int> IdAndRError = shoppingService.CheckCartSession();
+                if (IdAndRError.Count == 0) //cart valid
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+            }            
+            return RedirectToAction("ManageCart", "Home");
         }
 
         [HttpGet]

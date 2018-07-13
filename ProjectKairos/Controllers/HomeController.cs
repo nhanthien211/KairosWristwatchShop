@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
+using ProjectKairos.ViewModel;
+using System.Collections.Generic;
 
 namespace ProjectKairos.Controllers
 {
@@ -8,11 +10,13 @@ namespace ProjectKairos.Controllers
     {
         private KAIROS_SHOPEntities db;
         private WatchService watchService;
+        private ShoppingCartService shoppingService;
 
         public HomeController()
         {
             db = new KAIROS_SHOPEntities();
             watchService = new WatchService(db);
+            shoppingService = new ShoppingCartService(db);
         }
 
         public ActionResult Index()
@@ -71,9 +75,19 @@ namespace ProjectKairos.Controllers
                 if (roleName == "Administrator")
                 {
                     return RedirectToAction("Index", "Admin");
+                } else if (roleName == "Member")
+                {
+                    //TODO: CHECK CART IN DB +++ Show cart in DB
                 }
             }
-            return View("~/Views/Home/shopping_cart.cshtml");
+
+            //Not Login => check cart in Session
+            var viewModel = new ShoppingCartViewModel((List<ShoppingItem>)Session["CART"]);
+
+            Dictionary<int, int> IdAndRError = shoppingService.CheckCartSession();
+            viewModel.IdAndError = IdAndRError;
+
+            return View("~/Views/Home/shopping_cart.cshtml", viewModel);
         }
 
     }

@@ -9,14 +9,7 @@ namespace ProjectKairos.ViewModel
         public int Quantity { get; set; }
         public double Price { get; set; }
         public bool Status { get; set; }
-
-        private string thumbnail;
-
-        public string Thumbnail
-        {
-            get { return thumbnail; }
-            set { thumbnail = value; }
-        }
+        public string Thumbnail { get; set; }
 
     }
 }

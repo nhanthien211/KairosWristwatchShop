@@ -221,7 +221,8 @@
 
     @Scripts.Render("~/bundles/user_script")
     @RenderSection("loadAddress", required: false)
-    <!--===============================================================================================-->
+    @RenderSection("addToCart", required: false)
+    <!--===============================================================================================
     <script type="text/javascript">
         $('.block2-btn-addcart').each(function () {
             var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();

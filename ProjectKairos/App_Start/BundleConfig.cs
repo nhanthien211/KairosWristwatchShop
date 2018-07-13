@@ -93,6 +93,9 @@ namespace ProjectKairos
             bundles.Add(new ScriptBundle("~/bundles/loadAddress").Include(
                 "~/Scripts/checkout-load-address.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/addToCart").Include(
+                "~/Scripts/add-to-cart.js"));
+
             //to disable auto ignore .min file while debug = true in web.config
             bundles.IgnoreList.Clear();
 
