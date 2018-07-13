@@ -145,7 +145,7 @@ namespace ProjectKairos.ViewModel
         }
 
         public string Thumbnail { get; set; }
-
+        public string InvalidImageFileMessage { get; set; }
 
     }
 }

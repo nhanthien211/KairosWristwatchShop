@@ -19,7 +19,7 @@ thumbnailFile.onchange = function (e) {
         $(this).next().after().text($(this).val().split('\\').slice(-1)[0]);
         $('#thumbnailFileUploadResult').addClass('text-success');
         $('#thumbnailFileUploadResult').html('Success');
-        document.getElementById('imagePreview').src = window.URL.createObjectURL(file.files[0]);
+        document.getElementById('imagePreview').src = window.URL.createObjectURL(thumbnailFile.files[0]);
     } else {
         $(this).next().after().text('Choose File');
         $('#thumbnailFileUploadResult').addClass('text-danger');

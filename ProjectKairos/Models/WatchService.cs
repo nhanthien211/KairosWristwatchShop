@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Web;
@@ -11,7 +10,6 @@ using Newtonsoft.Json;
 using OfficeOpenXml;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
-using WebGrease.Css;
 
 namespace ProjectKairos.Models
 {
@@ -174,14 +172,14 @@ namespace ProjectKairos.Models
         public ManageWatchDetailViewModel PrepopulateEditValue(Watch watch, List<Movement> movement, List<WatchModel> watchModel)
         {
             var oldValue = db.Watches.Where(w => w.WatchID == watch.WatchID)
-                .Select(w => new { w.WatchID, w.Thumbnail }).FirstOrDefault();
+                .Select(w => new { w.WatchCode, w.Thumbnail }).FirstOrDefault();
 
             var viewModel = new ManageWatchDetailViewModel
             {
                 Movement = movement,
                 WatchModel = watchModel,
-                WatchId = oldValue.WatchID, //giá trị cũ do giá trị mới bị trùng
-                WatchCode = watch.WatchCode,
+                WatchId = watch.WatchID,
+                WatchCode = oldValue.WatchCode, //giá trị cũ do giá trị mới bị trùng
                 WatchDescription = watch.WatchDescription,
                 Quantity = watch.Quantity,
                 Price = watch.Price,
@@ -198,8 +196,32 @@ namespace ProjectKairos.Models
                 Guarantee = watch.Guarantee,
                 Alarm = watch.Alarm,
                 Thumbnail = oldValue.Thumbnail, //load lại thumbnail cũ
-                Status = watch.Status,
-                DuplicateErrorMessage = "Watch with code '" + watch.WatchCode + "' already existed. Please choose another one"
+                Status = watch.Status
+            };
+            return viewModel;
+        }
+
+        public AddWatchViewModel PrepopulateInputValue(Watch watch, List<Movement> movement,
+            List<WatchModel> watchModel)
+        {
+            var viewModel = new AddWatchViewModel
+            {
+                Movement = movement,
+                WatchModel = watchModel,
+                WatchName = watch.WatchCode,
+                WatchDescription = watch.WatchDescription,
+                ModelId = watch.ModelID,
+                MovementId = watch.MovementID,
+                BandMaterial = watch.BandMaterial,
+                CaseRadius = watch.CaseRadius.GetValueOrDefault(),
+                CaseMaterial = watch.CaseMaterial,
+                Discount = watch.Discount,
+                Quantity = watch.Quantity,
+                Price = watch.Price,
+                Guarantee = watch.Guarantee,
+                Alarm = watch.Alarm,
+                LedLight = watch.LEDLight,
+                WaterResistant = watch.WaterResistant
             };
             return viewModel;
         }

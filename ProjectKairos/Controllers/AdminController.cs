@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
@@ -164,34 +163,26 @@ namespace ProjectKairos.Controllers
                 watch.WaterResistant = Request["water"] == "yes";
                 watch.LEDLight = Request["led"] == "yes";
                 watch.Alarm = Request["alarm"] == "yes";
+                bool duplicateCode = watchService.IsDuplicatedWatchCode(watch.WatchCode);
+                bool validImage = FileTypeDetector.IsImageFile(thumbnail);
                 //check if watch code is unique
-                if (watchService.IsDuplicatedWatchCode(watch.WatchCode))
+                if (!validImage || duplicateCode)
                 {
-                    //code đã tồn tại
-                    //thông báo điền lại code 
+                    //code đã tồn tại hoặc hình ảnh không hợp lệ
+                    //thông báo điền lại code                     
                     //prefill các field
                     var movement = movementService.GetMovementList();
                     var watchModel = watchModelService.GetModelsList();
-                    var viewModel = new AddWatchViewModel
+                    var viewModel = watchService.PrepopulateInputValue(watch, movement, watchModel);
+                    if (duplicateCode)
                     {
-                        Movement = movement,
-                        WatchModel = watchModel,
-                        WatchName = watch.WatchCode,
-                        WatchDescription = watch.WatchDescription,
-                        ModelId = watch.ModelID,
-                        MovementId = watch.MovementID,
-                        BandMaterial = watch.BandMaterial,
-                        CaseRadius = watch.CaseRadius.GetValueOrDefault(),
-                        CaseMaterial = watch.CaseMaterial,
-                        Discount = watch.Discount,
-                        Quantity = watch.Quantity,
-                        Price = watch.Price,
-                        Guarantee = watch.Guarantee,
-                        Alarm = watch.Alarm,
-                        LedLight = watch.LEDLight,
-                        WaterResistant = watch.WaterResistant,
-                        DuplicateErrorMessage = "Watch with code '" + watch.WatchCode + "' already existed"
-                    };
+                        viewModel.DuplicateErrorMessage = "Watch with code '" + watch.WatchCode + "' already existed";
+                    }
+
+                    if (!validImage)
+                    {
+                        viewModel.InvalidImageFileMessage = "Invalid Thumbnail. Upload file is not an image";
+                    }
                     return View("~/Views/Admin/admin_manage_watch_add.cshtml", viewModel);
                 }
                 //lưu hình ảnh xuống máy  
@@ -273,23 +264,30 @@ namespace ProjectKairos.Controllers
                 watch.LEDLight = Request["led"] == "yes";
                 watch.Alarm = Request["alarm"] == "yes";
                 watch.Status = Request["status"] == "yes";
-                //check if watch code is unique
-                if (watchService.IsDuplicatedWatchCode(watch.WatchCode, watch.WatchID))
+                bool duplicateCode = watchService.IsDuplicatedWatchCode(watch.WatchCode, watch.WatchID);
+                bool validImage = FileTypeDetector.IsImageFile(thumbnail);
+                if (duplicateCode || !validImage)
                 {
-                    //code đã tồn tại
-                    //thông báo điền lại code 
-                    //prefill các field
-                    //result ở đây là link thumbnail cũ
                     var movement = movementService.GetMovementList();
                     var watchModel = watchModelService.GetModelsList();
                     ManageWatchDetailViewModel viewModel = watchService.PrepopulateEditValue(watch, movement, watchModel);
+                    if (duplicateCode)
+                    {
+                        viewModel.DuplicateErrorMessage = "Watch with code '" + watch.WatchCode + "' already existed. Please choose another one";
+                    }
+
+                    if (!validImage)
+                    {
+                        viewModel.InvalidImageFileMessage = "Invalid Thumbnail. Upload file is not image";
+                    }
                     return View("~/Views/Admin/admin_manage_watch_detail.cshtml", viewModel);
                 }
+                String oldValue = watchService.SerializeOldValue(watch.WatchID);
                 if (watchService.UpdateWatchInfo(watch, thumbnail))
                 {
                     //save old value to modification table
                     String userId = Session.GetCurrentUserInfo("Username");
-                    String oldValue = watchService.SerializeOldValue(watch.WatchID);
+
                     if (modificationService.CreateNewModificationHistory(watch.WatchID, oldValue, userId))
                     {
                         TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
@@ -306,36 +304,31 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Administrator")]
         public ActionResult ImportWatch(HttpPostedFileBase zip, HttpPostedFileBase excel)
         {
-            MemoryUploadedFile zipFile = new MemoryUploadedFile(zip.InputStream, zip.ContentType, zip.FileName);
-            MemoryUploadedFile excelFile = new MemoryUploadedFile(excel.InputStream, zip.ContentType, zip.FileName);
 
             bool canImport = true;
             TempData["SHOW_MODAL"] = @"<script>$('#importModal').modal();</script>";
-            //string excelResult = ProcessImportFileHelper.CheckValidExcelFile(excelFile);
-            //if (excelResult != null)
-            //{
-            //    canImport = false;
-            //    TempData["EXCEL"] = excelResult;
-            //}
 
-            //string zipResult = ProcessImportFileHelper.CheckValidZipFile(zipFile);
-            //if (zipResult != null)
-            //{
-            //    canImport = false;
-            //    TempData["ZIP"] = zipResult;
-            //}
+            string excelResult = ProcessImportFileHelper.CheckValidExcelFile(excel);
+            if (excelResult != null)
+            {
+                canImport = false;
+                TempData["EXCEL"] = excelResult;
+            }
 
-            //if (!canImport)
-            //{
+            string zipResult = ProcessImportFileHelper.CheckValidZipFile(zip);
+            if (zipResult != null)
+            {
+                canImport = false;
+                TempData["ZIP"] = zipResult;
+            }
 
-            //    return RedirectToAction("AddWatch", "Admin");
-            //}
-            //MemoryStream ms = new MemoryStream();
-
-            //zip.InputStream.CopyTo(ms);
-
+            if (!canImport)
+            {
+                return RedirectToAction("AddWatch", "Admin");
+            }
             int result = watchService.ImportWatchFromFile(excel, zip, Session.GetCurrentUserInfo("Username"));
             TempData["RESULT"] = "Total " + result + " watch(es) imported successfully";
+
             return RedirectToAction("AddWatch", "Admin");
         }
     }

@@ -121,7 +121,8 @@ namespace ProjectKairos.Utilities
 
         private static bool CheckImageZipFile(HttpPostedFileBase file)
         {
-            using (ZipArchive archive = new ZipArchive(file.InputStream, ZipArchiveMode.Read))
+            //true: leaveOpen after read, so that file stream will not be disposed
+            using (ZipArchive archive = new ZipArchive(file.InputStream, ZipArchiveMode.Read, true))
             {
                 if (archive.Entries.Count == 0)
                 {

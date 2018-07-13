@@ -85,10 +85,11 @@
                     </div>
                                                  
                     
-                    <div class="modal-footer">
+                    <div class="modal-footer" style="padding-right: 10% !important">
+                        <div class="text-info">@Model.ImportMessage</div>
                         <button type="submit" class="btn btn-outline-success">Confirm</button>
                     </div>
-                    <div>@Model.ImportMessage</div>
+                    
                     
                 }
             </div>
@@ -139,7 +140,7 @@
                             <div class="invalid-feedback" style="font-size: 15px;">
                                 A Thumbnail for product is required!
                             </div>
-                            <div id="thumbnailFileUploadResult"></div>
+                            <div id="thumbnailFileUploadResult" class="text-danger">@Model.InvalidImageFileMessage</div>
                         </div>
                     </div>
 
@@ -147,7 +148,7 @@
                 <br />
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-12">
-                        <img id="imagePreview" style="width: 100px;height: auto" alt="" />
+                        <img src="" id="imagePreview" style="width: 100px;height: auto" alt="" />
                     </div>
                 </div>
                 <div class="row for-input-row" style="font-weight: bold">

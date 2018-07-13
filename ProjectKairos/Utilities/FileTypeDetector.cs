@@ -86,13 +86,10 @@ namespace ProjectKairos.Utilities
 
         private static byte[] ConvertFileToByteArray(HttpPostedFileBase file)
         {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                file.InputStream.Seek(0, SeekOrigin.Begin);
-                file.InputStream.CopyTo(ms);
-                byte[] array = ms.GetBuffer();
-                return array;
-            }
+            var array = new Byte[file.ContentLength];
+            file.InputStream.Position = 0;
+            file.InputStream.Read(array, 0, file.ContentLength);
+            return array;
         }
 
         private static byte[] ConvertFileToByteArray(Stream file)
@@ -103,7 +100,5 @@ namespace ProjectKairos.Utilities
                 return ms.ToArray();
             }
         }
-
-
     }
 }
