@@ -111,6 +111,10 @@ namespace ProjectKairos.ViewModel
         public List<WatchModel> WatchModel { get; set; }
 
         public string DuplicateErrorMessage { get; set; }
+        public string InvalidExcelFileMessage { get; set; }
+        public string InvalidZipFileMessage { get; set; }
+        public string InvalidImageFileMessage { get; set; }
+        public string ImportMessage { get; set; }
 
         public AddWatchViewModel(List<Movement> movement, List<WatchModel> watchModel)
         {

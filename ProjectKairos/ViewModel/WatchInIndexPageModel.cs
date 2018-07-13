@@ -1,6 +1,4 @@
-﻿using ProjectKairos.Utilities;
-
-namespace ProjectKairos.ViewModel
+﻿namespace ProjectKairos.ViewModel
 {
     public class WatchInIndexPageModel
     {

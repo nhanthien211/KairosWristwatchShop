@@ -36,20 +36,7 @@ namespace ProjectKairos.Controllers
         }
 
         [HttpGet]
-        [Route("Product")]
-        public ActionResult ViewProduct()
-        {
-            return View("~/Views/Home/shopping_product.cshtml");
-        }
-
-        [HttpGet]
-        [Route("Detail")]
-        public ActionResult ViewProductDetail()
-        {
-            return View("~/Views/Home/shopping_detail.cshtml");
-        }
-
-        [HttpGet]
+        [AuthorizeUser(Role = "Guest, Member")]
         [Route("Cart")]
         public ActionResult ManageCart()
         {

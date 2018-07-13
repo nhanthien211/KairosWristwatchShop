@@ -18,46 +18,8 @@
 
 @section scripts
 {
-    <script type="text/javascript">        
-        var file = document.getElementById('inputGroupFile01');
-        file.value = '';
-        file.onchange = function (e) {
-            
-            $('#fileUploadResult').removeClass();
-            var fileExtension = this.value.match(/\.([^\.]+)$/)[1];
-            fileExtension = fileExtension.toLowerCase();
-            if (fileExtension === 'png' || fileExtension === 'jpg' || fileExtension === 'jpeg') {
-                var size = file.files[0].size;
-                if (size > 512000) {
-                    //bigger than 500kb, too much for a thumbnail
-                    $(this).next().after().text('Choose File');
-                    $('#fileUploadResult').addClass('text-danger');
-                    $('#fileUploadResult').html('Uploaded file must be under 500KB');
-                    this.value = '';
-                    document.getElementById('imagePreview').src = '';
-                    return;
-                }               
-                $(this).next().after().text($(this).val().split('\\').slice(-1)[0]);
-                $('#fileUploadResult').addClass('text-success');
-                $('#fileUploadResult').html('Success');
-                document.getElementById('imagePreview').src = window.URL.createObjectURL(file.files[0]);
-            } else {
-                $(this).next().after().text('Choose File');
-                $('#fileUploadResult').addClass('text-danger');
-                $('#fileUploadResult').html('Only .jpg .jpeg and .png is supported');
-                this.value = '';
-                document.getElementById('imagePreview').src = '';
-            } 
-            
-        };
-
-        function clearFileError() {
-            $('#fileUploadResult').html('');        
-            var text = CKEDITOR.instances.editor1.getData();
-            text = CKEDITOR.tools.htmlEncode(text);            
-            $('#hiddenEditorValue').val(text);        
-        }                       
-    </script>
+    @Scripts.Render("~/bundles/validate_file");
+   
 }
 
 <div id="successModal" class="modal fade">
@@ -78,6 +40,62 @@
         </div>
     </div>
 </div>     
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Import Watch</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- change password form ========================================================== -->
+
+                @using (Html.BeginForm("ImportWatch", "Admin", FormMethod.Post, new { @class = "to-validate", enctype = "multipart/form-data", novalidate = "" }))
+                {
+                    <div class="row for-input-row" style="font-weight: bold; margin-bottom: 90px;">
+                        <div class="col-sm-12 custom-file">
+                            <label for="Excel">Excel (*)</label>
+                            <div class="custom-file" lang="es">
+                                <input type="file" name="excel" class="custom-file-input" id="inputFileExcel" required value="" 
+                                       accept=".xls,.xlsx"/>
+                                <label class="custom-file-label" for="inputFileExcel">Choose file</label>
+                                <div class="invalid-feedback" style="font-size: 15px;">
+                                    Required!
+                                </div>
+                                <div id="excelFileUploadResult" class="text-danger">@Model.InvalidExcelFileMessage</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row for-input-row" style="font-weight: bold; margin-bottom: 90px;">
+                        <div class="col-sm-12 custom-file">
+                            <label for="ZipFile">Image Zip File (*)</label>
+                            <div class="custom-file" lang="es">
+                                <input type="file" name="zip" class="custom-file-input" id="inputFileZip" required value="" accept=".zip">
+                                <label class="custom-file-label" for="inputFileZip">Choose file</label>
+                                <div class="invalid-feedback" style="font-size: 15px;">
+                                    Required!
+                                </div>
+                                <div id="zipFileUploadResult" class="text-danger">@Model.InvalidZipFileMessage</div>
+                            </div>
+                        </div>
+
+                    </div>
+                                                 
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-success">Confirm</button>
+                    </div>
+                    <div>@Model.ImportMessage</div>
+                    
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -92,47 +110,47 @@
     <div class="card mb-3">
         <div class="card-header">
             <i class="fa fa-fw fa-cubes"></i> Add New Watch
+            <button class="btn btn-danger" type="button" style="float: right;" data-toggle="modal" data-target="#importModal">Import From Excel</button>
         </div>
         <div class="card-body">
             <!-- Form for update watch -->
             @using (Html.BeginForm("AddWatch", "Admin", FormMethod.Post, new { @class = "to-validate", enctype = "multipart/form-data", novalidate = "" }))
-            {                
-            <div class="row for-input-row" style="font-weight: bold">
-                
-                <div class="col-sm-12">
+            {
+                <div class="row for-input-row" style="font-weight: bold">
 
-                    <label for="WatchName">Watch Name (*)</label>
-                    <input class="form-control form-control-sm" type="text" name="WatchCode" value="@Model.WatchName" pattern="[A-Za-z0-9-]{1,}" required>
-                    <div class="invalid-feedback" style="font-size: 15px;">
-                        Name required and does not contains special characters!
-                    </div>
-                    <div class="text-danger">@Model.DuplicateErrorMessage</div>
+                    <div class="col-sm-12">
 
-                </div>
-            </div>
-
-            <div class="row for-input-row" style="font-weight: bold; margin-bottom: 50px;">
-                <div class="col-sm-12 custom-file">
-                    <label for="Thumbnail">Thumbnail (*)</label>
-                    <div class="custom-file" lang="es">
-                        <input type="file" name="thumbnail" class="custom-file-input" id="inputGroupFile01" required accept="image/*" value="">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        <label for="WatchName">Watch Name (*)</label>
+                        <input class="form-control form-control-sm" type="text" name="WatchCode" value="@Model.WatchName" pattern="[A-Za-z0-9-]{1,}" required>
                         <div class="invalid-feedback" style="font-size: 15px;">
-                            A Thumbnail for product is required!
+                            Name required and does not contains special characters!
                         </div>
-                        <div id="fileUploadResult"></div>
+                        <div class="text-danger">@Model.DuplicateErrorMessage</div>
+
                     </div>
                 </div>
-                
-            </div>
-             <br/>
+
+                <div class="row for-input-row" style="font-weight: bold; margin-bottom: 50px;">
+                    <div class="col-sm-12 custom-file">
+                        <label for="Thumbnail">Thumbnail (*)</label>
+                        <div class="custom-file" lang="es">
+                            <input type="file" name="thumbnail" class="custom-file-input" id="inputFileThumbnail" required accept="image/*" value="">
+                            <label class="custom-file-label" for="inputFileThumbnail">Choose file</label>
+                            <div class="invalid-feedback" style="font-size: 15px;">
+                                A Thumbnail for product is required!
+                            </div>
+                            <div id="thumbnailFileUploadResult"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-12">
-                        <img id="imagePreview" style="width: 100px;height: auto" alt=""/>
+                        <img id="imagePreview" style="width: 100px;height: auto" alt="" />
                     </div>
-
                 </div>
-            <div class="row for-input-row" style="font-weight: bold">
+                <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
                         <label for="Quantity">Quantity (*)</label>
                         <input class="form-control form-control-sm" type="number" name="Quantity" value="@Model.Quantity" min="0" step="1" required>
@@ -149,24 +167,24 @@
                     </div>
                 </div>
 
-            <div class="row for-input-row" style="font-weight: bold">
-                <div class="col-sm-12">
-                 <label for="WatchDescription">Watch Description</label>
-                 <br>
-                 <input type="hidden" name="WatchDescription" value="" id="hiddenEditorValue"/>
-                 <textarea name="description" id="editor1" rows="10" cols="80">
+                <div class="row for-input-row" style="font-weight: bold">
+                    <div class="col-sm-12">
+                        <label for="WatchDescription">Watch Description</label>
+                        <br>
+                        <input type="hidden" name="WatchDescription" value="" id="hiddenEditorValue" />
+                        <textarea name="description" id="editor1" rows="10" cols="80">
                   @Html.Raw(HttpUtility.HtmlDecode(Model.WatchDescription))
                   </textarea>
-                    <script>
-                        CKEDITOR.replace('editor1', {
-                            htmlEncodeOutput: true
-                        });
-                    </script>                           
+                        <script>
+                            CKEDITOR.replace('editor1', {
+                                htmlEncodeOutput: true
+                            });
+                        </script>
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="row for-input-row" style="font-weight: bold">
+                <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
                         <label for="Movement">Movement</label>
                         <select name="MovementID" class="custom-select">
@@ -177,8 +195,8 @@
                                 {
                                     selected = "selected";
                                 }
-                            <option value="@movement.MovementID" @selected>@movement.MovementName</option>
-                            }                        
+                                <option value="@movement.MovementID" @selected>@movement.MovementName</option>
+                            }
                         </select>
                     </div>
                     <div class="col-sm-6">
@@ -193,7 +211,7 @@
                                     selected = "selected";
                                 }
                                 <option value="@watchModel.ModelID" @selected>@watchModel.ModelName</option>
-                            }  
+                            }
                         </select>
                     </div>
                 </div>
@@ -214,7 +232,7 @@
                     <div class="col-sm-3">
                         <label for="LED">LED Light</label>
                         <br>
-                        
+
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary radio-config @Model.LedEnableLabel">
                                 <input type="radio" name="led" value="yes" autocomplete="off" @Model.LedEnable> Yes
@@ -268,13 +286,11 @@
                     </div>
                 </div>
 
-                <div class="row for-input-row">
-                    <div class="col-sm-12 col-lg-12 for-info-name">
+                <div class="row for-input-row">                
+                    <div class="col-sm-12 col-md-12  col-lg-12 for-info-name">
                         <button type="submit" class="btn btn-outline-success" id="btn-add-watch" onclick="clearFileError()">Save Changes</button>
                     </div>
-                </div>   
-
-
+                </div>              
             }
         </div>
     </div>

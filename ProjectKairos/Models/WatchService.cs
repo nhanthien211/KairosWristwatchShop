@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using ImageProcessor.Imaging;
 using Newtonsoft.Json;
+using OfficeOpenXml;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
+using WebGrease.Css;
 
 namespace ProjectKairos.Models
 {
@@ -53,10 +57,10 @@ namespace ProjectKairos.Models
             return watch.Skip(skip).Take(pageSize).ToList();
         }
 
-        public WatchDetailViewModel ViewWatchDetail(int id)
+        public ManageWatchDetailViewModel ViewWatchDetail(int id)
         {
             var watchDetail = db.Watches.Where(w => w.WatchID == id)
-                .Select(w => new WatchDetailViewModel
+                .Select(w => new ManageWatchDetailViewModel
                 {
                     WatchId = w.WatchID,
                     WatchCode = w.WatchCode,
@@ -167,12 +171,12 @@ namespace ProjectKairos.Models
             return false;
         }
 
-        public WatchDetailViewModel PrepopulateEditValue(Watch watch, List<Movement> movement, List<WatchModel> watchModel)
+        public ManageWatchDetailViewModel PrepopulateEditValue(Watch watch, List<Movement> movement, List<WatchModel> watchModel)
         {
             var oldValue = db.Watches.Where(w => w.WatchID == watch.WatchID)
                 .Select(w => new { w.WatchID, w.Thumbnail }).FirstOrDefault();
 
-            var viewModel = new WatchDetailViewModel
+            var viewModel = new ManageWatchDetailViewModel
             {
                 Movement = movement,
                 WatchModel = watchModel,
@@ -207,7 +211,6 @@ namespace ProjectKairos.Models
             return result > 0;
         }
 
-
         public List<WatchInIndexPageModel> LoadWatchListIndex()
         {
             var watch = db.Watches.Where(w => w.Quantity > 0 && w.Status == true)
@@ -221,6 +224,108 @@ namespace ProjectKairos.Models
                 .OrderByDescending(w => w.WatchID)
                 .Take(8).ToList();
             return watch;
+        }
+
+        public int ImportWatchFromFile(HttpPostedFileBase excel, HttpPostedFileBase zip, string username)
+        {
+
+            int totalImported = 0;
+
+            using (ExcelPackage package = new ExcelPackage(excel.InputStream))
+            using (ZipArchive archive = new ZipArchive(zip.InputStream, ZipArchiveMode.Read))
+            {
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+
+                int startRow = workSheet.Dimension.Start.Row;
+                int endRow = workSheet.Dimension.End.Row;
+                int startCol = workSheet.Dimension.Start.Column;
+                int endCol = workSheet.Dimension.End.Column;
+                string watchCodeColumn,
+                    watchDescriptionColumn,
+                    quantityColumn,
+                    priceColumn,
+                    movementIdColumn,
+                    modelIdColumn,
+                    waterResistantColumn,
+                    bandMaterialColumn,
+                    caseRadiusColumn,
+                    caseMaterialColumn,
+                    discountColumn,
+                    ledLightColumn,
+                    guaranteeColumn,
+                    alarmColumn;
+                using (var headers = workSheet.Cells[startRow, startRow, startCol, endCol])
+                {
+                    watchCodeColumn = headers.First(h => h.Value.Equals("WatchCode")).Address[0].ToString();
+                    watchDescriptionColumn = headers.First(h => h.Value.Equals("WatchDescription")).Address[0].ToString();
+                    priceColumn = headers.First(h => h.Value.Equals("Price")).Address[0].ToString();
+                    quantityColumn = headers.First(h => h.Value.Equals("Quantity")).Address[0].ToString();
+                    movementIdColumn = headers.First(h => h.Value.Equals("MovementID")).Address[0].ToString();
+                    modelIdColumn = headers.First(h => h.Value.Equals("ModelID")).Address[0].ToString();
+                    waterResistantColumn = headers.First(h => h.Value.Equals("WaterResistant")).Address[0].ToString();
+                    bandMaterialColumn = headers.First(h => h.Value.Equals("BandMaterial")).Address[0].ToString();
+                    caseRadiusColumn = headers.First(h => h.Value.Equals("CaseRadius")).Address[0].ToString();
+                    caseMaterialColumn = headers.First(h => h.Value.Equals("CaseMaterial")).Address[0].ToString();
+                    discountColumn = headers.First(h => h.Value.Equals("Discount")).Address[0].ToString();
+                    ledLightColumn = headers.First(h => h.Value.Equals("LEDLight")).Address[0].ToString();
+                    guaranteeColumn = headers.First(h => h.Value.Equals("Guarantee")).Address[0].ToString();
+                    alarmColumn = headers.First(h => h.Value.Equals("Alarm")).Address[0].ToString();
+                }
+
+                for (int row = startRow + 1; row <= endRow; row++)
+                {
+                    string watchCode = workSheet.Cells[watchCodeColumn + row].Value.ToString();
+
+                    //Duplicate code found. Skip add. Otherwise will continue to check
+                    if (!IsDuplicatedWatchCode(watchCode))
+                    {
+
+                        ZipArchiveEntry entry = archive.Entries.FirstOrDefault(e => e.Name.Contains(watchCode));
+                        //No Thumbnail match watchcode. Skip add. Otherwise will continue
+                        if (entry != null)
+                        {
+                            try
+                            {
+                                Watch watch = new Watch
+                                {
+                                    WatchCode = watchCode,
+                                    WatchDescription = workSheet.Cells[watchDescriptionColumn + row].Value.ToString(),
+                                    BandMaterial = workSheet.Cells[bandMaterialColumn + row].Value.ToString(),
+                                    CaseMaterial = workSheet.Cells[caseMaterialColumn + row].Value.ToString(),
+
+                                    Quantity = Int32.Parse(workSheet.Cells[quantityColumn + row].Value.ToString()),
+                                    Price = Double.Parse(workSheet.Cells[priceColumn + row].Value.ToString()),
+                                    MovementID = Int32.Parse(workSheet.Cells[movementIdColumn + row].Value.ToString()),
+                                    ModelID = Int32.Parse(workSheet.Cells[modelIdColumn + row].Value.ToString()),
+                                    CaseRadius = Double.Parse(workSheet.Cells[caseRadiusColumn + row].Value.ToString()),
+                                    Discount = Int32.Parse(workSheet.Cells[discountColumn + row].Value.ToString()),
+                                    Guarantee = Int32.Parse(workSheet.Cells[guaranteeColumn + row].Value.ToString()),
+                                    WaterResistant = workSheet.Cells[waterResistantColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
+                                    LEDLight = workSheet.Cells[ledLightColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
+                                    Alarm = workSheet.Cells[alarmColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
+                                };
+
+                                string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watchCode + DateTime.Now.ToBinary();
+                                ImageProcessHelper.ResizedImage(entry.Open(), 360, 500, ResizeMode.Pad, ref path);
+
+                                watch.Thumbnail = path;
+                                watch.PublishedTime = DateTime.Now;
+                                watch.PublishedBy = username;
+                                watch.Status = true;
+                                db.Watches.Add(watch);
+                                db.SaveChanges();
+                                totalImported++;
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            return totalImported;
         }
     }
 }

@@ -54,6 +54,10 @@ namespace ProjectKairos
                 "~/Scripts/dataTables.bootstrap4.js",
                 "~/Scripts/sb-admin-datatables-watch.js"));
 
+            //Script for validate add new watch page
+            bundles.Add(new ScriptBundle("~/bundles/validate_file").Include(
+                "~/Scripts/add-watch-script.js"));
+
             //CKEditor script 
             bundles.Add(new ScriptBundle("~/bundles/ckeditor").Include(
                 "~/Scripts/ckeditor/ckeditor.js"));

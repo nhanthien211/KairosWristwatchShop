@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
@@ -138,6 +139,18 @@ namespace ProjectKairos.Controllers
             var movement = db.Movements.ToList();
             var watchModel = db.WatchModels.ToList();
             var viewModel = new AddWatchViewModel(movement, watchModel);
+            if (TempData["EXCEL"] != null)
+            {
+                viewModel.InvalidExcelFileMessage = (string)TempData["EXCEL"];
+            }
+            if (TempData["ZIP"] != null)
+            {
+                viewModel.InvalidZipFileMessage = (string)TempData["ZIP"];
+            }
+            if (TempData["RESULT"] != null)
+            {
+                viewModel.ImportMessage = (string)TempData["RESULT"];
+            }
             return View("~/Views/Admin/admin_manage_watch_add.cshtml", viewModel);
         }
 
@@ -269,7 +282,7 @@ namespace ProjectKairos.Controllers
                     //result ở đây là link thumbnail cũ
                     var movement = movementService.GetMovementList();
                     var watchModel = watchModelService.GetModelsList();
-                    WatchDetailViewModel viewModel = watchService.PrepopulateEditValue(watch, movement, watchModel);
+                    ManageWatchDetailViewModel viewModel = watchService.PrepopulateEditValue(watch, movement, watchModel);
                     return View("~/Views/Admin/admin_manage_watch_detail.cshtml", viewModel);
                 }
                 if (watchService.UpdateWatchInfo(watch, thumbnail))
@@ -286,6 +299,44 @@ namespace ProjectKairos.Controllers
                 return HttpNotFound(); //change to 404
             }
             return HttpNotFound();
+        }
+
+        [HttpPost]
+        [Route("ImportWatch")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult ImportWatch(HttpPostedFileBase zip, HttpPostedFileBase excel)
+        {
+            MemoryUploadedFile zipFile = new MemoryUploadedFile(zip.InputStream, zip.ContentType, zip.FileName);
+            MemoryUploadedFile excelFile = new MemoryUploadedFile(excel.InputStream, zip.ContentType, zip.FileName);
+
+            bool canImport = true;
+            TempData["SHOW_MODAL"] = @"<script>$('#importModal').modal();</script>";
+            //string excelResult = ProcessImportFileHelper.CheckValidExcelFile(excelFile);
+            //if (excelResult != null)
+            //{
+            //    canImport = false;
+            //    TempData["EXCEL"] = excelResult;
+            //}
+
+            //string zipResult = ProcessImportFileHelper.CheckValidZipFile(zipFile);
+            //if (zipResult != null)
+            //{
+            //    canImport = false;
+            //    TempData["ZIP"] = zipResult;
+            //}
+
+            //if (!canImport)
+            //{
+
+            //    return RedirectToAction("AddWatch", "Admin");
+            //}
+            //MemoryStream ms = new MemoryStream();
+
+            //zip.InputStream.CopyTo(ms);
+
+            int result = watchService.ImportWatchFromFile(excel, zip, Session.GetCurrentUserInfo("Username"));
+            TempData["RESULT"] = "Total " + result + " watch(es) imported successfully";
+            return RedirectToAction("AddWatch", "Admin");
         }
     }
 }
