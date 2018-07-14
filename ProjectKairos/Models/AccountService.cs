@@ -19,7 +19,7 @@ namespace ProjectKairos.Models
         public bool AdminUpdateAccount(string username, bool isActive, int roleId)
         {
             Account account = db.Accounts.Find(username);
-
+            
             db.Accounts.Attach(account);
 
             account.IsActive = isActive;
@@ -114,7 +114,7 @@ namespace ProjectKairos.Models
             var result = db.Accounts
                 .Include(a => a.Role)
                 .Where(a => a.Username == username && a.IsActive == true)
-                .Select(a => new { a.Username, a.Password, a.PasswordSalt, a.Role.RoleName, a.RoleId })
+                .Select(a => new { a.Username, a.Password, a.PasswordSalt, a.Role.RoleName, a.RoleId, a.FirstName, a.LastName })
                 .FirstOrDefault();
             if (result == null)
             {
@@ -136,7 +136,8 @@ namespace ProjectKairos.Models
                 {
                     Username = username,
                     RoleId = result.RoleId,
-                    RoleName = result.RoleName
+                    RoleName = result.RoleName,
+                    FullName = result.LastName + " " + result.FirstName
                 };
                 return JsonConvert.SerializeObject(loginInfo, Formatting.Indented);
             }

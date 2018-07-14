@@ -58,7 +58,7 @@
 </h5>
 
 <!-- FORM ACCOUNT INFO ================================= -->
-@using (@Html.BeginForm("UpdateMyInfo", "Account", FormMethod.Post, new { @class = "to-validate", novalidate = "" }))
+@using (@Html.BeginForm("UpdateMyInfo", "Account", FormMethod.Post, new { @class = "to-validate", novalidate = "", style = "margin-bottom: 15px;" }))
 {
     <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
         <!-- Row firstname -->
@@ -178,8 +178,7 @@
             {
                 style = "text-danger";
             }
-            <div class="@style" style="font-weight: bold">@result</div>
-            <br>
+            <div class="@style" style="font-weight: bold">@result</div>            
         }
         <div class="wrap-dropdown-content p-t-15 p-b-14">
             <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text20 color0-hov trans-0-4">

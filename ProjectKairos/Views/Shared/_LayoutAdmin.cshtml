@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ProjectKairos.Utilities
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,7 +28,11 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-
+                <li class="nav-item">
+                    <a class="nav-link nav-welcome" href="#">
+                        <span class="nav-link-text">Welcome, @Session.GetCurrentUserInfo("FullName")</span>
+                    </a>
+                </li>
                 <li class="nav-item @ViewBag.Info" data-toggle="tooltip" data-placement="right" title="Account Information">
                     <a class="nav-link" href="@Url.Action("Index", "Admin")">
                         <i class="fa fa-fw fa-user"></i>

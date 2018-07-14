@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
@@ -116,7 +117,9 @@ namespace ProjectKairos.Controllers
                     var loginAccount = new
                     {
                         Username = registerAccount.Username,
-                        RoleName = accountService.GetRoleName(registerAccount.Username)
+                        RoleName = accountService.GetRoleName(registerAccount.Username),
+                        RoleId = registerAccount.RoleId,
+                        FullName = registerAccount.LastName + " " + registerAccount.FirstName
                     };
                     Session["CURRENT_USER_ID"] = JsonConvert.SerializeObject(loginAccount, Formatting.Indented);
                     return Redirect(Request.UrlReferrer.ToString());
@@ -145,6 +148,10 @@ namespace ProjectKairos.Controllers
                 string username = Session.GetCurrentUserInfo("Username");
                 if (accountService.UpdateAccountInfo(account, username))
                 {
+                    string currentUser = (string)Session["CURRENT_USER_ID"];
+                    JObject user = JObject.Parse(currentUser);
+                    user["FullName"] = account.LastName + " " + account.FirstName;
+                    Session["CURRENT_USER_ID"] = JsonConvert.SerializeObject(user);
                     TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
                     if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
                     {
@@ -164,9 +171,7 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Administrator, Member")]
         public ActionResult ChangePassword(string oldPassword, string newPassword)
         {
-            TempData["SHOW_MODAL"] = @"<script>$('#passwordModal').modal();</script>";
             string username = Session.GetCurrentUserInfo("Username");
-
             if (accountService.UpdateAccountPassword(username, oldPassword, newPassword))
             {
                 TempData["UPDATE_RESULT"] = "Password is saved successfully.";
@@ -174,19 +179,16 @@ namespace ProjectKairos.Controllers
             else
             {
                 //incorrect password
-                TempData["UPDATE_RESULT"] = "Old Password is incorrect.";
-                //script to display modal
+                TempData["UPDATE_RESULT"] = "Current Password is incorrect.";
+
             }
-            //correct password1
             if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
             {
+                //script to display modal
+                TempData["SHOW_MODAL"] = @"<script>$('#passwordModal').modal();</script>";
                 return RedirectToAction("Index", "Admin");
             }
-            if (Session.GetCurrentUserInfo("RoleName") == "Member")
-            {
-                return RedirectToAction("ManageAccount", "User");
-            }
-            return Content("TO USER");
+            return RedirectToAction("ManageAccount", "User");
         }
     }
 
