@@ -1,4 +1,8 @@
-﻿/*[add product ]
+﻿$(document).ready(function () {
+
+});
+
+/*[add product ]
     ===========================================================*/
 function addToCartAjax(id, name) {
     $.ajax({

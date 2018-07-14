@@ -413,6 +413,42 @@ namespace ProjectKairos.Models
             return IdAndError;
         }
 
+        public bool CheckCartExistedInDB(string username)
+        {
+            try
+            {
+                //get user's cart with status not checkout
+                var userOrderID = db.Orders
+                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                    .Select(o => o.OrderID)
+                    .FirstOrDefault();
+
+                //=====================================================================
+                if (userOrderID == 0) //currently dont have any cart => not check
+                {
+                    return false;
+                }
+                //=====================================================================
+                else //have cart => check if cart is empty
+                {
+                    var item = db.OrderDetails
+                            .Where(o => o.OrderID == userOrderID)
+                            .Select(o => new { o.WatchID, o.Quantity })
+                            .ToList();
+
+                    if (item == null)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception)
+            {                
+                return false;
+            }            
+        }
+
         public bool CheckAvailableAndQuantityInDB(int id, int quantityWant)
         {
             var quantityHave = db.Watches

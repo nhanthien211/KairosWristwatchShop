@@ -77,7 +77,13 @@ namespace ProjectKairos.Controllers
                     return RedirectToAction("Index", "Admin");
                 } else if (roleName == "Member")
                 {
-                    //TODO: CHECK CART IN DB +++ Show cart in DB
+                    string username = Session.GetCurrentUserInfo("Username");
+                    //Check if cart existed and not empty
+                    bool checkExisted = shoppingService.CheckCartExistedInDB(username);
+                    if (!checkExisted)
+                    {
+                        return View("~/Views/Home/shopping_cart.cshtml");
+                    }
                 }
             }
 
