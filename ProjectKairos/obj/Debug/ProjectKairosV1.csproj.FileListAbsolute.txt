@@ -164,7 +164,6 @@ D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKai
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Microsoft.Web.Infrastructure.dll
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Newtonsoft.Json.dll
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Diagnostics.DiagnosticSource.dll
-D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.IO.Compression.ZipFile.dll
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Web.Helpers.dll
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Web.Mvc.dll
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Web.Optimization.dll

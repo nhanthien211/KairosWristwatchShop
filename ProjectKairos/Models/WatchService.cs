@@ -296,24 +296,25 @@ namespace ProjectKairos.Models
 
                 for (int row = startRow + 1; row <= endRow; row++)
                 {
-                    string watchCode = workSheet.Cells[watchCodeColumn + row].Value.ToString();
-
-                    //Duplicate code found. Skip add. Otherwise will continue to check
-                    if (!IsDuplicatedWatchCode(watchCode))
+                    try
                     {
+                        string watchCode = workSheet.Cells[watchCodeColumn + row].Value.ToString();
 
-                        ZipArchiveEntry entry = archive.Entries.FirstOrDefault(e => e.Name.Contains(watchCode));
-                        //No Thumbnail match watchcode. Skip add. Otherwise will continue
-                        if (entry != null)
+                        //Duplicate code found. Skip add. Otherwise will continue to check
+                        if (!IsDuplicatedWatchCode(watchCode))
                         {
-                            try
+
+                            ZipArchiveEntry entry = archive.Entries.FirstOrDefault(e => e.Name.Contains(watchCode));
+                            //No Thumbnail match watchcode. Skip add. Otherwise will continue
+                            if (entry != null)
                             {
+
                                 Watch watch = new Watch
                                 {
                                     WatchCode = watchCode,
-                                    WatchDescription = workSheet.Cells[watchDescriptionColumn + row].Value.ToString(),
-                                    BandMaterial = workSheet.Cells[bandMaterialColumn + row].Value.ToString(),
-                                    CaseMaterial = workSheet.Cells[caseMaterialColumn + row].Value.ToString(),
+                                    WatchDescription = workSheet.Cells[watchDescriptionColumn + row].Value == null ? null : workSheet.Cells[watchDescriptionColumn + row].Value.ToString(),
+                                    BandMaterial = workSheet.Cells[bandMaterialColumn + row].Value == null ? null : workSheet.Cells[bandMaterialColumn + row].Value.ToString(),
+                                    CaseMaterial = workSheet.Cells[caseMaterialColumn + row].Value == null ? null : workSheet.Cells[caseMaterialColumn + row].Value.ToString(),
 
                                     Quantity = Int32.Parse(workSheet.Cells[quantityColumn + row].Value.ToString()),
                                     Price = Double.Parse(workSheet.Cells[priceColumn + row].Value.ToString()),
@@ -322,31 +323,38 @@ namespace ProjectKairos.Models
                                     CaseRadius = Double.Parse(workSheet.Cells[caseRadiusColumn + row].Value.ToString()),
                                     Discount = Int32.Parse(workSheet.Cells[discountColumn + row].Value.ToString()),
                                     Guarantee = Int32.Parse(workSheet.Cells[guaranteeColumn + row].Value.ToString()),
+
                                     WaterResistant = workSheet.Cells[waterResistantColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
                                     LEDLight = workSheet.Cells[ledLightColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
                                     Alarm = workSheet.Cells[alarmColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
                                 };
+                                if (watch.Quantity >= 0 && watch.Price >= 0 &&
+                                    watch.CaseRadius.GetValueOrDefault() >= 0 &&
+                                    watch.Discount >= 0 &&
+                                    watch.Guarantee >= 0)
+                                {
+                                    string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watchCode + DateTime.Now.ToBinary();
+                                    ImageProcessHelper.ResizedImage(entry.Open(), 360, 500, ResizeMode.Pad, ref path);
 
-                                string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watchCode + DateTime.Now.ToBinary();
-                                ImageProcessHelper.ResizedImage(entry.Open(), 360, 500, ResizeMode.Pad, ref path);
-
-                                watch.Thumbnail = path;
-                                watch.PublishedTime = DateTime.Now;
-                                watch.PublishedBy = username;
-                                watch.Status = true;
-                                db.Watches.Add(watch);
-                                db.SaveChanges();
-                                totalImported++;
-                            }
-                            catch (Exception)
-                            {
+                                    watch.Thumbnail = path;
+                                    watch.PublishedTime = DateTime.Now;
+                                    watch.PublishedBy = username;
+                                    watch.Status = true;
+                                    db.Watches.Add(watch);
+                                    db.SaveChanges();
+                                    totalImported++;
+                                }
 
                             }
                         }
                     }
+                    catch (Exception)
+                    {
+
+                    }
+
                 }
             }
-
             return totalImported;
         }
     }

@@ -22,6 +22,7 @@ namespace ProjectKairos.Utilities
                 return false;
             }
             string signature = GetFileSignature(bytes);
+            file.InputStream.Position = 0;
             return signature.Contains(JpgSignature) || signature.Contains(PngSignature);
         }
 

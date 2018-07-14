@@ -187,6 +187,7 @@ namespace ProjectKairos.Controllers
                 }
                 //lưu hình ảnh xuống máy  
                 string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watch.WatchCode + DateTime.Now.ToBinary();
+                //thumbnail.InputStream.Position = 0;
                 ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 500, ResizeMode.Pad, ref path);
                 watch.Thumbnail = path;
                 watch.PublishedTime = DateTime.Now;
@@ -283,6 +284,8 @@ namespace ProjectKairos.Controllers
                     return View("~/Views/Admin/admin_manage_watch_detail.cshtml", viewModel);
                 }
                 String oldValue = watchService.SerializeOldValue(watch.WatchID);
+                //thumbnail.InputStream.Position = 0;
+
                 if (watchService.UpdateWatchInfo(watch, thumbnail))
                 {
                     //save old value to modification table
