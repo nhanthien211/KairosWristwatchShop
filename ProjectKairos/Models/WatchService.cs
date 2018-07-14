@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO.Compression;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
 using ImageProcessor.Imaging;
@@ -85,26 +86,12 @@ namespace ProjectKairos.Models
 
         public bool IsDuplicatedWatchCode(string watchCode, int watchId)
         {
-            var result = db.Watches.Where(w => w.WatchCode == watchCode && w.WatchID != watchId)
-                .Select(w => w.WatchCode)
-                .FirstOrDefault();
-            if (result != null)
-            {
-                return true;
-            }
-            return false;
+            return db.Watches.Any(w => w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase) && w.WatchID == watchId);
         }
 
         public bool IsDuplicatedWatchCode(string watchCode)
         {
-            var result = db.Watches.Where(w => w.WatchCode == watchCode)
-                .Select(w => w.WatchCode)
-                .FirstOrDefault();
-            if (result != null)
-            {
-                return true;
-            }
-            return false;
+            return db.Watches.Any(w => w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase));
         }
 
         public String SerializeOldValue(int watchId)
@@ -235,13 +222,16 @@ namespace ProjectKairos.Models
 
         public List<WatchInIndexPageModel> LoadWatchListIndex()
         {
-            var watch = db.Watches.Where(w => w.Quantity > 0 && w.Status == true)
+            var watch = db.Watches
+                .Include(w => w.WatchModel)
+                .Where(w => w.Quantity > 0 && w.Status == true)
                 .Select(w => new WatchInIndexPageModel
                 {
                     WatchID = w.WatchID,
                     WatchCode = w.WatchCode,
                     Thumbnail = w.Thumbnail,
-                    Price = w.Price * (1 - w.Discount * 0.01)
+                    Price = w.Price * (1 - w.Discount * 0.01),
+                    WatchModel = w.WatchModel.ModelName
                 })
                 .OrderByDescending(w => w.WatchID)
                 .Take(8).ToList();
@@ -298,12 +288,11 @@ namespace ProjectKairos.Models
                 {
                     try
                     {
-                        string watchCode = workSheet.Cells[watchCodeColumn + row].Value.ToString();
-
-                        //Duplicate code found. Skip add. Otherwise will continue to check
-                        if (!IsDuplicatedWatchCode(watchCode))
+                        string watchCode = workSheet.Cells[watchCodeColumn + row].Value.ToString().ToUpper().Trim();
+                        if (Regex.Match(watchCode, "^[A-Za-z0-9-]{1,}$").Success && !IsDuplicatedWatchCode(watchCode))
                         {
-
+                            //validate code pattern
+                            ////Duplicate code found. Skip add. Otherwise will continue to check
                             ZipArchiveEntry entry = archive.Entries.FirstOrDefault(e => e.Name.Contains(watchCode));
                             //No Thumbnail match watchcode. Skip add. Otherwise will continue
                             if (entry != null)
@@ -312,21 +301,21 @@ namespace ProjectKairos.Models
                                 Watch watch = new Watch
                                 {
                                     WatchCode = watchCode,
-                                    WatchDescription = workSheet.Cells[watchDescriptionColumn + row].Value == null ? null : workSheet.Cells[watchDescriptionColumn + row].Value.ToString(),
-                                    BandMaterial = workSheet.Cells[bandMaterialColumn + row].Value == null ? null : workSheet.Cells[bandMaterialColumn + row].Value.ToString(),
-                                    CaseMaterial = workSheet.Cells[caseMaterialColumn + row].Value == null ? null : workSheet.Cells[caseMaterialColumn + row].Value.ToString(),
+                                    WatchDescription = workSheet.Cells[watchDescriptionColumn + row].Value == null ? null : workSheet.Cells[watchDescriptionColumn + row].Value.ToString().Trim(),
+                                    BandMaterial = workSheet.Cells[bandMaterialColumn + row].Value == null ? null : workSheet.Cells[bandMaterialColumn + row].Value.ToString().Trim(),
+                                    CaseMaterial = workSheet.Cells[caseMaterialColumn + row].Value == null ? null : workSheet.Cells[caseMaterialColumn + row].Value.ToString().Trim(),
 
-                                    Quantity = Int32.Parse(workSheet.Cells[quantityColumn + row].Value.ToString()),
-                                    Price = Double.Parse(workSheet.Cells[priceColumn + row].Value.ToString()),
-                                    MovementID = Int32.Parse(workSheet.Cells[movementIdColumn + row].Value.ToString()),
-                                    ModelID = Int32.Parse(workSheet.Cells[modelIdColumn + row].Value.ToString()),
-                                    CaseRadius = Double.Parse(workSheet.Cells[caseRadiusColumn + row].Value.ToString()),
-                                    Discount = Int32.Parse(workSheet.Cells[discountColumn + row].Value.ToString()),
-                                    Guarantee = Int32.Parse(workSheet.Cells[guaranteeColumn + row].Value.ToString()),
+                                    Quantity = Int32.Parse(workSheet.Cells[quantityColumn + row].Value.ToString().Trim()),
+                                    Price = Double.Parse(workSheet.Cells[priceColumn + row].Value.ToString().Trim()),
+                                    MovementID = Int32.Parse(workSheet.Cells[movementIdColumn + row].Value.ToString().Trim()),
+                                    ModelID = Int32.Parse(workSheet.Cells[modelIdColumn + row].Value.ToString().Trim()),
+                                    CaseRadius = Double.Parse(workSheet.Cells[caseRadiusColumn + row].Value.ToString().Trim()),
+                                    Discount = Int32.Parse(workSheet.Cells[discountColumn + row].Value.ToString().Trim()),
+                                    Guarantee = Int32.Parse(workSheet.Cells[guaranteeColumn + row].Value.ToString().Trim()),
 
-                                    WaterResistant = workSheet.Cells[waterResistantColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
-                                    LEDLight = workSheet.Cells[ledLightColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
-                                    Alarm = workSheet.Cells[alarmColumn + row].Value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase),
+                                    WaterResistant = workSheet.Cells[waterResistantColumn + row].Value.ToString().Trim().Equals("true", StringComparison.OrdinalIgnoreCase),
+                                    LEDLight = workSheet.Cells[ledLightColumn + row].Value.ToString().Trim().Equals("true", StringComparison.OrdinalIgnoreCase),
+                                    Alarm = workSheet.Cells[alarmColumn + row].Value.ToString().Trim().Equals("true", StringComparison.OrdinalIgnoreCase),
                                 };
                                 if (watch.Quantity >= 0 && watch.Price >= 0 &&
                                     watch.CaseRadius.GetValueOrDefault() >= 0 &&
@@ -352,10 +341,44 @@ namespace ProjectKairos.Models
                     {
 
                     }
-
                 }
             }
             return totalImported;
+        }
+
+        public bool IsAvailableWatch(string watchCode)
+        {
+            return db.Watches.Any(w =>
+                w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase)
+                && w.Status);
+        }
+
+        public WatchDetailViewModel GetWatchFullDetail(string watchCode)
+        {
+            var viewModel = db.Watches
+                .Include(w => w.WatchModel)
+                .Include(w => w.Movement)
+                .Where(w => w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase))
+                .Select(w => new WatchDetailViewModel
+                {
+                    WatchId = w.WatchID,
+                    WatchCode = w.WatchCode,
+
+                    Price = w.Price * (1 - w.Discount * 0.01),
+                    Quantity = w.Quantity,
+                    Thumbnail = w.Thumbnail,
+                    Description = w.WatchDescription,
+                    MovementName = w.Movement.MovementName,
+                    ModelName = w.WatchModel.ModelName,
+                    BandMaterial = w.BandMaterial,
+                    CaseRadius = w.CaseRadius,
+                    CaseMaterial = w.CaseMaterial,
+                    Guarantee = w.Guarantee,
+                    WaterResistant = w.WaterResistant,
+                    LedLight = w.LEDLight,
+                    Alarm = w.Alarm
+                }).FirstOrDefault();
+            return viewModel;
         }
     }
 }

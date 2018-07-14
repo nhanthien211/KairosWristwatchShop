@@ -68,7 +68,8 @@ namespace ProjectKairos.Controllers
                 registerAccount.Gender = Request["gender"] == "male";
                 //ModelState.IsValid: whether auto binding request
                 //parameter to object account field is correct
-
+                registerAccount.Username = registerAccount.Username.ToLower();
+                registerAccount.Email = registerAccount.Email.ToLower();
                 //Step 1 check if username exists ?
                 string duplicateUsername = "";
                 string duplicateEmail = "";
@@ -124,7 +125,7 @@ namespace ProjectKairos.Controllers
                     Session["CURRENT_USER_ID"] = JsonConvert.SerializeObject(loginAccount, Formatting.Indented);
                     return Redirect(Request.UrlReferrer.ToString());
                 }
-                return HttpNotFound();
+                return Content("Unexpected error");
             }
             //return unexpected error please try again      
             //will have a 404 not found page default for all error

@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Product Detail";
+﻿@model ProjectKairos.ViewModel.WatchDetailViewModel
+
+@{
+    ViewBag.Title = "Watch Detail";
 
     ViewBag.Home = "";
     ViewBag.Product = "";
@@ -18,23 +20,13 @@
                 <div class="wrap-slick3-dots"></div>
 
                 <div class="slick3">
-                    <div class="item-slick3" data-thumb="../Content/img/mainIMG/p1.png">
+                    <div class="item-slick3" data-thumb="@Model.Thumbnail">
                         <div class="wrap-pic-w for-img-contain">
-                            <img src="../Content/img/mainIMG/p1.png" alt="IMG-PRODUCT" class="for-img">
+                            <img src="@Model.Thumbnail" alt="IMG-PRODUCT" class="for-img">
                         </div>
                     </div>
 
-                    <div class="item-slick3" data-thumb="../Content/img/mainIMG/p2.png">
-                        <div class="wrap-pic-w for-img-contain">
-                            <img src="../Content/img/mainIMG/p2.png" alt="IMG-PRODUCT" class="for-img">
-                        </div>
-                    </div>
-
-                    <div class="item-slick3" data-thumb="../Content/img/mainIMG/p3.png">
-                        <div class="wrap-pic-w for-img-contain">
-                            <img src="../Content/img/mainIMG/p3.png" alt="IMG-PRODUCT" class="for-img">
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -42,27 +34,36 @@
         <!-- product overview -->
         <div class="w-size14 p-t-30 respon5">
             <h4 class="m-text16">
-                G-SHOCK Collection
+                @Model.ModelName Collection
             </h4>
             <h3 class="product-detail-name m-text5 t-left p-b-13">
-                GBA800-7A
+                @Model.WatchCode
             </h3>
             <span class="m-text17 p-b-13">
-                $120
+                $@Model.Price
             </span>
 
             <!-- check quantity -->
             <p class="s-text3 p-t-13">
                 Status:
-                <span style="color: green">Available</span>
-                <span style="color: red">Out of Stock</span>
+                @if (@Model.Quantity > 0)
+                {
+                    <span style="color: green">Available</span>
+
+                }
+                else
+                {
+                    <span style="color: red">Out of Stock</span>
+                }
+
             </p>
-            <!-- check discount -->
+            <!-- check discount
             <p class="s-text3 p-t-13">
                 Discount:
                 <span style="color: green">10%</span>
                 <span style="color: red">Sorry, no discount right now.</span>
             </p>
+            -->
 
             <!--ADD TO CART-->
             <div class="p-t-33 p-b-60" style="text-align: left;">
@@ -107,45 +108,46 @@
                         <tbody>
                             <tr>
                                 <th scope="row">Code</th>
-                                <td>GBA800-7A</td>
+                                <td>@Model.WatchCode</td>
                             </tr>
                             <tr>
                                 <th scope="row">Movement</th>
-                                <td>Analog-Digital</td>
+                                <td>@Model.MovementName</td>
                             </tr>
                             <tr>
                                 <th scope="row">Model</th>
-                                <td>---</td>
+                                <td>@Model.ModelName</td>
                             </tr>
                            
                             <tr>
                                 <th scope="row">Band Material</th>
-                                <td>---</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Case Radius</th>
-                                <td>15mm</td>
+                                <td>@Model.BandMaterial</td>
                             </tr>
                             <tr>
                                 <th scope="row">Case Material</th>
-                                <td>---</td>
+                                <td>@Model.CaseMaterial</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Case Radius</th>
+                                <td>@Model.CaseRadius.GetValueOrDefault() mm</td>
                             </tr>
                             
+                            
                             <tr>
-                                <th scope="row">Guaarantee (Months)</th>
-                                <td>24</td>
+                                <th scope="row">Guarantee</th>
+                                <td>@Model.Guarantee months</td>
                             </tr>
                             <tr>
                                 <th scope="row">Water Resistant</th>
-                                <td>Yes</td>
+                                <td>@Model.WaterResistantInfo</td>
                             </tr>
                             <tr>
                                 <th scope="row">LED Light</th>
-                                <td>Yes</td>
+                                <td>@Model.LedLightInfo</td>
                             </tr>
                             <tr>
                                 <th scope="row">Alarm</th>
-                                <td>Yes</td>
+                                <td>@Model.AlarmInfo</td>
                             </tr>
                         </tbody>
                     </table>
@@ -163,16 +165,7 @@
 
                 <div class="dropdown-content dis-none p-t-15 p-b-23">
                     <p class="s-text3">
-                        While linked with the G-SHOCK Connected phone app, you can configure settings for a step count log with five exercise intensity
-                        levels, calorie calculations, and step targets. The ability to use the app to create timer combinations and send them
-                        to the watch, to store stopwatch measurement data, to view data and more all combine to help you plan and record your
-                        workouts, making them more effective and enjoyable. Other features include app-based auto time setting correction
-                        and other features for more efficient timekeeping, and an Auto Double LED Light to facilitate workouts in areas where
-                        lighting is dim. The small cases of these models are great for active training. Back wings on the inside of the bands
-                        where they connect to the case, a new band ring shape that prevents sliding, more band holes to allow better tightness
-                        adjustment, and a soft urethane band, which maintains its suppleness even after long wear all add up to a more comfortable
-                        fit. A mid-size design that's optimal for running and training, Bluetooth®, phone app linking and much more makes
-                        the GBA800 the perfect choice for everyday wear and fitness training.
+                        @Html.Encode(Model.Description)
                     </p>
                 </div>
             </div>

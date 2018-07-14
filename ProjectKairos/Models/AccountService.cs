@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ProjectKairos.ViewModel;
 using System.Data.Entity;
@@ -19,7 +20,7 @@ namespace ProjectKairos.Models
         public bool AdminUpdateAccount(string username, bool isActive, int roleId)
         {
             Account account = db.Accounts.Find(username);
-            
+
             db.Accounts.Attach(account);
 
             account.IsActive = isActive;
@@ -92,14 +93,13 @@ namespace ProjectKairos.Models
 
         public bool IsDuplicatedUsername(string username)
         {
-            string result = db.Accounts.Where(a => a.Username == username).Select(a => a.Username).FirstOrDefault();
-            return result != null;
+            return db.Accounts.Any(a => a.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool IsDuplicatedEmail(string email)
         {
-            string result = db.Accounts.Where(a => a.Email == email).Select(a => a.Email).FirstOrDefault();
-            return result != null;
+
+            return db.Accounts.Any(a => a.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool AddNewAccount(Account account)

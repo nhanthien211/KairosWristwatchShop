@@ -96,7 +96,7 @@ namespace ProjectKairos.Controllers
             var account = accountService.ViewAccountInfo(username);
             if (account == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
             var role = roleService.GetListRole();
             account.Role = role;
@@ -126,7 +126,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("ViewAccount", "Admin");
             }
 
-            return HttpNotFound(); //change to 404/ server busy
+            return RedirectToAction("NotFound", "Home"); //change to 404/ server busy
         }
 
         [HttpGet]
@@ -163,6 +163,7 @@ namespace ProjectKairos.Controllers
                 watch.WaterResistant = Request["water"] == "yes";
                 watch.LEDLight = Request["led"] == "yes";
                 watch.Alarm = Request["alarm"] == "yes";
+                watch.WatchCode = watch.WatchCode.ToUpper();
                 bool duplicateCode = watchService.IsDuplicatedWatchCode(watch.WatchCode);
                 bool validImage = FileTypeDetector.IsImageFile(thumbnail);
                 //check if watch code is unique
@@ -198,9 +199,9 @@ namespace ProjectKairos.Controllers
                     TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
                     return RedirectToAction("AddWatch", "Admin");
                 }
-                return HttpNotFound();
+                return Content("Unexpected Error");
             }
-            return HttpNotFound();
+            return RedirectToAction("NotFound", "Home");
         }
 
         [HttpPost]
@@ -238,13 +239,13 @@ namespace ProjectKairos.Controllers
             }
             catch (FormatException)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
 
             var watchDetail = watchService.ViewWatchDetail(id);
             if (watchDetail == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
             watchDetail.Movement = movementService.GetMovementList();
             watchDetail.WatchModel = watchModelService.GetModelsList();
@@ -265,6 +266,7 @@ namespace ProjectKairos.Controllers
                 watch.LEDLight = Request["led"] == "yes";
                 watch.Alarm = Request["alarm"] == "yes";
                 watch.Status = Request["status"] == "yes";
+                watch.WatchCode = watch.WatchCode.ToUpper();
                 bool duplicateCode = watchService.IsDuplicatedWatchCode(watch.WatchCode, watch.WatchID);
                 bool validImage = FileTypeDetector.IsImageFile(thumbnail);
                 if (duplicateCode || !validImage)
@@ -297,9 +299,9 @@ namespace ProjectKairos.Controllers
                         return RedirectToAction("ViewWatch", "Admin");
                     }
                 }
-                return HttpNotFound(); //change to 404
+                return Content("Unexpected Error"); //change to 404
             }
-            return HttpNotFound();
+            return RedirectToAction("NotFound", "Home");
         }
 
         [HttpPost]

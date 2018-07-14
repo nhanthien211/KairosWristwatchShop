@@ -6,6 +6,7 @@
         public string WatchCode { get; set; }
         public double Price { get; set; }
         public string Thumbnail { get; set; }
+        public string WatchModel { get; set; }
 
     }
 }
