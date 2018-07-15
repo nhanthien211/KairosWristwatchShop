@@ -380,7 +380,7 @@ namespace ProjectKairos.Models
             return viewModel;
         }
 
-        public ViewWatchCategoryViewModel GetWatchListBasedOnCategory(string category, int page, int pageSize)
+        public ViewWatchCategoryViewModel GetWatchListBasedOnCategory(string category, int page, int pageSize, string searchValue, string price, string sorting)
         {
 
             //lấy danh sách sản phẩm
@@ -396,15 +396,57 @@ namespace ProjectKairos.Models
                    });
 
             //Filter category
-            //TODO: filter search value, price range
+            //TODO: current category
             if (!category.Equals("All", StringComparison.OrdinalIgnoreCase))
             {
                 data = data.Where(d => d.ModelName.Equals(category, StringComparison.OrdinalIgnoreCase));
             }
 
+            //TODO: filter search value
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                data = data.Where(d => d.WatchCode.Contains(searchValue));
+            }
+
+
+            //TODO: add price range filter
+            if (!string.IsNullOrEmpty(price))
+            {
+                switch (price)
+                {
+                    case "0_100":
+                        data = data.Where(d => d.Price <= 100);
+                        break;
+                    case "100_200":
+                        data = data.Where(d => d.Price > 100 && d.Price <= 200);
+                        break;
+                    case "200_300":
+                        data = data.Where(d => d.Price > 200 && d.Price <= 300);
+                        break;
+                    case "300_400":
+                        data = data.Where(d => d.Price > 300 && d.Price <= 400);
+                        break;
+                    case "400":
+                        data = data.Where(d => d.Price > 400);
+                        break;
+                }
+            }
+
+
             //TODO: orderby ... .Must be sort before calling skip()
-            //TODO: Currently set default order by ID, then change orderBy later
+
             data = data.OrderBy(d => d.WatchID);
+            switch (sorting)
+            {
+                case "price_asc":
+                    data = data.OrderBy(d => d.Price);
+                    break;
+                case "price_desc":
+                    data = data.OrderByDescending(d => d.Price);
+                    break;
+            }
+
+
 
             //TODO: get number of page need before paging result set
             int count = data.Count();
@@ -413,7 +455,10 @@ namespace ProjectKairos.Models
             var viewModel = new ViewWatchCategoryViewModel
             {
                 WatchList = data.ToPagedList(page, pageSize),
-                WatchCount = count
+                WatchCount = count,
+                SearchValue = searchValue,
+                PriceRange = price,
+                SortFilter = sorting
             };
             return viewModel;
         }

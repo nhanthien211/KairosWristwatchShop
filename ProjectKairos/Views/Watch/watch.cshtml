@@ -1,4 +1,5 @@
 ﻿@using ProjectKairos.Utilities
+@using ProjectKairos.ViewModel
 @using X.PagedList.Mvc
 @using X.PagedList.Mvc.Common
 @model ProjectKairos.ViewModel.ViewWatchCategoryViewModel
@@ -67,56 +68,77 @@
                             </a>
                         </li>
                     </ul>
+                    @using (@Html.BeginForm("ViewProduct", "Watch", FormMethod.Get))
+                    {
+                        <!-- search======================================= -->
 
-                    <!-- search======================================= -->
-                    <h4 class="m-text14 p-b-7">
-                        Search
-                    </h4>
-                    <div class="p-b-54">
-                        <div class="search-product pos-relative bo4 of-hidden">
-                            <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="searchValue" placeholder="Search Products...">
-                            <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-                                <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                            </button>
+                         
+                            
+                        <h4 class="m-text14 p-b-7">
+                            Search
+                        </h4>
+                        <div class="p-b-54">
+                            <div class="search-product pos-relative bo4 of-hidden">
+                                <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="searchValue" placeholder="Search Products..." value="@Model.SearchValue">
+                                
+                                <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" type="submit">
+                                    <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!--filter==============================================  -->
-                    <h4 class="m-text14 p-b-7">
-                        Filter
-                    </h4>                    
+                        <!--filter==============================================  -->
+                        <h4 class="m-text14 p-b-7">
+                            Filter
+                        </h4>
 
-                    <!-- filter price ================================ -->
+                        <!-- filter price ================================ -->
 
-                    <div class="p-t-22 p-b-22 bo3">
-                        <div class="m-text15 p-b-17">
-                            Price
-                        </div>
-                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="price">
-                                <option>All range</option>
-                                <option>Under $100.00</option>
-                                <option>$100.00 - $200.00</option>
-                                <option>$200.00 - $300.00</option>
-                                <option>$300.00 - $400.00</option>
-                                <option>$400.00+</option>
+                        <div class="p-t-22 p-b-22 bo3">
+                            <div class="m-text15 p-b-17">
+                                Price
+                            </div>
+                            <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                                @Html.DropDownList("price", new []
+                                {
+                                    new SelectListItem() {Text = "All range", Value = "0", Selected = Model.PriceRange == "0"},
+                                    new SelectListItem() {Text = "Under $100", Value = "0_100", Selected = Model.PriceRange == "0_100"},
+                                    new SelectListItem() {Text = "$100 - $200", Value = "100_200", Selected = Model.PriceRange == "100_200"},
+                                    new SelectListItem() {Text = "$200 - $300", Value = "200_300", Selected = Model.PriceRange == "200_300"},
+                                    new SelectListItem() {Text = "$300 - $400", Value = "300_400", Selected = Model.PriceRange == "300_400"},
+                                    new SelectListItem() {Text = "$400+", Value = "400", Selected = Model.PriceRange == "400"}
+                                }, 
+                                    new
+                                    {
+                                        @class = "selection-2"
 
-                            </select>
+                                    }
+                                )                               
+                            </div>
                         </div>
-                    </div>
-                    <!-- filter sort================================== -->
-                    <div class="p-t-22 p-b-22 bo3">
-                        <div class="m-text15 p-b-17">
-                            Sort By
+                        <!-- filter sort================================== -->
+                        <div class="p-t-22 p-b-22 bo3">
+                            <div class="m-text15 p-b-17">
+                                Sort By
+                            </div>
+                            <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                                @Html.DropDownList("sorting", new []
+                                {
+                                    new SelectListItem() {Text = "None", Value = "none", Selected = Model.PriceRange == "none"},
+                                    new SelectListItem() {Text = "Price: low to high", Value = "price_asc", Selected = Model.PriceRange == "price_asc"},
+                                    new SelectListItem() {Text = "Price: high to low", Value = "price_desc", Selected = Model.PriceRange == "price_desc"}
+                                },
+                                    new
+                                    {
+                                        @class = "selection-2"
+
+                                    }
+                                    )
+
+                            </div>
+                            <input type="hidden" name="page" value="1">
                         </div>
-                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting">
-                                <option>None</option>
-                                <option>Price: low to high</option>
-                                <option>Price: high to low</option>                               
-                            </select>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
 
@@ -129,27 +151,7 @@
                     </span>
                 </div>
                 <!-- Page -->
-                @*<div class="pagination flex-m flex-w p-t-15 p-b-20">
-                    @Html.PagedListPager(Model.WatchList, pageNumber => Url.Action("ViewProduct", "Watch", new {pageNumber}),
-                        new PagedListRenderOptions
-                        {
-                            FunctionToTransformEachPageLink = (li, a) =>
-                            {
-
-                                a.Attributes.Add("class", "item-pagination flex-c-m trans-0-4");
-                                li.InnerHtml = a.ToString();
-                                return li;
-                            },
-                            MaximumPageNumbersToDisplay = 5,
-                            ActiveLiElementClass = "active-pagination",
-                            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
-                            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
-                            DisplayLinkToNextPage = PagedListDisplayMode.Never,
-                            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
-                            DisplayEllipsesWhenNotShowingAllPageNumbers = true
-                        })
-
-                </div>*@
+               
 
                 <!-- Product -->
 
@@ -187,9 +189,17 @@
 
                 </div>
 
-                <!-- Page -->
+                <!-- Page --> 
                 <div class="pagination flex-m flex-w">
-                    @Html.PagedListPager(Model.WatchList, pageNumber => Url.Action("ViewProduct", "Watch", new {pageNumber}),
+                    @Html.PagedListPager(Model.WatchList, page => Url.Action("ViewProduct", "Watch",
+                        new 
+                        {                                                       
+                            searchValue = Model.SearchValue,
+                            price = Model.PriceRange,
+                            sorting = Model.SortFilter,
+                            pageNumber = page
+
+                        }),
                         new PagedListRenderOptions
                         {
                             FunctionToTransformEachPageLink = (li, a) =>

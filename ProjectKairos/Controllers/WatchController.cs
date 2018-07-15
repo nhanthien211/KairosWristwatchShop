@@ -21,14 +21,20 @@ namespace ProjectKairos.Controllers
 
         [HttpGet]
         [AuthorizeUser(Role = "Guest, Member")]
-        [Route("Category/{category}/{pageNumber?}")]
-        public ActionResult ViewProduct(string category, int? pageNumber)
+        [Route("Category/{category}")]
+        public ActionResult ViewProduct(string category, int? pageNumber, string searchValue, string price, string sorting)
         {
             if (watchModelService.IsModelExisted(category) || category.Equals("All", StringComparison.OrdinalIgnoreCase))
             {
+                int pageReset = Convert.ToInt32(Request["page"]);
                 int selectedPage = pageNumber ?? 1;
+                if (pageReset != 0)
+                {
+                    selectedPage = 1;
+                }
+
                 int pageSize = 6;
-                var viewModel = watchService.GetWatchListBasedOnCategory(category, selectedPage, pageSize);
+                var viewModel = watchService.GetWatchListBasedOnCategory(category, selectedPage, pageSize, searchValue, price, sorting);
                 return View("~/Views/Watch/watch.cshtml", viewModel);
             }
             return RedirectToAction("NotFound", "Home");
