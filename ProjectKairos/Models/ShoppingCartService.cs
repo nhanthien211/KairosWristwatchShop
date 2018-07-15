@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -9,23 +10,98 @@ namespace ProjectKairos.Models
     {
         private KAIROS_SHOPEntities db;
         private int quantityHave = 0;
-        private bool failByQuantity;
 
+        // Variable to check if action fail because invalid quantity in DB
+        private bool failByQuantity;        
         public bool FailByQuantity
         {
             get { return failByQuantity; }
             set { failByQuantity = value; }
         }
 
+        // Variable to check if cart is empty after remove a product
+        private bool emptyCart;
+        public bool EmptyCart
+        {
+            get { return emptyCart; }
+            set { emptyCart = value; }
+        }
+
+
         public ShoppingCartService(KAIROS_SHOPEntities db)
         {
             this.db = db;
             failByQuantity = false;
+            emptyCart = false;
         }
 
-        public List<ShoppingItem> LoadCartDB(string username)
+        public bool MergeCartSessionAnddDDB(string username)
         {
-            return null;
+            List<ShoppingItem> cartSession = (List<ShoppingItem>)HttpContext.Current.Session["CART"];
+            List<ShoppingItem> cartDB = this.LoadCartItemDB(username);
+
+            if (cartSession == null) //no cart in session => dont need to merge
+            {
+                return true;
+            }
+            if (cartSession != null)
+            {
+                if (cartDB == null) //no cart in DB => create new order
+                {
+                    //create new cart in DB
+                    Order currentOrder = new Order();
+                    currentOrder.CustomerID = username;
+                    currentOrder.OrderStatus = 1;
+
+                    db.Orders.Add(currentOrder);
+                    int result = db.SaveChanges();
+                    if (result == 0)
+                    {
+                        return false; //insert fail
+                    }
+                }
+                //have cart => merge!!!
+                int cartID = db.Orders
+                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                    .Select(o => o.OrderID)
+                    .FirstOrDefault();
+
+                foreach (ShoppingItem item in cartSession)
+                {
+                    bool re = this.MergeItemInCartDB(cartID, item.Product.ProductID, item.Quantity);
+                    if (!re)
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
+        }
+
+        private bool MergeItemInCartDB(int orderID, int productID, int quantitySession)
+        {
+            OrderDetail itemDB = db.OrderDetails.Find(productID, orderID);
+
+            if (itemDB == null) //item not existed => create new item
+            {
+                OrderDetail itemToAdd = new OrderDetail
+                {
+                    OrderID = orderID,
+                    WatchID = productID,
+                    Quantity = quantitySession
+                };
+                db.OrderDetails.Add(itemToAdd);
+                int re = db.SaveChanges();
+                return re > 0;
+            } //item existed => update quantity, no need to validate quantity avaiable in DB
+
+            db.OrderDetails.Attach(itemDB);
+            int quantityDB = itemDB.Quantity;
+            itemDB.Quantity = quantityDB + quantitySession;
+
+            int re1 = db.SaveChanges();
+            return re1 > 0;
         }
 
         /// <summary>
@@ -245,6 +321,7 @@ namespace ProjectKairos.Models
         public bool RemoveItemSession(string id)
         {
             int ProductID = Convert.ToInt32(id);
+            emptyCart = false;
 
             try
             {
@@ -262,7 +339,6 @@ namespace ProjectKairos.Models
                     {
                         return false;
                     }
-
                     else //already existed, remove
                     {
                         ShoppingItem toRemove = cart[indexInCart];
@@ -272,7 +348,8 @@ namespace ProjectKairos.Models
                         if (cart.Count == 0)
                         {
                             HttpContext.Current.Session["CART"] = null;
-                            return false;
+                            emptyCart = true;
+                            return true;
                         }
                     }
                     HttpContext.Current.Session["CART"] = cart;
@@ -288,6 +365,7 @@ namespace ProjectKairos.Models
         public bool RemoveItemDB(string id, string username)
         {
             int ProductID = Convert.ToInt32(id);
+            emptyCart = false;
 
             try
             {
@@ -310,9 +388,38 @@ namespace ProjectKairos.Models
                         .Select(d => d.Quantity).FirstOrDefault();
 
                     //========================
-                    if (quantity == 0) //item not existed in order => can not remove
+                    if (quantity == 0) //item not existed in order || item auto become 0 =>
                     {
-                        return false;
+                        OrderDetail detail = db.OrderDetails.Find(ProductID, userOrderID);
+                        db.OrderDetails.Attach(detail);
+                        db.OrderDetails.Remove(detail);
+
+                        int resultDetail = db.SaveChanges();
+                        if (resultDetail > 0)
+                        {
+                            //check if cart is empty => to refresh page
+                            var itemInCart = db.OrderDetails
+                                .Where(d => d.OrderID == userOrderID)
+                                .Select(d => d.WatchID)
+                                .ToList();
+
+                            if (itemInCart.Count != 0)
+                            {
+                                return true; //still have item in cart in OrderDetail DB
+                            }
+
+                            var curEmptyOrder = db.Orders.Find(userOrderID);
+                            db.Orders.Attach(curEmptyOrder);
+                            db.Orders.Remove(curEmptyOrder);
+                            db.SaveChanges();
+
+                            emptyCart = true;
+                            return true; //success + empty cart!
+                        }
+                        else
+                        {
+                            return false; //SaveChange fail
+                        }
                     }
                     else //======================== have item in cart => remove item
                     {                                                                        
@@ -323,13 +430,32 @@ namespace ProjectKairos.Models
                         int resultDetail = db.SaveChanges();
                         if (resultDetail > 0)
                         {
-                            return true; //success
+                            //check if cart is empty => to refresh page
+                            var itemInCart = db.OrderDetails
+                                .Where(d => d.OrderID == userOrderID)
+                                .Select(d => d.WatchID)
+                                .ToList();
+
+                            if (itemInCart.Count != 0)
+                            {
+                                return true; //still have item in cart in OrderDetail DB
+                            }
+
+                            var curEmptyOrder = db.Orders.Find(userOrderID);
+                            db.Orders.Attach(curEmptyOrder);
+                            db.Orders.Remove(curEmptyOrder);
+                            db.SaveChanges();
+
+                            emptyCart = true;
+                            return true; //success + empty cart!
                         }
                         else
                         {
-                            return false; //fail
+                            return false; //SaveChange fail
                         }
                     }
+
+                    return false;
                 }
             }
             catch (Exception)
@@ -338,15 +464,17 @@ namespace ProjectKairos.Models
             }
         }
 
-        public int UpdateCartItem(string id, string quantity)
+        public bool UpdateCartItemSession(string id, string quantity)
         {
             int ProductID = Convert.ToInt32(id);
             int quantityNeed = Convert.ToInt32(quantity);
+            failByQuantity = false;
+
             try
             {
                 if (HttpContext.Current.Session["CART"] == null) //cart not exist
                 {
-                    return -2;
+                    return false;
                 }
                 else
                 {
@@ -356,7 +484,7 @@ namespace ProjectKairos.Models
 
                     if (indexInCart == -1) //not found item
                     {
-                        return -2;
+                        return false;
                     }
 
                     else //already existed => check available quantity in DB
@@ -370,16 +498,73 @@ namespace ProjectKairos.Models
                             toUpdate.Quantity = quantityNeed; //update quantity
                             toUpdate.calculateSubTotal(); //update subTotal for this product
                             HttpContext.Current.Session["CART"] = cart; //update cart
-                            return -1;
+                            return true;
                         }
                         //NOT enough quantity => not update => return availavle in DB
-                        return quantityHave;
+                        failByQuantity = true;
+                        return false;
                     }
                 }
             }
             catch (Exception)
             {
-                return -1;
+                return false;
+            }
+        }
+
+        public bool UpdateCartItemDB(string id, string quantity, string username)
+        {
+            int productID = Convert.ToInt32(id);
+            int quantityNeed = Convert.ToInt32(quantity);
+            failByQuantity = false;
+
+            //get user's cart with status not checkout
+            var userOrderID = db.Orders
+                .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                .Select(o => o.OrderID)
+                .FirstOrDefault();
+
+            //=====================================================================
+            if (userOrderID == 0) //currently dont have any cart => can not update => fail
+            {
+                return false;
+            }
+            //=====================================================================
+            else //have cart => check if item have in cart
+            {
+                var quantityCurent = db.OrderDetails
+                    .Where(d => d.OrderID == userOrderID && d.WatchID == productID)
+                    .Select(d => d.Quantity).FirstOrDefault();
+
+                //========================
+                if (quantityCurent == 0) //item not existed in order => can not update
+                {
+                    return false;
+                }
+                else //======================== have item in cart => check avaiable quantity in DB
+                {
+                    bool checkQuantity = this.CheckAvailableAndQuantityInDB(productID, quantityNeed);
+                    if (!checkQuantity)
+                    {
+                        failByQuantity = true;
+                        return false; //fail because not enough quantity
+                    }
+
+                    //enough quantity => update
+                    OrderDetail detail = db.OrderDetails.Find(productID, userOrderID);
+                    db.OrderDetails.Attach(detail);
+                    detail.Quantity = quantityNeed;
+
+                    int resultDetail = db.SaveChanges();
+                    if (db.Entry(detail).State == EntityState.Unchanged || resultDetail > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false; //fail
+                    }
+                }
             }
         }
 
@@ -393,6 +578,33 @@ namespace ProjectKairos.Models
 
             List<ShoppingItem> cart = (List<ShoppingItem>)HttpContext.Current.Session["CART"];
 
+            if (cart.Count == 0)
+            {
+                return null;
+            }
+
+            //Begin to find invalid quantity in cart ==============================
+            Dictionary<int, int> IdAndError = new Dictionary<int, int>();
+
+            foreach (ShoppingItem item in cart)
+            {
+                bool result = CheckAvailableAndQuantityInDB(item.Product.ProductID, item.Quantity);
+                if (!result)
+                {
+                    IdAndError.Add(item.Product.ProductID, this.quantityHave);
+                }
+            }
+
+            return IdAndError;
+        }
+
+        public Dictionary<int, int> CheckCartDB(List<ShoppingItem> cart)
+        {
+            //check cart ========================================================
+            if (cart == null)
+            {
+                return null;
+            }
             if (cart.Count == 0)
             {
                 return null;
@@ -436,7 +648,7 @@ namespace ProjectKairos.Models
                             .Select(o => new { o.WatchID, o.Quantity })
                             .ToList();
 
-                    if (item == null)
+                    if (item.Count == 0) //no item in cart
                     {
                         return false;
                     }
@@ -447,6 +659,43 @@ namespace ProjectKairos.Models
             {                
                 return false;
             }            
+        }
+
+        public List<ShoppingItem> LoadCartItemDB(string username)
+        {
+            var orderID = db.Orders
+                .Where(o => o.CustomerID == username && o.OrderStatus == 1)
+                .Select(o => o.OrderID).FirstOrDefault();
+
+            var itemsID = db.OrderDetails
+                .Where(d => d.OrderID == orderID)
+                .Select(o => new { o.WatchID, o.Quantity })
+                .ToList();
+
+            List<ShoppingItem> listItem = new List<ShoppingItem>();
+
+            foreach(var item in itemsID)
+            {
+                ShoppingProduct p = db
+                        .Watches.Where(w => w.WatchID == item.WatchID)
+                        .Select(w => new ShoppingProduct
+                        {
+                            ProductID = w.WatchID,
+                            ProductCode = w.WatchCode,
+                            ProductPrice = w.Price,
+                            ProductPhoto = w.Thumbnail
+                        })
+                        .FirstOrDefault();
+
+                ShoppingItem curItem = new ShoppingItem(p, item.Quantity);
+                listItem.Add(curItem);
+            }
+
+            if (listItem.Count != 0)
+            {
+                return listItem;
+            }
+            return null;
         }
 
         public bool CheckAvailableAndQuantityInDB(int id, int quantityWant)
@@ -467,7 +716,7 @@ namespace ProjectKairos.Models
             return result;
         }
 
-        public double GetItemSubTotal(string id)
+        public double GetItemSubTotalSession(string id)
         {
             int ProductID = Convert.ToInt32(id);
 
@@ -492,6 +741,57 @@ namespace ProjectKairos.Models
                     return cart[indexInCart].SubTotal;
                 }
             }
+        }
+
+        public double GetItemSubTotalDB(string id, string username)
+        {
+            int productID = Convert.ToInt32(id);
+
+            //get user's cart with status not checkout
+            var userOrderID = db.Orders
+                .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                .Select(o => o.OrderID)
+                .FirstOrDefault();
+
+            //=====================================================================
+            if (userOrderID == 0) //currently dont have any cart
+            {
+                return 0;
+            }
+            //=====================================================================
+            else //have cart => check if item have in cart
+            {
+                var quantityCurent = db.OrderDetails
+                    .Where(d => d.OrderID == userOrderID && d.WatchID == productID)
+                    .Select(d => d.Quantity).FirstOrDefault();
+
+                //========================
+                if (quantityCurent == 0) //item not existed in order
+                {
+                    return 0;
+                }
+                else //======================== have item in cart
+                {
+                    var price = db.Watches.Where(w => w.WatchID == productID).Select(w => w.Price).First();
+                    return price * quantityCurent;
+                }
+            }
+        }
+
+        public double CalculateCartTotalDB(string username)
+        {
+            List<ShoppingItem> cart = this.LoadCartItemDB(username);
+            double total = 0;
+
+            if (cart != null)
+            {
+                foreach (ShoppingItem item in cart)
+                {
+                    total = total + (item.Product.ProductPrice * item.Quantity);
+                }
+                return total;
+            }
+            return 0;
         }
 
         private int isExist(int id)

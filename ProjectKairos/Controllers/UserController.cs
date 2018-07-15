@@ -44,13 +44,22 @@ namespace ProjectKairos.Controllers
         [Route("Checkout")]
         public ActionResult CheckOut()
         {            
-
             if (Session["CURRENT_USER_ID"] != null)
             {
                 string roleName = Session.GetCurrentUserInfo("RoleName");
-                if (roleName == "Member")
+                if (roleName == "Member") //login
                 {
-                    return View("~/Views/User/user_checkout.cshtml");
+                    string username = Session.GetCurrentUserInfo("Username");
+                    List<ShoppingItem> cartDB = shoppingService.LoadCartItemDB(username);
+                    if (cartDB != null && cartDB.Count != 0)
+                    {
+                        Dictionary<int, int> IdAndRErrorDB = shoppingService.CheckCartDB(cartDB);
+                        if (IdAndRErrorDB.Count == 0) //cart valid
+                        {
+                            return View("~/Views/User/user_checkout.cshtml");
+                        }
+                    }
+                    return RedirectToAction("ManageCart", "Home");
                 } else if (roleName == "Administrator")
                 {
                     return RedirectToAction("Index", "Admin");
@@ -69,7 +78,7 @@ namespace ProjectKairos.Controllers
                     return RedirectToAction("Login", "Account");
                 }
             }            
-            return RedirectToAction("ManageCart", "Home");
+            return RedirectToAction("ManageCart", "Home"); //đã có validate trong đây
         }
 
         [HttpGet]

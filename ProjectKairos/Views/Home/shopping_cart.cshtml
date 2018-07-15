@@ -28,7 +28,7 @@
     <div class="container">
         <!-- Empty cart -->
         @{
-            if (Session["CART"] == null || Model == null)
+            if (Model.CartProduct == null || (Session["CART"] == null && Model.CartProduct.Count == 0))
             {
                 <div class="p-t-30 p-b-30">
                     <h5 class="m-text20 p-b-24">

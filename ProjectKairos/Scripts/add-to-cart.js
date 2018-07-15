@@ -15,7 +15,7 @@ function addToCartAjax(id, name) {
             if (response.success) {
                 swal(name, "is added to cart !", "success");
             } else {
-                if (response.quantity == -2) {
+                if (response.quantity == -1) {
                     swal("", "Can not update your cart! Somthing when wrong! Plaese try again later", "");
                 } else {
                     swal(name, "can not be added to cart anymore! Available in Stock: " + response.quantity, "");
@@ -39,12 +39,17 @@ function removeItemAjax(id) {
         },
         success: function (response) {
             if (response.success) {
-                $('#row-' + id).fadeOut('slow');
-                $('#cart-total').html('$ ' + response.responseText);
-                $('#message').css("color", "green");
-                $('#message').html('Remove item successfully!');                
+                if (response.empty) {
+                    window.location.href = window.location.href;
+                } else {
+                    $('#row-' + id).fadeOut('slow');
+                    $('#cart-total').html('$ ' + response.responseText);
+                    $('#message').css("color", "green");
+                    $('#message').html('Remove item successfully!');
+                }                
             } else {
-                window.location.href = window.location.href;
+                $('#message').css("color", "red");
+                $('#message').html('Remove item fail! Please try again later!');
             }
         },
         error: function (response) {
@@ -72,7 +77,7 @@ function updateItemAjax(id, quantityNeed) {
                 $('#text-' + id).val(quantityNeed);
                 $('#sub-total-' + id).html('$ ' + response.subTotal);
             } else {
-                if (response.quantity == -2) {
+                if (response.quantity == -1) {
                     $('#message-' + id).css("color", "red");
                     $('#message-' + id).html('Update item quantity fail! Try again later');
                     $("#message-" + id).show();
@@ -105,7 +110,7 @@ function updateItemAjaxForInputOutRange(id, quantityNeed) {
                 $('#text-' + id).val(quantityNeed);
                 $('#sub-total-' + id).html('$ ' + response.subTotal);
             } else {
-                if (response.quantity == -2) {
+                if (response.quantity == -1) {
                     $('#message-' + id).css("color", "red");
                     $('#message-' + id).html('Update item quantity fail! Try again later');
                     $("#message-" + id).show();
@@ -141,7 +146,7 @@ function updateItemAjaxForInputEmpty(id, quantityNeed) {
                 $('#text-' + id).val(quantityNeed);
                 $('#sub-total-' + id).html('$ ' + response.subTotal);
             } else {
-                if (response.quantity == -2) {
+                if (response.quantity == -1) {
                     $('#message-' + id).css("color", "red");
                     $('#message-' + id).html('Update item quantity fail! Try again later');
                     $("#message-" + id).show();
@@ -186,7 +191,7 @@ function updateItemAjaxForInputOutNormal(id, quantityNeed) {
                 $('#text-' + id).val(quantityNeed);
                 $('#sub-total-' + id).html('$ ' + response.subTotal);
             } else {
-                if (response.quantity == -2) {
+                if (response.quantity == -1) {
                     $('#message-' + id).css("color", "red");
                     $('#message-' + id).html('Update item quantity fail! Try again later');
                     $("#message-" + id).show();

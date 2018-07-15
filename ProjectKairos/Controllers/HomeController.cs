@@ -80,9 +80,18 @@ namespace ProjectKairos.Controllers
                     string username = Session.GetCurrentUserInfo("Username");
                     //Check if cart existed and not empty
                     bool checkExisted = shoppingService.CheckCartExistedInDB(username);
-                    if (!checkExisted)
+                    if (!checkExisted) //empty cart
                     {
-                        return View("~/Views/Home/shopping_cart.cshtml");
+                        var viewModelEmpty = new List<ShoppingItem>();
+
+                        return View("~/Views/Home/shopping_cart.cshtml", viewModelEmpty);
+                    } else //cart have item
+                    {
+                        List<ShoppingItem> items = shoppingService.LoadCartItemDB(username);
+                        var viewModelDB = new ShoppingCartViewModel(items);
+                        viewModelDB.IdAndError = shoppingService.CheckCartDB(items);
+
+                        return View("~/Views/Home/shopping_cart.cshtml", viewModelDB);
                     }
                 }
             }
