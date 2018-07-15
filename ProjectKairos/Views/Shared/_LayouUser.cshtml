@@ -28,7 +28,7 @@
                                 <a href="@Url.Action("Index", "Home")">Home</a>
                             </li>
                             <li class="@ViewBag.Product">
-                                <a href="@Url.Action("ViewProduct", "Watch")">Shop</a>
+                                <a href="@Url.Action("ViewProduct", "Watch", new { category = "All" })">Shop</a>
                             </li>
                         </ul>
                     </nav>

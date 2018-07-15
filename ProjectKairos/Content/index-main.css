@@ -434,7 +434,7 @@ iframe {
 }
 
 .rs1-select2 .select2-container .select2-selection--single {
-  height: 20px;;
+  height: 20px;
 }
 
 /*[ rs2-select2 ]
@@ -1953,21 +1953,21 @@ li.sale-noti > a {
 
 .item-pagination {
   font-family: Montserrat-Regular;
-  font-size: 13px;
+  font-size: 15px;    
   color: #808080;
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid #eeeeee;
+  border: 1px solid black;
   margin: 6px;
 }
 
-.item-pagination:hover {
+.item-pagination:hover  {
   background-color: #222222;
   color: white;
 }
 
-.active-pagination {
+.active-pagination > span {
   background-color: #222222;
   color: white;
 }

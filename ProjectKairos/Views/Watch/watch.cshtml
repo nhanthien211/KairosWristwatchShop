@@ -1,4 +1,8 @@
-﻿@{
+﻿@using ProjectKairos.Utilities
+@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
+@model ProjectKairos.ViewModel.ViewWatchCategoryViewModel
+@{
     ViewBag.Title = "Watch";
 
     ViewBag.Home = "";
@@ -16,7 +20,7 @@
 }
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../Content/img/mainIMG/shop-banner.jpg);">
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/Content/img/mainIMG/shop-banner.jpg);">
     <h2 class="l-text2 t-center">
         KAIROS NYC
     </h2>
@@ -40,25 +44,25 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <a href="#" class="s-text13 active1">
+                            <a href="@Url.Action("ViewProduct", "Watch", new { category = "All"})" class="s-text13 @Html.IsSelected("All")">
                                 All
                             </a>
                         </li>
 
                         <li class="p-t-4">
-                            <a href="#" class="s-text13">
+                            <a href="@Url.Action("ViewProduct", "Watch", new { category = "G-Shock"})" class="s-text13 @Html.IsSelected("G-Shock")">
                                 G-SHOCK
                             </a>
                         </li>
 
                         <li class="p-t-4">
-                            <a href="#" class="s-text13">
+                            <a href="@Url.Action("ViewProduct", "Watch", new { category = "G-Steel"})" class="s-text13 @Html.IsSelected("G-Steel")">
                                 G-STEEL
                             </a>
                         </li>
 
                         <li class="p-t-4">
-                            <a href="#" class="s-text13">
+                            <a href="@Url.Action("ViewProduct", "Watch", new { category = "Baby-G"})" class="s-text13 @Html.IsSelected("Baby-G")">
                                 BABY-G
                             </a>
                         </li>
@@ -80,23 +84,7 @@
                     <!--filter==============================================  -->
                     <h4 class="m-text14 p-b-7">
                         Filter
-                    </h4>
-                    <!-- filter Categories ============================ -->
-                    <div class="p-t-22 p-b-22 bo3">
-                        <div class="m-text15 p-b-17">
-                            Categories
-                        </div>
-                        <div class="s-text16">
-                            <input class="magic-checkbox" type="checkbox" name="all" id="1" value="all">
-                            <label for="1">All</label>
-                            <input class="magic-checkbox" type="checkbox" name="gshock" id="2" value="gshock">
-                            <label for="2">G-SHOCK</label>
-                            <input class="magic-checkbox" type="checkbox" name="gsteel" id="3" value="gsteel">
-                            <label for="3">G-STEEL</label>
-                            <input class="magic-checkbox" type="checkbox" name="babyg" id="4" value="babyg">
-                            <label for="4">BABY-G</label>
-                        </div>
-                    </div>
+                    </h4>                    
 
                     <!-- filter price ================================ -->
 
@@ -124,9 +112,8 @@
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
                             <select class="selection-2" name="sorting">
                                 <option>None</option>
-                                <option>Popularity</option>
                                 <option>Price: low to high</option>
-                                <option>Price: high to low</option>
+                                <option>Price: high to low</option>                               
                             </select>
                         </div>
                     </div>
@@ -136,183 +123,91 @@
             <!-- right column=========================== -->
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
                 <!--  -->
-                <div class="flex-sb-m flex-w p-b-35">
-                    <span class="s-text8 p-t-5 p-b-5">
-                        Total: xxx Products
+                <div class="flex-sb-m flex-w">
+                    <span class="s-text18 p-t-5 p-b-5">
+                        Total: @Model.WatchCount Products
                     </span>
                 </div>
+                <!-- Page -->
+                @*<div class="pagination flex-m flex-w p-t-15 p-b-20">
+                    @Html.PagedListPager(Model.WatchList, pageNumber => Url.Action("ViewProduct", "Watch", new {pageNumber}),
+                        new PagedListRenderOptions
+                        {
+                            FunctionToTransformEachPageLink = (li, a) =>
+                            {
+
+                                a.Attributes.Add("class", "item-pagination flex-c-m trans-0-4");
+                                li.InnerHtml = a.ToString();
+                                return li;
+                            },
+                            MaximumPageNumbersToDisplay = 5,
+                            ActiveLiElementClass = "active-pagination",
+                            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                            DisplayLinkToNextPage = PagedListDisplayMode.Never,
+                            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+                            DisplayEllipsesWhenNotShowingAllPageNumbers = true
+                        })
+
+                </div>*@
 
                 <!-- Product -->
 
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="../Content/img/ProductThumbnail/GBA800AT-1A-8586706586545614924.png" alt="IMG-PRODUCT">
+                    @foreach (var watch in Model.WatchList)
+                    {
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="@watch.Thumbnail" alt="IMG-PRODUCT">
 
-                                <div class="block2-overlay trans-0-4">
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
+                                    <div class="block2-overlay trans-0-4">
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Product Detail -->
-                            <div class="block2-txt p-t-20">
-                                <a href="@Url.Action("ViewProductDetail", "Home")" class="block2-name dis-block s-text3 p-b-5">
-                                    Herschel supply co 25l
-                                </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    $75.00
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
+                                <!-- Product Detail -->
+                                <div class="block2-txt p-t-20">
+                                    <a href="@Url.Action("ViewProductDetail", "Watch", new { watchCode = @watch.WatchCode})" class="block2-name dis-block s-text3 p-b-5">
+                                        @watch.WatchCode
+                                    </a>
+                                    <span class="block2-price m-text6 p-r-5">
+                                        $@watch.Price
+                                    </span>
                                 </div>
                             </div>
-
-                            <!-- Product Detail -->
-                            <div class="block2-txt p-t-20">
-                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
-                                    Herschel supply co 25l
-                                </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    $75.00
-                                </span>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
+                    }
 
-                                <div class="block2-overlay trans-0-4">
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Detail -->
-                            <div class="block2-txt p-t-20">
-                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
-                                    Herschel supply co 25l
-                                </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    $75.00
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Detail -->
-                            <div class="block2-txt p-t-20">
-                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
-                                    Herschel supply co 25l
-                                </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    $75.00
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Detail -->
-                            <div class="block2-txt p-t-20">
-                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
-                                    Herschel supply co 25l
-                                </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    $75.00
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Detail -->
-                            <div class="block2-txt p-t-20">
-                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
-                                    Herschel supply co 25l
-                                </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    $75.00
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Page -->
-                <div class="pagination flex-m flex-w p-t-26">
-                    <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                    <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+                <div class="pagination flex-m flex-w">
+                    @Html.PagedListPager(Model.WatchList, pageNumber => Url.Action("ViewProduct", "Watch", new {pageNumber}),
+                        new PagedListRenderOptions
+                        {
+                            FunctionToTransformEachPageLink = (li, a) =>
+                            {
+
+                                a.Attributes.Add("class", "item-pagination flex-c-m trans-0-4");
+                                li.InnerHtml = a.ToString();
+                                return li;
+                            },
+                            MaximumPageNumbersToDisplay = 5,
+                            ActiveLiElementClass = "active-pagination",
+                            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                            DisplayLinkToNextPage = PagedListDisplayMode.Never,
+                            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+                            DisplayEllipsesWhenNotShowingAllPageNumbers = true
+                        })
+
                 </div>
             </div>
         </div>

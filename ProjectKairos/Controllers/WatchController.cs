@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 
@@ -20,23 +21,26 @@ namespace ProjectKairos.Controllers
 
         [HttpGet]
         [AuthorizeUser(Role = "Guest, Member")]
-        [Route("{category?}")]
-        public ActionResult ViewProduct(string category)
+        [Route("Category/{category}/{pageNumber?}")]
+        public ActionResult ViewProduct(string category, int? pageNumber)
         {
-            if (string.IsNullOrEmpty(category))
+            if (watchModelService.IsModelExisted(category) || category.Equals("All", StringComparison.OrdinalIgnoreCase))
             {
-                return View("~/Views/Watch/watch.cshtml");
+                int selectedPage = pageNumber ?? 1;
+                int pageSize = 6;
+                var viewModel = watchService.GetWatchListBasedOnCategory(category, selectedPage, pageSize);
+                return View("~/Views/Watch/watch.cshtml", viewModel);
             }
+            return RedirectToAction("NotFound", "Home");
 
-            return Content(category);
         }
 
         [HttpGet]
         [AuthorizeUser(Role = "Guest, Member")]
-        [Route("{category}/{watchCode}")]
-        public ActionResult ViewProductDetail(string category, string watchCode)
+        [Route("{watchCode}")]
+        public ActionResult ViewProductDetail(string watchCode)
         {
-            if (watchModelService.IsModelExisted(category) && watchService.IsAvailableWatch(watchCode))
+            if (watchService.IsAvailableWatch(watchCode))
             {
                 //valid link. Deny any invalid manual input link.
                 var viewModel = watchService.GetWatchFullDetail(watchCode);
@@ -44,9 +48,6 @@ namespace ProjectKairos.Controllers
             }
             return RedirectToAction("NotFound", "Home");
         }
-
-
-
 
     }
 }

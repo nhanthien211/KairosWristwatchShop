@@ -145,6 +145,12 @@
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="X.PagedList, Version=7.5.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.7.5.0\lib\net45\X.PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc, Version=7.5.0.0, Culture=neutral, PublicKeyToken=c6e0b5b21f916f4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.Mvc.7.5.0\lib\net452\X.PagedList.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -225,6 +231,7 @@
     <Compile Include="Utilities\AuthorizeUserAttribute.cs" />
     <Compile Include="Utilities\EncryptPasswordUtil.cs" />
     <Compile Include="Utilities\FileTypeDetector.cs" />
+    <Compile Include="Utilities\HtmlHelper.cs" />
     <Compile Include="Utilities\ImageProcessHelper.cs" />
     <Compile Include="Utilities\MemoryUploadedFile.cs" />
     <Compile Include="Utilities\MyCustomUtility.cs" />
@@ -236,6 +243,7 @@
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
     <Compile Include="ViewModel\ManageWatchDetailViewModel.cs" />
+    <Compile Include="ViewModel\ViewWatchCategoryViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
     <Compile Include="ViewModel\WatchInIndexPageModel.cs" />
     <Compile Include="ViewModel\WatchTableViewModel.cs" />

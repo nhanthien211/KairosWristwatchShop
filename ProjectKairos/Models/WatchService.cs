@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using OfficeOpenXml;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
+using X.PagedList;
 
 namespace ProjectKairos.Models
 {
@@ -223,7 +224,6 @@ namespace ProjectKairos.Models
         public List<WatchInIndexPageModel> LoadWatchListIndex()
         {
             var watch = db.Watches
-                .Include(w => w.WatchModel)
                 .Where(w => w.Quantity > 0 && w.Status == true)
                 .Select(w => new WatchInIndexPageModel
                 {
@@ -231,7 +231,6 @@ namespace ProjectKairos.Models
                     WatchCode = w.WatchCode,
                     Thumbnail = w.Thumbnail,
                     Price = w.Price * (1 - w.Discount * 0.01),
-                    WatchModel = w.WatchModel.ModelName
                 })
                 .OrderByDescending(w => w.WatchID)
                 .Take(8).ToList();
@@ -378,6 +377,44 @@ namespace ProjectKairos.Models
                     LedLight = w.LEDLight,
                     Alarm = w.Alarm
                 }).FirstOrDefault();
+            return viewModel;
+        }
+
+        public ViewWatchCategoryViewModel GetWatchListBasedOnCategory(string category, int page, int pageSize)
+        {
+
+            //lấy danh sách sản phẩm
+            var data = db.Watches
+                   .Include(w => w.WatchModel)
+                   .Select(w => new WatchInIndexPageModel
+                   {
+                       WatchID = w.WatchID,
+                       WatchCode = w.WatchCode,
+                       Thumbnail = w.Thumbnail,
+                       Price = w.Price * (1 - w.Discount * 0.01),
+                       ModelName = w.WatchModel.ModelName
+                   });
+
+            //Filter category
+            //TODO: filter search value, price range
+            if (!category.Equals("All", StringComparison.OrdinalIgnoreCase))
+            {
+                data = data.Where(d => d.ModelName.Equals(category, StringComparison.OrdinalIgnoreCase));
+            }
+
+            //TODO: orderby ... .Must be sort before calling skip()
+            //TODO: Currently set default order by ID, then change orderBy later
+            data = data.OrderBy(d => d.WatchID);
+
+            //TODO: get number of page need before paging result set
+            int count = data.Count();
+
+            //TODO: Paging result
+            var viewModel = new ViewWatchCategoryViewModel
+            {
+                WatchList = data.ToPagedList(page, pageSize),
+                WatchCount = count
+            };
             return viewModel;
         }
     }
