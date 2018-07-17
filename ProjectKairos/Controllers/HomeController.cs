@@ -82,7 +82,7 @@ namespace ProjectKairos.Controllers
                     bool checkExisted = shoppingService.CheckCartExistedInDB(username);
                     if (!checkExisted) //empty cart
                     {
-                        var viewModelEmpty = new List<ShoppingItem>();
+                        var viewModelEmpty = new ShoppingCartViewModel(new List<ShoppingItem>());
 
                         return View("~/Views/Home/shopping_cart.cshtml", viewModelEmpty);
                     } else //cart have item

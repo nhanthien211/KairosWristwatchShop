@@ -803,5 +803,55 @@ namespace ProjectKairos.Models
             return -1;
         }
 
+        public bool UpdateShippingInfo(string username, Order order)
+        {
+            using (var dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    //get user's cart with status not checkout
+                    var orderID = db.Orders
+                        .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                        .Select(o => o.OrderID)
+                        .FirstOrDefault();
+
+                    Order updateOrder = db.Orders.Find(orderID);
+                    db.Orders.Attach(updateOrder);
+                    updateOrder.ShipName = order.ShipName;
+                    updateOrder.ShipPhone = order.ShipPhone;
+                    updateOrder.ShipCity = order.ShipCity;
+                    updateOrder.ShipDistrict = order.ShipDistrict;
+                    updateOrder.ShipWard = order.ShipWard;
+                    updateOrder.ShipStreet = order.ShipStreet;
+                    updateOrder.ShippAddressNumber = order.ShippAddressNumber;
+                    updateOrder.ShipNote = order.ShipNote;
+                    updateOrder.OrderDate = DateTime.Now;
+                    updateOrder.OrderStatus = 2;
+                    db.SaveChanges();
+
+                    var items = db.OrderDetails
+                        .Where(d => d.OrderID == orderID)
+                        .Select(d => new { d.WatchID, d.Quantity })
+                        .ToList();
+
+                    foreach(var item in items)
+                    {
+                        Watch curItem = db.Watches.Find(item.WatchID);
+                        db.Watches.Attach(curItem);
+                        curItem.Quantity = curItem.Quantity - item.Quantity;
+                        db.SaveChanges();
+                    }
+
+                    dbTransaction.Commit();
+
+                } catch (Exception e)
+                {
+                    return false;
+                }
+                return true;
+            }
+
+        }
+
     }
 }

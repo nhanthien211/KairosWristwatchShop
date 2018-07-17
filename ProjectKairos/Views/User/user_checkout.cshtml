@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ProjectKairos.ViewModel.ShippingInfoViewModel
+
+@{
     ViewBag.Title = "Check out";
 
     ViewBag.Home = "";
@@ -26,12 +28,12 @@
 <section class="cart bgwhite p-t-20 p-b-100">
     <div class="container" style="text-align: center">
         <!-- Total -->
-        <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm w-size16" style="display inline-block; text-align left">
+        <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm w-size16" style="display: inline-block; text-align left">
             <h5 class="m-text20 p-b-24">
                 Shipping Information
             </h5>
-            <!-- FORM SHIP INFO ================================= -->
-            <form action="#" method="get" id="shipInfo" class="to-validate" novalidate onsubmit="return checkAddress()">
+            @using (Html.BeginForm("ConfirmOrder", "User", FormMethod.Post, new { @class = "to-validate", novalidate = "", onsubmit = "return checkAddress()" })) { 
+            <!-- FORM SHIP INFO ================================= -->            
                 <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
                     <!-- Row shipName -->
                     <span class="s-text18 w-size15 w-full-sm p-t-5">
@@ -39,7 +41,7 @@
                     </span>
                     <div class="w-size16 w-full-sm">
                         <div class="m-b-12">
-                            <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipName" placeholder="* Enter receiver name" id="validationCustom01"
+                            <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipName" placeholder="* Enter receiver name" id="validationCustom01" value="@Model.ShipName"
                                    required>
                             <div class="invalid-feedback">
                                 Receiver name is required!
@@ -54,7 +56,7 @@
                     <div class="w-size16 w-full-sm">
                         <div class="m-b-12">
                             <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipPhone" placeholder="* Enter phone number (8 - 11 numbers)"
-                                   id="validationCustom02" required pattern=".{8,11}[0-9]">
+                                   value="@Model.ShipPhone" id="validationCustom02" required pattern=".{8,11}[0-9]">
                             <div class="invalid-feedback">
                                 Invalid phone number! (8-11 numbers)
                             </div>
@@ -97,7 +99,7 @@
                     </span>
                     <div class="w-size16 w-full-sm">
                         <div class="m-b-12">
-                            <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipStreet" placeholder="Enter street name">
+                            <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipStreet" placeholder="Enter street name" value="@Model.ShipStreet">
                         </div>
                     </div>
 
@@ -107,7 +109,7 @@
                     </span>
                     <div class="w-size16 w-full-sm">
                         <div class="m-b-12">
-                            <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipAddressNumber" placeholder="Enter address number">
+                            <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shippAddressNumber" placeholder="Enter address number" value="@Model.ShipAddressNumbere">
                         </div>
                     </div>
 
@@ -117,23 +119,11 @@
                     </span>
                     <div class="w-size16 w-full-sm">
                         <div class="m-b-12">
-                            <textarea name="shipNote" class="form-control s-text8 p-l-15 p-r-15" placeholder="For delivery note . . ." rows="5"></textarea>
+                            <textarea name="shipNote" class="form-control s-text8 p-l-15 p-r-15" placeholder="For delivery note . . ." rows="5" ></textarea>
                         </div>
                     </div>
-
-                    <span class="s-text18 w-size15 w-full-sm p-t-5">
-                    </span>
-                    <div class="trans-0-4 m-b-10">
-                        <!-- Button -->
-                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-10 p-b-10 p-r-20 p-l-20" type="submit">
-                            Update Totals
-                        </button>
-                    </div>
                 </div>
-            </form>
-            <!-- END FORM============================ -->
 
-            <!-- Update this after submit from above: Calculate shipping fee => Total -->
             <div id="checkoutTotal">
                 <div class="flex-w flex-sb-m p-t-26 p-b-30">
                     <div class="flex-w flex-m w-full-sm">
@@ -167,7 +157,7 @@
                     </div>
                     <div class="flex-w flex-m w-full-sm">
                         <span class="m-text20 w-size20 w-full-sm">
-                            $46.00
+                            $ @Model.Total
                         </span>
                     </div>
                 </div>
@@ -181,13 +171,14 @@
                     <div class="flex-w flex-m w-full-sm">
                         <div class="trans-0-4 m-b-10">
                             <!-- Button -->
-                            <a href="orders.html" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-10 p-b-10 p-r-20 p-l-20">
-                                confrim order
-                            </a>
+                            <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-10 p-b-10 p-r-20 p-l-20">
+                                Confirm Order
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+            }
         </div>
     </div>
 </section>

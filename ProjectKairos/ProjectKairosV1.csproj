@@ -241,6 +241,7 @@
     <Compile Include="ViewModel\AccountRegisterViewModel.cs" />
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
+    <Compile Include="ViewModel\ShippingInfoViewModel.cs" />
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
     <Compile Include="ViewModel\WatchInIndexPageModel.cs" />
