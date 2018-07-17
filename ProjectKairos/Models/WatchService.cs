@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
-using System.Web.Mvc;
 using ImageProcessor.Imaging;
 using Newtonsoft.Json;
 using OfficeOpenXml;

@@ -1,4 +1,4 @@
-﻿@model ProjectKairos.ViewModel.WatchInIndexPageModel
+﻿@model List<ProjectKairos.ViewModel.WatchInIndexPageModel>
 
 @{
     ViewBag.Title = "Home";
@@ -214,25 +214,16 @@
                             </div>
                         </div>
 
-                            <div class="block2-txt p-t-20">
-                                <a href="@Url.Action("ViewProductDetail", "Watch", new {watchCode = @watch.WatchCode})" class="block2-name dis-block s-text3 p-b-5">
-                                    @watch.WatchCode
-                                </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    $@watch.Price
-                                </span>
-                            </div>
-                        </div>
-
                         <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                GSHOCK #GPRB1000
+                            <a href="@Url.Action("ViewProductDetail", "Watch", new {watchCode = @watch.WatchCode})" class="block2-name dis-block s-text3 p-b-5">
+                                @watch.WatchCode
                             </a>
                             <span class="block2-price m-text6 p-r-5">
-                                $175.00
+                                $@watch.Price
                             </span>
                         </div>
-                    </div>
+                    </div>                  
+
                 }
 
 

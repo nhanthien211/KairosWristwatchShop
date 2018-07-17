@@ -12,7 +12,7 @@ namespace ProjectKairos.Models
         private int quantityHave = 0;
 
         // Variable to check if action fail because invalid quantity in DB
-        private bool failByQuantity;        
+        private bool failByQuantity;
         public bool FailByQuantity
         {
             get { return failByQuantity; }
@@ -75,7 +75,7 @@ namespace ProjectKairos.Models
                     }
                 }
             }
-            
+
             return true;
         }
 
@@ -314,8 +314,7 @@ namespace ProjectKairos.Models
                 failByQuantity = false;
                 return false;
             }
-            failByQuantity = false;
-            return false;
+
         }
 
         public bool RemoveItemSession(string id)
@@ -422,7 +421,7 @@ namespace ProjectKairos.Models
                         }
                     }
                     else //======================== have item in cart => remove item
-                    {                                                                        
+                    {
                         OrderDetail detail = db.OrderDetails.Find(ProductID, userOrderID);
                         db.OrderDetails.Attach(detail);
                         db.OrderDetails.Remove(detail);
@@ -454,8 +453,6 @@ namespace ProjectKairos.Models
                             return false; //SaveChange fail
                         }
                     }
-
-                    return false;
                 }
             }
             catch (Exception)
@@ -656,9 +653,9 @@ namespace ProjectKairos.Models
                 }
             }
             catch (Exception)
-            {                
+            {
                 return false;
-            }            
+            }
         }
 
         public List<ShoppingItem> LoadCartItemDB(string username)
@@ -674,7 +671,7 @@ namespace ProjectKairos.Models
 
             List<ShoppingItem> listItem = new List<ShoppingItem>();
 
-            foreach(var item in itemsID)
+            foreach (var item in itemsID)
             {
                 ShoppingProduct p = db
                         .Watches.Where(w => w.WatchID == item.WatchID)

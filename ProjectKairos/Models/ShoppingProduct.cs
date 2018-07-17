@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ProjectKairos.Models
+﻿namespace ProjectKairos.Models
 {
     public class ShoppingProduct
     {
