@@ -602,8 +602,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\ProductThumbnail\" />
-    <Folder Include="Views\Service\" />
-    <Folder Include="Views\Shopping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.eot" />
