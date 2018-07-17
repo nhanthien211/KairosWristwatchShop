@@ -268,7 +268,12 @@ namespace ProjectKairos.Controllers
                 watch.Status = Request["status"] == "yes";
                 watch.WatchCode = watch.WatchCode.ToUpper();
                 bool duplicateCode = watchService.IsDuplicatedWatchCode(watch.WatchCode, watch.WatchID);
-                bool validImage = FileTypeDetector.IsImageFile(thumbnail);
+
+                bool validImage = true;
+                if (thumbnail != null)
+                {
+                    validImage = FileTypeDetector.IsImageFile(thumbnail); ;
+                }
                 if (duplicateCode || !validImage)
                 {
                     var movement = movementService.GetMovementList();

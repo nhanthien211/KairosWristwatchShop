@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
+using System.Web.Mvc;
 using ImageProcessor.Imaging;
 using Newtonsoft.Json;
 using OfficeOpenXml;
@@ -87,7 +88,7 @@ namespace ProjectKairos.Models
 
         public bool IsDuplicatedWatchCode(string watchCode, int watchId)
         {
-            return db.Watches.Any(w => w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase) && w.WatchID == watchId);
+            return db.Watches.Any(w => w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase) && w.WatchID != watchId);
         }
 
         public bool IsDuplicatedWatchCode(string watchCode)
@@ -386,6 +387,7 @@ namespace ProjectKairos.Models
             //lấy danh sách sản phẩm
             var data = db.Watches
                    .Include(w => w.WatchModel)
+                    .Where(w => w.Status)
                    .Select(w => new WatchInIndexPageModel
                    {
                        WatchID = w.WatchID,

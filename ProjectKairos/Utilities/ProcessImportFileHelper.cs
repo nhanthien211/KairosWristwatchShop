@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
 using System.Web;
@@ -19,34 +20,42 @@ namespace ProjectKairos.Utilities
             };
             // Khởi tạo data table            
             // Load file excel và các setting ban đầu
-            using (ExcelPackage package = new ExcelPackage(file.InputStream))
+            try
             {
-                if (package.Workbook.Worksheets.Count < 1)
+                using (ExcelPackage package = new ExcelPackage(file.InputStream))
                 {
-                    // Log - Không có sheet nào tồn tại trong file excel của bạn
-                    return false;
-                }
-                // Khởi Lấy Sheet đầu tiện trong file Excel để truy vấn, truyền vào name của Sheet để lấy ra sheet cần, nếu name = null thì lấy sheet đầu tiên
-                ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+                    if (package.Workbook.Worksheets.Count < 1)
+                    {
+                        // Log - Không có sheet nào tồn tại trong file excel của bạn
+                        return false;
+                    }
+                    // Khởi Lấy Sheet đầu tiện trong file Excel để truy vấn, truyền vào name của Sheet để lấy ra sheet cần, nếu name = null thì lấy sheet đầu tiên
+                    ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
 
-                if (workSheet.Dimension == null)
-                {
-                    return false;
-                }
-
-                int startRow = workSheet.Dimension.Start.Row;
-                int startCol = workSheet.Dimension.Start.Column;
-                int endCol = workSheet.Dimension.End.Column;
-                // Đọc tất cả các header
-                using (var headers = workSheet.Cells[startRow, startRow, startCol, endCol])
-                {
-                    if (!expectedHeader.All(e => headers.Any(h => h.Value.Equals(e))))
+                    if (workSheet.Dimension == null)
                     {
                         return false;
                     }
-                    return true;
+
+                    int startRow = workSheet.Dimension.Start.Row;
+                    int startCol = workSheet.Dimension.Start.Column;
+                    int endCol = workSheet.Dimension.End.Column;
+                    // Đọc tất cả các header
+                    using (var headers = workSheet.Cells[startRow, startRow, startCol, endCol])
+                    {
+                        if (!expectedHeader.All(e => headers.Any(h => h.Value.Equals(e))))
+                        {
+                            return false;
+                        }
+                        return true;
+                    }
                 }
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         private static int GetNumberOfRecord(HttpPostedFileBase file)
@@ -78,45 +87,18 @@ namespace ProjectKairos.Utilities
                 return "Input file is not vaild excel file";
             }
 
+            file.InputStream.Position = 0;
             if (!CheckExcelFileHeader(file))
             {
                 return "Excel file is missing some column";
             }
-
+            file.InputStream.Position = 0;
             if (GetNumberOfRecord(file) == 0)
             {
                 return "Excel does not contains any record";
             }
+            file.InputStream.Position = 0;
             return null;
-        }
-
-        public static List<string> GetProductCode(HttpPostedFileBase file)
-        {
-            List<string> watchCodeList = new List<string>();
-            // Khởi tạo data table            
-            // Load file excel và các setting ban đầu
-            using (ExcelPackage package = new ExcelPackage(file.InputStream))
-            {
-                // Khởi Lấy Sheet đầu tiện trong file Excel để truy vấn, truyền vào name của Sheet để lấy ra sheet cần, nếu name = null thì lấy sheet đầu tiên
-                ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
-
-                int startRow = workSheet.Dimension.Start.Row;
-                int endRow = workSheet.Dimension.End.Row;
-                int startCol = workSheet.Dimension.Start.Column;
-                int endCol = workSheet.Dimension.End.Column;
-                string watchCodeColumn;
-                using (var headers = workSheet.Cells[startRow, startRow, startCol, endCol])
-                {
-                    watchCodeColumn = headers.First(h => h.Value.Equals("WatchCode")).Address[0].ToString();
-                }
-                for (var rowNumber = startRow + 1; rowNumber <= endRow; rowNumber++)
-                {
-                    string value = workSheet.Cells[watchCodeColumn + rowNumber].Value.ToString();
-                    watchCodeList.Add(value);
-
-                }
-            }
-            return watchCodeList;
         }
 
         private static bool CheckImageZipFile(HttpPostedFileBase file)
@@ -145,11 +127,12 @@ namespace ProjectKairos.Utilities
             {
                 return "Input file is not .zip file";
             }
-
+            file.InputStream.Position = 0;
             if (!CheckImageZipFile(file))
             {
                 return "Zip file is empty or contains invalid image file";
             }
+            file.InputStream.Position = 0;
             return null;
         }
     }

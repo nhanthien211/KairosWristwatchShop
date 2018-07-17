@@ -165,7 +165,7 @@
 
                 <div class="dropdown-content dis-none p-t-15 p-b-23">
                     <p class="s-text3">
-                        @Html.Encode(Model.Description)
+                        @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Description))                        
                     </p>
                 </div>
             </div>

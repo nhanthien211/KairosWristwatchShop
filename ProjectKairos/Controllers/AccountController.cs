@@ -12,11 +12,13 @@ namespace ProjectKairos.Controllers
     {
         private KAIROS_SHOPEntities db;
         private AccountService accountService;
+        private ShoppingCartService shoppingService;
 
         public AccountController()
         {
             db = new KAIROS_SHOPEntities();
             accountService = new AccountService(db);
+            shoppingService = new ShoppingCartService(db);
         }
 
         [HttpGet]
@@ -46,6 +48,12 @@ namespace ProjectKairos.Controllers
             }
 
             Session["CURRENT_USER_ID"] = result;
+
+            bool resultMerge = shoppingService.MergeCartSessionAnddDDB(Session.GetCurrentUserInfo("Username"));
+            if (resultMerge) //done => remove cart in session
+            {
+                Session["CART"] = null;
+            }
             return Redirect(Request.UrlReferrer.ToString());
         }
 
