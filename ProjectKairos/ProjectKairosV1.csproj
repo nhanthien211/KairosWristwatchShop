@@ -166,9 +166,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\WatchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -615,7 +615,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\ProductThumbnail\" />
+    <Folder Include="Content\img\ProductThumbnail\" />   
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.eot" />
@@ -630,13 +630,6 @@
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Models\Kairos_Shop.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Kairos_Shop.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Kairos_Shop.edmx.diagram">
-      <DependentUpon>Kairos_Shop.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\font-montserrat\Montserrat-Black.ttf" />
     <Content Include="Content\font-montserrat\Montserrat-BlackItalic.ttf" />
     <Content Include="Content\font-montserrat\Montserrat-Bold.ttf" />
@@ -673,6 +666,14 @@
     <Content Include="Content\font-poppins\Poppins-SemiBoldItalic.ttf" />
     <Content Include="Content\font-poppins\Poppins-Thin.ttf" />
     <Content Include="Content\font-poppins\Poppins-ThinItalic.ttf" />
+    <EntityDeploy Include="Models\Kairos_Shop.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Kairos_Shop.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Kairos_Shop.edmx.diagram">
+      <DependentUpon>Kairos_Shop.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
     <Content Include="Views\Home\login.cshtml" />
     <Content Include="Views\Admin\admin_info.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />

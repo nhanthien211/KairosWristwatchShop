@@ -42,7 +42,7 @@ function removeItemAjax(id) {
                 if (response.empty) {
                     window.location.href = window.location.href;
                 } else {
-                    $('#row-' + id).fadeOut('slow');
+                    $('#row-' + id).remove();
                     $('#cart-total').html('$ ' + response.responseText);
                     $('#message').css("color", "green");
                     $('#message').html('Remove item successfully!');
@@ -155,9 +155,6 @@ function updateItemAjaxForInputEmpty(id, quantityNeed) {
                     $('#message-' + id).css("color", "red");
                     $('#message-' + id).html('Sorry! This product is out of stock! Please remove it from your cart!');
                     $("#message-" + id).show();
-                    $("#btn-up-" + id).hide();
-                    $("#btn-down-" + id).hide();
-                    $("#text-" + id).hide();
                 }
                 else {
                     $('#message-' + id).css("color", "red");

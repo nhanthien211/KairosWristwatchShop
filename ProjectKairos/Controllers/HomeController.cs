@@ -19,7 +19,6 @@ namespace ProjectKairos.Controllers
             shoppingService = new ShoppingCartService(db);
         }
 
-
         public ActionResult Index()
         {
             if (Session["CURRENT_USER_ID"] != null)
@@ -34,10 +33,22 @@ namespace ProjectKairos.Controllers
 
             return View("~/Views/Home/index.cshtml", listProductModel);
         }
+	   
+        
 
-        public ActionResult NotFound()
+        [HttpGet]
+        [Route("ProductDetail/{ProductID}")]
+        public ActionResult ViewProductDetail()
         {
-            return View("~/Views/Home/404_page.cshtml");
+            if (Session["CURRENT_USER_ID"] != null)
+            {
+                string roleName = Session.GetCurrentUserInfo("RoleName");
+                if (roleName == "Administrator")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            return View("~/Views/Home/shopping_detail.cshtml");
         }
 
         [HttpGet]
@@ -64,6 +75,7 @@ namespace ProjectKairos.Controllers
                 return View("~/Views/Home/shopping_cart.cshtml", viewModelDB);
 
             }
+
             //Not Login => check cart in Session
             var viewModel = new ShoppingCartViewModel((List<ShoppingItem>)Session["CART"]);
 

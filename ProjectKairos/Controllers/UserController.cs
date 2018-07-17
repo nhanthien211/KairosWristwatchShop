@@ -55,7 +55,9 @@ namespace ProjectKairos.Controllers
                         Dictionary<int, int> IdAndRErrorDB = shoppingService.CheckCartDB(cartDB);
                         if (IdAndRErrorDB.Count == 0) //cart valid
                         {
-                            return View("~/Views/User/user_checkout.cshtml");
+                            var viewModel = new ShippingInfoViewModel();
+                            viewModel.Total = shoppingService.CalculateCartTotalDB(username);
+                            return View("~/Views/User/user_checkout.cshtml", viewModel);
                         }
                     }
                     return RedirectToAction("ManageCart", "Home");
@@ -94,6 +96,42 @@ namespace ProjectKairos.Controllers
         public ActionResult ViewOrderDetail()
         {
             return View("~/Views/User/user_order_detail.cshtml");
+        }
+
+        [HttpPost]
+        [Route("ConfirmOrder")]
+        [AuthorizeUser(Role = "Member")]
+        public ActionResult ConfirmOrder([Bind(Include = "shipName, shipPhone, shipCity, shipDistrict, shipWard, shipStreet, shippAddressNumber, shipNote")]Order order)
+        {
+            string username = Session.GetCurrentUserInfo("Username");
+
+            bool hasCart = shoppingService.CheckCartExistedInDB(username);
+            if (!hasCart) //cart not existed || cart empty => return to cart page
+            {
+                return RedirectToAction("ManageCart", "Home");
+            }
+
+            //cart existed => get cart
+            List<ShoppingItem> cart = shoppingService.LoadCartItemDB(username);
+            //validate quantity in cart
+            Dictionary<int, int> IDANdError = shoppingService.CheckCartDB(cart);
+
+            if(IDANdError != null && IDANdError.Count != 0) //there are error in quantity in cart => return to cart page
+            {
+                var viewModelDB = new ShoppingCartViewModel(cart);
+                viewModelDB.IdAndError = IDANdError;
+                return View("~/Views/Home/shopping_cart.cshtml", viewModelDB);
+            }
+
+            //valid cart => check shipping info
+            bool result = shoppingService.UpdateShippingInfo(username, order);
+            
+            if (result)
+            {               
+                return View("~/Views/User/user_order.cshtml");
+            }
+
+            return Content("Unexpected Error. Please try again");
         }
     }
 }
