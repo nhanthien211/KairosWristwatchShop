@@ -218,7 +218,6 @@ var check = function () {
 var checkA = function () {
     alert('a');
     if (document.getElementById('shipCity')[0].selectedIndex <= 0) {
-        alert('ád');
         document.getElementById('message').style.color = 'green';
         document.getElementById('message').innerHTML = 'Matched!';
         return false;

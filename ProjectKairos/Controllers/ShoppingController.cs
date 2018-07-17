@@ -15,7 +15,7 @@ namespace ProjectKairos.Controllers
         private KAIROS_SHOPEntities db;
         private ShoppingCartService shoppingService;
 
-
+        
         public ShoppingController()
         {
             db = new KAIROS_SHOPEntities();
@@ -32,16 +32,15 @@ namespace ProjectKairos.Controllers
             if (username == null) //not login => save in session
             {
                 result = shoppingService.AddToCartSession(id);
-            }
-            else //login => save in DB
+            } else //login => save in DB
             {
                 result = shoppingService.AddToCartDB(id, username);
             }
+
             if (result) //success
             {
                 return Json(new { success = true, responseText = "Add successfuly", quantity = -1 }, JsonRequestBehavior.AllowGet);
-            }
-            else //fail
+            } else //fail
             {
                 if (shoppingService.FailByQuantity)
                 { //fail because quantity not enough => send available quantity in DB back to View to inform
@@ -50,7 +49,7 @@ namespace ProjectKairos.Controllers
                 }
                 //fail
                 return Json(new { success = false, responseText = "Add fail", quantity = -1 }, JsonRequestBehavior.AllowGet);
-            }
+            }            
         }
 
         [HttpPost]
@@ -119,7 +118,7 @@ namespace ProjectKairos.Controllers
                 }
                 //fail
                 return Json(new { success = false, responseText = "Add fail", quantity = -1 }, JsonRequestBehavior.AllowGet);
-            }
+            }       
         }
 
         private double CalculateCurrentTotalSession()
@@ -138,6 +137,6 @@ namespace ProjectKairos.Controllers
             }
 
             return total;
-        }
+        }        
     }
 }

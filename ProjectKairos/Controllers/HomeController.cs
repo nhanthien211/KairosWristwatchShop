@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
+using System.Collections.Generic;
 
 namespace ProjectKairos.Controllers
 {

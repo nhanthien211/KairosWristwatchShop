@@ -248,7 +248,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("NotFound", "Home");
             }
             watchDetail.Movement = movementService.GetMovementList();
-            watchDetail.WatchModel = watchModelService.GetModelsList();
+            watchDetail.WatchModel = watchModelService.GetModelsList();           
             return View("~/Views/Admin/admin_manage_watch_detail.cshtml", watchDetail);
         }
 
@@ -297,7 +297,7 @@ namespace ProjectKairos.Controllers
                 {
                     //save old value to modification table
                     String userId = Session.GetCurrentUserInfo("Username");
-
+                    String oldValue = watchService.SerializeOldValue(watch.WatchID);
                     if (modificationService.CreateNewModificationHistory(watch.WatchID, oldValue, userId))
                     {
                         TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";

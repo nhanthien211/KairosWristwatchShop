@@ -38,10 +38,14 @@ namespace ProjectKairos.Models
         public string PublishedBy { get; set; }
         public int Discount { get; set; }
         public bool LEDLight { get; set; }
+        public int Guarantee { get; set; }
         public bool Alarm { get; set; }
         public string Thumbnail { get; set; }
         public bool Status { get; set; }
+<<<<<<< HEAD
         public int Guarantee { get; set; }
+=======
+>>>>>>> origin/backend_vy
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

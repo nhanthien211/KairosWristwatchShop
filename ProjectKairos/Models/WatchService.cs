@@ -88,12 +88,26 @@ namespace ProjectKairos.Models
 
         public bool IsDuplicatedWatchCode(string watchCode, int watchId)
         {
-            return db.Watches.Any(w => w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase) && w.WatchID != watchId);
+            var result = db.Watches.Where(w => w.WatchCode == watchCode && w.WatchID != watchId)
+                .Select(w => w.WatchCode)
+                .FirstOrDefault();
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool IsDuplicatedWatchCode(string watchCode)
         {
-            return db.Watches.Any(w => w.WatchCode.Equals(watchCode, StringComparison.OrdinalIgnoreCase));
+            var result = db.Watches.Where(w => w.WatchCode == watchCode)
+                .Select(w => w.WatchCode)
+                .FirstOrDefault();
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public String SerializeOldValue(int watchId)

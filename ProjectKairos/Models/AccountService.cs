@@ -47,7 +47,6 @@ namespace ProjectKairos.Models
                 StartDate = a.StartDate,
                 IsActive = a.IsActive,
                 RoleId = a.RoleId
-
             }).FirstOrDefault();
             return account;
         }

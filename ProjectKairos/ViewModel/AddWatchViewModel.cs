@@ -21,7 +21,7 @@ namespace ProjectKairos.ViewModel
         private bool waterResistant;
         public bool WaterResistant
         {
-            get => waterResistant;
+            get { return waterResistant; }
             set
             {
                 waterResistant = value;
@@ -47,7 +47,7 @@ namespace ProjectKairos.ViewModel
         private bool ledLight;
         public bool LedLight
         {
-            get => ledLight;
+            get { return ledLight; }
             set
             {
                 ledLight = value;
@@ -74,7 +74,7 @@ namespace ProjectKairos.ViewModel
         private bool alarm;
         public bool Alarm
         {
-            get => alarm;
+            get { return alarm; }
             set
             {
                 alarm = value;
@@ -99,8 +99,8 @@ namespace ProjectKairos.ViewModel
         private double? caseRadius;
         public double CaseRadius
         {
-            get => caseRadius.GetValueOrDefault();
-            set => caseRadius = value;
+            get { return caseRadius.GetValueOrDefault(); }
+            set { caseRadius = value; }
 
         }
 

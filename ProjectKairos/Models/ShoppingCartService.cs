@@ -12,7 +12,7 @@ namespace ProjectKairos.Models
         private int quantityHave = 0;
 
         // Variable to check if action fail because invalid quantity in DB
-        private bool failByQuantity;
+        private bool failByQuantity;        
         public bool FailByQuantity
         {
             get { return failByQuantity; }
@@ -75,7 +75,7 @@ namespace ProjectKairos.Models
                     }
                 }
             }
-
+            
             return true;
         }
 
@@ -170,7 +170,6 @@ namespace ProjectKairos.Models
             }
             catch (Exception)
             {
-                //TODO: never throw exception 
                 failByQuantity = false;
                 return false;
             }
@@ -179,6 +178,16 @@ namespace ProjectKairos.Models
         public bool AddToCartDB(string id, string username)
         {
             int ProductID = Convert.ToInt32(id);
+
+            var product = db.Watches
+                .Where(w => w.WatchID == ProductID)
+                .Select(p => new ShoppingProduct
+                {
+                    ProductID = ProductID,
+                    ProductCode = p.WatchCode,
+                    ProductPrice = p.Price,
+                    ProductPhoto = p.Thumbnail
+                }).FirstOrDefault();
 
             try
             {
@@ -192,16 +201,12 @@ namespace ProjectKairos.Models
                 if (userOrderID == 0) //currently dont have any cart
                 {
                     //create new cart in DB
-                    Order currentOrder = new Order
-                    {
-                        CustomerID = username,
-                        OrderStatus = 1
-                    };
+                    Order currentOrder = new Order();
+                    currentOrder.CustomerID = username;
+                    currentOrder.OrderStatus = 1;
 
                     db.Orders.Add(currentOrder);
                     int result = db.SaveChanges();
-
-                    //check if this code is 
                     if (result == 0)
                     {
                         failByQuantity = false;
@@ -209,7 +214,7 @@ namespace ProjectKairos.Models
                     }
 
                     //get orderID
-                    var orderID = db.Orders
+                    var orderID = (int)db.Orders
                         .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
                         .Select(o => o.OrderID)
                         .First();
@@ -223,12 +228,10 @@ namespace ProjectKairos.Models
                     }
 
                     //add new item to cart
-                    OrderDetail detail = new OrderDetail
-                    {
-                        OrderID = orderID,
-                        WatchID = ProductID,
-                        Quantity = 1
-                    };
+                    OrderDetail detail = new OrderDetail();
+                    detail.OrderID = orderID;
+                    detail.WatchID = ProductID;
+                    detail.Quantity = 1;
 
                     db.OrderDetails.Add(detail);
                     int resultDetail = db.SaveChanges();
@@ -311,6 +314,8 @@ namespace ProjectKairos.Models
                 failByQuantity = false;
                 return false;
             }
+            failByQuantity = false;
+            return false;
         }
 
         public bool RemoveItemSession(string id)
@@ -417,7 +422,7 @@ namespace ProjectKairos.Models
                         }
                     }
                     else //======================== have item in cart => remove item
-                    {
+                    {                                                                        
                         OrderDetail detail = db.OrderDetails.Find(ProductID, userOrderID);
                         db.OrderDetails.Attach(detail);
                         db.OrderDetails.Remove(detail);
@@ -651,9 +656,9 @@ namespace ProjectKairos.Models
                 }
             }
             catch (Exception)
-            {
+            {                
                 return false;
-            }
+            }            
         }
 
         public List<ShoppingItem> LoadCartItemDB(string username)
@@ -669,7 +674,7 @@ namespace ProjectKairos.Models
 
             List<ShoppingItem> listItem = new List<ShoppingItem>();
 
-            foreach (var item in itemsID)
+            foreach(var item in itemsID)
             {
                 ShoppingProduct p = db
                         .Watches.Where(w => w.WatchID == item.WatchID)

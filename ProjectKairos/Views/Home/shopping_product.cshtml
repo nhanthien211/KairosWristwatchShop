@@ -1,0 +1,322 @@
+﻿@{
+    ViewBag.Title = "Product";
+
+    ViewBag.Home = "";
+    ViewBag.Product = "sale-noti";
+    ViewBag.MyAccount = "";
+    ViewBag.MyOrder = "";
+
+    Layout = "~/Views/Shared/_LayouUser.cshtml";
+}
+
+@section product_checkbox_css
+{
+    <!--Chèn style cho checkbox-->
+    @Styles.Render("~/Content/product_checkbox_css")
+}
+
+<!-- Title Page -->
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../Content/img/mainIMG/shop-banner.jpg);">
+    <h2 class="l-text2 t-center">
+        KAIROS NYC
+    </h2>
+    <p class="m-text13 t-center">
+        8th floor, 379 Hudson St, New York, NY 10018
+    </p>
+</section>
+
+
+<!-- Content page -->
+<section class="bgwhite p-t-55 p-b-65">
+    <div class="container">
+        <div class="row">
+            <!-- left column============================ -->
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                <div class="leftbar p-r-20 p-r-0-sm">
+                    <!-- categories =================================== -->
+                    <h4 class="m-text14 p-b-7">
+                        Categories
+                    </h4>
+
+                    <ul class="p-b-54">
+                        <li class="p-t-4">
+                            <a href="#" class="s-text13 active1">
+                                All
+                            </a>
+                        </li>
+
+                        <li class="p-t-4">
+                            <a href="#" class="s-text13">
+                                G-SHOCK
+                            </a>
+                        </li>
+
+                        <li class="p-t-4">
+                            <a href="#" class="s-text13">
+                                G-STEEL
+                            </a>
+                        </li>
+
+                        <li class="p-t-4">
+                            <a href="#" class="s-text13">
+                                BABY-G
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- search======================================= -->
+                    <h4 class="m-text14 p-b-7">
+                        Search
+                    </h4>
+                    <div class="p-b-54">
+                        <div class="search-product pos-relative bo4 of-hidden">
+                            <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="searchValue" placeholder="Search Products...">
+                            <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                                <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--filter==============================================  -->
+                    <h4 class="m-text14 p-b-7">
+                        Filter
+                    </h4>
+                    <!-- filter Categories ============================ -->
+                    <div class="p-t-22 p-b-22 bo3">
+                        <div class="m-text15 p-b-17">
+                            Categories
+                        </div>
+                        <div class="s-text16">
+                            <input class="magic-checkbox" type="checkbox" name="all" id="1" value="all">
+                            <label for="1">All</label>
+                            <input class="magic-checkbox" type="checkbox" name="gshock" id="2" value="gshock">
+                            <label for="2">G-SHOCK</label>
+                            <input class="magic-checkbox" type="checkbox" name="gsteel" id="3" value="gsteel">
+                            <label for="3">G-STEEL</label>
+                            <input class="magic-checkbox" type="checkbox" name="babyg" id="4" value="babyg">
+                            <label for="4">BABY-G</label>
+                        </div>
+                    </div>
+
+                    <!-- filter price ================================ -->
+
+                    <div class="p-t-22 p-b-22 bo3">
+                        <div class="m-text15 p-b-17">
+                            Price
+                        </div>
+                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                            <select class="selection-2" name="price">
+                                <option>All range</option>
+                                <option>Under $100.00</option>
+                                <option>$100.00 - $200.00</option>
+                                <option>$200.00 - $300.00</option>
+                                <option>$300.00 - $400.00</option>
+                                <option>$400.00+</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <!-- filter sort================================== -->
+                    <div class="p-t-22 p-b-22 bo3">
+                        <div class="m-text15 p-b-17">
+                            Sort By
+                        </div>
+                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                            <select class="selection-2" name="sorting">
+                                <option>None</option>
+                                <option>Popularity</option>
+                                <option>Price: low to high</option>
+                                <option>Price: high to low</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right column=========================== -->
+            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                <!--  -->
+                <div class="flex-sb-m flex-w p-b-35">
+                    <span class="s-text8 p-t-5 p-b-5">
+                        Total: xxx Products
+                    </span>
+                </div>
+
+                <!-- Product -->
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="../Content/img/ProductThumbnail/GBA800AT-1A-8586706586545614924.png" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Detail -->
+                            <div class="block2-txt p-t-20">
+                                <a href="@Url.Action("ViewProductDetail", "Home")" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+                                <span class="block2-price m-text6 p-r-5">
+                                    $75.00
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Detail -->
+                            <div class="block2-txt p-t-20">
+                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+                                <span class="block2-price m-text6 p-r-5">
+                                    $75.00
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Detail -->
+                            <div class="block2-txt p-t-20">
+                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+                                <span class="block2-price m-text6 p-r-5">
+                                    $75.00
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Detail -->
+                            <div class="block2-txt p-t-20">
+                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+                                <span class="block2-price m-text6 p-r-5">
+                                    $75.00
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Detail -->
+                            <div class="block2-txt p-t-20">
+                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+                                <span class="block2-price m-text6 p-r-5">
+                                    $75.00
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="../Content/img/mainIMG/item-01.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Detail -->
+                            <div class="block2-txt p-t-20">
+                                <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+                                <span class="block2-price m-text6 p-r-5">
+                                    $75.00
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page -->
+                <div class="pagination flex-m flex-w p-t-26">
+                    <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
+                    <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

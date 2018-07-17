@@ -46,9 +46,9 @@ namespace ProjectKairos.Controllers
                 };
                 return View("~/Views/Home/login.cshtml", viewModel);
             }
-
             Session["CURRENT_USER_ID"] = result;
 
+            //merge cart if any
             bool resultMerge = shoppingService.MergeCartSessionAnddDDB(Session.GetCurrentUserInfo("Username"));
             if (resultMerge) //done => remove cart in session
             {
@@ -65,7 +65,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Home");
             }
             AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
-            return View("~/Views/Home/login.cshtml", viewModel);
+            return View("~/Views/login.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -135,7 +135,7 @@ namespace ProjectKairos.Controllers
                 }
                 return Content("Unexpected error");
             }
-            //return unexpected error please try again      
+            //return unexpected error please try again 
             //will have a 404 not found page default for all error
             return Content("Unexpected error");
         }
@@ -180,7 +180,9 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Administrator, Member")]
         public ActionResult ChangePassword(string oldPassword, string newPassword)
         {
+            TempData["SHOW_MODAL"] = @"<script>$('#passwordModal').modal();</script>";
             string username = Session.GetCurrentUserInfo("Username");
+
             if (accountService.UpdateAccountPassword(username, oldPassword, newPassword))
             {
                 TempData["UPDATE_RESULT"] = "Password is saved successfully.";
@@ -188,16 +190,19 @@ namespace ProjectKairos.Controllers
             else
             {
                 //incorrect password
-                TempData["UPDATE_RESULT"] = "Current Password is incorrect.";
-
+                TempData["UPDATE_RESULT"] = "Old Password is incorrect.";
+                //script to display modal
             }
+            //correct password
             if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
             {
-                //script to display modal
-                TempData["SHOW_MODAL"] = @"<script>$('#passwordModal').modal();</script>";
                 return RedirectToAction("Index", "Admin");
             }
-            return RedirectToAction("ManageAccount", "User");
+            if (Session.GetCurrentUserInfo("RoleName") == "Member")
+            {
+                return RedirectToAction("ManageAccount", "User");
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 

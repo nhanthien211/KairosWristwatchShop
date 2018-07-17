@@ -191,6 +191,15 @@ D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKai
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Web.WebPages.xml
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Web.WebPages.Deployment.xml
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Web.WebPages.Razor.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Newtonsoft.Json.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Antlr3.Runtime.pdb
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\System.Diagnostics.DiagnosticSource.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Microsoft.AI.DependencyCollector.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Microsoft.AI.WindowsServer.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Microsoft.AI.Web.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairosV1.csprojAssemblyReference.cache
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairosV1.csproj.CoreCompileInputs.cache
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairosV1.csproj.CopyComplete
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairos.dll
