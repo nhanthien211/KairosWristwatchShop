@@ -831,7 +831,7 @@ namespace ProjectKairos.Models
                         .Select(d => new { d.WatchID, d.Quantity })
                         .ToList();
 
-                    foreach(var item in items)
+                    foreach (var item in items)
                     {
                         Watch curItem = db.Watches.Find(item.WatchID);
                         db.Watches.Attach(curItem);
@@ -841,7 +841,8 @@ namespace ProjectKairos.Models
 
                     dbTransaction.Commit();
 
-                } catch (Exception e)
+                }
+                catch (Exception)
                 {
                     return false;
                 }

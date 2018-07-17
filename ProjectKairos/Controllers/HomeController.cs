@@ -33,23 +33,6 @@ namespace ProjectKairos.Controllers
 
             return View("~/Views/Home/index.cshtml", listProductModel);
         }
-	   
-        
-
-        [HttpGet]
-        [Route("ProductDetail/{ProductID}")]
-        public ActionResult ViewProductDetail()
-        {
-            if (Session["CURRENT_USER_ID"] != null)
-            {
-                string roleName = Session.GetCurrentUserInfo("RoleName");
-                if (roleName == "Administrator")
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
-            }
-            return View("~/Views/Home/shopping_detail.cshtml");
-        }
 
         [HttpGet]
         [AuthorizeUser(Role = "Guest, Member")]

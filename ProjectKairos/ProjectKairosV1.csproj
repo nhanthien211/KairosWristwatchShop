@@ -169,6 +169,7 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WatchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +255,7 @@
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
     <Compile Include="ViewModel\ManageWatchDetailViewModel.cs" />
+    <Compile Include="ViewModel\ShippingInfoViewModel.cs" />
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\ViewWatchCategoryViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
@@ -615,7 +617,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\ProductThumbnail\" />   
+    <Folder Include="Content\img\ProductThumbnail\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.eot" />

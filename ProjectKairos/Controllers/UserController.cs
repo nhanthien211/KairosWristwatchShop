@@ -2,6 +2,7 @@
 using ProjectKairos.Utilities;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using ProjectKairos.ViewModel;
 
 namespace ProjectKairos.Controllers
 {
@@ -40,9 +41,8 @@ namespace ProjectKairos.Controllers
 
         [HttpGet]
         [Route("Checkout")]
-        [AuthorizeUser(Role = "Member")]
         public ActionResult CheckOut()
-        {            
+        {
             if (Session["CURRENT_USER_ID"] != null)
             {
                 string roleName = Session.GetCurrentUserInfo("RoleName");
@@ -55,13 +55,16 @@ namespace ProjectKairos.Controllers
                         Dictionary<int, int> IdAndRErrorDB = shoppingService.CheckCartDB(cartDB);
                         if (IdAndRErrorDB.Count == 0) //cart valid
                         {
-                            var viewModel = new ShippingInfoViewModel();
-                            viewModel.Total = shoppingService.CalculateCartTotalDB(username);
+                            var viewModel = new ShippingInfoViewModel
+                            {
+                                Total = shoppingService.CalculateCartTotalDB(username)
+                            };
                             return View("~/Views/User/user_checkout.cshtml", viewModel);
                         }
                     }
                     return RedirectToAction("ManageCart", "Home");
-                } else if (roleName == "Administrator")
+                }
+                else if (roleName == "Administrator")
                 {
                     return RedirectToAction("Index", "Admin");
                 }
@@ -78,7 +81,7 @@ namespace ProjectKairos.Controllers
                 {
                     return RedirectToAction("Login", "Account");
                 }
-            }            
+            }
             return RedirectToAction("ManageCart", "Home"); //đã có validate trong đây
         }
 
@@ -116,7 +119,7 @@ namespace ProjectKairos.Controllers
             //validate quantity in cart
             Dictionary<int, int> IDANdError = shoppingService.CheckCartDB(cart);
 
-            if(IDANdError != null && IDANdError.Count != 0) //there are error in quantity in cart => return to cart page
+            if (IDANdError != null && IDANdError.Count != 0) //there are error in quantity in cart => return to cart page
             {
                 var viewModelDB = new ShoppingCartViewModel(cart);
                 viewModelDB.IdAndError = IDANdError;
@@ -125,9 +128,9 @@ namespace ProjectKairos.Controllers
 
             //valid cart => check shipping info
             bool result = shoppingService.UpdateShippingInfo(username, order);
-            
+
             if (result)
-            {               
+            {
                 return View("~/Views/User/user_order.cshtml");
             }
 
