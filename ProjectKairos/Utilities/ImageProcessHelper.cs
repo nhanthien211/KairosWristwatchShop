@@ -15,17 +15,18 @@ namespace ProjectKairos.Utilities
             format.Quality = 100;
             path = path + "." + format.DefaultExtension;
             Size size = new Size(width, height);
-            using (var outStream = new MemoryStream())
+
+            using (ImageFactory imageFactory = new ImageFactory())
             {
-                using (ImageFactory imageFactory = new ImageFactory())
-                {
-                    ResizeLayer resizeLayer = new ResizeLayer(size, resizeMode);
-                    imageFactory.Load(stream)
-                        .Resize(resizeLayer)
-                        .Format(format)
-                        .Save(path);
-                }
+                ResizeLayer resizeLayer = new ResizeLayer(size, resizeMode);
+                imageFactory.Load(stream)
+                    .Resize(resizeLayer)
+                    .BackgroundColor(Color.White)
+                    .Format(format)
+                    .Save(path);
             }
+
+            path = MyCustomUtility.RelativeFromAbsolutePath(path);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
@@ -11,11 +12,13 @@ namespace ProjectKairos.Controllers
     {
         private KAIROS_SHOPEntities db;
         private AccountService accountService;
+        private ShoppingCartService shoppingService;
 
         public AccountController()
         {
             db = new KAIROS_SHOPEntities();
             accountService = new AccountService(db);
+            shoppingService = new ShoppingCartService(db);
         }
 
         [HttpGet]
@@ -27,7 +30,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Home");
             }
             AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
-            return View("~/Views/login.cshtml", viewModel);
+            return View("~/Views/Home/login.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -41,10 +44,16 @@ namespace ProjectKairos.Controllers
                 {
                     InvalidLogin = "Invalid username or password. Please try again"
                 };
-                return View("~/Views/login.cshtml", viewModel);
+                return View("~/Views/Home/login.cshtml", viewModel);
             }
-
             Session["CURRENT_USER_ID"] = result;
+
+            //merge cart if any
+            bool resultMerge = shoppingService.MergeCartSessionAnddDDB(Session.GetCurrentUserInfo("Username"));
+            if (resultMerge) //done => remove cart in session
+            {
+                Session["CART"] = null;
+            }
             return Redirect(Request.UrlReferrer.ToString());
         }
 
@@ -67,7 +76,8 @@ namespace ProjectKairos.Controllers
                 registerAccount.Gender = Request["gender"] == "male";
                 //ModelState.IsValid: whether auto binding request
                 //parameter to object account field is correct
-
+                registerAccount.Username = registerAccount.Username.ToLower();
+                registerAccount.Email = registerAccount.Email.ToLower();
                 //Step 1 check if username exists ?
                 string duplicateUsername = "";
                 string duplicateEmail = "";
@@ -99,7 +109,7 @@ namespace ProjectKairos.Controllers
                         DuplicateUsernameErrorMessage = duplicateUsername
                     };
                     ViewBag.message = @"<script>$('.login-form').css('display', 'none');$('.register-form').css('display', 'block');$('.show-login-form').removeClass('active');$('.show-register-form').addClass('active');</script>";
-                    return View("~/Views/login.cshtml", viewModel);
+                    return View("~/Views/Home/login.cshtml", viewModel);
                 }
                 //halting password to store in database
                 //NOTE: do not auto binding password at first
@@ -116,12 +126,14 @@ namespace ProjectKairos.Controllers
                     var loginAccount = new
                     {
                         Username = registerAccount.Username,
-                        RoleName = accountService.GetRoleName(registerAccount.Username)
+                        RoleName = accountService.GetRoleName(registerAccount.Username),
+                        RoleId = registerAccount.RoleId,
+                        FullName = registerAccount.LastName + " " + registerAccount.FirstName
                     };
                     Session["CURRENT_USER_ID"] = JsonConvert.SerializeObject(loginAccount, Formatting.Indented);
                     return Redirect(Request.UrlReferrer.ToString());
                 }
-                return HttpNotFound();
+                return Content("Unexpected error");
             }
             //return unexpected error please try again 
             //will have a 404 not found page default for all error
@@ -145,10 +157,18 @@ namespace ProjectKairos.Controllers
                 string username = Session.GetCurrentUserInfo("Username");
                 if (accountService.UpdateAccountInfo(account, username))
                 {
+                    string currentUser = (string)Session["CURRENT_USER_ID"];
+                    JObject user = JObject.Parse(currentUser);
+                    user["FullName"] = account.LastName + " " + account.FirstName;
+                    Session["CURRENT_USER_ID"] = JsonConvert.SerializeObject(user);
                     TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
                     if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
                     {
                         return RedirectToAction("Index", "Admin");
+                    }
+                    if (Session.GetCurrentUserInfo("RoleName") == "Member")
+                    {
+                        return RedirectToAction("ManageAccount", "User");
                     }
                 }
 
@@ -173,14 +193,19 @@ namespace ProjectKairos.Controllers
                 TempData["UPDATE_RESULT"] = "Old Password is incorrect.";
                 //script to display modal
             }
-            //correct password1
+            //correct password
             if (Session.GetCurrentUserInfo("RoleName") == "Administrator")
             {
                 return RedirectToAction("Index", "Admin");
             }
-            return Content("TO USER");
+            if (Session.GetCurrentUserInfo("RoleName") == "Member")
+            {
+                return RedirectToAction("ManageAccount", "User");
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 
 
 }
+

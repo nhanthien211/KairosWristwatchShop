@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ProjectKairos.ViewModel;
 using System.Data.Entity;
@@ -46,7 +47,6 @@ namespace ProjectKairos.Models
                 StartDate = a.StartDate,
                 IsActive = a.IsActive,
                 RoleId = a.RoleId
-
             }).FirstOrDefault();
             return account;
         }
@@ -92,14 +92,13 @@ namespace ProjectKairos.Models
 
         public bool IsDuplicatedUsername(string username)
         {
-            string result = db.Accounts.Where(a => a.Username == username).Select(a => a.Username).FirstOrDefault();
-            return result != null;
+            return db.Accounts.Any(a => a.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool IsDuplicatedEmail(string email)
         {
-            string result = db.Accounts.Where(a => a.Email == email).Select(a => a.Email).FirstOrDefault();
-            return result != null;
+
+            return db.Accounts.Any(a => a.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool AddNewAccount(Account account)
@@ -114,7 +113,7 @@ namespace ProjectKairos.Models
             var result = db.Accounts
                 .Include(a => a.Role)
                 .Where(a => a.Username == username && a.IsActive == true)
-                .Select(a => new { a.Username, a.Password, a.PasswordSalt, a.Role.RoleName, a.RoleId })
+                .Select(a => new { a.Username, a.Password, a.PasswordSalt, a.Role.RoleName, a.RoleId, a.FirstName, a.LastName })
                 .FirstOrDefault();
             if (result == null)
             {
@@ -136,7 +135,8 @@ namespace ProjectKairos.Models
                 {
                     Username = username,
                     RoleId = result.RoleId,
-                    RoleName = result.RoleName
+                    RoleName = result.RoleName,
+                    FullName = result.LastName + " " + result.FirstName
                 };
                 return JsonConvert.SerializeObject(loginInfo, Formatting.Indented);
             }

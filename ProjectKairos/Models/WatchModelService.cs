@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjectKairos.Models
@@ -15,6 +16,11 @@ namespace ProjectKairos.Models
         public List<WatchModel> GetModelsList()
         {
             return db.WatchModels.ToList();
+        }
+
+        public bool IsModelExisted(string category)
+        {
+            return db.WatchModels.Any(m => m.ModelName.Equals(category, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

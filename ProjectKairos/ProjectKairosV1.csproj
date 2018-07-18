@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectKairos</RootNamespace>
     <AssemblyName>ProjectKairos</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -36,6 +36,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,22 +49,63 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="ImageProcessor, Version=2.6.2.25, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ImageProcessor.2.6.2.25\lib\net452\ImageProcessor.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -70,17 +113,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-    </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -89,13 +122,14 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Optimization">
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
@@ -108,46 +142,21 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebGrease">
-      <Private>True</Private>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="X.PagedList, Version=7.5.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.7.5.0\lib\net45\X.PagedList.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Diagnostics.DiagnosticSource">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
-      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="X.PagedList.Mvc, Version=7.5.0.0, Culture=neutral, PublicKeyToken=c6e0b5b21f916f4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.Mvc.7.5.0\lib\net452\X.PagedList.Mvc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +166,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WatchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +225,9 @@
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoleService.cs" />
+    <Compile Include="Models\ShoppingCartService.cs" />
+    <Compile Include="Models\ShoppingItem.cs" />
+    <Compile Include="Models\ShoppingProduct.cs" />
     <Compile Include="Models\Ward.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
@@ -226,16 +242,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AuthorizeUserAttribute.cs" />
     <Compile Include="Utilities\EncryptPasswordUtil.cs" />
-    <Compile Include="Utilities\HtmlMenuHelper.cs" />
+    <Compile Include="Utilities\FileTypeDetector.cs" />
+    <Compile Include="Utilities\HtmlHelper.cs" />
     <Compile Include="Utilities\ImageProcessHelper.cs" />
+    <Compile Include="Utilities\MemoryUploadedFile.cs" />
     <Compile Include="Utilities\MyCustomUtility.cs" />
+    <Compile Include="Utilities\ProcessImportFileHelper.cs" />
     <Compile Include="Utilities\SessionHelper.cs" />
     <Compile Include="ViewModel\AccountInfoRoleViewModel.cs" />
     <Compile Include="ViewModel\AccountInfoViewModel.cs" />
     <Compile Include="ViewModel\AccountRegisterViewModel.cs" />
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
+    <Compile Include="ViewModel\ManageWatchDetailViewModel.cs" />
+    <Compile Include="ViewModel\ShippingInfoViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
+    <Compile Include="ViewModel\ViewWatchCategoryViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
+    <Compile Include="ViewModel\WatchInIndexPageModel.cs" />
     <Compile Include="ViewModel\WatchTableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +269,7 @@
     <Content Include="Content\font-awesome\webfonts\fa-brands-400.svg" />
     <Content Include="Content\font-awesome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\font-montserrat\OFL.txt" />
     <Content Include="Content\img\icons\bg-01.jpg" />
     <Content Include="Content\img\icons\discover.png" />
     <Content Include="Content\img\icons\express.png" />
@@ -257,14 +282,34 @@
     <Content Include="Content\img\icons\paypal.png" />
     <Content Include="Content\img\icons\video-16-9.jpg" />
     <Content Include="Content\img\icons\visa.png" />
+    <Content Include="Content\img\mainIMG\casio-banner-1.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-10.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-2.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-4.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-5.jpg" />
+    <Content Include="Content\img\mainIMG\casio-banner-7.jpg" />
+    <Content Include="Content\img\mainIMG\casio-long-poster.jpg" />
     <Content Include="Content\img\mainIMG\casio-small-banner-12.jpg" />
+    <Content Include="Content\img\mainIMG\casio-small-banner-6.jpg" />
+    <Content Include="Content\img\mainIMG\casio-small-banner-8.jpg" />
+    <Content Include="Content\img\mainIMG\casio-small-banner-9.jpg" />
     <Content Include="Content\img\mainIMG\login-banner-2.jpg" />
     <Content Include="Content\img\mainIMG\login-banner-4.jpg" />
     <Content Include="Content\img\mainIMG\notfound.jpg" />
+    <Content Include="Content\img\mainIMG\p1.jpg" />
     <Content Include="Content\img\mainIMG\reg-banner-1.jpg" />
     <Content Include="Content\img\mainIMG\reg-banner-2.jpg" />
+    <Content Include="Content\img\mainIMG\shop-banner.jpg" />
+    <Content Include="Content\index-animate.css" />
+    <Content Include="Content\index-animsition.min.css" />
+    <Content Include="Content\index-hamburgers.min.css" />
+    <Content Include="Content\index-main.css" />
+    <Content Include="Content\index-select2.min.css" />
+    <Content Include="Content\index-slick.css" />
+    <Content Include="Content\index-util.min.css" />
     <Content Include="Content\login-form-elements.css" />
     <Content Include="Content\login-style.css" />
+    <Content Include="Content\magic-check.min.css" />
     <Content Include="Content\main-admin-page.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -281,8 +326,11 @@
       <DependentUpon>Kairos_Shop.edmx</DependentUpon>
       <LastGenOutput>Kairos_Shop.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\add-to-cart.js" />
+    <Content Include="Scripts\add-watch-script.js" />
     <Content Include="Scripts\animsition.min.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\checkout-load-address.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -565,7 +613,7 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\index.cshtml" />
+    <Content Include="Views\Home\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -584,6 +632,42 @@
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\font-montserrat\Montserrat-Black.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-BlackItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraBold.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Italic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Light.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-LightItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Medium.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-MediumItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Regular.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-Thin.ttf" />
+    <Content Include="Content\font-montserrat\Montserrat-ThinItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Black.ttf" />
+    <Content Include="Content\font-poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Bold.ttf" />
+    <Content Include="Content\font-poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Italic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Light.ttf" />
+    <Content Include="Content\font-poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Medium.ttf" />
+    <Content Include="Content\font-poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Regular.ttf" />
+    <Content Include="Content\font-poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Content\font-poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Content\font-poppins\Poppins-Thin.ttf" />
+    <Content Include="Content\font-poppins\Poppins-ThinItalic.ttf" />
     <EntityDeploy Include="Models\Kairos_Shop.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Kairos_Shop.Designer.cs</LastGenOutput>
@@ -592,7 +676,7 @@
       <DependentUpon>Kairos_Shop.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
-    <Content Include="Views\login.cshtml" />
+    <Content Include="Views\Home\login.cshtml" />
     <Content Include="Views\Admin\admin_info.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\admin_manage_user.cshtml" />
@@ -607,9 +691,21 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Views\Shared\_LayouUser.cshtml" />
+    <Content Include="Views\User\user_account.cshtml" />
+    <Content Include="Views\User\user_checkout.cshtml" />
+    <Content Include="Views\User\user_order.cshtml" />
+    <Content Include="Views\User\user_order_detail.cshtml" />
+    <Content Include="Views\Home\404_page.cshtml" />
+    <Content Include="Views\Home\shopping_cart.cshtml" />
+    <Content Include="Views\Watch\watch_detail.cshtml" />
+    <Content Include="Views\Watch\watch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

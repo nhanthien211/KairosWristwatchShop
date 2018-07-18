@@ -54,11 +54,51 @@ namespace ProjectKairos
                 "~/Scripts/dataTables.bootstrap4.js",
                 "~/Scripts/sb-admin-datatables-watch.js"));
 
+            //Script for validate add new watch page
+            bundles.Add(new ScriptBundle("~/bundles/validate_file").Include(
+                "~/Scripts/add-watch-script.js"));
+
             //CKEditor script 
             bundles.Add(new ScriptBundle("~/bundles/ckeditor").Include(
                 "~/Scripts/ckeditor/ckeditor.js"));
 
+            //common css for user
+            bundles.Add(new StyleBundle("~/Content/user_css").Include(
+                "~/Content/bootstrap.min.css",
+                "~/Content/index-animate.css",
+                "~/Content/index-hamburgers.min.css",
+                "~/Content/index-animsition.min.css",
+                "~/Content/index-select2.min.css",
+                "~/Content/index-slick.css",
+                "~/Content/index-util.min.css",
+                "~/Content/index-main.css"
+            ).Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
 
+            //css for checkbox in product.html
+            bundles.Add(new StyleBundle("~/Content/product_checkbox_css").Include(
+                "~/Content/magic-check.min.css"));
+
+            //common js for user
+            bundles.Add(new ScriptBundle("~/bundles/user_script").Include(
+                "~/Scripts/jquery.min.js",
+                "~/Scripts/animsition.min.js",
+                "~/Scripts/index-popper.min.js",
+                "~/Scripts/bootstrap.bundle.min.js",
+                "~/Scripts/index-select2.min.js",
+                "~/Scripts/index-slick.min.js",
+                "~/Scripts/index-slick-custom.min.js",
+                "~/Scripts/index-sweetalert.min.js",
+                "~/Scripts/index-main.js"));
+
+            //css for 404
+            bundles.Add(new StyleBundle("~/Content/404_css").Include(
+                "~/Content/bootstrap.min.css").Include("~/Content/font-awesome/css/fontawesome-all.min.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new ScriptBundle("~/bundles/loadAddress").Include(
+                "~/Scripts/checkout-load-address.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/addToCart").Include(
+                "~/Scripts/add-to-cart.js"));
 
             //to disable auto ignore .min file while debug = true in web.config
             bundles.IgnoreList.Clear();

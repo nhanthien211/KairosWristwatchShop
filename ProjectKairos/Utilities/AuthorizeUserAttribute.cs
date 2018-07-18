@@ -11,6 +11,10 @@ namespace ProjectKairos.Utilities
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             string privilegeLevels = httpContext.Session.GetCurrentUserInfo("RoleName");
+            if (privilegeLevels == null && Role.Contains("Guest"))
+            {
+                return true;
+            }
             string[] allRole = Role.Split(',');
             foreach (var role in allRole)
             {

@@ -100,25 +100,12 @@
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
                         <label for="Gender">Gender</label>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            @{
-                                var male = "checked";
-                                var maleLabel = "active";
-                                var female = "";
-                                var femaleLabel = "";
-                                if (!Model.Gender)
-                                {
-                                    male = "";
-                                    maleLabel = "";
-                                    female = "checked";
-                                    femaleLabel = "active";
-                                }
-                            }
-                            <label class="btn btn-secondary @maleLabel radio-config">
-                                <input type="radio" name="gender" value="male" id="option1" autocomplete="off" @male> Male
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">                            
+                            <label class="btn btn-secondary @Model.MaleLabel radio-config">
+                                <input type="radio" name="gender" value="male" id="option1" autocomplete="off" @Model.Male> Male
                             </label>
-                            <label class="btn btn-secondary @femaleLabel radio-config">
-                                <input type="radio" name="gender" value="female" id="option2" autocomplete="off" @female> Female
+                            <label class="btn btn-secondary @Model.FemaleLabel radio-config">
+                                <input type="radio" name="gender" value="female" id="option2" autocomplete="off" @Model.Female> Female
                             </label>
                         </div>
                     </div>
@@ -155,7 +142,7 @@
                 @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post, new { onsubmit = "return check()" }))
                 {
 
-                    <label for="password">Old Password</label>
+                    <label for="password">Current Password</label>
 
                     <input class="form-control form-control-sm" type="password" name="oldPassword" value="" required minLength="8">
                     <label for="password">New Password</label>
@@ -198,7 +185,7 @@
                 <h4 class="modal-title">Success!</h4>
             </div>
             <div class="modal-body">
-                <p class="text-center">Account Info Added Successfully.</p>
+                <p class="text-center">Account Info Updated Successfully.</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>

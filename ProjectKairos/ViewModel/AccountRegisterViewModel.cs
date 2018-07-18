@@ -22,7 +22,7 @@ namespace ProjectKairos.ViewModel
         private bool gender;
         public bool Gender
         {
-            get => gender;
+            get { return gender; }
             set
             {
                 gender = value;
