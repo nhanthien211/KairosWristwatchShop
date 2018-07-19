@@ -1,0 +1,153 @@
+﻿@model ProjectKairos.ViewModel.AccountInfoRoleViewModel
+
+@{
+    ViewBag.Title = "Order Detail";
+
+    ViewBag.Info = "";
+    ViewBag.Account = "";
+    ViewBag.Order = "active";
+    ViewBag.Watch = "";
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style type="text/css">
+    .wrap-table-shopping-cart {
+        margin: 0px 50px 20px 50px;
+    }
+
+    .table-custom th {
+        width: 20%;
+        text-align: right;
+        background-color: ghostwhite;
+    }
+
+    .title {
+        margin-top: 30px;
+        margin-left: 50px;
+        color: #e65540;
+    }
+</style>
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("", "")">Order Management ****not mapping yet******</a>
+        </li>
+        <li class="breadcrumb-item active">Order Details</li>
+    </ol>
+
+    <!-- DataTables Card-->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-fw fa-sliders-h "></i> View Order Details
+        </div>
+        <div class="card-body">
+
+            <h2>
+                Order #ID123
+            </h2>
+
+            <h5 class="title">
+                General Information
+            </h5>
+            <div class="wrap-table-shopping-cart">
+                
+                @*bảng info chung của order -------------------------------------------*@
+                <table class="table table-bordered table-custom">
+                    <tbody>
+                    <tr>
+                        <th>Receiver</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Order Date</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Shipped Date</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Ship Address</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Ship Note</th>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                @*-----------------------------------------------------------------------*@
+            </div>
+
+            <h5 class="title">
+                Product
+            </h5>
+            <div class="wrap-table-shopping-cart">
+                @*bảng các sản phẩm trong order -------------------------------------------*@
+                <table class="table table-bordered table-custom">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="3">Total</th>
+                        <th>123</th>
+                    </tr>
+                    </tfoot>
+                </table>
+                @*-------------------------------------------------------------------*@
+            </div>
+            
+            <h5 class="title">
+                Order Status
+            </h5>
+            @*Form đổi status order -------------------------------------------*@
+            @using (Html.BeginForm("", "", new { }, FormMethod.Post))
+            {
+                <div class="row" style="margin-left: 35px;">
+                    <div class="col-sm-4 col-lg-4">
+                        <select name="selectRole" class="form-control">
+                            @*@foreach (var role in Model.Role)
+                            {
+                                string selected = "";
+                                if (role.RoleID == Model.RoleId)
+                                {
+                                    selected = "selected";
+                                }
+                                <option value="@role.RoleID" @selected>@role.RoleName</option>
+                            }*@
+                        </select>
+                    </div>
+                    <div class="col-sm-8 col-lg-8">
+                        <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                    </div>
+                    </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+
