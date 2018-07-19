@@ -340,5 +340,13 @@ namespace ProjectKairos.Controllers
 
             return RedirectToAction("AddWatch", "Admin");
         }
+
+        [HttpGet]
+        [Route("Manage/Order/View/{orderId}")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult ViewOrder(int orderId)
+        {
+            return View("~/Views/Admin/admin_manage_order_detail.cshtml", null);
+        }
     }
 }
