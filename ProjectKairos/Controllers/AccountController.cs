@@ -65,7 +65,7 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("Index", "Home");
             }
             AccountRegisterViewModel viewModel = new AccountRegisterViewModel();
-            return View("~/Views/login.cshtml", viewModel);
+            return View("~/Views/Home/login.cshtml", viewModel);
         }
 
         [HttpPost]

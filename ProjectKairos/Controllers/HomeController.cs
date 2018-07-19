@@ -19,6 +19,11 @@ namespace ProjectKairos.Controllers
             shoppingService = new ShoppingCartService(db);
         }
 
+        public ActionResult NotFound()
+        {
+            return View("~/Views/Home/404_page.cshtml");
+        }
+
         public ActionResult Index()
         {
             if (Session["CURRENT_USER_ID"] != null)

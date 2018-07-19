@@ -477,5 +477,12 @@ namespace ProjectKairos.Models
             };
             return viewModel;
         }
+
+        public double GetDiscountPriceOfWatch(int watchId)
+        {
+            return db.Watches
+                .Where(w => w.WatchID == watchId)
+                .Select(w => w.Price * (1 - w.Discount * 0.01)).FirstOrDefault();
+        }
     }
 }

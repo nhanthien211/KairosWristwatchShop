@@ -21,6 +21,7 @@ namespace ProjectKairos.Controllers
         private MovementService movementService;
         private AccountService accountService;
         private RoleService roleService;
+        private OrderService orderService;
 
         public AdminController()
         {
@@ -31,6 +32,7 @@ namespace ProjectKairos.Controllers
             movementService = new MovementService(db);
             accountService = new AccountService(db);
             roleService = new RoleService(db);
+            orderService = new OrderService(db);
         }
 
         // GET: Admin
@@ -339,6 +341,26 @@ namespace ProjectKairos.Controllers
             TempData["RESULT"] = "Total " + result + " watch(es) imported successfully";
 
             return RedirectToAction("AddWatch", "Admin");
+        }
+
+        [HttpPost]
+        [AuthorizeUser(Role = "Administrator")]
+        [Route("LoadOrder")]
+        public ActionResult LoadOrder()
+        {
+            var draw = Request.Form.GetValues("draw").FirstOrDefault();
+            var start = Request.Form.GetValues("start").FirstOrDefault();
+            var length = Request.Form.GetValues("length").FirstOrDefault();
+            //Request.Form.GetValues("order[0][column]").FirstOrDefault(): get column index that used for sorting
+            //columns[index][name]:get column name to used in orderBy LINQ statement            
+            string sortColumnDirection = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+            var searchValue = Request.Form.GetValues("search[value]").FirstOrDefault();
+            //Paging Size (5, 10,20,50,100)  
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+            int recordsTotal = 0;
+            var data = orderService.LoadOrderTable(sortColumnDirection, searchValue, ref recordsTotal, pageSize, skip);
+            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
         }
     }
 }

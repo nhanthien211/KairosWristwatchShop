@@ -3,7 +3,7 @@ $(document).ready(function () {
         "processing": true, // for show progress bar  
         "serverSide": true, // for process server side          
         "orderMulti": false, // for disable multiple column at once  
-        "pageLength": 3,  
+        "pageLength": 10,  
         "pagingType": "full_numbers",
         order: [[1, "asc"]],
         "ajax": {
