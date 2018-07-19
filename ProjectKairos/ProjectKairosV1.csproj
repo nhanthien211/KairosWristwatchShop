@@ -218,6 +218,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderService.cs" />
     <Compile Include="Models\OrderStatu.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
@@ -255,6 +256,7 @@
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
     <Compile Include="ViewModel\ManageWatchDetailViewModel.cs" />
+    <Compile Include="ViewModel\OrderTableViewModel.cs" />
     <Compile Include="ViewModel\ShippingInfoViewModel.cs" />
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\ViewWatchCategoryViewModel.cs" />
@@ -700,6 +702,7 @@
     <Content Include="Views\Home\shopping_cart.cshtml" />
     <Content Include="Views\Watch\watch_detail.cshtml" />
     <Content Include="Views\Watch\watch.cshtml" />
+    <Content Include="Views\Admin\admin_manage_order_detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

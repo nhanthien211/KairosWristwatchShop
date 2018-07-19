@@ -122,7 +122,8 @@ namespace ProjectKairos.Models
                     ProductID = ProductID,
                     ProductCode = p.WatchCode,
                     ProductPrice = p.Price,
-                    ProductPhoto = p.Thumbnail
+                    ProductPhoto = p.Thumbnail,
+                    ProductDiscount = p.Discount
                 }).FirstOrDefault();
 
             try
@@ -186,7 +187,8 @@ namespace ProjectKairos.Models
                     ProductID = ProductID,
                     ProductCode = p.WatchCode,
                     ProductPrice = p.Price,
-                    ProductPhoto = p.Thumbnail
+                    ProductPhoto = p.Thumbnail,
+                    ProductDiscount = p.Discount
                 }).FirstOrDefault();
 
             try
@@ -680,7 +682,8 @@ namespace ProjectKairos.Models
                             ProductID = w.WatchID,
                             ProductCode = w.WatchCode,
                             ProductPrice = w.Price,
-                            ProductPhoto = w.Thumbnail
+                            ProductPhoto = w.Thumbnail,
+                            ProductDiscount = w.Discount
                         })
                         .FirstOrDefault();
 

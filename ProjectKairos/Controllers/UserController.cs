@@ -12,12 +12,14 @@ namespace ProjectKairos.Controllers
         private KAIROS_SHOPEntities db;
         private AccountService accountService;
         private ShoppingCartService shoppingService;
+        private OrderService orderService;
 
         public UserController()
         {
             db = new KAIROS_SHOPEntities();
             accountService = new AccountService(db);
             shoppingService = new ShoppingCartService(db);
+            orderService = new OrderService(db);
         }
 
         // GET: User
@@ -90,7 +92,9 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Member")]
         public ActionResult ManageOrder()
         {
-            return View("~/Views/User/user_order.cshtml");
+            string username = Session.GetCurrentUserInfo("Username");
+            List<OrderTableViewModel> viewModel = orderService.LoadAllCustomerOrder(username);
+            return View("~/Views/User/user_order.cshtml", viewModel);
         }
 
         [HttpGet]
@@ -131,7 +135,7 @@ namespace ProjectKairos.Controllers
 
             if (result)
             {
-                return View("~/Views/User/user_order.cshtml");
+                return RedirectToAction("ManageOrder", "User");
             }
 
             return Content("Unexpected Error. Please try again");
