@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using ProjectKairos.Utilities;
 using ProjectKairos.ViewModel;
 
 namespace ProjectKairos.Models
@@ -20,7 +21,7 @@ namespace ProjectKairos.Models
         {
             var order = db.Orders
                 .Include(o => o.OrderStatu)
-                .Where(o => o.OrderStatus != 1)
+                .Where(o => o.OrderStatus != (int)Enumeration.OrderStatus.InCart)
                 .Select(o => new OrderTableViewModel
                 {
                     OrderId = o.OrderID,
@@ -67,7 +68,7 @@ namespace ProjectKairos.Models
 
         public bool IsValidOrderId(int orderId)
         {
-            return db.Orders.Any(o => o.OrderID == orderId && o.OrderStatus != 1);
+            return db.Orders.Any(o => o.OrderID == orderId && o.OrderStatus != (int)Enumeration.OrderStatus.InCart);
         }
 
         public AdminOrderDetailViewModel LoadOrderDetailAdmin(int orderId)
@@ -76,11 +77,11 @@ namespace ProjectKairos.Models
             return null;
         }
 
-	public List<OrderTableViewModel> LoadAllCustomerOrder(string username)
+        public List<OrderTableViewModel> LoadAllCustomerOrder(string username)
         {
             var order = db.Orders
                 .Include(o => o.OrderStatu)
-                .Where(o => o.OrderStatus != 1 && o.CustomerID.Equals(username))
+                .Where(o => o.OrderStatus != (int)Enumeration.OrderStatus.InCart && o.CustomerID.Equals(username))
                 .Select(o => new OrderTableViewModel
                 {
                     OrderId = o.OrderID,

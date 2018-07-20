@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using ProjectKairos.Utilities;
 
 namespace ProjectKairos.Models
 {
@@ -51,7 +52,7 @@ namespace ProjectKairos.Models
                     //create new cart in DB
                     Order currentOrder = new Order();
                     currentOrder.CustomerID = username;
-                    currentOrder.OrderStatus = 1;
+                    currentOrder.OrderStatus = (int)Enumeration.OrderStatus.InCart;
 
                     db.Orders.Add(currentOrder);
                     int result = db.SaveChanges();
@@ -62,7 +63,7 @@ namespace ProjectKairos.Models
                 }
                 //have cart => merge!!!
                 int cartID = db.Orders
-                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                     .Select(o => o.OrderID)
                     .FirstOrDefault();
 
@@ -195,7 +196,7 @@ namespace ProjectKairos.Models
             {
                 //get user's cart with status not checkout
                 var userOrderID = db.Orders
-                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                     .Select(o => o.OrderID)
                     .FirstOrDefault();
 
@@ -205,7 +206,7 @@ namespace ProjectKairos.Models
                     //create new cart in DB
                     Order currentOrder = new Order();
                     currentOrder.CustomerID = username;
-                    currentOrder.OrderStatus = 1;
+                    currentOrder.OrderStatus = (int)Enumeration.OrderStatus.InCart;
 
                     db.Orders.Add(currentOrder);
                     int result = db.SaveChanges();
@@ -217,7 +218,7 @@ namespace ProjectKairos.Models
 
                     //get orderID
                     var orderID = (int)db.Orders
-                        .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                        .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                         .Select(o => o.OrderID)
                         .First();
 
@@ -372,7 +373,7 @@ namespace ProjectKairos.Models
             {
                 //get user's cart with status not checkout
                 var userOrderID = db.Orders
-                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                     .Select(o => o.OrderID)
                     .FirstOrDefault();
 
@@ -519,7 +520,7 @@ namespace ProjectKairos.Models
 
             //get user's cart with status not checkout
             var userOrderID = db.Orders
-                .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                 .Select(o => o.OrderID)
                 .FirstOrDefault();
 
@@ -630,7 +631,7 @@ namespace ProjectKairos.Models
             {
                 //get user's cart with status not checkout
                 var userOrderID = db.Orders
-                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                    .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                     .Select(o => o.OrderID)
                     .FirstOrDefault();
 
@@ -663,7 +664,7 @@ namespace ProjectKairos.Models
         public List<ShoppingItem> LoadCartItemDB(string username)
         {
             var orderID = db.Orders
-                .Where(o => o.CustomerID == username && o.OrderStatus == 1)
+                .Where(o => o.CustomerID == username && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                 .Select(o => o.OrderID).FirstOrDefault();
 
             var itemsID = db.OrderDetails
@@ -749,7 +750,7 @@ namespace ProjectKairos.Models
 
             //get user's cart with status not checkout
             var userOrderID = db.Orders
-                .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                 .Select(o => o.OrderID)
                 .FirstOrDefault();
 
@@ -811,7 +812,7 @@ namespace ProjectKairos.Models
                 {
                     //get user's cart with status not checkout
                     var orderID = db.Orders
-                        .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == 1)
+                        .Where(o => o.CustomerID.Equals(username) && o.OrderStatus == (int)Enumeration.OrderStatus.InCart)
                         .Select(o => o.OrderID)
                         .FirstOrDefault();
 
@@ -826,7 +827,7 @@ namespace ProjectKairos.Models
                     updateOrder.ShippAddressNumber = order.ShippAddressNumber;
                     updateOrder.ShipNote = order.ShipNote;
                     updateOrder.OrderDate = DateTime.Now;
-                    updateOrder.OrderStatus = 2;
+                    updateOrder.OrderStatus = (int)Enumeration.OrderStatus.Pending;
                     db.SaveChanges();
 
                     var items = db.OrderDetails
