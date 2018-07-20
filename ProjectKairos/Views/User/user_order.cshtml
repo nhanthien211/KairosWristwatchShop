@@ -1,4 +1,7 @@
-﻿@{
+﻿@using ProjectKairos.ViewModel
+@model List<ProjectKairos.ViewModel.OrderTableViewModel>
+
+@{
     ViewBag.Title = "My Orders";
 
     ViewBag.Home = "";
@@ -48,43 +51,51 @@
             <!-- right column========================= -->
             <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-r-0 m-l-auto p-lr-15-sm w-size16 respon5" style="background-color: #eeeeee59">
                 <!-- Empty order list -->
-                <div class="p-b-30">
-                    <h5 class="m-text20 p-b-24">
-                        You haven't placed any order yet!
-                    </h5>
-                    <a href="@Url.Action("ViewProduct","Home")" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 size13">Continue shopping...</a>
-                </div>
-
+                @if (Model == null)
+                {
+                    <div class="p-b-30">
+                        <h5 class="m-text20 p-b-24">
+                            You haven't placed any order yet!
+                        </h5>
+                        <a href="@Url.Action("ViewProduct", "Watch", new { category = "All"})" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 size13">Continue shopping...</a>
+                    </div>
+                }
+                else
+                {
                 <!-- have order -->
                 <h5 class="m-text20 p-b-24">
-                    My Orders (total: xxx)
+                    My Orders (total: @Model.Count)
                 </h5>
 
-                <div class="wrap-table-shopping-cart bgwhite">
-                    <table class="table table-bordered bgwhite">
-                        <thead>
+                    <div class="wrap-table-shopping-cart bgwhite">
+                        <table class="table table-bordered bgwhite">
+                            <thead>
                             <tr>
                                 <th>OrderID</th>
                                 <th>Bought Date</th>
                                 <th>Total</th>
                                 <th>Status</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="color: tomato; text-decoration: underline">
-                                    <a href="@Url.Action("ViewOrderDetail","User")">ID123</a>
-                                </td>
-                                <td>20-12-2018</td>
-                                <td>$36.00</td>
-                                <td>
-                                    Complete
-                                </td>
-                            </tr>
-                        </tbody>
+                            </thead>
+                            <tbody>
+                            @foreach (OrderTableViewModel order in Model)
+                            {
+                                <tr>
+                                    <td style="color: tomato; text-decoration: underline">
+                                        <a href="@Url.Action("ViewOrderDetail", "User")">@order.OrderId</a>
+                                    </td>
+                                    <td>@order.OrderDate</td>
+                                    <td>$ @order.Total</td>
+                                    <td>
+                                        @order.Status
+                                    </td>
+                                </tr>
+                            }                            
+                            </tbody>
 
-                    </table>
-                </div>
+                        </table>
+                    </div>
+                }
             </div>
         </div>
     </div>

@@ -75,5 +75,21 @@ namespace ProjectKairos.Models
 
             return null;
         }
+
+	public List<OrderTableViewModel> LoadAllCustomerOrder(string username)
+        {
+            var order = db.Orders
+                .Include(o => o.OrderStatu)
+                .Where(o => o.OrderStatus != 1 && o.CustomerID.Equals(username))
+                .Select(o => new OrderTableViewModel
+                {
+                    OrderId = o.OrderID,
+                    Status = o.OrderStatu.StatusDescription,
+                    Customer = username,
+                    OrderDate = o.OrderDate,
+                    Total = o.OrderDetails.Sum(d => (d.Watch.Price * (1 - d.Watch.Discount * 0.01)) * d.Quantity)
+                });
+            return order.ToList();
+        }
     }
 }
