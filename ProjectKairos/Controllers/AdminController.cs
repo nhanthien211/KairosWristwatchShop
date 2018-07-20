@@ -22,6 +22,8 @@ namespace ProjectKairos.Controllers
         private AccountService accountService;
         private RoleService roleService;
         private OrderService orderService;
+        private OrderStatusService orderStatusService;
+        private OrderDetailService orderDetailService;
 
         public AdminController()
         {
@@ -33,6 +35,8 @@ namespace ProjectKairos.Controllers
             accountService = new AccountService(db);
             roleService = new RoleService(db);
             orderService = new OrderService(db);
+            orderStatusService = new OrderStatusService(db);
+            orderDetailService = new OrderDetailService(db);
         }
 
         // GET: Admin
@@ -86,7 +90,8 @@ namespace ProjectKairos.Controllers
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt32(start) : 0;
             int recordsTotal = 0;
-            var data = accountService.LoadAccountTable(sortColumnDirection, searchValue, ref recordsTotal, pageSize, skip);
+            var data = accountService.LoadAccountTable(sortColumnDirection, searchValue, ref recordsTotal, pageSize,
+                skip);
             return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
         }
 
@@ -100,6 +105,7 @@ namespace ProjectKairos.Controllers
             {
                 return RedirectToAction("NotFound", "Home");
             }
+
             var role = roleService.GetListRole();
             account.Role = role;
             return View("~/Views/Admin/admin_manage_user_detail.cshtml", account);
@@ -124,6 +130,7 @@ namespace ProjectKairos.Controllers
                     }
 
                 }
+
                 TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
                 return RedirectToAction("ViewAccount", "Admin");
             }
@@ -144,21 +151,26 @@ namespace ProjectKairos.Controllers
             {
                 viewModel.InvalidExcelFileMessage = (string)TempData["EXCEL"];
             }
+
             if (TempData["ZIP"] != null)
             {
                 viewModel.InvalidZipFileMessage = (string)TempData["ZIP"];
             }
+
             if (TempData["RESULT"] != null)
             {
                 viewModel.ImportMessage = (string)TempData["RESULT"];
             }
+
             return View("~/Views/Admin/admin_manage_watch_add.cshtml", viewModel);
         }
 
         [HttpPost]
         [Route("Manage/Watch/Add")]
         [AuthorizeUser(Role = "Administrator")]
-        public ActionResult AddWatch([Bind(Include = "WatchDescription, WatchCode, Quantity, Price, MovementID, ModelId, BandMaterial, CaseRadius, CaseMaterial, Discount, Guarantee")] Watch watch, HttpPostedFileBase thumbnail)
+        public ActionResult AddWatch([Bind(Include =
+                "WatchDescription, WatchCode, Quantity, Price, MovementID, ModelId, BandMaterial, CaseRadius, CaseMaterial, Discount, Guarantee")]
+            Watch watch, HttpPostedFileBase thumbnail)
         {
             if (ModelState.IsValid)
             {
@@ -186,10 +198,13 @@ namespace ProjectKairos.Controllers
                     {
                         viewModel.InvalidImageFileMessage = "Invalid Thumbnail. Upload file is not an image";
                     }
+
                     return View("~/Views/Admin/admin_manage_watch_add.cshtml", viewModel);
                 }
+
                 //lưu hình ảnh xuống máy  
-                string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watch.WatchCode + DateTime.Now.ToBinary();
+                string path = HostingEnvironment.MapPath("~/Content/img/ProductThumbnail/") + watch.WatchCode +
+                              DateTime.Now.ToBinary();
                 //thumbnail.InputStream.Position = 0;
                 ImageProcessHelper.ResizedImage(thumbnail.InputStream, 360, 500, ResizeMode.Pad, ref path);
                 watch.Thumbnail = path;
@@ -201,8 +216,10 @@ namespace ProjectKairos.Controllers
                     TempData["SHOW_MODAL"] = @"<script>$('#successModal').modal();</script>";
                     return RedirectToAction("AddWatch", "Admin");
                 }
+
                 return Content("Unexpected Error");
             }
+
             return RedirectToAction("NotFound", "Home");
         }
 
@@ -249,6 +266,7 @@ namespace ProjectKairos.Controllers
             {
                 return RedirectToAction("NotFound", "Home");
             }
+
             watchDetail.Movement = movementService.GetMovementList();
             watchDetail.WatchModel = watchModelService.GetModelsList();
             return View("~/Views/Admin/admin_manage_watch_detail.cshtml", watchDetail);
@@ -259,7 +277,8 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Administrator")]
         public ActionResult EditWatch([Bind(Include = "WatchId, WatchCode, WatchDescription, Quantity, Price, " +
                                                       "MovementID, ModelID, BandMaterial, CaseMaterial, " +
-                                                      "CaseRadius, Discount, Guarantee, PublishedBy, PublishedTime")] Watch watch, HttpPostedFileBase thumbnail)
+                                                      "CaseRadius, Discount, Guarantee, PublishedBy, PublishedTime")]
+            Watch watch, HttpPostedFileBase thumbnail)
         {
 
             if (ModelState.IsValid)
@@ -274,24 +293,30 @@ namespace ProjectKairos.Controllers
                 bool validImage = true;
                 if (thumbnail != null)
                 {
-                    validImage = FileTypeDetector.IsImageFile(thumbnail); ;
+                    validImage = FileTypeDetector.IsImageFile(thumbnail);
+                    ;
                 }
+
                 if (duplicateCode || !validImage)
                 {
                     var movement = movementService.GetMovementList();
                     var watchModel = watchModelService.GetModelsList();
-                    ManageWatchDetailViewModel viewModel = watchService.PrepopulateEditValue(watch, movement, watchModel);
+                    ManageWatchDetailViewModel viewModel =
+                        watchService.PrepopulateEditValue(watch, movement, watchModel);
                     if (duplicateCode)
                     {
-                        viewModel.DuplicateErrorMessage = "Watch with code '" + watch.WatchCode + "' already existed. Please choose another one";
+                        viewModel.DuplicateErrorMessage =
+                            "Watch with code '" + watch.WatchCode + "' already existed. Please choose another one";
                     }
 
                     if (!validImage)
                     {
                         viewModel.InvalidImageFileMessage = "Invalid Thumbnail. Upload file is not image";
                     }
+
                     return View("~/Views/Admin/admin_manage_watch_detail.cshtml", viewModel);
                 }
+
                 String oldValue = watchService.SerializeOldValue(watch.WatchID);
                 //thumbnail.InputStream.Position = 0;
 
@@ -305,8 +330,10 @@ namespace ProjectKairos.Controllers
                         return RedirectToAction("ViewWatch", "Admin");
                     }
                 }
+
                 return Content("Unexpected Error"); //change to 404
             }
+
             return RedirectToAction("NotFound", "Home");
         }
 
@@ -337,6 +364,7 @@ namespace ProjectKairos.Controllers
             {
                 return RedirectToAction("AddWatch", "Admin");
             }
+
             int result = watchService.ImportWatchFromFile(excel, zip, Session.GetCurrentUserInfo("Username"));
             TempData["RESULT"] = "Total " + result + " watch(es) imported successfully";
 
@@ -382,8 +410,20 @@ namespace ProjectKairos.Controllers
                 return RedirectToAction("NotFound", "Home");
             }
 
+            var viewModel = orderService.LoadOrderDetailAdmin(id);
+            viewModel.OrderStatusList = orderStatusService.GetAllOrderStatusExceptCart();
+            viewModel.OrderItem = orderDetailService.LoadAllItemInOrder(id);
 
-            return View("~/Views/Admin/admin_manage_order_detail.cshtml", null);
+            return View("~/Views/Admin/admin_manage_order_detail.cshtml", viewModel);
+        }
+
+        [HttpPost]
+        [Route("Manage/Order/Edit/{orderId}")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult EditOrder(string orderId, int selectStatus)
+        {
+            return Content(selectStatus + "");
+            //return RedirectToAction("ViewOrder", "Admin", orderId);
         }
     }
 }

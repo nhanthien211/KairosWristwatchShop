@@ -73,8 +73,52 @@ namespace ProjectKairos.Models
 
         public AdminOrderDetailViewModel LoadOrderDetailAdmin(int orderId)
         {
+            var viewModel = db.Orders
+                .Include(o => o.Ward)
+                .Include(o => o.District)
+                .Include(o => o.City)
+                .Where(o => o.OrderID == orderId)
+                .Select(o => new AdminOrderDetailViewModel
+                {
+                    OrderId = o.OrderID,
+                    Customer = o.CustomerID,
+                    Receiver = o.ShipName,
+                    Phone = o.ShipPhone,
+                    OrderDate = o.OrderDate,
+                    Address = o.ShippAddressNumber + " " + o.ShipStreet + ", "
+                              + o.Ward.Type + " " + o.Ward.WardName + ", "
+                              + o.District.Type + " " + o.District.DistrictName + ", "
+                              + o.City.Type + " " + o.City.CityName,
+                    ShipNote = o.ShipNote,
+                    OrderStatus = o.OrderStatus
+                })
+                .FirstOrDefault();
+            return viewModel;
+        }
 
-            return null;
+        public OrderDetailViewModel LoadOrderDetailUser(int orderId)
+        {
+            var viewModel = db.Orders
+                .Include(o => o.OrderStatu)
+                .Include(o => o.Ward)
+                .Include(o => o.District)
+                .Include(o => o.City)
+                .Where(o => o.OrderID == orderId)
+                .Select(o => new OrderDetailViewModel
+                {
+                    OrderId = o.OrderID,
+                    Receiver = o.ShipName,
+                    Phone = o.ShipPhone,
+                    OrderDate = o.OrderDate,
+                    Address = o.ShippAddressNumber + " " + o.ShipStreet + ", "
+                              + o.Ward.Type + " " + o.Ward.WardName + ", "
+                              + o.District.Type + " " + o.District.DistrictName + ", "
+                              + o.City.Type + " " + o.City.CityName,
+                    ShipNote = o.ShipNote,
+                    Status = o.OrderStatu.StatusDescription
+                })
+                .FirstOrDefault();
+            return viewModel;
         }
 
         public List<OrderTableViewModel> LoadAllCustomerOrder(string username)

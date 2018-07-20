@@ -180,13 +180,7 @@
     <Compile Include="Models\City.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Comment.cs">
-      <DependentUpon>Kairos_Shop.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\District.cs">
-      <DependentUpon>Kairos_Shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Image.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Kairos_Shop.Context.cs">
@@ -221,6 +215,10 @@
     <Compile Include="Models\OrderDetailService.cs" />
     <Compile Include="Models\OrderService.cs" />
     <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>Kairos_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatusService.cs" />
+    <Compile Include="Models\Review.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">

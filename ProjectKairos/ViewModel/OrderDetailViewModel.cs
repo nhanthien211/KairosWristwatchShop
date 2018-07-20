@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectKairos.ViewModel
 {
     public class OrderDetailViewModel
     {
-        public List<OrderItemViewModel> OrderItem { get; set; }
+        private List<OrderItemViewModel> orderItem;
+
+        public List<OrderItemViewModel> OrderItem
+        {
+            get => orderItem;
+            set
+            {
+                orderItem = value;
+                TotalPrice = orderItem.Sum(o => o.Total);
+            }
+        }
+
         public int OrderId { get; set; }
         public string Receiver { get; set; }
         public string Phone { get; set; }
@@ -25,7 +37,7 @@ namespace ProjectKairos.ViewModel
         public string Address { get; set; }
         public string ShipNote { get; set; }
         public string Status { get; set; }
-        public int TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
 
     }
 }

@@ -13,7 +13,7 @@
 }
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../../Content/img/mainIMG/shop-banner.jpg);">
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/Content/img/mainIMG/shop-banner.jpg);">
     <h2 class="l-text2 t-center">
         My Orders
     </h2>
@@ -82,7 +82,7 @@
                             {
                                 <tr>
                                     <td style="color: tomato; text-decoration: underline">
-                                        <a href="@Url.Action("ViewOrderDetail", "User")">@order.OrderId</a>
+                                        <a href="@Url.Action("ViewOrderDetail", "User", new {orderId = @order.OrderId})">@order.OrderId</a>
                                     </td>
                                     <td>@order.OrderDate</td>
                                     <td>$ @order.Total</td>

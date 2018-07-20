@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ProjectKairos.ViewModel;
+using System.Data.Entity;
 
 namespace ProjectKairos.Models
 {
@@ -13,17 +15,20 @@ namespace ProjectKairos.Models
             this.db = db;
         }
 
-        public OrderItemViewModel LoadAllItemInOrder(int orderId)
+        public List<OrderItemViewModel> LoadAllItemInOrder(int orderId)
         {
 
-            var result = db.OrderDetails.Where(d => d.OrderID == 1001)
-                .Select(d => new
+            var result = db.OrderDetails
+                .Include(d => d.Watch)
+                .Where(d => d.OrderID == orderId)
+                .Select(d => new OrderItemViewModel
                 {
-                    Product = d.Watch.WatchCode,
+                    WatchCode = d.Watch.WatchCode,
                     Price = d.Watch.Price * (1 - d.Watch.Discount * 0.01),
                     Quantity = d.Quantity,
-                });
-            return null;
+                    Total = d.Watch.Price * (1 - d.Watch.Discount * 0.01) * d.Quantity
+                }).ToList();
+            return result;
         }
     }
 }

@@ -28,20 +28,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="KAIROS_SHOPModel.Comment">
-        <MappingFragment StoreEntitySet="Comments">
-          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-          <ScalarProperty Name="WatchID" ColumnName="WatchID" />
-          <ScalarProperty Name="CommentBy" ColumnName="CommentBy" />
-          <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-          <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Districts">
       <EntityTypeMapping TypeName="KAIROS_SHOPModel.District">
         <MappingFragment StoreEntitySet="District">
@@ -49,20 +35,6 @@
           <ScalarProperty Name="CityID" ColumnName="CityID" />
           <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
           <ScalarProperty Name="Type" ColumnName="Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="KAIROS_SHOPModel.Image">
-        <MappingFragment StoreEntitySet="Images">
-          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-          <ScalarProperty Name="WatchID" ColumnName="WatchID" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="UploadedTime" ColumnName="UploadedTime" />
-          <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-          <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

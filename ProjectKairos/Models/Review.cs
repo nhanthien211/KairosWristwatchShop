@@ -12,19 +12,14 @@ namespace ProjectKairos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment
+    public partial class Review
     {
-        public int CommentID { get; set; }
-        public int WatchID { get; set; }
-        public string CommentBy { get; set; }
-        public System.DateTime CommentTime { get; set; }
-        public string Content { get; set; }
-        public string LastModifiedBy { get; set; }
-        public Nullable<System.DateTime> LastModifiedTime { get; set; }
-        public bool Status { get; set; }
+        public int WatchId { get; set; }
+        public string Username { get; set; }
+        public double Rating { get; set; }
+        public System.DateTime ReviewDate { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual Account Account1 { get; set; }
         public virtual Watch Watch { get; set; }
     }
 }

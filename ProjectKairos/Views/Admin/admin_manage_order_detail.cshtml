@@ -1,5 +1,4 @@
-﻿@model ProjectKairos.ViewModel.AccountInfoRoleViewModel
-
+﻿@model ProjectKairos.ViewModel.AdminOrderDetailViewModel
 @{
     ViewBag.Title = "Order Detail";
 
@@ -10,24 +9,6 @@
 
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<style type="text/css">
-    .wrap-table-shopping-cart {
-        margin: 0px 50px 20px 50px;
-    }
-
-    .table-custom th {
-        width: 20%;
-        text-align: right;
-        background-color: ghostwhite;
-    }
-
-    .title {
-        margin-top: 30px;
-        margin-left: 50px;
-        color: #e65540;
-    }
-</style>
 
 <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -54,31 +35,31 @@
                     <tbody>
                     <tr>
                         <th>Order ID</th>
-                        <td></td>
+                        <td>@Model.OrderId</td>
                     </tr>
                     <tr>
                         <th>Customer</th>
-                        <td></td>
+                        <td>@Model.Customer</td>
                     </tr>
                     <tr>
                         <th>Receiver</th>
-                        <td></td>
+                        <td>@Model.Receiver</td>
                     </tr>
                     <tr>
                         <th>Phone</th>
-                        <td></td>
+                        <td>@Model.Phone</td>
                     </tr>
                         <tr>
                             <th>Order Date</th>
-                            <td></td>
+                            <td>@Model.Date</td>
                         </tr>                                               
                         <tr>
                             <th>Ship Address</th>
-                            <td></td>
+                            <td>@Model.Address</td>
                         </tr>
                         <tr>
                             <th>Ship Note</th>
-                            <td></td>
+                            <td>@Model.ShipNote</td>
                         </tr>
                     </tbody>
                 </table>
@@ -90,27 +71,31 @@
             </h5>
             <div class="wrap-table-shopping-cart">
                 @*bảng các sản phẩm trong order -------------------------------------------*@
-                <table class="table table-bordered table-custom">
+                <table class="table table-bordered table-custom table-product">
                     <thead>
                     <tr>
                         <th>Product</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
+                        <th>Sub Total</th>
+                    </tr>  
                     </thead>
                     <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach (var item in Model.OrderItem) 
+                    {
+                        <tr>
+                            <td>@item.WatchCode</td>
+                            <td>$ @item.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>$ @item.Total</td>
+                        </tr>   
+                    }
+                    
                     </tbody>
                     <tfoot>
                     <tr>
                         <th colspan="3">Total</th>
-                        <th>123</th>
+                        <th>$ @Model.TotalPrice</th>
                     </tr>
                     </tfoot>
                 </table>
@@ -121,20 +106,20 @@
                 Order Status
             </h5>
             @*Form đổi status order -------------------------------------------*@
-            @using (Html.BeginForm("", "", new { }, FormMethod.Post))
+            @using (Html.BeginForm("EditOrder", "Admin", new { }, FormMethod.Post))
             {
                 <div class="row" style="margin-left: 35px;">
                     <div class="col-sm-4 col-lg-4">
-                        <select name="selectRole" class="form-control">
-                            @*@foreach (var role in Model.Role)
+                        <select name="selectStatus" class="form-control">
+                            @foreach (var status in Model.OrderStatusList)
                             {
                                 string selected = "";
-                                if (role.RoleID == Model.RoleId)
+                                if (status.StatusID == Model.OrderStatus)
                                 {
                                     selected = "selected";
                                 }
-                                <option value="@role.RoleID" @selected>@role.RoleName</option>
-                            }*@
+                                <option value="@status.StatusID" @selected>@status.StatusDescription</option>
+                            }
                         </select>
                     </div>
                     <div class="col-sm-8 col-lg-8">
