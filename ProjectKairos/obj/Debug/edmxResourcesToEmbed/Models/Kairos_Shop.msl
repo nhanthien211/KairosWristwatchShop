@@ -102,8 +102,6 @@
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
-          <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-          <ScalarProperty Name="ShipFee" ColumnName="ShipFee" />
           <ScalarProperty Name="ShipName" ColumnName="ShipName" />
           <ScalarProperty Name="ShipPhone" ColumnName="ShipPhone" />
           <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />

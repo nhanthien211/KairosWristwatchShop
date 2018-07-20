@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="Username" />
@@ -95,8 +95,6 @@
     <Property Name="CustomerID" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="OrderDate" Type="datetime" />
     <Property Name="OrderStatus" Type="int" Nullable="false" />
-    <Property Name="ShippedDate" Type="date" />
-    <Property Name="ShipFee" Type="float" />
     <Property Name="ShipName" Type="nvarchar" MaxLength="100" />
     <Property Name="ShipPhone" Type="varchar" MaxLength="11" />
     <Property Name="ShipCity" Type="int" />

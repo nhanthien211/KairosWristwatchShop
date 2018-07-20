@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="Username" />
@@ -100,8 +100,6 @@
           <Property Name="CustomerID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="OrderStatus" Type="int" Nullable="false" />
-          <Property Name="ShippedDate" Type="date" />
-          <Property Name="ShipFee" Type="float" />
           <Property Name="ShipName" Type="nvarchar" MaxLength="100" />
           <Property Name="ShipPhone" Type="varchar" MaxLength="11" />
           <Property Name="ShipCity" Type="int" />
@@ -642,8 +640,6 @@
           <Property Name="CustomerID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="OrderStatus" Type="Int32" Nullable="false" />
-          <Property Name="ShippedDate" Type="DateTime" Precision="0" />
-          <Property Name="ShipFee" Type="Double" />
           <Property Name="ShipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ShipPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="ShipCity" Type="Int32" />
@@ -1185,8 +1181,6 @@
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-                <ScalarProperty Name="ShipFee" ColumnName="ShipFee" />
                 <ScalarProperty Name="ShipName" ColumnName="ShipName" />
                 <ScalarProperty Name="ShipPhone" ColumnName="ShipPhone" />
                 <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />

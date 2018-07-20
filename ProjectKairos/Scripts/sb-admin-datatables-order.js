@@ -18,6 +18,10 @@
                 "orderable": false
             },
             {
+                "targets": [1],
+                "orderable": false
+            },      
+            {
                 "targets": [2],
                 "searchable": false,
                 "orderable": false
@@ -29,6 +33,10 @@
             },
             {
                 "targets": [4],
+                "searchable": false                
+            },
+            {
+                "targets": [5],
                 "searchable": false,
                 "orderable": false
             }
@@ -36,28 +44,33 @@
 
         "columns": [
             {
-                "data": "Username",
-                "name": "Username",
+                "data": "OrderId",
+                "name": "Order",
                 "autoWidth": true
             },
             {
-                "data": "FullName",
-                "name": "Name",
+                "data": "Customer",
+                "name": "Customer",
                 "autoWidth": true
             },
             {
-                "data": "RoleName",
-                "name": "Role",
+                "data": "Date",
+                "name": "Order Date",
                 "autoWidth": true
             },
             {
-                "data": "IsActive",
-                "name": "Active",
+                "data": "Total",
+                "name": "Total ($)",
+                "autoWidth": true
+            },
+            {
+                "data": "Status",
+                "name": "Status",
                 "autoWidth": true
             },
             {
                 "render": function (data, type, full, meta) {
-                    return '<a href="/Admin/Manage/Account/View/' + full.Username + '"><i class="fa fa-edit"></i>View Detail & Edit</a>';
+                    return '<a href="/Admin/Manage/Order/View/' + full.OrderId + '"><i class="fa fa-edit"></i>View Detail & Edit</a>';
                 }
             },
         ]

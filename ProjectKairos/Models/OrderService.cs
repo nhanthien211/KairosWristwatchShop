@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Data.Entity;
 using ProjectKairos.ViewModel;
 
@@ -10,6 +9,7 @@ namespace ProjectKairos.Models
     public class OrderService
     {
         private KAIROS_SHOPEntities db;
+
 
         public OrderService(KAIROS_SHOPEntities db)
         {
@@ -44,16 +44,36 @@ namespace ProjectKairos.Models
                 }
             }
             //Search  
+
             if (!string.IsNullOrEmpty(searchValue))
             {
                 //can search based on order id
-                int search = Convert.ToInt32(searchValue);
+                int search;
+                try
+                {
+                    search = Convert.ToInt32(searchValue);
+                }
+                catch (FormatException)
+                {
+                    search = 0;
+                }
                 order = order
                     .Where(o => o.OrderId == search || o.Customer.Contains(searchValue));
             }
             //total number of rows count   
             recordsTotal = order.Count();
             return order.Skip(skip).Take(pageSize).ToList();
+        }
+
+        public bool IsValidOrderId(int orderId)
+        {
+            return db.Orders.Any(o => o.OrderID == orderId && o.OrderStatus != 1);
+        }
+
+        public AdminOrderDetailViewModel LoadOrderDetailAdmin(int orderId)
+        {
+
+            return null;
         }
     }
 }

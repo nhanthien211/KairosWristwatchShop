@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ProjectKairos.ViewModel
 {
-    public class OrderTableViewModel
+    public class OrderDetailViewModel
     {
+        public List<OrderItemViewModel> OrderItem { get; set; }
         public int OrderId { get; set; }
-        public string Customer { get; set; }
+        public string Receiver { get; set; }
+        public string Phone { get; set; }
 
         public string Date { get; set; }
         private DateTime? orderDate;
@@ -19,10 +22,10 @@ namespace ProjectKairos.ViewModel
             }
         }
 
-        public double Total { get; set; }
+        public string Address { get; set; }
+        public string ShipNote { get; set; }
         public string Status { get; set; }
-
-
+        public int TotalPrice { get; set; }
 
     }
 }

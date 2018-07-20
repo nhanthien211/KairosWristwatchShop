@@ -359,8 +359,31 @@ namespace ProjectKairos.Controllers
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt32(start) : 0;
             int recordsTotal = 0;
-            var data = orderService.LoadOrderTable(sortColumnDirection, searchValue, ref recordsTotal, pageSize, skip);
+            var data = orderService.LoadOrderTable(sortColumnDirection, searchValue, ref recordsTotal, skip, pageSize);
             return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
+        }
+
+        [HttpGet]
+        [Route("Manage/Order/View/{orderId}")]
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult ViewOrder(string orderId)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(orderId);
+                if (!orderService.IsValidOrderId(id))
+                {
+                    return RedirectToAction("NotFound", "Home");
+                }
+            }
+            catch (FormatException)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+
+            return View("~/Views/Admin/admin_manage_order_detail.cshtml", null);
         }
     }
 }
