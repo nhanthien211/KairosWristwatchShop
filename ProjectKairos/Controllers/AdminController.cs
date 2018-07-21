@@ -420,10 +420,14 @@ namespace ProjectKairos.Controllers
         [HttpPost]
         [Route("Manage/Order/Edit/{orderId}")]
         [AuthorizeUser(Role = "Administrator")]
-        public ActionResult EditOrder(string orderId, int selectStatus)
+        public ActionResult EditOrder(int orderId, int selectStatus)
         {
-            return Content(selectStatus + "");
-            //return RedirectToAction("ViewOrder", "Admin", orderId);
+            if (orderService.AdminUpdateOrderStatus(orderId, selectStatus))
+            {
+                return RedirectToAction("ViewOrder", "Admin", orderId);
+            }
+
+            return Content("Server are currently unavailable.");
         }
     }
 }

@@ -136,5 +136,16 @@ namespace ProjectKairos.Models
                 });
             return order.ToList();
         }
+
+        public bool AdminUpdateOrderStatus(int orderId, int status)
+        {
+            var order = db.Orders.Find(orderId);
+            db.Orders.Attach(order);
+
+            order.OrderStatus = status;
+
+            int result = db.SaveChanges();
+            return (result > 0 || db.Entry(order).State == EntityState.Unchanged);
+        }
     }
 }

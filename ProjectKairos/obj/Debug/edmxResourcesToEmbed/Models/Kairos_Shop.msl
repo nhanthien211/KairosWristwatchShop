@@ -93,6 +93,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="KAIROS_SHOPModel.Review">
+        <MappingFragment StoreEntitySet="Review">
+          <ScalarProperty Name="WatchId" ColumnName="WatchId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="KAIROS_SHOPModel.Role">
         <MappingFragment StoreEntitySet="Roles">

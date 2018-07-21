@@ -85,6 +85,16 @@
     <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StatusDescription" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="WatchId" />
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="WatchId" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Rating" Type="float" Nullable="false" />
+    <Property Name="ReviewDate" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Roles">
     <Key>
       <PropertyRef Name="RoleID" />
@@ -133,6 +143,30 @@
     <Property Name="ModelName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="ModelDescription" Type="varchar(max)" />
   </EntityType>
+  <Association Name="FK__Review__Username__2F9A1060">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Review__WatchId__2EA5EC27">
+    <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Watches">
+        <PropertyRef Name="WatchID" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="WatchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Accounts_Roles">
     <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
@@ -322,10 +356,19 @@
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Watches" EntityType="Self.Watches" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WatchModels" EntityType="Self.WatchModels" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Review__Username__2F9A1060" Association="Self.FK__Review__Username__2F9A1060">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Review__WatchId__2EA5EC27" Association="Self.FK__Review__WatchId__2EA5EC27">
+      <End Role="Watches" EntitySet="Watches" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
     <AssociationSet Name="FK_Accounts_Roles" Association="Self.FK_Accounts_Roles">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Accounts" EntitySet="Accounts" />

@@ -6,7 +6,8 @@
         {
             InCart = 1,
             Pending = 2,
-            Complete = 3
+            InDelivery = 3,
+            Complete = 4
         }
     }
 }
