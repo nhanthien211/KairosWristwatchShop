@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2aeeb8c987b54e7a8dc6ddb99143d9b4" Name="Diagram1">
+      <Diagram DiagramId="ac70d48959f346fda8284021ebe1ebbe" Name="Diagram1">
         <EntityTypeShape EntityType="KAIROS_SHOPModel.Account" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="KAIROS_SHOPModel.City" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="KAIROS_SHOPModel.District" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="KAIROS_SHOPModel.Ward" Width="1.5" PointX="6" PointY="22.25" IsExpanded="true" />
         <EntityTypeShape EntityType="KAIROS_SHOPModel.Watch" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="KAIROS_SHOPModel.WatchModel" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK__Review__Username__2F9A1060" ManuallyRouted="false" />
+        <AssociationConnector Association="KAIROS_SHOPModel.FK__Review__Username__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Accounts_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Modifications_Account" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_Accounts" ManuallyRouted="false" />
@@ -33,7 +33,7 @@
         <AssociationConnector Association="KAIROS_SHOPModel.FK_OrderDetail_Watches" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_OrderStatus" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_Ward" ManuallyRouted="false" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK__Review__WatchId__2EA5EC27" ManuallyRouted="false" />
+        <AssociationConnector Association="KAIROS_SHOPModel.FK__Review__WatchId__2B3F6F97" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Watches_WatchModels" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

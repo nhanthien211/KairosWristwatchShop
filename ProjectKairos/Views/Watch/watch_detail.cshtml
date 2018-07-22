@@ -166,42 +166,9 @@
                 <p class="s-text3">
                     20 - 12 - 2018
                 </p>
-            </div>
-            <p class="s-text3 p-t-20">
-                Review here Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida
-                arcu nisl, a dignissim mauris placerat risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit.
-                Proin gravida arcu nisl, a dignissim mauris risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed
-                velit. Proin gravida arcu nisl, a dignissim mauris.
-            </p>
+            </div>          
         </div>
-        <!-- End One REVIEW =========================================== -->
-        <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
-            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text20 color0-hov trans-0-4">
-                Add Your Review
-                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-            </h5>
-
-            <!-- Write REVIEW -->
-            @if (Session["CURRENT_USER_ID"] != null)
-            {
-                <div class="dropdown-content dis-none p-t-15 p-b-23">
-                    <form action="#" method="get">
-                        <textarea name="review" class="form-control" rows="5" placeholder="Your review here . . . " required></textarea>
-                        <br>
-                        <button type="submit" class="btn btn-success">Send</button>
-                    </form>
-                </div>
-            }
-            else
-            {
-                <!-- NOT LOGIN && NOT BOUGHT THIS PRODUCT -->
-            <div class="dropdown-content dis-none p-t-15 p-b-23">
-                <p class="s-text3" style="color: red">
-                    Review only available for authorized user who had already bought this product.
-                </p>
-            </div>
-            }
-        </div>
+        <!-- End One REVIEW =========================================== -->        
     </div>
 </div>
 

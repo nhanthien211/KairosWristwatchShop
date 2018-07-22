@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="KAIROS_SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="Username" />
@@ -92,7 +92,7 @@
     </Key>
     <Property Name="WatchId" Type="int" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Rating" Type="float" Nullable="false" />
+    <Property Name="Rating" Type="float" />
     <Property Name="ReviewDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Roles">
@@ -143,7 +143,7 @@
     <Property Name="ModelName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="ModelDescription" Type="varchar(max)" />
   </EntityType>
-  <Association Name="FK__Review__Username__2F9A1060">
+  <Association Name="FK__Review__Username__2A4B4B5E">
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
     <End Role="Review" Type="Self.Review" Multiplicity="*" />
     <ReferentialConstraint>
@@ -155,7 +155,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Review__WatchId__2EA5EC27">
+  <Association Name="FK__Review__WatchId__2B3F6F97">
     <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
     <End Role="Review" Type="Self.Review" Multiplicity="*" />
     <ReferentialConstraint>
@@ -361,11 +361,11 @@
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Watches" EntityType="Self.Watches" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WatchModels" EntityType="Self.WatchModels" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Review__Username__2F9A1060" Association="Self.FK__Review__Username__2F9A1060">
+    <AssociationSet Name="FK__Review__Username__2A4B4B5E" Association="Self.FK__Review__Username__2A4B4B5E">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Review" EntitySet="Review" />
     </AssociationSet>
-    <AssociationSet Name="FK__Review__WatchId__2EA5EC27" Association="Self.FK__Review__WatchId__2EA5EC27">
+    <AssociationSet Name="FK__Review__WatchId__2B3F6F97" Association="Self.FK__Review__WatchId__2B3F6F97">
       <End Role="Watches" EntitySet="Watches" />
       <End Role="Review" EntitySet="Review" />
     </AssociationSet>

@@ -16,7 +16,7 @@
     <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="RoleId" Type="Int32" Nullable="false" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__Username__2F9A1060" FromRole="Accounts" ToRole="Review" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__Username__2A4B4B5E" FromRole="Accounts" ToRole="Review" />
     <NavigationProperty Name="Role" Relationship="Self.FK_Accounts_Roles" FromRole="Accounts" ToRole="Roles" />
     <NavigationProperty Name="Modifications" Relationship="Self.FK_Modifications_Account" FromRole="Accounts" ToRole="Modifications" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Accounts" FromRole="Accounts" ToRole="Orders" />
@@ -114,10 +114,10 @@
     </Key>
     <Property Name="WatchId" Type="Int32" Nullable="false" />
     <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Rating" Type="Double" Nullable="false" />
+    <Property Name="Rating" Type="Double" />
     <Property Name="ReviewDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Account" Relationship="Self.FK__Review__Username__2F9A1060" FromRole="Review" ToRole="Accounts" />
-    <NavigationProperty Name="Watch" Relationship="Self.FK__Review__WatchId__2EA5EC27" FromRole="Review" ToRole="Watches" />
+    <NavigationProperty Name="Account" Relationship="Self.FK__Review__Username__2A4B4B5E" FromRole="Review" ToRole="Accounts" />
+    <NavigationProperty Name="Watch" Relationship="Self.FK__Review__WatchId__2B3F6F97" FromRole="Review" ToRole="Watches" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -165,7 +165,7 @@
     <NavigationProperty Name="Modifications" Relationship="Self.FK_Modifications_Watches" FromRole="Watches" ToRole="Modifications" />
     <NavigationProperty Name="Movement" Relationship="Self.FK_Watches_Movements" FromRole="Watches" ToRole="Movements" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Watches" FromRole="Watches" ToRole="OrderDetail" />
-    <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__WatchId__2EA5EC27" FromRole="Watches" ToRole="Review" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__WatchId__2B3F6F97" FromRole="Watches" ToRole="Review" />
     <NavigationProperty Name="WatchModel" Relationship="Self.FK_Watches_WatchModels" FromRole="Watches" ToRole="WatchModels" />
   </EntityType>
   <EntityType Name="WatchModel">
@@ -177,7 +177,7 @@
     <Property Name="ModelDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Watches" Relationship="Self.FK_Watches_WatchModels" FromRole="WatchModels" ToRole="Watches" />
   </EntityType>
-  <Association Name="FK__Review__Username__2F9A1060">
+  <Association Name="FK__Review__Username__2A4B4B5E">
     <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
     <End Role="Review" Type="Self.Review" Multiplicity="*" />
     <ReferentialConstraint>
@@ -357,7 +357,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Review__WatchId__2EA5EC27">
+  <Association Name="FK__Review__WatchId__2B3F6F97">
     <End Role="Watches" Type="Self.Watch" Multiplicity="1" />
     <End Role="Review" Type="Self.Review" Multiplicity="*" />
     <ReferentialConstraint>
@@ -395,7 +395,7 @@
     <EntitySet Name="Wards" EntityType="Self.Ward" />
     <EntitySet Name="Watches" EntityType="Self.Watch" />
     <EntitySet Name="WatchModels" EntityType="Self.WatchModel" />
-    <AssociationSet Name="FK__Review__Username__2F9A1060" Association="Self.FK__Review__Username__2F9A1060">
+    <AssociationSet Name="FK__Review__Username__2A4B4B5E" Association="Self.FK__Review__Username__2A4B4B5E">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Review" EntitySet="Reviews" />
     </AssociationSet>
@@ -455,7 +455,7 @@
       <End Role="Ward" EntitySet="Wards" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Review__WatchId__2EA5EC27" Association="Self.FK__Review__WatchId__2EA5EC27">
+    <AssociationSet Name="FK__Review__WatchId__2B3F6F97" Association="Self.FK__Review__WatchId__2B3F6F97">
       <End Role="Watches" EntitySet="Watches" />
       <End Role="Review" EntitySet="Reviews" />
     </AssociationSet>

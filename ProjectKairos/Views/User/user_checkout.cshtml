@@ -42,7 +42,7 @@
                     <div class="w-size16 w-full-sm">
                         <div class="m-b-12">
                             <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="shipName" placeholder="* Enter receiver name" id="validationCustom01" value="@Model.ShipName"
-                                   required>
+                                   required onblur="$(this).val($(this).val().replace(/^\s+$/,''));">
                             <div class="invalid-feedback">
                                 Receiver name is required!
                             </div>

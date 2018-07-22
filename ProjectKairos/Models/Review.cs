@@ -16,7 +16,7 @@ namespace ProjectKairos.Models
     {
         public int WatchId { get; set; }
         public string Username { get; set; }
-        public double Rating { get; set; }
+        public Nullable<double> Rating { get; set; }
         public System.DateTime ReviewDate { get; set; }
     
         public virtual Account Account { get; set; }
