@@ -420,6 +420,7 @@ namespace ProjectKairos.Models
             //TODO: filter search value
             if (!string.IsNullOrEmpty(searchValue))
             {
+                searchValue = searchValue.Trim();
                 data = data.Where(d => d.WatchCode.Contains(searchValue));
             }
 
@@ -476,6 +477,13 @@ namespace ProjectKairos.Models
                 SortFilter = sorting
             };
             return viewModel;
+        }
+
+        public double GetDiscountPriceOfWatch(int watchId)
+        {
+            return db.Watches
+                .Where(w => w.WatchID == watchId)
+                .Select(w => w.Price * (1 - w.Discount * 0.01)).FirstOrDefault();
         }
     }
 }

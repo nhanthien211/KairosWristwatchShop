@@ -1,4 +1,6 @@
-﻿namespace ProjectKairos.ViewModel
+﻿using System.Collections.Generic;
+
+namespace ProjectKairos.ViewModel
 {
     public class WatchDetailViewModel
     {
@@ -65,5 +67,7 @@
             }
         }
         //list of preview
+
+        public List<ReviewInProductViewModel> ReviewList { get; set; }
     }
 }

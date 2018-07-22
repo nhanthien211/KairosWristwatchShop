@@ -4,45 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-<<<<<<< HEAD
-      <Diagram DiagramId="42e1785ab9cd4edcbe0ba48641983612" Name="Diagram1" ZoomLevel="97">
-=======
-      <Diagram DiagramId="2cf466b4c676419796f1a9b9f392a633" Name="Diagram1">
->>>>>>> origin/backend_vy
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Account" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.City" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Comment" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.District" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Image" Width="1.5" PointX="8.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Modification" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Movement" Width="1.5" PointX="9" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.OrderDetail" Width="1.5" PointX="13.5" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Order" Width="1.5" PointX="6.625" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.OrderStatu" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Role" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Ward" Width="1.5" PointX="3" PointY="25.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.Watch" Width="1.5" PointX="11.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KAIROS_SHOPModel.WatchModel" Width="1.5" PointX="9" PointY="15.625" IsExpanded="true" />
+      <Diagram DiagramId="2aeeb8c987b54e7a8dc6ddb99143d9b4" Name="Diagram1">
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Account" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.City" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.District" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Modification" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Movement" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.OrderDetail" Width="1.5" PointX="10.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Order" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.OrderStatu" Width="1.5" PointX="6" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Review" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Role" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Ward" Width="1.5" PointX="6" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.Watch" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KAIROS_SHOPModel.WatchModel" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <AssociationConnector Association="KAIROS_SHOPModel.FK__Review__Username__2F9A1060" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Accounts_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK_Comments_Accounts_1" ManuallyRouted="false" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK_Comments_Accounts_2" ManuallyRouted="false" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK_Images_Accounts_1" ManuallyRouted="false" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK_Images_Accounts_2" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Modifications_Account" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_Accounts" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Watches_Accounts" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_District_City" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_City" ManuallyRouted="false" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK_Comments_Watches" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_District" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Ward_District" ManuallyRouted="false" />
-        <AssociationConnector Association="KAIROS_SHOPModel.FK_Images_Watches" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Modifications_Watches" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Watches_Movements" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_OrderDetail_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_OrderDetail_Watches" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_OrderStatus" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Orders_Ward" ManuallyRouted="false" />
+        <AssociationConnector Association="KAIROS_SHOPModel.FK__Review__WatchId__2EA5EC27" ManuallyRouted="false" />
         <AssociationConnector Association="KAIROS_SHOPModel.FK_Watches_WatchModels" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

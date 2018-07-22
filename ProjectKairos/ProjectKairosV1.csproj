@@ -180,13 +180,7 @@
     <Compile Include="Models\City.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Comment.cs">
-      <DependentUpon>Kairos_Shop.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\District.cs">
-      <DependentUpon>Kairos_Shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Image.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Kairos_Shop.Context.cs">
@@ -218,7 +212,14 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderDetailService.cs" />
+    <Compile Include="Models\OrderService.cs" />
     <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>Kairos_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatusService.cs" />
+    <Compile Include="Models\ReviewService.cs" />
+    <Compile Include="Models\Review.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
@@ -242,6 +243,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AuthorizeUserAttribute.cs" />
     <Compile Include="Utilities\EncryptPasswordUtil.cs" />
+    <Compile Include="Utilities\Enumeration.cs" />
     <Compile Include="Utilities\FileTypeDetector.cs" />
     <Compile Include="Utilities\HtmlHelper.cs" />
     <Compile Include="Utilities\ImageProcessHelper.cs" />
@@ -254,12 +256,18 @@
     <Compile Include="ViewModel\AccountRegisterViewModel.cs" />
     <Compile Include="ViewModel\AccountTableViewModel.cs" />
     <Compile Include="ViewModel\AddWatchViewModel.cs" />
+    <Compile Include="ViewModel\AdminOrderDetailViewModel.cs" />
     <Compile Include="ViewModel\ManageWatchDetailViewModel.cs" />
+    <Compile Include="ViewModel\OrderDetailViewModel.cs" />
+    <Compile Include="ViewModel\OrderItemViewModel.cs" />
+    <Compile Include="ViewModel\OrderTableViewModel.cs" />
+    <Compile Include="ViewModel\ReviewInProductViewModel.cs" />
     <Compile Include="ViewModel\ShippingInfoViewModel.cs" />
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\ViewWatchCategoryViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
     <Compile Include="ViewModel\WatchInIndexPageModel.cs" />
+    <Compile Include="ViewModel\WatchReviewViewModel.cs" />
     <Compile Include="ViewModel\WatchTableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -598,6 +606,7 @@
     <Content Include="Scripts\jquery.easing.compatibility.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\rating-star.js" />
     <Content Include="Scripts\sb-admin-datatables-account.js" />
     <Content Include="Scripts\sb-admin-datatables-order.js" />
     <Content Include="Scripts\sb-admin-datatables-watch.js" />
@@ -700,6 +709,8 @@
     <Content Include="Views\Home\shopping_cart.cshtml" />
     <Content Include="Views\Watch\watch_detail.cshtml" />
     <Content Include="Views\Watch\watch.cshtml" />
+    <Content Include="Views\Admin\admin_manage_order_detail.cshtml" />
+    <Content Include="Views\User\user_review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -161,7 +161,13 @@
 
                 <div>
                     <p class="s-text7 w-size27">
-                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                        Any questions? Let us know in store at 
+                    </p>
+                    <p class="s-text7 w-size27">
+                        8th floor, 72 Le Thanh Ton St, District 1, HCM 
+                    </p>
+                    <p class="s-text7 w-size27">
+                        or call us on (+84) 169 2425 183
                     </p>
                 </div>
             </div>
@@ -173,16 +179,10 @@
 
                 <ul>
                     <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            About Us
+                        <a class="s-text7" href="@Url.Action("ViewProduct", "Watch", new {category = "All"})">
+                           Start Shopping
                         </a>
-                    </li>
-
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Contact Us
-                        </a>
-                    </li>
+                    </li>                   
 
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
@@ -192,19 +192,7 @@
                 </ul>
             </div>
 
-            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-                <h4 class="s-text12 p-b-30">
-                    Help
-                </h4>
-
-                <ul>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            FAQs
-                        </a>
-                    </li>
-                </ul>
-            </div>
+      
         </div>
     </footer>
 
@@ -222,6 +210,7 @@
     @Scripts.Render("~/bundles/user_script")
     @RenderSection("loadAddress", required: false)
     @RenderSection("addToCart", required: false)
+    @RenderSection("starRating", required: false)
     <!--===============================================================================================
     <script type="text/javascript">
         $('.block2-btn-addcart').each(function () {
@@ -233,13 +222,8 @@
     </script>
     <!--===============================================================================================-->
     <script type="text/javascript">
-        $(".selection-1").select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $('#dropDownSelect1')
-        });
-
         $(".selection-2").select2({
-            minimumResultsForSearch: 20,
+            minimumResultsForSearch: 2,            
             dropdownParent: $('#dropDownSelect2')
         });
     </script>

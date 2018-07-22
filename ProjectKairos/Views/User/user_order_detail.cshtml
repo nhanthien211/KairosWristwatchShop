@@ -1,4 +1,7 @@
-﻿@{
+﻿@using ProjectKairos.Utilities
+@model ProjectKairos.ViewModel.OrderDetailViewModel
+
+@{
     ViewBag.Title = "Order Detail";
 
     ViewBag.Home = "";
@@ -9,8 +12,9 @@
     Layout = "~/Views/Shared/_LayouUser.cshtml";
 }
 
+
 <!-- Title Page -->
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../../Content/img/mainIMG/shop-banner.jpg);">
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/Content/img/mainIMG/shop-banner.jpg);">
     <h2 class="l-text2 t-center">
         order detail
     </h2>
@@ -23,83 +27,102 @@
             <!-- Back to list order -->
             <div class="p-b-30">
                 <a href="@Url.Action("ManageOrder","User")" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 size13">back</a>
-            </div>
-            
-            <!-- orderID -->
-            <h5 class="m-text20 p-b-24">
-                Order #ID123
-            </h5>
+            </div>          
 
-            <h5 class="m-text19 p-b-10">
+            <h5 class="m-text19 p-b-10 title">
                 General Information
             </h5>
             <div class="wrap-table-shopping-cart">
-                <table class="table table-bordered bgwhite s-text3">
+                <table class="table table-bordered bgwhite s-text3 table-custom">
                     <tbody>
-                        <tr>
-                            <th style="width: 30%;">Receiver</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th style="width: 30%;">Order Date</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th style="width: 30%;">Status</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th style="width: 30%;">Shipped Date</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th style="width: 30%;">Ship Address</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th style="width: 30%;">Ship Note</th>
-                            <td></td>
-                        </tr>
+                    <tr>
+                        <th>Order ID</th>
+                        <td>@Model.OrderId</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>@Model.Status</td>
+                    </tr>  
+                    <tr>
+                        <th>Receiver</th>
+                        <td>@Model.Receiver</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <th>Order Date</th>
+                        <td>@Model.Date</td>
+                    </tr>                                     
+                    <tr>
+                        <th>Ship Address</th>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <th>Ship Note</th>
+                        <td>@Model.ShipNote</td>
+                    </tr>
 
                     </tbody>
 
                 </table>
             </div>
 
-            <h5 class="m-text19 p-b-10">
+            <h5 class="m-text19 p-b-10 title">
                 Product
             </h5>
             <div class="wrap-table-shopping-cart">
-                <table class="table table-bordered bgwhite">
+                <table class="table table-bordered bgwhite table-custom table-product">
                     <thead>
                         <tr>
+                            @if (@Model.OrderStatus ==(int) Enumeration.OrderStatus.Complete)
+                            {
+                                
+                                <th>Review</th>
+                            }
+
                             <th>Product</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th>Total</th>
+                            <th>Sub Total</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach (var item in Model.OrderItem)
+                    {
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            @if (@Model.OrderStatus == (int)Enumeration.OrderStatus.Complete)
+                            {
+                                <td>
+                                    @using (Html.BeginForm("ReviewWatch", "User", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="orderId" value="@Model.OrderId" />
+                                        <input type="hidden" name="watchId" value="@item.WatchId" />
+                                        <button class="btn btn-outline-primary">Write review</button>
+                                    }
+                                </td>
+                            }                           
+                            <td>@item.WatchCode</td>
+                            <td>$ @item.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>$ @item.Total</td>
                         </tr>
+                    }
+                    
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <th colspan="3">Subtotal</th>
-                            <th>123</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3">Shipping Fee</th>
-                            <th>123</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3">Total</th>
-                            <th>123</th>
-                        </tr>
+                    <tr>
+                        @{
+                            int colspan = 3;
+                            if (@Model.OrderStatus == (int) Enumeration.OrderStatus.Complete)
+                            {
+                                colspan = 4;
+                            }
+                        }
+                        <th colspan="@colspan">Total</th>
+                        <th>$ @Model.TotalPrice</th>
+                    </tr>
                     </tfoot>
                 </table>
             </div>

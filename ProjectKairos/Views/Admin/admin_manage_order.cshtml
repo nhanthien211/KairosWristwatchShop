@@ -12,6 +12,7 @@
 @section scripts
 {
     <!--Bổ sung script để load table order-->
+    @Scripts.Render("~/bundles/datatable_order")
 }
 
 <div class="container-fluid">
@@ -30,40 +31,14 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>OrderID</th>
-                            <th>CustomerID</th>
+                            <th>Order</th>
+                            <th>Customer</th>
                             <th>Order Date</th>
                             <th>Total ($)</th>
                             <th>Status</th>
                             <th>More Details</th>
                         </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>OrderID</th>
-                            <th>CustomerID</th>
-                            <th>Order Date</th>
-                            <th>Total ($)</th>
-                            <th>Status</th>
-                            <th>More Details</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <!-- Vòng for cho list data -->
-                        <tr>
-                            <td>O1</td>
-                            <td>cus1</td>
-                            <td>2017-12-31</td>
-                            <td>123.0</td>
-                            <td>Complete</td>
-                            <td>
-                                <a href="#" data-toggle="modal" data-target="#editModal">
-                                    <i class="fa fa-edit"></i>
-                                    View Details & Edit
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
+                    </thead>                                        
                 </table>
             </div>
         </div>

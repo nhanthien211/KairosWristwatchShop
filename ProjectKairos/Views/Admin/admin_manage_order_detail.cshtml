@@ -1,0 +1,137 @@
+﻿@model ProjectKairos.ViewModel.AdminOrderDetailViewModel
+@{
+    ViewBag.Title = "Order Detail";
+
+    ViewBag.Info = "";
+    ViewBag.Account = "";
+    ViewBag.Order = "active";
+    ViewBag.Watch = "";
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("ManageOrder", "Admin")">Order Management</a>
+        </li>
+        <li class="breadcrumb-item active">Order Details</li>
+    </ol>
+
+    <!-- DataTables Card-->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-fw fa-sliders-h "></i> View Order Details
+        </div>
+        <div class="card-body">
+            <h5 class="title">
+                General Information
+            </h5>
+            <div class="wrap-table-shopping-cart">
+                
+                @*bảng info chung của order -------------------------------------------*@
+                <table class="table table-bordered table-custom">
+                    <tbody>
+                    <tr>
+                        <th>Order ID</th>
+                        <td>@Model.OrderId</td>
+                    </tr>
+                    <tr>
+                        <th>Customer</th>
+                        <td>@Model.Customer</td>
+                    </tr>
+                    <tr>
+                        <th>Receiver</th>
+                        <td>@Model.Receiver</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>@Model.Phone</td>
+                    </tr>
+                        <tr>
+                            <th>Order Date</th>
+                            <td>@Model.Date</td>
+                        </tr>                                               
+                        <tr>
+                            <th>Ship Address</th>
+                            <td>@Model.Address</td>
+                        </tr>
+                        <tr>
+                            <th>Ship Note</th>
+                            <td>@Model.ShipNote</td>
+                        </tr>
+                    </tbody>
+                </table>
+                @*-----------------------------------------------------------------------*@
+            </div>
+
+            <h5 class="title">
+                Product
+            </h5>
+            <div class="wrap-table-shopping-cart">
+                @*bảng các sản phẩm trong order -------------------------------------------*@
+                <table class="table table-bordered table-custom table-product">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Sub Total</th>
+                    </tr>  
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.OrderItem) 
+                    {
+                        <tr>
+                            <td>@item.WatchCode</td>
+                            <td>$ @item.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>$ @item.Total</td>
+                        </tr>   
+                    }
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="3">Total</th>
+                        <th>$ @Model.TotalPrice</th>
+                    </tr>
+                    </tfoot>
+                </table>
+                @*-------------------------------------------------------------------*@
+            </div>
+            
+            <h5 class="title">
+                Order Status
+            </h5>
+            @*Form đổi status order -------------------------------------------*@
+            @using (Html.BeginForm("EditOrder", "Admin", new { }, FormMethod.Post))
+            {
+                <div class="row" style="margin-left: 35px;">
+                    <div class="col-sm-4 col-lg-4">
+                        <select name="selectStatus" class="form-control">
+                            @foreach (var status in Model.OrderStatusList)
+                            {
+                                string selected = "";
+                                if (status.StatusID == Model.OrderStatus)
+                                {
+                                    selected = "selected";
+                                }
+                                <option value="@status.StatusID" @selected>@status.StatusDescription</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-8 col-lg-8">
+                        <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                    </div>
+                    </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+

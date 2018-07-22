@@ -100,6 +100,9 @@ namespace ProjectKairos
             bundles.Add(new ScriptBundle("~/bundles/addToCart").Include(
                 "~/Scripts/add-to-cart.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/rating").Include(
+                "~/Scripts/rating-star.js"));
+
             //to disable auto ignore .min file while debug = true in web.config
             bundles.IgnoreList.Clear();
 

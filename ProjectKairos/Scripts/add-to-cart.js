@@ -28,6 +28,30 @@ function addToCartAjax(id, name) {
     });
 };
 
+function addToCartAjaxForShop(id, name) {
+    $.ajax({
+        type: "POST",
+        url: '../../Shopping/AddToCart',
+        data: {
+            "id": id
+        },
+        success: function (response) {
+            if (response.success) {
+                swal(name, "is added to cart !", "success");
+            } else {
+                if (response.quantity == -1) {
+                    swal("", "Can not update your cart! Somthing when wrong! Plaese try again later", "");
+                } else {
+                    swal(name, "can not be added to cart anymore! Available in Stock: " + response.quantity, "");
+                }
+            }
+        },
+        error: function (response) {
+            swal(name, "is NOT added to cart !", "fail");
+        }
+    });
+};
+
 /*[ remove product ]
     ===========================================================*/
 function removeItemAjax(id) {

@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KAIROS_SHOPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="Boolean" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Accounts_Roles" FromRole="Accounts" ToRole="Roles" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Accounts_1" FromRole="Accounts" ToRole="Comments" />
+    <NavigationProperty Name="Comments1" Relationship="Self.FK_Comments_Accounts_2" FromRole="Accounts" ToRole="Comments" />
+    <NavigationProperty Name="Images" Relationship="Self.FK_Images_Accounts_1" FromRole="Accounts" ToRole="Images" />
+    <NavigationProperty Name="Images1" Relationship="Self.FK_Images_Accounts_2" FromRole="Accounts" ToRole="Images" />
+    <NavigationProperty Name="Modifications" Relationship="Self.FK_Modifications_Account" FromRole="Accounts" ToRole="Modifications" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Accounts" FromRole="Accounts" ToRole="Orders" />
+    <NavigationProperty Name="Watches" Relationship="Self.FK_Watches_Accounts" FromRole="Accounts" ToRole="Watches" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Districts" Relationship="Self.FK_District_City" FromRole="City" ToRole="District" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_City" FromRole="City" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WatchID" Type="Int32" Nullable="false" />
+    <Property Name="CommentBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CommentTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Comments_Accounts_1" FromRole="Comments" ToRole="Accounts" />
+    <NavigationProperty Name="Account1" Relationship="Self.FK_Comments_Accounts_2" FromRole="Comments" ToRole="Accounts" />
+    <NavigationProperty Name="Watch" Relationship="Self.FK_Comments_Watches" FromRole="Comments" ToRole="Watches" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictID" />
+    </Key>
+    <Property Name="DistrictID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="DistrictName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_District_City" FromRole="District" ToRole="City" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_District" FromRole="District" ToRole="Orders" />
+    <NavigationProperty Name="Wards" Relationship="Self.FK_Ward_District" FromRole="District" ToRole="Ward" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WatchID" Type="Int32" Nullable="false" />
+    <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UploadedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UploadedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Images_Accounts_1" FromRole="Images" ToRole="Accounts" />
+    <NavigationProperty Name="Account1" Relationship="Self.FK_Images_Accounts_2" FromRole="Images" ToRole="Accounts" />
+    <NavigationProperty Name="Watch" Relationship="Self.FK_Images_Watches" FromRole="Images" ToRole="Watches" />
+  </EntityType>
+  <EntityType Name="Modification">
+    <Key>
+      <PropertyRef Name="ModificationID" />
+    </Key>
+    <Property Name="ModificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WatchID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Modifications_Account" FromRole="Modifications" ToRole="Accounts" />
+    <NavigationProperty Name="Watch" Relationship="Self.FK_Modifications_Watches" FromRole="Modifications" ToRole="Watches" />
+  </EntityType>
+  <EntityType Name="Movement">
+    <Key>
+      <PropertyRef Name="MovementID" />
+    </Key>
+    <Property Name="MovementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MovementName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MovementDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Watches" Relationship="Self.FK_Watches_Movements" FromRole="Movements" ToRole="Watches" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="WatchID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="WatchID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Orders" FromRole="OrderDetail" ToRole="Orders" />
+    <NavigationProperty Name="Watch" Relationship="Self.FK_OrderDetail_Watches" FromRole="OrderDetail" ToRole="Watches" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="OrderStatus" Type="Int32" Nullable="false" />
+    <Property Name="ShippedDate" Type="DateTime" Precision="0" />
+    <Property Name="ShipFee" Type="Double" />
+    <Property Name="ShipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="ShipCity" Type="Int32" />
+    <Property Name="ShipDistrict" Type="Int32" />
+    <Property Name="ShipWard" Type="Int32" />
+    <Property Name="ShipStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShippAddressNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ShipNote" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Orders_Accounts" FromRole="Orders" ToRole="Accounts" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Orders_City" FromRole="Orders" ToRole="City" />
+    <NavigationProperty Name="District" Relationship="Self.FK_Orders_District" FromRole="Orders" ToRole="District" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Orders" FromRole="Orders" ToRole="OrderDetail" />
+    <NavigationProperty Name="OrderStatu" Relationship="Self.FK_Orders_OrderStatus" FromRole="Orders" ToRole="OrderStatus" />
+    <NavigationProperty Name="Ward" Relationship="Self.FK_Orders_Ward" FromRole="Orders" ToRole="Ward" />
+  </EntityType>
+  <EntityType Name="OrderStatu">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_OrderStatus" FromRole="OrderStatus" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Roles" FromRole="Roles" ToRole="Accounts" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Ward">
+    <Key>
+      <PropertyRef Name="WardID" />
+    </Key>
+    <Property Name="WardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictID" Type="Int32" Nullable="false" />
+    <Property Name="WardName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="District" Relationship="Self.FK_Ward_District" FromRole="Ward" ToRole="District" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Ward" FromRole="Ward" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Watch">
+    <Key>
+      <PropertyRef Name="WatchID" />
+    </Key>
+    <Property Name="WatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WatchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WatchDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="MovementID" Type="Int32" Nullable="false" />
+    <Property Name="ModelID" Type="Int32" Nullable="false" />
+    <Property Name="WaterResistant" Type="Boolean" Nullable="false" />
+    <Property Name="BandMaterial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CaseRadius" Type="Double" />
+    <Property Name="CaseMaterial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PublishedTime" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PublishedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Discount" Type="Int32" Nullable="false" />
+    <Property Name="LEDLight" Type="Boolean" Nullable="false" />
+    <Property Name="Guarantee" Type="Int32" Nullable="false" />
+    <Property Name="Alarm" Type="Boolean" Nullable="false" />
+    <Property Name="Thumbnail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Watches_Accounts" FromRole="Watches" ToRole="Accounts" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Watches" FromRole="Watches" ToRole="Comments" />
+    <NavigationProperty Name="Images" Relationship="Self.FK_Images_Watches" FromRole="Watches" ToRole="Images" />
+    <NavigationProperty Name="Modifications" Relationship="Self.FK_Modifications_Watches" FromRole="Watches" ToRole="Modifications" />
+    <NavigationProperty Name="Movement" Relationship="Self.FK_Watches_Movements" FromRole="Watches" ToRole="Movements" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Watches" FromRole="Watches" ToRole="OrderDetail" />
+    <NavigationProperty Name="WatchModel" Relationship="Self.FK_Watches_WatchModels" FromRole="Watches" ToRole="WatchModels" />
+  </EntityType>
+  <EntityType Name="WatchModel">
+    <Key>
+      <PropertyRef Name="ModelID" />
+    </Key>
+    <Property Name="ModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModelName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ModelDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Watches" Relationship="Self.FK_Watches_WatchModels" FromRole="WatchModels" ToRole="Watches" />
+  </EntityType>
+  <Association Name="FK_Accounts_Roles">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+    <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Accounts_1">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="CommentBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Accounts_2">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="LastModifiedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_Accounts_1">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+    <End Role="Images" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="UploadedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_Accounts_2">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Images" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="LastModifiedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Modifications_Account">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+    <End Role="Modifications" Type="Self.Modification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Modifications">
+        <PropertyRef Name="ModifiedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Accounts">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Watches_Accounts">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+    <End Role="Watches" Type="Self.Watch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Watches">
+        <PropertyRef Name="PublishedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_District_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ShipCity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Watches">
+    <End Role="Watches" Type="Self.Watch" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Watches">
+        <PropertyRef Name="WatchID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="WatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_District">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ShipDistrict" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ward_District">
+    <End Role="District" Type="Self.District" Multiplicity="1" />
+    <End Role="Ward" Type="Self.Ward" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="Ward">
+        <PropertyRef Name="DistrictID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_Watches">
+    <End Role="Watches" Type="Self.Watch" Multiplicity="1" />
+    <End Role="Images" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Watches">
+        <PropertyRef Name="WatchID" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="WatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Modifications_Watches">
+    <End Role="Watches" Type="Self.Watch" Multiplicity="1" />
+    <End Role="Modifications" Type="Self.Modification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Watches">
+        <PropertyRef Name="WatchID" />
+      </Principal>
+      <Dependent Role="Modifications">
+        <PropertyRef Name="WatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Watches_Movements">
+    <End Role="Movements" Type="Self.Movement" Multiplicity="1" />
+    <End Role="Watches" Type="Self.Watch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movements">
+        <PropertyRef Name="MovementID" />
+      </Principal>
+      <Dependent Role="Watches">
+        <PropertyRef Name="MovementID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Watches">
+    <End Role="Watches" Type="Self.Watch" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Watches">
+        <PropertyRef Name="WatchID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="WatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_OrderStatus">
+    <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="OrderStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Ward">
+    <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ward">
+        <PropertyRef Name="WardID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ShipWard" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Watches_WatchModels">
+    <End Role="WatchModels" Type="Self.WatchModel" Multiplicity="1" />
+    <End Role="Watches" Type="Self.Watch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WatchModels">
+        <PropertyRef Name="ModelID" />
+      </Principal>
+      <Dependent Role="Watches">
+        <PropertyRef Name="ModelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KAIROS_SHOPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Districts" EntityType="Self.District" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
+    <EntitySet Name="Modifications" EntityType="Self.Modification" />
+    <EntitySet Name="Movements" EntityType="Self.Movement" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Wards" EntityType="Self.Ward" />
+    <EntitySet Name="Watches" EntityType="Self.Watch" />
+    <EntitySet Name="WatchModels" EntityType="Self.WatchModel" />
+    <AssociationSet Name="FK_Accounts_Roles" Association="Self.FK_Accounts_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Accounts_1" Association="Self.FK_Comments_Accounts_1">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Accounts_2" Association="Self.FK_Comments_Accounts_2">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_Accounts_1" Association="Self.FK_Images_Accounts_1">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_Accounts_2" Association="Self.FK_Images_Accounts_2">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Modifications_Account" Association="Self.FK_Modifications_Account">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Modifications" EntitySet="Modifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Accounts" Association="Self.FK_Orders_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Watches_Accounts" Association="Self.FK_Watches_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Watches" EntitySet="Watches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_District_City" Association="Self.FK_District_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_City" Association="Self.FK_Orders_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Watches" Association="Self.FK_Comments_Watches">
+      <End Role="Watches" EntitySet="Watches" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_District" Association="Self.FK_Orders_District">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ward_District" Association="Self.FK_Ward_District">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="Ward" EntitySet="Wards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_Watches" Association="Self.FK_Images_Watches">
+      <End Role="Watches" EntitySet="Watches" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Modifications_Watches" Association="Self.FK_Modifications_Watches">
+      <End Role="Watches" EntitySet="Watches" />
+      <End Role="Modifications" EntitySet="Modifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Watches_Movements" Association="Self.FK_Watches_Movements">
+      <End Role="Movements" EntitySet="Movements" />
+      <End Role="Watches" EntitySet="Watches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Orders" Association="Self.FK_OrderDetail_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Watches" Association="Self.FK_OrderDetail_Watches">
+      <End Role="Watches" EntitySet="Watches" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_OrderStatus" Association="Self.FK_Orders_OrderStatus">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Ward" Association="Self.FK_Orders_Ward">
+      <End Role="Ward" EntitySet="Wards" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Watches_WatchModels" Association="Self.FK_Watches_WatchModels">
+      <End Role="WatchModels" EntitySet="WatchModels" />
+      <End Role="Watches" EntitySet="Watches" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

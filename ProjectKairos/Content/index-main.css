@@ -1,3 +1,9 @@
+/*CSS for rating star*/
+#hearts {
+    color: #e65540;
+    font-size: 36px;
+}
+
 /*CSS FOR cart.html*/
 .cart-img-product-config {
   width: 90px;
@@ -2359,4 +2365,27 @@ input.num-product::-webkit-inner-spin-button {
 .trigger-btn {
     display: inline-block;
     margin: 100px auto;
+}
+
+/*CSS for table order view*/
+.wrap-table-shopping-cart {
+    margin: 0px 50px 20px 50px;
+}
+
+.table-custom th {
+    width: 20%;
+    text-align: right;
+    background-color: ghostwhite;
+}
+
+.table-product td {
+    text-align: right;
+    vertical-align: middle !important;
+}
+
+.title {
+    margin-top: 30px;
+    margin-left: 50px;
+    color: #e65540;
+    font-weight: bold;
 }

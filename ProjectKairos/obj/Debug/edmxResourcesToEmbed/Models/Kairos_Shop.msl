@@ -28,20 +28,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="KAIROS_SHOPModel.Comment">
-        <MappingFragment StoreEntitySet="Comments">
-          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-          <ScalarProperty Name="WatchID" ColumnName="WatchID" />
-          <ScalarProperty Name="CommentBy" ColumnName="CommentBy" />
-          <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-          <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Districts">
       <EntityTypeMapping TypeName="KAIROS_SHOPModel.District">
         <MappingFragment StoreEntitySet="District">
@@ -49,20 +35,6 @@
           <ScalarProperty Name="CityID" ColumnName="CityID" />
           <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
           <ScalarProperty Name="Type" ColumnName="Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="KAIROS_SHOPModel.Image">
-        <MappingFragment StoreEntitySet="Images">
-          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-          <ScalarProperty Name="WatchID" ColumnName="WatchID" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="UploadedTime" ColumnName="UploadedTime" />
-          <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-          <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -102,8 +74,6 @@
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
-          <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-          <ScalarProperty Name="ShipFee" ColumnName="ShipFee" />
           <ScalarProperty Name="ShipName" ColumnName="ShipName" />
           <ScalarProperty Name="ShipPhone" ColumnName="ShipPhone" />
           <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
@@ -120,6 +90,16 @@
         <MappingFragment StoreEntitySet="OrderStatus">
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="KAIROS_SHOPModel.Review">
+        <MappingFragment StoreEntitySet="Review">
+          <ScalarProperty Name="WatchId" ColumnName="WatchId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

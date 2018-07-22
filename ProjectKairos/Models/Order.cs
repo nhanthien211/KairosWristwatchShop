@@ -24,8 +24,6 @@ namespace ProjectKairos.Models
         public string CustomerID { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public int OrderStatus { get; set; }
-        public Nullable<System.DateTime> ShippedDate { get; set; }
-        public Nullable<double> ShipFee { get; set; }
         public string ShipName { get; set; }
         public string ShipPhone { get; set; }
         public Nullable<int> ShipCity { get; set; }

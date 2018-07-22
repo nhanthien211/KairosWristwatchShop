@@ -1,0 +1,89 @@
+﻿@model ProjectKairos.ViewModel.WatchReviewViewModel
+
+@{
+    ViewBag.Title = "Review Watch";
+    Layout = "~/Views/Shared/_LayouUser.cshtml";
+}
+
+@section starRating
+{
+    @Scripts.Render("~/bundles/rating")
+    <script type="text/javascript">
+        $(function () {
+            return $(".starrr").starrr({
+                rating: 1
+            });
+        });
+
+        $(document).ready(function () {
+
+            $('#hearts').on('starrr:change', function (e, value) {
+                $('#count').val(value);
+                $('#star-count').html("You vote: " + value);
+            });
+
+        });
+    </script>
+}
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/Content/img/mainIMG/shop-banner.jpg);">
+    <h2 class="l-text2 t-center">
+        Review
+    </h2>
+</section>
+
+<div class="container bgwhite p-t-35 p-b-30">
+    <div class="flex-w flex-sb">
+        <!-- 3 images -->
+        <div class="w-size13 p-t-30 respon5">
+            <div class="wrap-slick3 flex-sb flex-w">
+                <div class="slick3">
+                    <div class="item-slick3" data-thumb="~/Content/img/ProductThumbnail/BA110-7A1-8586696153096165856.png">
+                        <div class="wrap-pic-w for-img-contain">
+                            <img src="@Model.Thumbnail" alt="IMG-PRODUCT" class="for-img">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- product overview -->
+        <div class="w-size14 p-t-30 respon5">
+
+            <h3 class="product-detail-name m-text5 t-left p-b-13">
+                @Model.WatchCode
+            </h3>
+            
+
+
+            <div class="wrap-dropdown-content bo7 p-t-100 p-b-14">
+                <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text20 color0-hov trans-0-4">
+                    Add Your Review
+                    <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+                </h5>
+
+                <!-- Write REVIEW -->
+
+                <div class="dropdown-content dis-none p-t-15 p-b-23">
+                    @using (Html.BeginForm("SubmitRating", "User", FormMethod.Post))
+                    {
+                        <div id="hearts" class="starrr" data-rating="@Model.YourRating.GetValueOrDefault()"></div>
+                        <div class="text-success" id="star-count">
+                            You vote: @Model.YourRating.GetValueOrDefault()
+                        </div>
+                        <input type="hidden" id="count" name="star" value="@Model.YourRating.GetValueOrDefault()" />
+                        <input type="hidden" id="count" name="watchId" value="@Model.WatchId" />
+                        <input type="hidden" id="count" name="orderId" value="@Model.OrderId" />
+                        <br>
+                        <button type="submit" class="btn btn-success">Send</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

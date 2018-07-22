@@ -1,4 +1,5 @@
-﻿using ProjectKairos.Models;
+﻿using System;
+using ProjectKairos.Models;
 using ProjectKairos.Utilities;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -12,12 +13,18 @@ namespace ProjectKairos.Controllers
         private KAIROS_SHOPEntities db;
         private AccountService accountService;
         private ShoppingCartService shoppingService;
+        private OrderService orderService;
+        private OrderDetailService orderDetailService;
+        private ReviewService reviewService;
 
         public UserController()
         {
             db = new KAIROS_SHOPEntities();
             accountService = new AccountService(db);
             shoppingService = new ShoppingCartService(db);
+            orderService = new OrderService(db);
+            orderDetailService = new OrderDetailService(db);
+            reviewService = new ReviewService(db);
         }
 
         // GET: User
@@ -39,7 +46,7 @@ namespace ProjectKairos.Controllers
             return View("~/Views/User/user_account.cshtml", viewModel);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Checkout")]
         public ActionResult CheckOut()
         {
@@ -90,15 +97,34 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Member")]
         public ActionResult ManageOrder()
         {
-            return View("~/Views/User/user_order.cshtml");
+            string username = Session.GetCurrentUserInfo("Username");
+            List<OrderTableViewModel> viewModel = orderService.LoadAllCustomerOrder(username);
+            return View("~/Views/User/user_order.cshtml", viewModel);
         }
 
         [HttpGet]
-        [Route("OrderDetail")]
+        [Route("Manage/Order/{orderId}")]
         [AuthorizeUser(Role = "Member")]
-        public ActionResult ViewOrderDetail()
+        public ActionResult ViewOrderDetail(string orderId)
         {
-            return View("~/Views/User/user_order_detail.cshtml");
+            int id;
+            try
+            {
+                id = Convert.ToInt32(orderId);
+                if (!orderService.IsValidOrderId(id))
+                {
+                    return RedirectToAction("NotFound", "Home");
+                }
+            }
+            catch (FormatException)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+            var viewModel = orderService.LoadOrderDetailUser(id);
+            viewModel.OrderItem = orderDetailService.LoadAllItemInOrder(id);
+
+            return View("~/Views/User/user_order_detail.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -131,10 +157,53 @@ namespace ProjectKairos.Controllers
 
             if (result)
             {
-                return View("~/Views/User/user_order.cshtml");
+                return RedirectToAction("ManageOrder", "User");
             }
 
             return Content("Unexpected Error. Please try again");
+        }
+
+        [HttpPost]
+        [Route("Review/Watch")]
+        public ActionResult ReviewWatch(string watchId, string orderId)
+        {
+            int id, order;
+            try
+            {
+                id = Convert.ToInt32(watchId);
+                order = Convert.ToInt32(orderId);
+            }
+            catch
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+            string username = Session.GetCurrentUserInfo("Username");
+            var viewModel = reviewService.ViewWatchReview(id, username, order);
+            return View("~/Views/User/user_review.cshtml", viewModel);
+        }
+
+        public ActionResult SubmitRating(string watchId, string star, string orderId)
+        {
+            int rating, id;
+            try
+            {
+                rating = Convert.ToInt32(star);
+                id = Convert.ToInt32(watchId);
+            }
+            catch (FormatException)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+            string username = Session.GetCurrentUserInfo("Username");
+            bool result = reviewService.RateStarWatch(id, username, rating);
+            if (result)
+            {
+                return RedirectToAction("ViewOrderDetail", "User", new { orderId = orderId });
+            }
+
+            return Content("Unexpected Error Orrcured");
         }
     }
 }

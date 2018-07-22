@@ -19,13 +19,18 @@
     @Styles.Render("~/Content/product_checkbox_css")
 }
 
+@section addToCart
+{
+    @Scripts.Render("~/bundles/addToCart")
+}
+
 <!-- Title Page -->
 <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/Content/img/mainIMG/shop-banner.jpg);">
     <h2 class="l-text2 t-center">
-        KAIROS NYC
+        KAIROS HCM
     </h2>
     <p class="m-text13 t-center">
-        8th floor, 379 Hudson St, New York, NY 10018
+        8th floor, 72 Le Thanh Ton St, District 1, HCM
     </p>
 </section>
 
@@ -166,7 +171,7 @@
                                     <div class="block2-overlay trans-0-4">
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
                                             <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" type="button" onclick="addToCartAjaxForShop('@watch.WatchID', '@watch.WatchCode')">
                                                 Add to Cart
                                             </button>
                                         </div>

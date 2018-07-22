@@ -27,14 +27,13 @@ namespace ProjectKairos.Models
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<District> Districts { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Modification> Modifications { get; set; }
         public virtual DbSet<Movement> Movements { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderStatu> OrderStatus { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Watch> Watches { get; set; }

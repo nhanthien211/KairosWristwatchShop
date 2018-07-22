@@ -197,3 +197,4 @@ D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKai
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairosV1.csproj.CopyComplete
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairos.dll
 D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairos.pdb
+D:\FPT\2018 Summer\PRN CSharp\Practice\MyProject\KairosWristwatchShop\ProjectKairos\obj\Debug\ProjectKairosV1.csprojAssemblyReference.cache
