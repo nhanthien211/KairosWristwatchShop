@@ -26,7 +26,8 @@ namespace ProjectKairos.Models
                     WatchCode = d.Watch.WatchCode,
                     Price = d.Watch.Price * (1 - d.Watch.Discount * 0.01),
                     Quantity = d.Quantity,
-                    Total = d.Watch.Price * (1 - d.Watch.Discount * 0.01) * d.Quantity
+                    Total = d.Watch.Price * (1 - d.Watch.Discount * 0.01) * d.Quantity,
+                    WatchId = d.WatchID
                 }).ToList();
             return result;
         }

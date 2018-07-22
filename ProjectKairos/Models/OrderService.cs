@@ -115,7 +115,8 @@ namespace ProjectKairos.Models
                               + o.District.Type + " " + o.District.DistrictName + ", "
                               + o.City.Type + " " + o.City.CityName,
                     ShipNote = o.ShipNote,
-                    Status = o.OrderStatu.StatusDescription
+                    Status = o.OrderStatu.StatusDescription,
+                    OrderStatus = o.OrderStatus
                 })
                 .FirstOrDefault();
             return viewModel;

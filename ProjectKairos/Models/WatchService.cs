@@ -420,6 +420,7 @@ namespace ProjectKairos.Models
             //TODO: filter search value
             if (!string.IsNullOrEmpty(searchValue))
             {
+                searchValue = searchValue.Trim();
                 data = data.Where(d => d.WatchCode.Contains(searchValue));
             }
 

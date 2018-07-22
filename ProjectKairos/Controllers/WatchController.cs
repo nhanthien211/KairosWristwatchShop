@@ -10,6 +10,8 @@ namespace ProjectKairos.Controllers
     {
         private WatchModelService watchModelService;
         private WatchService watchService;
+        private ReviewService reviewService;
+
         private KAIROS_SHOPEntities db;
 
         public WatchController()
@@ -17,6 +19,7 @@ namespace ProjectKairos.Controllers
             db = new KAIROS_SHOPEntities();
             watchModelService = new WatchModelService(db);
             watchService = new WatchService(db);
+            reviewService = new ReviewService(db);
         }
 
         [HttpGet]
@@ -50,6 +53,7 @@ namespace ProjectKairos.Controllers
             {
                 //valid link. Deny any invalid manual input link.
                 var viewModel = watchService.GetWatchFullDetail(watchCode);
+                viewModel.ReviewList = reviewService.LoadWatchAllReview(watchCode);
                 return View("~/Views/Watch/watch_detail.cshtml", viewModel);
             }
             return RedirectToAction("NotFound", "Home");

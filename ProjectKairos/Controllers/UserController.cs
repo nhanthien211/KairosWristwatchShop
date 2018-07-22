@@ -15,6 +15,7 @@ namespace ProjectKairos.Controllers
         private ShoppingCartService shoppingService;
         private OrderService orderService;
         private OrderDetailService orderDetailService;
+        private ReviewService reviewService;
 
         public UserController()
         {
@@ -23,6 +24,7 @@ namespace ProjectKairos.Controllers
             shoppingService = new ShoppingCartService(db);
             orderService = new OrderService(db);
             orderDetailService = new OrderDetailService(db);
+            reviewService = new ReviewService(db);
         }
 
         // GET: User
@@ -130,7 +132,6 @@ namespace ProjectKairos.Controllers
         [AuthorizeUser(Role = "Member")]
         public ActionResult ConfirmOrder([Bind(Include = "shipName, shipPhone, shipCity, shipDistrict, shipWard, shipStreet, shippAddressNumber, shipNote")]Order order)
         {
-
             string username = Session.GetCurrentUserInfo("Username");
 
             bool hasCart = shoppingService.CheckCartExistedInDB(username);
@@ -160,7 +161,49 @@ namespace ProjectKairos.Controllers
             }
 
             return Content("Unexpected Error. Please try again");
+        }
 
+        [HttpPost]
+        [Route("Review/Watch")]
+        public ActionResult ReviewWatch(string watchId, string orderId)
+        {
+            int id, order;
+            try
+            {
+                id = Convert.ToInt32(watchId);
+                order = Convert.ToInt32(orderId);
+            }
+            catch
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+            string username = Session.GetCurrentUserInfo("Username");
+            var viewModel = reviewService.ViewWatchReview(id, username, order);
+            return View("~/Views/User/user_review.cshtml", viewModel);
+        }
+
+        public ActionResult SubmitRating(string watchId, string star, string orderId)
+        {
+            int rating, id;
+            try
+            {
+                rating = Convert.ToInt32(star);
+                id = Convert.ToInt32(watchId);
+            }
+            catch (FormatException)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+            string username = Session.GetCurrentUserInfo("Username");
+            bool result = reviewService.RateStarWatch(id, username, rating);
+            if (result)
+            {
+                return RedirectToAction("ViewOrderDetail", "User", new { orderId = orderId });
+            }
+
+            return Content("Unexpected Error Orrcured");
         }
     }
 }

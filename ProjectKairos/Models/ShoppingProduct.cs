@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace ProjectKairos.Models
+﻿namespace ProjectKairos.Models
 {
     public class ShoppingProduct
     {

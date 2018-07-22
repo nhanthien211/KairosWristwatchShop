@@ -16,6 +16,20 @@
     @Scripts.Render("~/bundles/addToCart")
 }
 
+@section starRating
+{
+    @Scripts.Render("~/bundles/rating")
+
+   
+}
+
+<style>
+
+    .star-checked{
+        color: orange;
+    }
+</style>
+
 <!-- Product Detail -->
 <div class="container bgwhite p-t-35 p-b-30">
     <div class="flex-w flex-sb">
@@ -31,7 +45,7 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
             </div>
         </div>
@@ -56,7 +70,7 @@
                     <span style="color: green">Available</span>
                     <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                         <!-- Button -->
-                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit"  onclick="addToCartAjax('@Model.WatchId', '@Model.WatchCode')">
+                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" onclick="addToCartAjax('@Model.WatchId', '@Model.WatchCode')">
                             Add to Cart
                         </button>
                     </div>
@@ -69,7 +83,7 @@
             </p>
 
             <!--ADD TO CART-->
-            
+
         </div>
 
         <!-- product's Specifications -->
@@ -95,7 +109,7 @@
                                 <th scope="row">Model</th>
                                 <td>@Model.ModelName</td>
                             </tr>
-                           
+
                             <tr>
                                 <th scope="row">Band Material</th>
                                 <td>@Model.BandMaterial</td>
@@ -108,8 +122,8 @@
                                 <th scope="row">Case Radius</th>
                                 <td>@Model.CaseRadius.GetValueOrDefault() mm</td>
                             </tr>
-                            
-                            
+
+
                             <tr>
                                 <th scope="row">Guarantee</th>
                                 <td>@Model.Guarantee months</td>
@@ -142,7 +156,7 @@
 
                 <div class="dropdown-content dis-none p-t-15 p-b-23">
                     <p class="s-text3">
-                        @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Description))                        
+                        @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Description))
                     </p>
                 </div>
             </div>
@@ -156,53 +170,34 @@
         <h5 class="m-text20 p-b-24">
             Review
         </h5>
-        <!-- One REVIEW =========================================== -->
-        <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
-            <div class="flex-row">
-                <p class="m-text19">
-                    Name
-                </p>
-                <span class="linedivide1"></span>
-                <p class="s-text3">
-                    20 - 12 - 2018
-                </p>
-            </div>
-            <p class="s-text3 p-t-20">
-                Review here Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida
-                arcu nisl, a dignissim mauris placerat risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit.
-                Proin gravida arcu nisl, a dignissim mauris risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed
-                velit. Proin gravida arcu nisl, a dignissim mauris.
-            </p>
-        </div>
-        <!-- End One REVIEW =========================================== -->
-        <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
-            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text20 color0-hov trans-0-4">
-                Add Your Review
-                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-            </h5>
 
-            <!-- Write REVIEW -->
-            @if (Session["CURRENT_USER_ID"] != null)
-            {
-                <div class="dropdown-content dis-none p-t-15 p-b-23">
-                    <form action="#" method="get">
-                        <textarea name="review" class="form-control" rows="5" placeholder="Your review here . . . " required></textarea>
-                        <br>
-                        <button type="submit" class="btn btn-success">Send</button>
-                    </form>
+        @foreach (var review in Model.ReviewList)
+        {
+            <!-- One REVIEW =========================================== -->
+            <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+                <div class="flex-row">
+                    <p class="m-text19">
+                        @review.FullName
+                    </p>
+                    <span class="linedivide1"></span>
+                    <p class="s-text3">
+                        @review.ReviewDate.ToString("yyyy-MM-dd")
+                    </p>
                 </div>
-            }
-            else
-            {
-                <!-- NOT LOGIN && NOT BOUGHT THIS PRODUCT -->
-            <div class="dropdown-content dis-none p-t-15 p-b-23">
-                <p class="s-text3" style="color: red">
-                    Review only available for authorized user who had already bought this product.
-                </p>
+                <div>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        string check = i <= review.Rating ? "star-checked" : "";
+                        <span class="fas fa-star @check"></span>
+                    }
+                </div>
             </div>
-            }
-        </div>
+            <!-- End One REVIEW =========================================== -->
+        }
+
+
+
+
     </div>
 </div>
-
 

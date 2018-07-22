@@ -7,7 +7,7 @@ namespace ProjectKairos.ViewModel
     public class OrderDetailViewModel
     {
         private List<OrderItemViewModel> orderItem;
-
+        public int OrderStatus { get; set; }
         public List<OrderItemViewModel> OrderItem
         {
             get => orderItem;

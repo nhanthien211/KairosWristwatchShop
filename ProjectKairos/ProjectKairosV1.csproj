@@ -218,6 +218,7 @@
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderStatusService.cs" />
+    <Compile Include="Models\ReviewService.cs" />
     <Compile Include="Models\Review.cs">
       <DependentUpon>Kairos_Shop.tt</DependentUpon>
     </Compile>
@@ -260,11 +261,13 @@
     <Compile Include="ViewModel\OrderDetailViewModel.cs" />
     <Compile Include="ViewModel\OrderItemViewModel.cs" />
     <Compile Include="ViewModel\OrderTableViewModel.cs" />
+    <Compile Include="ViewModel\ReviewInProductViewModel.cs" />
     <Compile Include="ViewModel\ShippingInfoViewModel.cs" />
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\ViewWatchCategoryViewModel.cs" />
     <Compile Include="ViewModel\WatchDetailViewModel.cs" />
     <Compile Include="ViewModel\WatchInIndexPageModel.cs" />
+    <Compile Include="ViewModel\WatchReviewViewModel.cs" />
     <Compile Include="ViewModel\WatchTableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -603,6 +606,7 @@
     <Content Include="Scripts\jquery.easing.compatibility.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\rating-star.js" />
     <Content Include="Scripts\sb-admin-datatables-account.js" />
     <Content Include="Scripts\sb-admin-datatables-order.js" />
     <Content Include="Scripts\sb-admin-datatables-watch.js" />
@@ -706,6 +710,7 @@
     <Content Include="Views\Watch\watch_detail.cshtml" />
     <Content Include="Views\Watch\watch.cshtml" />
     <Content Include="Views\Admin\admin_manage_order_detail.cshtml" />
+    <Content Include="Views\User\user_review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

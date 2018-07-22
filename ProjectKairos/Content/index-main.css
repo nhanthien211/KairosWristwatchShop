@@ -1,3 +1,9 @@
+/*CSS for rating star*/
+#hearts {
+    color: #e65540;
+    font-size: 36px;
+}
+
 /*CSS FOR cart.html*/
 .cart-img-product-config {
   width: 90px;
@@ -2374,6 +2380,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .table-product td {
     text-align: right;
+    vertical-align: middle !important;
 }
 
 .title {
