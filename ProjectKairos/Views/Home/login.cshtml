@@ -92,17 +92,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="firstName" value="@Model.FirstName" placeholder="* First Name . . . " class="form-control" id="validationCustom05" required>
+                            <input type="text" name="firstName" value="@Model.FirstName" placeholder="* First Name . . . " class="form-control" id="validationCustom05" required pattern=".{2,30}" onblur="$(this).val($(this).val().replace(/^\s+$/,''));">
                             <i class="fa fa-quote-left form-group-icon"></i>
                             <div class="invalid-feedback" style="font-size: 15px;">
-                                First Name is required!!!
+                                First Name is required (2 - 30 characters)!!!
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="lastName" value="@Model.LastName" placeholder="* Last Name . . . " class="form-control" id="validationCustom06" required>
+                            <input type="text" name="lastName" value="@Model.LastName" placeholder="* Last Name . . . " class="form-control" id="validationCustom06" required pattern=".{2,30}" onblur="$(this).val($(this).val().replace(/^\s+$/,''));">
                             <i class="fa fa-quote-right form-group-icon"></i>
                             <div class="invalid-feedback" style="font-size: 15px;">
-                                Last Name is required!!!
+                                Last Name is required (2 - 30 characters)!!!
                             </div>
                         </div>
                         <div class="form-group">

@@ -67,9 +67,9 @@
         </span>
         <div class="w-size16 w-full-sm">
             <div class="m-b-12">
-                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="FirstName" id="validationCustom02" value="@Model.FirstName" required>
+                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="FirstName" id="validationCustom02" value="@Model.FirstName" required pattern=".{2,30}" onblur="$(this).val($(this).val().replace(/^\s+$/,''));">
                 <div class="invalid-feedback">
-                    Invalid First Name!
+                    Invalid First Name (2-30 characters)!
                 </div>
             </div>
         </div>
@@ -80,9 +80,9 @@
         </span>
         <div class="w-size16 w-full-sm">
             <div class="m-b-12">
-                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="LastName" id="validationCustom03" value="@Model.LastName" required>
+                <input class="form-control s-text8 p-l-15 p-r-15" type="text" name="LastName" id="validationCustom03" value="@Model.LastName" required pattern=".{2,30}" onblur="$(this).val($(this).val().replace(/^\s+$/,''));">
                 <div class="invalid-feedback">
-                    Invalid Last Name!
+                    Invalid Last Name (2-30 chracters)!
                 </div>
             </div>
         </div>

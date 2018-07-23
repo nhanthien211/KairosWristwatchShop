@@ -48,11 +48,15 @@ namespace ProjectKairos.Controllers
             }
             Session["CURRENT_USER_ID"] = result;
 
-            //merge cart if any
-            bool resultMerge = shoppingService.MergeCartSessionAnddDDB(Session.GetCurrentUserInfo("Username"));
-            if (resultMerge) //done => remove cart in session
+            //merge cart if user
+            int roleId = Convert.ToInt32(Session.GetCurrentUserInfo("RoleId"));
+            if (roleId == 2)
             {
-                Session["CART"] = null;
+                bool resultMerge = shoppingService.MergeCartSessionAnddDDB(Session.GetCurrentUserInfo("Username"));
+                if (resultMerge) //done => remove cart in session
+                {
+                    Session["CART"] = null;
+                }
             }
             return Redirect(Request.UrlReferrer.ToString());
         }
@@ -131,6 +135,11 @@ namespace ProjectKairos.Controllers
                         FullName = registerAccount.LastName + " " + registerAccount.FirstName
                     };
                     Session["CURRENT_USER_ID"] = JsonConvert.SerializeObject(loginAccount, Formatting.Indented);
+                    bool resultMerge = shoppingService.MergeCartSessionAnddDDB(Session.GetCurrentUserInfo("Username"));
+                    if (resultMerge) //done => remove cart in session
+                    {
+                        Session["CART"] = null;
+                    }
                     return Redirect(Request.UrlReferrer.ToString());
                 }
                 return Content("Unexpected error");

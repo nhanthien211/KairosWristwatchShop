@@ -44,14 +44,14 @@
                 <div class="row for-input-row" style="font-weight: bold">
                     <div class="col-sm-6">
                         <label for="FName">First Name *</label>
-                        <input class="form-control form-control-sm" type="text" name="firstName" value="@Model.FirstName" required>
+                        <input class="form-control form-control-sm" type="text" name="firstName" value="@Model.FirstName" required pattern=".{2,30}" onblur="$(this).val($(this).val().replace(/^\s+$/,''));">
                         <div class="invalid-feedback" style="font-size: 15px;">
                             Invalid First Name (2 - 30 characters)
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="LName">Last Name *</label>
-                        <input class="form-control form-control-sm" type="text" name="lastName" value="@Model.LastName" required>
+                        <input class="form-control form-control-sm" type="text" name="lastName" value="@Model.LastName" required pattern=".{2,30}" onblur="$(this).val($(this).val().replace(/^\s+$/,''));">
                         <div class="invalid-feedback" style="font-size: 15px;">
                             Invalid Last Name (2 - 30 characters)
                         </div>
